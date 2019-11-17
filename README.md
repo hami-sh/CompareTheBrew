@@ -1,8 +1,8 @@
 # CompareTheBrew.com.au
-Get the cheapest drink possible
+🍺🍺 Get the cheapest drink possible 🍺🍺
 
-## dependencies
-BeautifulSoup
+## Dependencies
+BeautifulSoup 4
 
 Selenium
 
