@@ -18,8 +18,8 @@ def download_bws(url, target_filename, filename_extension, total):
     for item in drinks:
         with thread.ThreadPoolExecutor() as executor:
             item_thread = executor.submit(item_thread_bws, item)
-            total.collection.append(item_thread.result())
-            print(item_thread.result().name + " " + item_thread.result().price)
+            print(item_thread.result().name + " " + item_thread.result().price + " " + str(item_thread.result().ml)
+                  + " " + str(item_thread.result().efficiency) + " " + item_thread.result().link)
 
 
 def item_thread_bws(item):
@@ -31,9 +31,49 @@ def item_thread_bws(item):
     dollar = item.find('span', {'class': 'productTile_priceDollars ng-binding'})
     cents = item.find('span', {'class': 'productTile_priceCents ng-binding'})
     price = str(dollar.text) + '.' + str(cents.text)
+    # link
+    link = item.find('a', {'class':'link--no-decoration'})
 
-    entry = Item("BWS", brand.text, name.text, price)
+    # alcohol content
+    chrome_options = Options()
+    chrome_options.add_argument("--headless")
+    driver = webdriver.Chrome(options=chrome_options)
+    driver.get("https://bws.com.au" + link['href'])
+    soup = BeautifulSoup(driver.page_source, 'html.parser')
+    detailsRaw = soup.find('div', {'class':'product-additional-details_container text-center ng-isolate-scope'})
+    list = detailsRaw.find('ul', {'class':'text-left'})
+    keys = list.findAll('strong', {'class':'list-details_header ng-binding'})
+    values = list.findAll('span', {'class':'pull-right list-details_info ng-binding ng-scope'})
+    details = dict()
+    for x in range(0, len(keys)):
+        details[keys[x].text] = values[x].text
+
+    size = 0;
+    if details['Liquor Size'].find('mL') != -1:
+        # measurement in mL
+        strSize = details['Liquor Size'][0:len(details['Liquor Size']) - 2]
+        size = int(strSize) / 1000
+    else:
+        # measurement in L
+        strSize = details['Liquor Size'][0:len(details['Liquor Size']) - 1]
+        size = int(strSize)
+
+    efficiency = size / float(price)
+
+    entry = Item("BWS", brand.text, name.text, price, "https://bws.com.au" + link['href'], details['Liquor Size'],
+                 details['Alcohol %'], details['Standard Drinks'], efficiency)
+
     return entry
+
+
+def organize(drinks):
+    # in Aus, std drink == 10g
+    # efficiency -> std drinks / price
+    sorted(drinks)
+
+    for drink in drinks:
+        print(drink.name + " " + drink.stdDrinks + " " + drink.price)
+
 
 
 def main():
@@ -44,11 +84,13 @@ def main():
     total = ItemCollection()
     # BWS
     bws = "https://bws.com.au/search?searchTerm=" + args.drink
-    download_bws(bws, "bws", "txt", total)
+    bwsPool = download_bws(bws, "bws", "txt", total)
 
     # Dan Murphy
 
     # ...
+    organize(bwsPool)
+
 
 if __name__ == '__main__':
     main()
