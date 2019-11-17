@@ -1,0 +1,96 @@
+[INFO  - 2019-11-17T03:37:11.068Z] GhostDriver - Main - running on port 59979
+[INFO  - 2019-11-17T03:37:11.607Z] Session [8a21d030-08eb-11ea-9695-8954770b005b] - page.settings - {"XSSAuditingEnabled":false,"javascriptCanCloseWindows":true,"javascriptCanOpenWindows":true,"javascriptEnabled":true,"loadImages":true,"localToRemoteUrlAccessEnabled":false,"userAgent":"Mozilla/5.0 (Macintosh; Intel Mac OS X) AppleWebKit/538.1 (KHTML, like Gecko) PhantomJS/2.1.1 Safari/538.1","webSecurityEnabled":true}
+[INFO  - 2019-11-17T03:37:11.607Z] Session [8a21d030-08eb-11ea-9695-8954770b005b] - page.customHeaders:  - {}
+[INFO  - 2019-11-17T03:37:11.607Z] Session [8a21d030-08eb-11ea-9695-8954770b005b] - Session.negotiatedCapabilities - {"browserName":"phantomjs","version":"2.1.1","driverName":"ghostdriver","driverVersion":"1.2.0","platform":"mac-unknown-64bit","javascriptEnabled":true,"takesScreenshot":true,"handlesAlerts":false,"databaseEnabled":false,"locationContextEnabled":false,"applicationCacheEnabled":false,"browserConnectionEnabled":false,"cssSelectorsEnabled":true,"webStorageEnabled":false,"rotatable":false,"acceptSslCerts":false,"nativeEvents":true,"proxy":{"proxyType":"direct"}}
+[INFO  - 2019-11-17T03:37:11.607Z] SessionManagerReqHand - _postNewSessionCommand - New Session Created: 8a21d030-08eb-11ea-9695-8954770b005b
+[ERROR - 2019-11-17T03:37:15.508Z] Session [8a21d030-08eb-11ea-9695-8954770b005b] - page.onError - msg: Error: [$injector:undef] Provider 'geolocation' must return a value from $get factory method.
+http://errors.angularjs.org/1.5.6/$injector/undef?p0=geolocation
+https://bws.com.au/Scripts/Bundles/vendor.bundle.c6ca65127d6c79965cd9.js:6:73793
+a@https://bws.com.au/Scripts/Bundles/vendor.bundle.c6ca65127d6c79965cd9.js:7:803
+https://bws.com.au/Scripts/Bundles/vendor.bundle.c6ca65127d6c79965cd9.js:7:1360
+r@https://bws.com.au/Scripts/Bundles/vendor.bundle.c6ca65127d6c79965cd9.js:7:199
+i@https://bws.com.au/Scripts/Bundles/vendor.bundle.c6ca65127d6c79965cd9.js:7:521
+a@https://bws.com.au/Scripts/Bundles/vendor.bundle.c6ca65127d6c79965cd9.js:7:693
+https://bws.com.au/Scripts/Bundles/vendor.bundle.c6ca65127d6c79965cd9.js:7:12612
+r@https://bws.com.au/Scripts/Bundles/vendor.bundle.c6ca65127d6c79965cd9.js:6:24757
+https://bws.com.au/Scripts/Bundles/vendor.bundle.c6ca65127d6c79965cd9.js:7:12574
+a@https://bws.com.au/Scripts/Bundles/vendor.bundle.c6ca65127d6c79965cd9.js:7:803
+https://bws.com.au/Scripts/Bundles/vendor.bundle.c6ca65127d6c79965cd9.js:6:73694
+a@https://bws.com.au/Scripts/Bundles/vendor.bundle.c6ca65127d6c79965cd9.js:7:803
+https://bws.com.au/Scripts/Bundles/vendor.bundle.c6ca65127d6c79965cd9.js:7:1360
+r@https://bws.com.au/Scripts/Bundles/vendor.bundle.c6ca65127d6c79965cd9.js:7:199
+ne@https://bws.com.au/Scripts/Bundles/vendor.bundle.c6ca65127d6c79965cd9.js:7:31962
+G@https://bws.com.au/Scripts/Bundles/vendor.bundle.c6ca65127d6c79965cd9.js:7:25086
+z@https://bws.com.au/Scripts/Bundles/vendor.bundle.c6ca65127d6c79965cd9.js:7:24438
+z@https://bws.com.au/Scripts/Bundles/vendor.bundle.c6ca65127d6c79965cd9.js:7:24610
+z@https://bws.com.au/Scripts/Bundles/vendor.bundle.c6ca65127d6c79965cd9.js:7:24610
+z@https://bws.com.au/Scripts/Bundles/vendor.bundle.c6ca65127d6c79965cd9.js:7:24610
+q@https://bws.com.au/Scripts/Bundles/vendor.bundle.c6ca65127d6c79965cd9.js:7:23412
+https://bws.com.au/Scripts/Bundles/vendor.bundle.c6ca65127d6c79965cd9.js:12:17090
+https://bws.com.au/Scripts/Bundles/vendor.bundle.c6ca65127d6c79965cd9.js:6:47296
+me@https://bws.com.au/Scripts/Bundles/vendor.bundle.c6ca65127d6c79965cd9.js:7:36017
+d@https://bws.com.au/Scripts/Bundles/vendor.bundle.c6ca65127d6c79965cd9.js:7:40820
+a@https://bws.com.au/Scripts/Bundles/vendor.bundle.c6ca65127d6c79965cd9.js:7:24338
+https://bws.com.au/Scripts/Bundles/vendor.bundle.c6ca65127d6c79965cd9.js:7:23869
+https://bws.com.au/Scripts/Bundles/vendor.bundle.c6ca65127d6c79965cd9.js:7:26479
+l@https://bws.com.au/Scripts/Bundles/vendor.bundle.c6ca65127d6c79965cd9.js:12:48354
+https://bws.com.au/Scripts/Bundles/vendor.bundle.c6ca65127d6c79965cd9.js:12:48627
+$broadcast@https://bws.com.au/Scripts/Bundles/vendor.bundle.c6ca65127d6c79965cd9.js:8:64667
+https://bws.com.au/Scripts/Bundles/vendor.bundle.c6ca65127d6c79965cd9.js:12:27950
+a@https://bws.com.au/Scripts/Bundles/vendor.bundle.c6ca65127d6c79965cd9.js:8:32751
+https://bws.com.au/Scripts/Bundles/vendor.bundle.c6ca65127d6c79965cd9.js:8:32923
+$eval@https://bws.com.au/Scripts/Bundles/vendor.bundle.c6ca65127d6c79965cd9.js:8:63276
+$digest@https://bws.com.au/Scripts/Bundles/vendor.bundle.c6ca65127d6c79965cd9.js:8:61767
+https://bws.com.au/Scripts/Bundles/vendor.bundle.c6ca65127d6c79965cd9.js:8:63370
+o@https://bws.com.au/Scripts/Bundles/vendor.bundle.c6ca65127d6c79965cd9.js:7:2656
+https://bws.com.au/Scripts/Bundles/vendor.bundle.c6ca65127d6c79965cd9.js:7:6743
+
+  phantomjs://platform/console++.js:263 in error
+[ERROR - 2019-11-17T03:37:15.508Z] Session [8a21d030-08eb-11ea-9695-8954770b005b] - page.onError - stack:
+  (anonymous function) (https://bws.com.au/Scripts/Bundles/vendor.bundle.c6ca65127d6c79965cd9.js:8)
+
+  phantomjs://platform/console++.js:263 in error
+[ERROR - 2019-11-17T03:37:15.514Z] Session [8a21d030-08eb-11ea-9695-8954770b005b] - page.onError - msg: Error: [$injector:undef] Provider 'geolocation' must return a value from $get factory method.
+http://errors.angularjs.org/1.5.6/$injector/undef?p0=geolocation
+https://bws.com.au/Scripts/Bundles/vendor.bundle.c6ca65127d6c79965cd9.js:6:73793
+a@https://bws.com.au/Scripts/Bundles/vendor.bundle.c6ca65127d6c79965cd9.js:7:803
+https://bws.com.au/Scripts/Bundles/vendor.bundle.c6ca65127d6c79965cd9.js:7:1360
+r@https://bws.com.au/Scripts/Bundles/vendor.bundle.c6ca65127d6c79965cd9.js:7:199
+i@https://bws.com.au/Scripts/Bundles/vendor.bundle.c6ca65127d6c79965cd9.js:7:521
+a@https://bws.com.au/Scripts/Bundles/vendor.bundle.c6ca65127d6c79965cd9.js:7:693
+https://bws.com.au/Scripts/Bundles/vendor.bundle.c6ca65127d6c79965cd9.js:7:12612
+r@https://bws.com.au/Scripts/Bundles/vendor.bundle.c6ca65127d6c79965cd9.js:6:24757
+https://bws.com.au/Scripts/Bundles/vendor.bundle.c6ca65127d6c79965cd9.js:7:12574
+a@https://bws.com.au/Scripts/Bundles/vendor.bundle.c6ca65127d6c79965cd9.js:7:803
+https://bws.com.au/Scripts/Bundles/vendor.bundle.c6ca65127d6c79965cd9.js:6:73694
+a@https://bws.com.au/Scripts/Bundles/vendor.bundle.c6ca65127d6c79965cd9.js:7:803
+https://bws.com.au/Scripts/Bundles/vendor.bundle.c6ca65127d6c79965cd9.js:7:1360
+r@https://bws.com.au/Scripts/Bundles/vendor.bundle.c6ca65127d6c79965cd9.js:7:199
+ne@https://bws.com.au/Scripts/Bundles/vendor.bundle.c6ca65127d6c79965cd9.js:7:31962
+G@https://bws.com.au/Scripts/Bundles/vendor.bundle.c6ca65127d6c79965cd9.js:7:25086
+z@https://bws.com.au/Scripts/Bundles/vendor.bundle.c6ca65127d6c79965cd9.js:7:24438
+q@https://bws.com.au/Scripts/Bundles/vendor.bundle.c6ca65127d6c79965cd9.js:7:23412
+https://bws.com.au/Scripts/Bundles/vendor.bundle.c6ca65127d6c79965cd9.js:12:17090
+https://bws.com.au/Scripts/Bundles/vendor.bundle.c6ca65127d6c79965cd9.js:6:47296
+me@https://bws.com.au/Scripts/Bundles/vendor.bundle.c6ca65127d6c79965cd9.js:7:36017
+d@https://bws.com.au/Scripts/Bundles/vendor.bundle.c6ca65127d6c79965cd9.js:7:40820
+a@https://bws.com.au/Scripts/Bundles/vendor.bundle.c6ca65127d6c79965cd9.js:7:24338
+https://bws.com.au/Scripts/Bundles/vendor.bundle.c6ca65127d6c79965cd9.js:7:23869
+https://bws.com.au/Scripts/Bundles/vendor.bundle.c6ca65127d6c79965cd9.js:7:26479
+l@https://bws.com.au/Scripts/Bundles/vendor.bundle.c6ca65127d6c79965cd9.js:12:48354
+https://bws.com.au/Scripts/Bundles/vendor.bundle.c6ca65127d6c79965cd9.js:12:48627
+$broadcast@https://bws.com.au/Scripts/Bundles/vendor.bundle.c6ca65127d6c79965cd9.js:8:64667
+https://bws.com.au/Scripts/Bundles/vendor.bundle.c6ca65127d6c79965cd9.js:12:27950
+a@https://bws.com.au/Scripts/Bundles/vendor.bundle.c6ca65127d6c79965cd9.js:8:32751
+https://bws.com.au/Scripts/Bundles/vendor.bundle.c6ca65127d6c79965cd9.js:8:32923
+$eval@https://bws.com.au/Scripts/Bundles/vendor.bundle.c6ca65127d6c79965cd9.js:8:63276
+$digest@https://bws.com.au/Scripts/Bundles/vendor.bundle.c6ca65127d6c79965cd9.js:8:61767
+https://bws.com.au/Scripts/Bundles/vendor.bundle.c6ca65127d6c79965cd9.js:8:63370
+o@https://bws.com.au/Scripts/Bundles/vendor.bundle.c6ca65127d6c79965cd9.js:7:2656
+https://bws.com.au/Scripts/Bundles/vendor.bundle.c6ca65127d6c79965cd9.js:7:6743
+
+  phantomjs://platform/console++.js:263 in error
+[ERROR - 2019-11-17T03:37:15.515Z] Session [8a21d030-08eb-11ea-9695-8954770b005b] - page.onError - stack:
+  (anonymous function) (https://bws.com.au/Scripts/Bundles/vendor.bundle.c6ca65127d6c79965cd9.js:8)
+
+  phantomjs://platform/console++.js:263 in error

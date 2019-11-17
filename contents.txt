@@ -1,0 +1,317 @@
+<!-- build:mvcmodel -->
+<!-- endbuild -->
+
+<!DOCTYPE html>
+<html id="js-feature-settings" class="onesite" lang="en-AU" ng-strict-di="true">
+<head ng-controller="PageMetadataController as metaController" class="ng-scope">
+
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="buildVersion" />
+    <meta name="fragment" content="!" />
+    <link rel="dns-prefetch" href="//assets.adobedtm.com">
+    <link rel="dns-prefetch" href="//media.richrelevance.com">
+    <link rel="dns-prefetch" href="//www.facebook.com">
+    <link rel="dns-prefetch" href="//www.google.com">
+    <link rel="dns-prefetch" href="//api.bws.com.au">
+    <link rel="dns-prefetch" href="//edgmedia.bws.com.au">
+    <link rel="dns-prefetch" href="//dev.visualwebsiteoptimizer.com">
+    <!-- Favicons -->
+    <link rel="apple-touch-icon" sizes="57x57" href="/apple-touch-icon-57x57.png">
+    <link rel="apple-touch-icon" sizes="60x60" href="/apple-touch-icon-60x60.png">
+    <link rel="apple-touch-icon" sizes="72x72" href="/apple-touch-icon-72x72.png">
+    <link rel="apple-touch-icon" sizes="76x76" href="/apple-touch-icon-76x76.png">
+    <link rel="apple-touch-icon" sizes="114x114" href="/apple-touch-icon-114x114.png">
+    <link rel="apple-touch-icon" sizes="120x120" href="/apple-touch-icon-120x120.png">
+    <link rel="apple-touch-icon" sizes="144x144" href="/apple-touch-icon-144x144.png">
+    <link rel="apple-touch-icon" sizes="152x152" href="/apple-touch-icon-152x152.png">
+    <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon-180x180.png">
+    <link rel="icon" type="image/png" href="/favicon-32x32.png" sizes="32x32">
+    <link rel="icon" type="image/png" href="/android-chrome-192x192.png" sizes="192x192">
+    <link rel="icon" type="image/png" href="/favicon-96x96.png" sizes="96x96">
+    <link rel="icon" type="image/png" href="/favicon-16x16.png" sizes="16x16">
+    <link rel="manifest" href="/manifest.json">
+    <link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5">
+    <meta name="msapplication-TileColor" content="#da532c">
+    <meta name="msapplication-TileImage" content="/mstile-144x144.png">
+    <meta name="theme-color" content="#ed702a">
+
+    <!-- #region Styles -->
+    <style>
+        [ng\:cloak], [ng-cloak], [data-ng-cloak], [x-ng-cloak], .ng-cloak, .x-ng-cloak {
+            display: none !important;
+        }
+    </style>
+
+    <!-- app styles -->
+    <link href="/Scripts/Bundles/bws.bundle.c30b81a340f9e879d9fc.css" rel="stylesheet" type="text/css">
+
+    <meta ng-if="metaController.prerender.name" name="{{metaController.prerender.name}}" content="{{metaController.prerender.value}}">
+    <meta ng-if="metaController.prerender.location" name="prerender-header" content="Location: {{metaController.prerender.location}}">
+
+    <meta ng-if="metaController.noIndex" name="robots" ng-attr-content="{{metaController.noIndex ? 'noindex' : undefined}}">
+
+    <!-- #region NextAndPrevTags -->
+    <link rel="prev" ng-href="{{metaController.metaData.metaPrevUrl}}" ng-if="metaController.metaData.metaPrevUrl" />
+    <link rel="next" ng-href="{{metaController.metaData.metaNextUrl}}" ng-if="metaController.metaData.metaNextUrl" />
+    <!-- #endregion -->
+
+    <!-- #region Metadata -->
+    <meta name="keywords" content=""/>
+    <title ng-if="metaController.metaData.title" ng-bind="metaController.metaData.title"></title>
+    <meta name="description" content="{{metaController.metaData.metaDescription}}" ng-if="metaController.metaData.metaDescription"/>
+    <link rel="canonical" href="{{metaController.canonicalUrl}}" />
+
+     <!-- facebook -->
+    <meta property="og:site_name" content="BWS Online"/>
+    <meta property="og:title" content="BWS | Your Local Bottle Shop For Beer, Wine & Spirits"
+            ng-attr-content="{{metaController.metaData.title}}"/>
+    <meta property="og:description" content="Shop for today's special at BWS. With over 1200 stores across Australia, you'll always find a way to celebrate with our wide range of Beer, Wine and Spirits."
+            ng-attr-content="{{metaController.metaData.metaDescription}}"/>
+    <meta property="og:type" content="website"/>
+    <meta property="og:url" content="{{metaController.canonicalUrl}}"/>
+
+    <!--
+        <meta property="og:image" content="{{metaController.metaData.openGraph.image}}" ng-if="metaController.metaData.openGraph.image"/>
+    -->
+
+    <meta property="fb:app_id" content="12345"/>
+
+    <meta name="robots" content="{{metaController.metaData.metaRobot}}" ng-if="metaController.metaData.metaRobot" />
+    <meta name="{{metaController.metaData.meta404.name}}" content="{{metaController.metaData.meta404.content}}" ng-if="metaController.metaData.meta404" />
+    <!-- #endregion -->
+
+    <meta ng-if="metaController.state === 'home'" name="google-site-verification" content="mK4Z9tPPyTZ5tQmCrsZMpBIMIfKLZEqrfPTrA-62S8I" />
+
+    <!-- Important: webpackManifest for long term caching -->
+    <!-- Need to be in the head -->
+    <script manifest>!function(e){function r(n){if(a[n])return a[n].exports;var o=a[n]={exports:{},id:n,loaded:!1};return e[n].call(o.exports,o,o.exports,r),o.loaded=!0,o.exports}var n=window.webpackJsonp;window.webpackJsonp=function(a,t,c){for(var d,f,i=0,u=[];i<a.length;i++)f=a[i],o[f]&&u.push(o[f][0]),o[f]=0;for(d in t)e[d]=t[d];for(n&&n(a,t);u.length;)u.shift()();if(c+1)return r(c)};var a={},o={0:0};r.e=function(e){function n(){t.onerror=t.onload=null,clearTimeout(c);var r=o[e];0!==r&&(r&&r[1](new Error("Loading chunk "+e+" failed.")),o[e]=void 0)}if(0===o[e])return Promise.resolve();if(o[e])return o[e][2];var a=document.getElementsByTagName("head")[0],t=document.createElement("script");t.type="text/javascript",t.charset="utf-8",t.async=!0,t.timeout=12e4,t.src=r.p+""+e+".bundle."+{1:"4326f0cca8f356edcb92",2:"de7a8ba7d10599e93fb1",3:"91f181c17debf7c6379c",4:"0e6dec71ace637694f7a",5:"cbf92aa640e99a94676b",6:"3ae85bc270c847851fd4",7:"f3764fa2cf4dda6b198f",8:"c6ca65127d6c79965cd9",9:"f5126ad20fdd04a594f9",10:"d0db87d0fd6d47272de3",11:"c30b81a340f9e879d9fc"}[e]+".js";var c=setTimeout(n,12e4);t.onerror=t.onload=n,a.appendChild(t);var d=new Promise(function(r,n){o[e]=[r,n]});return o[e][2]=d},r.m=e,r.c=a,r.oe=function(e){throw e},r.p=""}([]);
+//# sourceMappingURL=manifest.bundle.a72dc3e70ead8d6e685b.js.map</script>
+
+    <script src="//assets.adobedtm.com/7e12473bac81db7edce4f16b9bc78a4d470df6d8/satelliteLib-28fef40a7b2ea8c64fd13aff5db7f0cdda018e40.js"></script>
+    <script src="https://api.bws.com.au/bootstrap/path" type="text/javascript"></script>
+    <link rel="preload" href="/Scripts/Bundles/vendor.bundle.c6ca65127d6c79965cd9.js" as="script">
+    <link rel="preload" href="/Scripts/Bundles/common.bundle.de7a8ba7d10599e93fb1.js" as="script">
+    <link rel="preload" href="/Scripts/Bundles/shop.bundle.4326f0cca8f356edcb92.js" as="script">
+    <link rel="preload" href="/fonts//webfonts/34BEF4_0_0.woff2" as="font" type="font/woff2" crossorigin>
+    <link rel="preload" href="/fonts//webfonts/34BEF4_1_0.woff2" as="font" type="font/woff2" crossorigin>
+    <link rel="preload" href="/fonts//webfonts/34BEF4_6_0.woff2" as="font" type="font/woff2" crossorigin>
+</head>
+<body itemscope="itemscope" itemtype="http://schema.org/WebPage" class="ng-scope" state-class>
+    <!-- TODO: Updated loader with BWS styles -->
+    <div ng-if="::false" class="spinner spinner-circle applicationLoadingSpinner">
+        <wow-loading-spinner></wow-loading-spinner>
+    </div>
+    <div class="scroll-body" id="scroll-body">
+        <div id="body-container"
+             class="right-panel-close left-panel-close last-scroll-up shop scroll-position-max-top ng-cloak body-container"
+             ng-class="transitionClasses()"
+             ui-view
+             wow-page-transition
+             wow-page-transition-if="!breakpoints.isInMediumFormat"
+             wow-global-scroll
+             clearable-inputs>
+
+            <header id="header-container" class="header-container animated fadeInDown js-header-container">
+                <div class="header-panel" ui-view="header-panel"></div>
+            </header>
+
+            <div ui-view="toolbar"></div>
+
+            <div class="main-content-container js-main-content-container leftPanel-ishidden rightPanel-ishidden" wow-panels>
+
+                <div id="left-panel"
+                     wow-open-close-panel="left"
+                     wow-open-close-panel-sr-text="Filter products"
+                     tabindex="-1"
+                     class="panel-section panel-section--left closed u-noOutline">
+                    <div ng-show="$parent.panelOverride.panel === ''">
+                        <!-- start of nav injection -->
+                        <div ui-view="left-panel" class="left-panel-content"></div>
+                        <!-- end of nav injection -->
+                    </div>
+                    <div ng-show="$parent.panelOverride.panel === 'nav'" class="panel-transclude-container">
+                        <div ui-view="mobile-nav" class="panel-transclude-container"></div>
+                    </div>
+                </div>
+
+                <main role="main"
+                      id="center-panel"
+                      class="main-content ng-cloak animation-ended u-noOutline"
+                      tabindex="-1">
+
+                    <div class="center-content">
+
+                        <wow-mobile-set-store-notification></wow-mobile-set-store-notification>
+
+                        <wow-primary-header></wow-primary-header>
+
+                        <div ui-view="tracker-panel"></div>
+
+                        <div ui-view="dynamic-content-top"></div>
+
+                        <div ui-view="center-panel" class="center-panel-ui-view"></div>
+
+                        <richer-relevance-carousel></richer-relevance-carousel>
+
+                        <div ui-view="dynamic-content-bottom"></div>
+                    </div>
+
+                    <!-- Start:  -->
+                    <div class="overlay" wow-open-close-panel="right" ng-click="togglePanel()"></div>
+                </main>
+
+                <aside role="aside complementary" wow-open-close-panel="right" wow-open-close-panel-sr-text="shopping cart"
+                       class="panel-section panel-section--right closed u-noOutline cart">
+                    <div id="right-panel" tabindex="-1" class="right-panel-content" ui-view="right-panel"></div>
+                </aside>
+
+                <footer class="footer-wrapper" role="contentinfo">
+                    <wow-footer></wow-footer>
+                </footer>
+
+            </div>
+            <bws-return-to-top ng-cloak></bws-return-to-top>
+        </div>
+    </div>
+    <bws-notification></bws-notification>
+    <feature-promo></feature-promo>
+    <!-- build:init -->
+<script>
+    window.config = {"apiUrl":"https://api.bws.com.au/apis/ui","bootstrapUrl":"https://api.bws.com.au/bootstrap/path","siteName":"BWS Online","analytics":"//assets.adobedtm.com/7e12473bac81db7edce4f16b9bc78a4d470df6d8/satelliteLib-28fef40a7b2ea8c64fd13aff5db7f0cdda018e40.js","facebookAppId":"12345","environment":"prod","RR_isEnabled":"true","RR_SCRIPT":"//media.richrelevance.com/rrserver/js/1.2/p13n.js","RR_API_URL":"//recs.richrelevance.com/rrserver/","RR_API_KEY":"be5022fb232edc4e","APIGEE_ZENDESK_API_URL":"https://prod.mobile-api.woolworths.com.au/zendesk/v1","APIGEE_ZENDESK_API_KEY":"EeBf7llFVPVhfpIEjJE0yIpeEtIGqgxT","APIGEE_ZENDESK_ENABLE_SUBMIT":"true"};
+</script>
+    <!-- endbuild -->
+<script type="text/javascript" src="https://assets.citrusad.net/citrusjs/0.1.0/citrus.js"></script>
+    <script type="text/javascript">
+        window.wowIsDebuggingEnabled = true;
+        window.wowModules = [
+            { "files": ["/Scripts/Bundles/common.bundle.de7a8ba7d10599e93fb1.js"], "name": "common" },
+            { "files": ["/Scripts/Bundles/lists.bundle.d0db87d0fd6d47272de3.js"], "name": "lists" },
+            { "files": ["/Scripts/Bundles/shop.bundle.4326f0cca8f356edcb92.js"], "name": "shop" },
+            { "files": ["/Scripts/Bundles/checkout.bundle.91f181c17debf7c6379c.js"], "name": "checkout" },
+            { "files": ["/Scripts/Bundles/myaccount.bundle.0e6dec71ace637694f7a.js"], "name": "myaccount" },
+            { "files": ["/Scripts/Bundles/recipes.bundle.cbf92aa640e99a94676b.js"], "name": "recipes" },
+            { "files": ["/Scripts/Bundles/errorpages.bundle.f5126ad20fdd04a594f9.js"], "name": "errorpages" },
+            { "files": ["/Scripts/Bundles/contactus.bundle.3ae85bc270c847851fd4.js"], "name": "contactus" },
+            { "files": ["/Scripts/Bundles/offergroup.bundle.f3764fa2cf4dda6b198f.js"], "name": "offergroup" }
+        ];
+
+        window.shouldRunContextInitialization = true;
+    </script>
+
+    <!-- vendor/lib bundle -->
+    <script src="/Scripts/Bundles/vendor.bundle.c6ca65127d6c79965cd9.js" type="text/javascript"></script>
+    <script src="//media.richrelevance.com/rrserver/js/1.2/p13n.js"></script>
+
+    <!-- todo remove jquery ui when dynamic content update will be completed -->
+    <script src="/Scripts/jquery-ui-1.10.4.min.js" type="text/javascript"></script>
+
+    <!-- app bundle -->
+    <script src="/Scripts/Bundles/common.bundle.de7a8ba7d10599e93fb1.js" type="text/javascript"></script>
+    <script src="/Scripts/Bundles/shop.bundle.4326f0cca8f356edcb92.js" type="text/javascript"></script>
+
+    <!-- init the app and bootstrap angular -->
+    <script type="text/javascript">
+        // get the pagemodel
+        (function() {
+            'use strict';
+
+            //Check if user agent is a Robot (bingBot or GoogleBot)
+            var isRobot = /google|bing/i
+                .test(navigator.userAgent);
+
+            function addThirdPartyScripts(settings) {
+                var result = settings.filter(function( obj ) {
+                    return obj.Name === 'HeadTagThirdPartyScript';
+                });
+
+                var headElement =  $('head').first();
+
+                for(var i=0; i < result.length; ++i){
+                    headElement.append(result[i].Value);
+                }
+            }
+
+            function findFromBootstrap(findKey){
+                var key;
+                if(window.bootstrapData){
+                    for (key in window.bootstrapData) {
+                        if (key===findKey && window.bootstrapData.hasOwnProperty(findKey)) {
+                            return window.bootstrapData[key];
+                        }
+                    }
+                }
+                return null;
+            }
+
+            function getPageModel() {
+                 var pageModelUrl = '/Settings/PageModel';
+                var pageModelValue = findFromBootstrap(pageModelUrl);
+                if(pageModelValue){
+                   handlePageModelData(pageModelValue);
+                }
+                else{
+                    var xhr = new XMLHttpRequest();
+                    xhr.withCredentials = true;
+                    xhr.open('GET', window.config.apiUrl + '/Settings/PageModel', true);
+                    xhr.setRequestHeader('Content-Type', 'application/json');
+
+                    xhr.onreadystatechange = function () {
+                    var DONE = 4; // readyState 4 means the request is done.
+                    var OK = 200; // status 200 is a successful return.
+                    if (xhr.readyState === DONE) {
+                        if (xhr.status === OK) {
+                            var data = JSON.parse(xhr.responseText);
+                            handlePageModelData(data);
+                        } else {
+                            //Only redirect if user agent is not a robot (BingBot ot GoogleBot)
+                            if (!isRobot) {
+                                window.location = window.location.origin + '/high-traffic.html';
+                            }
+                            console.log('Error: ' + xhr.status); // An error occurred during the request.
+                        }
+                    }
+                    };
+                    xhr.send(null);
+                }
+            }
+
+            function setContext(context) {
+                window.IsGuest = context.IsGuest;
+                window.SessionId = context.ContextId;
+            }
+
+            function addFeaturesSettingsToHtmlTag(features) {
+                var featuresList = features.split(' ');
+                var htmlTagClassList = document.getElementById('js-feature-settings').classList;
+                for(var i =0; i < featuresList.length; i++) {
+                    htmlTagClassList.add(featuresList[i]);
+                }
+            }
+
+            function handlePageModelData(data){
+                    addFeaturesSettingsToHtmlTag(data.PageModel);
+                    addThirdPartyScripts(data.SpaInitialisationSettings);
+                    setContext(data.Context);
+                    startAngularApp();
+            }
+
+            function startAngularApp() {
+                angular.bootstrap(document, ['wowApp.shop']); //,  { strictDi: true }
+            }
+
+            getPageModel();
+
+        }());
+
+    </script>
+
+    <script type="text/javascript">_satellite.pageBottom();</script>
+
+    <script> window['adrum-start-time']= new Date().getTime(); </script>
+    <script src="/Scripts/adrum.js"></script>
+<script src="/Scripts/modernizr.custom.3.5.0.js?h=78ED4B82A6414E0036ED07E4F852A88E" type="text/javascript"></script>
+
+</body>
+</html>
