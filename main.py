@@ -53,7 +53,7 @@ def download_bws(url, target_filename, filename_extension, total, listBWS):
     drinks = soup.findAll('div', {'class':'productTile'})
     print('SCRAPED ' + str(len(drinks)))
     threads = 0
-    with threadingPool.ThreadPoolExecutor() as executor:
+    with threadingPool.ThreadPoolExecutor(max_workers=3) as executor:
         for item in drinks:
             print("INIT_THREAD[" + str(threads) + "]")
             threads += 1
@@ -99,13 +99,13 @@ def item_thread_bws(item, listBWS):
         strSize = details['Liquor Size'][0:len(details['Liquor Size']) - 1]
         size = int(strSize)
 
-    efficiency = size / float(price)
+    efficiency = float(details['Standard Drinks']) / float(price)
 
     entry = Item("BWS", brand.text, name.text, price, "https://bws.com.au" + link['href'], details['Liquor Size'],
                  details['Alcohol %'], details['Standard Drinks'], efficiency)
 
     listBWS.append(entry)
-    print("FOUND: " + entry.name + " " + entry.stdDrinks + " " + entry.price + " " + str(size) + " " + str(price))
+    print("FOUND: " + entry.name + " " + entry.stdDrinks + " " + entry.price + " " + str(size) + " " + str(price) + " " + efficiency)
 
 
 if __name__ == '__main__':
