@@ -1,32 +1,69 @@
-import argparse
-import logging
-import concurrent.futures as threadingpool
+##############################################
+##############################################
+# Hamish Bultitude 2019
+##############################################
+##############################################
+
+from selenium.webdriver.chrome.options import Options
+import concurrent.futures as threadingPool
 from classItem import Item, ItemCollection
 from bs4 import BeautifulSoup
 from selenium import webdriver
-from selenium.webdriver.chrome.options import Options
+import argparse
+import logging
 
-threads = list()
-parsedBWS = list()
+# logging.basicConfig(filename='brew.log', filemode='w', format='[%(asctime)s]%(name)s:%(levelname)s:%(message)s')
+# console = logging.StreamHandler()
+# console.setLevel(print)
+# # set a format which is simpler for console use
+# formatter = logging.Formatter('%(name)-12s: %(levelname)-8s %(message)s')
+# # tell the handler to use this format
+# console.setFormatter(formatter)
+# # add the handler to the root logger
+# logging.getLogger('').addHandler(console)
 
 
-def download_bws(url, target_filename, filename_extension, total):
+def main():
+    parser = argparse.ArgumentParser(description='Enter alcohol to search')
+    parser.add_argument("--drink", default='vodka', help="The drink")
+    args = parser.parse_args()
+    controller(args)
+
+
+def controller(args):
+    """
+    Main controller of URL execution
+    """
+    total = ItemCollection()
+    # BWS
+    bwsURL = "https://bws.com.au/search?searchTerm=" + args.drink
+    listBWS = list()
+    download_bws(bwsURL, "bws", "txt", total, listBWS)
+
+
+def download_bws(url, target_filename, filename_extension, total, listBWS):
+    """
+    Function to parse BWS site (circa November 2019) and return all drinks
+    """
     chrome_options = Options()
     chrome_options.add_argument("--headless")
     driver = webdriver.Chrome(options=chrome_options)
     driver.get(url)
     soup = BeautifulSoup(driver.page_source, 'html.parser')
     drinks = soup.findAll('div', {'class':'productTile'})
-    print('found ' + str(len(drinks)))
-
-    j = 0
-    with threadingpool.ThreadPoolExecutor() as executor:
+    print('SCRAPED ' + str(len(drinks)))
+    threads = 0
+    with threadingPool.ThreadPoolExecutor() as executor:
         for item in drinks:
-            print("thread start")
-            executor.submit(item_thread_bws, item)
+            print("INIT_THREAD[" + str(threads) + "]")
+            threads += 1
+            executor.submit(item_thread_bws, item, listBWS)
 
-def item_thread_bws(item):
-    print("start parse")
+
+def item_thread_bws(item, listBWS):
+    """
+    Thread function to control parsing of BWS drink details
+    """
     # brand
     brand = item.find('h2', {'class': 'productTile_brand ng-binding'})
     # name
@@ -67,33 +104,8 @@ def item_thread_bws(item):
     entry = Item("BWS", brand.text, name.text, price, "https://bws.com.au" + link['href'], details['Liquor Size'],
                  details['Alcohol %'], details['Standard Drinks'], efficiency)
 
-    # parsedBWS.append(entry)
-    print(entry.name + " " + entry.stdDrinks + " " + entry.price)
-
-def organize(drinks):
-    # in Aus, std drink == 10g
-    # efficiency -> std drinks / price
-    # sorted(drinks)
-
-    for drink in drinks:
-        print(drink.name + " " + drink.stdDrinks + " " + drink.price)
-
-
-
-def main():
-    parser = argparse.ArgumentParser(description='Enter alcohol to search')
-    parser.add_argument("--drink", default='vodka', help="The drink")
-    args = parser.parse_args()
-
-    total = ItemCollection()
-    # BWS
-    bws = "https://bws.com.au/search?searchTerm=" + args.drink
-    bwsPool = download_bws(bws, "bws", "txt", total)
-
-    # Dan Murphy
-
-    # ...
-    organize(parsedBWS)
+    listBWS.append(entry)
+    print("FOUND: " + entry.name + " " + entry.stdDrinks + " " + entry.price + " " + str(size) + " " + str(price))
 
 
 if __name__ == '__main__':

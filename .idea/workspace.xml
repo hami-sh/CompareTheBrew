@@ -2,7 +2,6 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="e2afa7ee-2eb7-45af-97c6-45ebd2cd5bf8" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/CompareTheDrink.iml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/CompareTheDrink.iml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/main.py" beforeDir="false" afterPath="$PROJECT_DIR$/main.py" afterDir="false" />
     </list>
@@ -17,9 +16,10 @@
       <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/main.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state>
+            <state relative-caret-position="2058">
+              <caret line="98" column="75" lean-forward="true" selection-start-line="98" selection-start-column="75" selection-end-line="98" selection-end-column="75" />
               <folding>
-                <element signature="e#0#15#0" expanded="true" />
+                <element signature="e#213#266#0" expanded="true" />
               </folding>
             </state>
           </provider>
@@ -54,7 +54,7 @@
       </list>
     </option>
   </component>
-  <component name="ProjectFrameBounds">
+  <component name="ProjectFrameBounds" extendedState="6">
     <option name="x" value="1231" />
     <option name="y" value="36" />
     <option name="width" value="1329" />
@@ -180,23 +180,24 @@
       <workItem from="1574053446416" duration="71000" />
       <workItem from="1574116871522" duration="342000" />
       <workItem from="1574117292142" duration="348000" />
-      <workItem from="1574335467241" duration="2606000" />
+      <workItem from="1574335467241" duration="4214000" />
+      <workItem from="1574339896927" duration="29000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="10737000" />
+    <option name="totallyTimeSpent" value="12374000" />
   </component>
   <component name="ToolWindowManager">
-    <frame x="1231" y="36" width="1329" height="988" extended-state="0" />
+    <frame x="0" y="23" width="2560" height="1020" extended-state="6" />
     <editor active="true" />
     <layout>
-      <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.16083916" />
+      <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.08260524" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
       <window_info id="Favorites" order="2" side_tool="true" />
       <window_info anchor="bottom" id="Message" order="0" />
       <window_info anchor="bottom" id="Find" order="1" />
-      <window_info active="true" anchor="bottom" x="204" y="167" width="905" height="730" id="Run" order="2" type="FLOATING" visible="true" weight="0.31931818" />
+      <window_info anchor="bottom" x="1022" y="46" width="1065" height="827" id="Run" order="2" type="FLOATING" weight="0.31931818" />
       <window_info anchor="bottom" id="Debug" order="3" weight="0.4" />
       <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
       <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
@@ -220,14 +221,15 @@
     <option name="version" value="1" />
   </component>
   <component name="com.intellij.coverage.CoverageDataManagerImpl">
-    <SUITE FILE_PATH="coverage/CompareTheDrink$main.coverage" NAME="main Coverage Results" MODIFIED="1574338027290" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
+    <SUITE FILE_PATH="coverage/CompareTheDrink$main.coverage" NAME="main Coverage Results" MODIFIED="1574339586825" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
   </component>
   <component name="editorHistoryManager">
     <entry file="file://$PROJECT_DIR$/main.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state>
+        <state relative-caret-position="2058">
+          <caret line="98" column="75" lean-forward="true" selection-start-line="98" selection-start-column="75" selection-end-line="98" selection-end-column="75" />
           <folding>
-            <element signature="e#0#15#0" expanded="true" />
+            <element signature="e#213#266#0" expanded="true" />
           </folding>
         </state>
       </provider>
