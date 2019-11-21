@@ -1,9 +1,13 @@
 import argparse
-import concurrent.futures as thread
+import logging
+import concurrent.futures as threadingpool
 from classItem import Item, ItemCollection
 from bs4 import BeautifulSoup
 from selenium import webdriver
 from selenium.webdriver.chrome.options import Options
+
+threads = list()
+parsedBWS = list()
 
 
 def download_bws(url, target_filename, filename_extension, total):
@@ -15,14 +19,14 @@ def download_bws(url, target_filename, filename_extension, total):
     drinks = soup.findAll('div', {'class':'productTile'})
     print('found ' + str(len(drinks)))
 
-    for item in drinks:
-        with thread.ThreadPoolExecutor() as executor:
-            item_thread = executor.submit(item_thread_bws, item)
-            print(item_thread.result().name + " " + item_thread.result().price + " " + str(item_thread.result().ml)
-                  + " " + str(item_thread.result().efficiency) + " " + item_thread.result().link)
-
+    j = 0
+    with threadingpool.ThreadPoolExecutor() as executor:
+        for item in drinks:
+            print("thread start")
+            executor.submit(item_thread_bws, item)
 
 def item_thread_bws(item):
+    print("start parse")
     # brand
     brand = item.find('h2', {'class': 'productTile_brand ng-binding'})
     # name
@@ -48,7 +52,7 @@ def item_thread_bws(item):
     for x in range(0, len(keys)):
         details[keys[x].text] = values[x].text
 
-    size = 0;
+    size = 0
     if details['Liquor Size'].find('mL') != -1:
         # measurement in mL
         strSize = details['Liquor Size'][0:len(details['Liquor Size']) - 2]
@@ -63,13 +67,13 @@ def item_thread_bws(item):
     entry = Item("BWS", brand.text, name.text, price, "https://bws.com.au" + link['href'], details['Liquor Size'],
                  details['Alcohol %'], details['Standard Drinks'], efficiency)
 
-    return entry
-
+    # parsedBWS.append(entry)
+    print(entry.name + " " + entry.stdDrinks + " " + entry.price)
 
 def organize(drinks):
     # in Aus, std drink == 10g
     # efficiency -> std drinks / price
-    sorted(drinks)
+    # sorted(drinks)
 
     for drink in drinks:
         print(drink.name + " " + drink.stdDrinks + " " + drink.price)
@@ -89,7 +93,7 @@ def main():
     # Dan Murphy
 
     # ...
-    organize(bwsPool)
+    organize(parsedBWS)
 
 
 if __name__ == '__main__':
