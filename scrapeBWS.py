@@ -83,4 +83,4 @@ def item_thread_bws(item, listBWS):
     entry = Item("BWS", brand.text, name.text, price, "https://bws.com.au" + link['href'], details['Liquor Size'],
                  details['Alcohol %'], details['Standard Drinks'], efficiency)
     print(entry.name + " " + entry.stdDrinks + " " + entry.price + " " + str(size) + " " + str(efficiency))
-    listBWS.append(entry)
+    return entry
