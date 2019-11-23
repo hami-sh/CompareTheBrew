@@ -60,10 +60,11 @@ def controller(args):
     """
     Main controller of URL execution
     """
-    # BWS
-    bwslist = list()
-    bwsURL = "https://bws.com.au/search?searchTerm=" + args.drink
-    bwslist = getData(bwsURL)
+    # Scrape from the given search url with the given search term
+    drinksData = list()
+    # url = "https://bws.com.au/search?searchTerm=" + args.drink
+    url = "https://www.firstchoiceliquor.com.au/search?searchTerm=" + args.drink
+    drinksData = getData(url)
 
     # Liquorland
     # liquourlandURL = "https://www.liquorland.com.au/search?q=" + args.drink
