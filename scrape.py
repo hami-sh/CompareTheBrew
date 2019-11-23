@@ -11,7 +11,7 @@ def getData(url):
     """
     liquorSite = getLiquorSiteFromUrl(url)
     soup = download(url)
-    drinksData = get_drinks(soup, liquorSite)
+    drinksData = getDrinks(soup, liquorSite)
     return drinksData
 
 def getLiquorSiteFromUrl(url):
