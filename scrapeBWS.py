@@ -6,7 +6,7 @@ from classItem import Item, ItemCollection
 import logging
 
 
-def download_bws(url, target_filename, filename_extension, total, listBWS):
+def download_bws(url, target_filename, filename_extension, listBWS):
     """
     Function to parse BWS site (circa November 2019) and return all drinks
 
