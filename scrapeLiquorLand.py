@@ -9,7 +9,7 @@ import random
 from urllib.request import Request, urlopen
 
 
-def download_liquorland(url, target_filename, filename_extension, total, list):
+def download_liquorland(url, target_filename, filename_extension, LiqourLandList):
     """
     Function to parse BWS site (circa November 2019) and return all drinks
     """

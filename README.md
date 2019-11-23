@@ -19,6 +19,7 @@ ___
 
 ## TODO
 - [ ] Move to next page of search results if multiple pages
+- [ ] Remove search query dependency (waiting on mcost)
 
 - [ ] Frontend
   - [ ] Design Mockup
