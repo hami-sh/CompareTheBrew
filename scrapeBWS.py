@@ -5,40 +5,6 @@ import concurrent.futures as threadingPool
 from classItem import Item, ItemCollection
 import logging
 
-
-def download_bws(url, target_filename, filename_extension, listBWS):
-    """
-    Function to parse BWS site (circa November 2019) and return all drinks
-
-    Args:
-        url: The url to be scraped
-        target_filename: the output file that the data will be saved to
-        filename_extension: file type of the output file
-        total:
-        list: a list for the output data to be put into
-    """
-    # Configure options for the chrome web driver which is used as a headless browser to scrape html and render javascript for web pages
-    chrome_options = Options()
-    chrome_options.add_argument("--headless")
-    driver = webdriver.Chrome(options=chrome_options)
-    # Get the HTML from the given url
-    driver.get(url)
-    # Create a BeautifulSoup object from the raw HTML string, to make it easier for us to search for particular elements later
-    soup = BeautifulSoup(driver.page_source, 'html.parser')
-    # Extract the drink profiles from the BeautifulSoup (configured for bws)
-    drinks = soup.findAll('div', {'class':'productTile'})
-    # Print all of the drinks profiles
-    print('SCRAPED ' + str(len(drinks)))
-    # Threading stuff basically executes multiple copies item_thread_bws(item, listBWS) concurrently
-    threads = 0
-    with threadingPool.ThreadPoolExecutor() as executor:
-        for item in drinks:
-            print("INIT_THREAD[" + str(threads) + "]")
-            threads += 1
-            # Run item_thread_bws(item, listBWS)
-            executor.submit(item_thread_bws, item, listBWS)
-
-
 def item_thread_bws(item, commonList):
     """
     Thread function to control parsing of BWS drink details

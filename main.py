@@ -37,8 +37,6 @@
 
 from classItem import ItemCollection
 import argparse
-from scrapeBWS import download_bws
-from scrapeLiquorLand import download_liquorland
 from scrape import getData
 
 # logging.basicConfig(filename='brew.log', filemode='w', format='[%(asctime)s]%(name)s:%(levelname)s:%(message)s')

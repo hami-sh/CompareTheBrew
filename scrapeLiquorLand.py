@@ -8,31 +8,6 @@ from fake_useragent import UserAgent
 import random
 from urllib.request import Request, urlopen
 
-
-def download_liquorland(url, target_filename, filename_extension, LiqourLandList):
-    """
-    Function to parse BWS site (circa November 2019) and return all drinks
-    """
-    soup = BeautifulSoup(url, 'html.parser')
-    specials = soup.findAll('div', {'class':'product-tile-wrapper update-specials-border'})
-    drinks = soup.findAll('div', {'class': 'product-tile-wrapper'})
-
-    print('LiqLand SCRAPED normal:' + str(len(drinks)))
-    print('LiqLand SCRAPED specials: ' + str(len(specials)))
-
-    threads = 0
-    with threadingPool.ThreadPoolExecutor(max_workers=3) as executor:
-        for item in drinks:
-            #print("INIT_THREAD[" + str(threads) + "]")
-            threads += 1
-            executor.submit(item_thread_liquorland, item, list)
-
-        for item in specials:
-            #print("INIT_THREAD[" + str(threads) + "]")
-            threads += 1
-            executor.submit(item_thread_liquorland, item, list)
-
-
 def item_thread_liquorland(item, commonList):
     """
     Thread function to control parsing of BWS drink details
@@ -49,7 +24,6 @@ def item_thread_liquorland(item, commonList):
     link = linkdiv.find('a')
     pricewithsymbols = " ".join(dollar.text.splitlines())
     priceformatted = pricewithsymbols.split('$')[1]
-
 
     # alcohol content
     ua = UserAgent(cache=False, use_cache_server=False)
@@ -85,7 +59,6 @@ def item_thread_liquorland(item, commonList):
         value = element.find('div', {"class":"pdp-des"}).text
         valueformatted = value.strip()
         details[keyformatted] = valueformatted
-
 
     efficiency = float(details['Standard Drinks']) / float(priceformatted)
 
