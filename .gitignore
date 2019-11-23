@@ -3,3 +3,4 @@ __pycache__/
 *.pyc
 *.xml
 .DS_Store
+.idea
