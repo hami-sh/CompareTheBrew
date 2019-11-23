@@ -65,6 +65,7 @@ def getDrinks(soup, liquorSite):
 
     Returns: A list of drink data
     """
+    print("site: " + liquorSite)
     drinks = list()
     # Get the drinks profiles based on the given liquorSite
     if liquorSite == "bws":
@@ -85,19 +86,18 @@ def getDrinks(soup, liquorSite):
     # Get the drink data for each drink profile we collected
     # Threading stuff basically executes multiple copies item_thread_XXX(item) concurrently
     threads = 0
-    with threadingPool.ThreadPoolExecutor() as executor:
+    with threadingPool.ThreadPoolExecutor(max_workers=3) as executor:
         for item in drinks:
             print("INIT_THREAD[" + str(threads) + "]")
             threads += 1
             # Execute the correct item_thread function based on the given liquorSite
             if liquorSite == "bws":
                 # Run item_thread_bws(item)
-                thread = executor.submit(item_thread_bws, item)
-                drinksdata.append(thread.result())
+                print(1)
+                executor.submit(item_thread_bws, item, drinksdata)
             elif liquorSite == "liquorland":
                 # Run item_thread_liquorland(item)
-                executor.submit(item_thread_liquorland, item)
-                drinksdata.append(thread.result())
+                executor.submit(item_thread_liquorland, item, drinksdata)
 
     # Return the drinksData
     return drinksdata

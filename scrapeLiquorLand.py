@@ -33,7 +33,7 @@ def download_liquorland(url, target_filename, filename_extension, LiqourLandList
             executor.submit(item_thread_liquorland, item, list)
 
 
-def item_thread_liquorland(item, list):
+def item_thread_liquorland(item, commonList):
     """
     Thread function to control parsing of BWS drink details
     """
@@ -92,4 +92,4 @@ def item_thread_liquorland(item, list):
     entry = Item("LiquorLand", brand.text, name.text, priceformatted, "https://liquorland.com.au" + link['href'], "0",
                  details['Alcohol Content'], details['Standard Drinks'], efficiency)
     print("FOUND: " + entry.brand + entry.name + " " + priceformatted + " " + str(efficiency))
-    return entry
+    commonList.append(entry)
