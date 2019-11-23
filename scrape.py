@@ -14,7 +14,7 @@ def getData(url):
     drinksData = get_drinks(soup, liquorSite)
     return drinksData
 
-getLiquorSiteFromUrl(url):
+def getLiquorSiteFromUrl(url):
     """
     Takes a search url (e.g. "https://bws.com.au/search?searchTerm="vodka") and automatically detects the liquorSite name and returns it
     """
@@ -57,7 +57,6 @@ def getDrinks(soup, liquorSite):
 
     Returns: A list of drink data
     """
-    drinks = list()
     # Get the drinks profiles based on the given liquorSite
     if liquorSite == "bws":
         # Extract the drink profiles from the BeautifulSoup (configured for bws)
@@ -69,7 +68,7 @@ def getDrinks(soup, liquorSite):
         drinks.append(specials)
 
     # Print all of the drinks profiles
-    print('SCRAPED ' + str(len(drinks)))
+    # print('SCRAPED ' + str(len(drinks)))
 
     # Create an empty list in which to store our drinks data (each drink will have its own Item object (see classItem) which will be added to the list)
     drinksData = {}
@@ -87,7 +86,7 @@ def getDrinks(soup, liquorSite):
                 drinksData.append(executor.submit(item_thread_bws, item))
             else if liquorSite == "liquorland":
                 # Run item_thread_liquorland(item)
-                drinksData.append(executor.submit(item_thread_bws, item))
+                drinksData.append(executor.submit(item_thread_liquorland, item))
 
     # Return the drinksData
     return drinksData
@@ -121,9 +120,80 @@ def item_thread_bws(item):
 
     for x in range(0, len(keys)):
         details[keys[x].text] = values[x].text
-        
+
+    size = 0
+    if details['Liquor Size'].find('mL') != -1:
+        # measurement in mL
+        strSize = details['Liquor Size'][0:len(details['Liquor Size']) - 2]
+        size = int(strSize) / 1000
+    else:
+        # measurement in L
+        strSize = details['Liquor Size'][0:len(details['Liquor Size']) - 1]
+        size = int(strSize)
+
     efficiency = float(details['Standard Drinks']) / float(price)
     entry = Item("BWS", brand.text, name.text, price, "https://bws.com.au" + link['href'], details['Liquor Size'],
                  details['Alcohol %'], details['Standard Drinks'], efficiency)
     print(entry.name + " " + entry.stdDrinks + " " + entry.price + " " + str(size) + " " + str(efficiency))
+    return entry
+
+def item_thread_liquorland(item, list):
+    """
+    Thread function to control parsing of liquorland drink details
+    """
+    # brand
+    brand = item.find('div', {'class': 'product-tile-brand'})
+    # name
+    name = item.find('div', {'class': 'product-tile-des'})
+    # price
+    pricespan = item.find('div', {'class': 'price-bundle-new'})
+    dollar = pricespan.find('span', {'class': 'price'})
+    # link
+    linkdiv = item.find('div', {'class':'product-tile-brand'})
+    link = linkdiv.find('a')
+    pricewithsymbols = " ".join(dollar.text.splitlines())
+    priceformatted = pricewithsymbols.split('$')[1]
+
+
+    # alcohol content
+    ua = UserAgent(cache=False, use_cache_server=False)
+    chrome_options = Options()
+    chrome_options.add_argument("--headless")
+    proxies = []  # Will contain proxies [ip, port]
+    proxies_req = Request('https://www.sslproxies.org/')
+    proxies_req = Request('https://free-proxy-list.net/')
+    proxies_req.add_header('User-Agent', ua.random)
+    proxies_doc = urlopen(proxies_req).read().decode('utf8')
+    proxy_soup = BeautifulSoup(proxies_doc, 'html.parser')
+    proxies_table = proxy_soup.find(id='proxylisttable')
+    for row in proxies_table.tbody.find_all('tr'):
+        proxies.append({
+            'ip': row.find_all('td')[0].string,
+            'port': row.find_all('td')[1].string
+        })
+
+    PROXY = proxies[0]['ip'] + ":" + proxies[0]['port']
+    print(PROXY)
+    chrome_options.add_argument('--proxy-server=' + PROXY)
+    driver = webdriver.Chrome(options=chrome_options)
+    driver.get("https://www.liquorland.com.au" + link['href'])
+
+    soup = BeautifulSoup(driver.page_source, 'html.parser')
+
+    detailsRaw = soup.find('ul', {'class':'pdp-detailsTable'})
+    listelements = detailsRaw.findAll('li')
+    details = dict()
+    for element in listelements:
+        key = element.find('div', {"class":"pdp-key"}).text
+        keyformatted = key.strip()
+        value = element.find('div', {"class":"pdp-des"}).text
+        valueformatted = value.strip()
+        details[keyformatted] = valueformatted
+
+
+    efficiency = float(details['Standard Drinks']) / float(priceformatted)
+
+    entry = Item("LiquorLand", brand.text, name.text, priceformatted, "https://liquorland.com.au" + link['href'], "0",
+                 details['Alcohol Content'], details['Standard Drinks'], efficiency)
+    print("FOUND: " + entry.brand + entry.name + " " + priceformatted + " " + str(efficiency))
     return entry
