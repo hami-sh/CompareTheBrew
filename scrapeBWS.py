@@ -18,7 +18,7 @@ def download_bws(url, target_filename, filename_extension, total, listBWS):
     drinks = soup.findAll('div', {'class':'productTile'})
     print('SCRAPED ' + str(len(drinks)))
     threads = 0
-    with threadingPool.ThreadPoolExecutor(max_workers=3) as executor:
+    with threadingPool.ThreadPoolExecutor() as executor:
         for item in drinks:
             print("INIT_THREAD[" + str(threads) + "]")
             threads += 1
@@ -51,6 +51,7 @@ def item_thread_bws(item, listBWS):
     keys = list.findAll('strong', {'class':'list-details_header ng-binding'})
     values = list.findAll('span', {'class':'pull-right list-details_info ng-binding ng-scope'})
     details = dict()
+
     for x in range(0, len(keys)):
         details[keys[x].text] = values[x].text
 
@@ -65,9 +66,7 @@ def item_thread_bws(item, listBWS):
         size = int(strSize)
 
     efficiency = float(details['Standard Drinks']) / float(price)
-
     entry = Item("BWS", brand.text, name.text, price, "https://bws.com.au" + link['href'], details['Liquor Size'],
                  details['Alcohol %'], details['Standard Drinks'], efficiency)
-
+    print(entry.name + " " + entry.stdDrinks + " " + entry.price + " " + str(size) + " " + str(efficiency))
     listBWS.append(entry)
-    print("FOUND: " + entry.name + " " + entry.stdDrinks + " " + entry.price + " " + str(size) + " " + str(price) + " " + efficiency)

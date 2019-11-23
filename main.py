@@ -7,6 +7,7 @@
 from classItem import ItemCollection
 import argparse
 from scrapeBWS import download_bws
+from scrapeLiquorLand import download_liquorland
 
 # logging.basicConfig(filename='brew.log', filemode='w', format='[%(asctime)s]%(name)s:%(levelname)s:%(message)s')
 # console = logging.StreamHandler()
@@ -33,9 +34,12 @@ def controller(args):
     # BWS
     bwsURL = "https://bws.com.au/search?searchTerm=" + args.drink
     listBWS = list()
-    download_bws(bwsURL, "bws", "txt", total, listBWS)
+    #download_bws(bwsURL, "bws", "txt", total, listBWS)
 
     # Liquorland
+    liquourlandURL = "https://www.liquorland.com.au/search?q=" + args.drink
+    listLiquourland = list()
+    download_liquorland(liquourlandURL, "liquorland", "txt", total, listLiquourland)
 
     #
 
