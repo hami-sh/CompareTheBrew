@@ -24,11 +24,15 @@ def getLiquorSiteFromUrl(url):
     """
     Takes a search url (e.g. "https://bws.com.au/search?searchTerm="vodka") and automatically detects the liquorSite name and returns it
     """
-    # url e.g. "https://bws.com.au/search?searchTerm="vodka"
-    domain = url.partition(".")[0]
-    # domain e.g. "https://bws"
-    liquorSite = domain[8:]
-    # liquorSite e.g. "bws"
+
+    # Separate the url into list items about the periods
+    urlList = url.split(".")
+    # If the first element ends in www - e.g. url of form https://www.firstchoiceliquor.com.au/, take the second element in the list as the liquorSite name
+    if urlList[0][-3:] == "www" or urlList[0][-3:] == "ww2":
+        liquorSite = urlList[1]
+    else:
+        # If we have a url without a www. url e.g. urlList=["https://bws", "com", "au/search?searchTerm='vodka'"] simply take the first element, split by the '/' and take the element in posiiton 2 of the resulting list
+        liquorSite = urlList[0].split("/")[2]
     return liquorSite
 
 
