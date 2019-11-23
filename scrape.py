@@ -5,8 +5,27 @@ import concurrent.futures as threadingPool
 from classItem import Item, ItemCollection
 import logging
 
+def getData(url):
+    """
+    Gets all of the drinks data given a search url and returns it as a list
+    """
+    liquorSite = getLiquorSiteFromUrl(url)
+    soup = download(url)
+    drinksData = get_drinks(soup, liquorSite)
+    return drinksData
 
-def download(url, target_filename, filename_extension, total, listBWS):
+getLiquorSiteFromUrl(url):
+    """
+    Takes a search url (e.g. "https://bws.com.au/search?searchTerm="vodka") and automatically detects the liquorSite name and returns it
+    """
+    # url e.g. "https://bws.com.au/search?searchTerm="vodka"
+    domain = url.partition(".")[0]
+    # domain e.g. "https://bws"
+    liquorSite = domain[8:]
+    # liquorSite e.g. "bws"
+    return liquorSite
+
+def download(url):
     """
     Function to parse a site (circa November 2019) and return a BeautifulSoup of its HTML
 
@@ -29,7 +48,7 @@ def download(url, target_filename, filename_extension, total, listBWS):
     soup = BeautifulSoup(driver.page_source, 'html.parser')
     return soup
 
-def get_drinks(soup, liquorSite):
+def getDrinks(soup, liquorSite):
     """
     Function to get a list of drink data from a BeautifulSoup and return the data in a list
 
@@ -48,20 +67,31 @@ def get_drinks(soup, liquorSite):
         drinks = soup.findAll('div', {'class': 'product-tile-wrapper'})
         drinks.append(specials)
 
-    # Extract the drink profiles from the BeautifulSoup (configured for bws)
-    drinks = soup.findAll('div', {'class':'productTile'})
     # Print all of the drinks profiles
-    print('SCRAPED ' + str(len(drinks)))
-    # Threading stuff basically executes multiple copies item_thread_bws(item, listBWS) concurrently
+    # print('SCRAPED ' + str(len(drinks)))
+
+    # Create an empty list in which to store our drinks data (each drink will have its own Item object (see classItem) which will be added to the list)
+    drinksData = {}
+
+    # Get the drink data for each drink profile we collected
+    # Threading stuff basically executes multiple copies item_thread_XXX(item) concurrently
     threads = 0
     with threadingPool.ThreadPoolExecutor() as executor:
         for item in drinks:
             print("INIT_THREAD[" + str(threads) + "]")
             threads += 1
-            # Run item_thread_bws(item, listBWS)
-            executor.submit(item_thread_bws, item, listBWS)
+            # Execute the correct item_thread function based on the given liquorSite
+            if liquorSite == "bws":
+                # Run item_thread_bws(item)
+                drinksData.append(executor.submit(item_thread_bws, item))
+            else if liquorSite == "liquorland":
+                # Run item_thread_liquorland(item)
+                drinksData.append(executor.submit(item_thread_bws, item))
 
-def item_thread_bws(item, listBWS):
+    # Return the drinksData
+    return drinksData
+
+def item_thread_bws(item):
     """
     Thread function to control parsing of BWS drink details
     """
@@ -105,4 +135,4 @@ def item_thread_bws(item, listBWS):
     entry = Item("BWS", brand.text, name.text, price, "https://bws.com.au" + link['href'], details['Liquor Size'],
                  details['Alcohol %'], details['Standard Drinks'], efficiency)
     print(entry.name + " " + entry.stdDrinks + " " + entry.price + " " + str(size) + " " + str(efficiency))
-    listBWS.append(entry)
+    return entry
