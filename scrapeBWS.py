@@ -27,12 +27,15 @@ def download_bws(url, target_filename, filename_extension, total, listBWS):
     soup = BeautifulSoup(driver.page_source, 'html.parser')
     # Extract the drink profiles from the BeautifulSoup (configured for bws)
     drinks = soup.findAll('div', {'class':'productTile'})
+    # Print all of the drinks profiles
     print('SCRAPED ' + str(len(drinks)))
+    # Threading stuff basically executes multiple copies item_thread_bws(item, listBWS) concurrently
     threads = 0
     with threadingPool.ThreadPoolExecutor() as executor:
         for item in drinks:
             print("INIT_THREAD[" + str(threads) + "]")
             threads += 1
+            # Run item_thread_bws(item, listBWS)
             executor.submit(item_thread_bws, item, listBWS)
 
 
