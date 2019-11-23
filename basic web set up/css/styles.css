@@ -1,0 +1,147 @@
+@font-face {
+    font-family: 'louis_george_cafe';
+    src: url('louis_george_cafe/louis_george_cafe_bold-webfont.eot');
+    src: url('louis_george_cafe/louis_geo/rge_cafe_bold-webfont.eot?#iefix') format('embedded-opentype'),
+         url('louis_george_cafe/louis_george_cafe_bold-webfont.woff2') format('woff2'),
+         url('louis_george_cafe/louis_george_cafe_bold-webfont.woff') format('woff'),
+         url('louis_george_cafe/louis_george_cafe_bold-webfont.ttf') format('truetype'),
+         url('louis_george_cafe/louis_george_cafe_bold-webfont.svg#louis_george_cafebold') format('svg');
+    font-weight: bold;
+    font-style: normal;
+
+}
+
+@font-face {
+    font-family: 'louis_george_cafe';
+    src: url('louis_george_cafe/louis_george_cafe-webfont.eot');
+    src: url('louis_george_cafe/louis_george_cafe-webfont.eot?#iefix') format('embedded-opentype'),
+         url('louis_george_cafe/louis_george_cafe-webfont.woff2') format('woff2'),
+         url('louis_george_cafe/louis_george_cafe-webfont.woff') format('woff'),
+         url('louis_george_cafe/louis_george_cafe-webfont.ttf') format('truetype'),
+         url('louis_george_cafe/louis_george_cafe-webfont.svg#louis_george_caferegular') format('svg');
+    font-weight: normal;
+    font-style: normal;
+
+}
+
+body {
+	font-family: 'louis_george_cafe', Arial, sans-serif;
+	font-weight: 500;
+	font-style: normal;
+	font-size: 14px;
+	margin: 0;
+	padding: 0;
+}
+
+.hamburger {
+	padding: 1%;
+	font-size: 48px;
+	color: #722f37;
+}
+
+#content {
+	
+}
+
+#main {
+	font-size: 30px;
+	position: absolute;
+	left: 50%;
+	top: 50%;
+	-webkit-transform: translate(-50%, -50%);
+	transform: translate(-50%, -50%);
+}
+
+input[type="search"]::-webkit-search-decoration,
+input[type="search"]::-webkit-search-cancel-button,
+input[type="search"]::-webkit-search-results-button,
+input[type="search"]::-webkit-search-results-decoration {
+	-webkit-appearance:none;
+}
+
+.underline {
+	background-color: #cda20b;
+	display: inline-block;
+	height: 2px;
+	transition: height .075s ease-in-out;
+	left: 0px;
+	margin-top: -4px;
+	position: absolute;
+	top: 105px;
+	width: 100%;
+	border-radius: 25px;
+}
+
+.light {
+	padding-top: 65px;
+	font-size: 14px;
+	color: #a7a7a7;
+}
+
+#question {
+	font-size: 23px;
+	font-weight: 700;
+	color: #722f37;
+	padding-bottom: 2.1%;
+}
+
+#searchDrink {
+	border: none;
+	background: none;
+	display: inline;
+	width: 92%;
+	font-family: 'louis_george_cafe', Arial, sans-serif;
+	font-weight: 500;
+	font-style: normal;
+	font-size: 44px;
+	color: #353535;
+}
+
+textarea:focus, input:focus{
+    outline: none;
+}
+
+#searchDrink:focus + .underline{
+	transition: height .075s ease-in-out;
+	height: 4px;
+}
+
+#footer {
+	position: fixed;
+	padding: 1%;
+ 	left: 0;
+ 	bottom: 0;
+ 	width: 100%;
+ 	background-color: #722f37;
+ 	color: #ffdc52;
+}
+
+#footerRight {
+	float: right;
+	margin-right: 2%;
+}
+
+#footerLeft {
+	float: left;
+}
+
+::placeholder { /* Chrome, Firefox, Opera, Safari 10.1+ */
+  color: #cda20b;
+  opacity: 1; /* Firefox */
+}
+
+:-ms-input-placeholder { /* Internet Explorer 10-11 */
+  color: #cda20b;
+}
+
+::-ms-input-placeholder { /* Microsoft Edge */
+  color: #cda20b;
+}
+
+::-moz-selection { /* Code for Firefox */
+  background: #ffdc52;
+}
+
+::selection {
+  background: #ffdc52;
+}
