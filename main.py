@@ -39,6 +39,7 @@ from classItem import ItemCollection
 from scrape import getData
 import argparse
 import threading
+from sql import sqlhandler
 
 # logging.basicConfig(filename='brew.log', filemode='w', format='[%(asctime)s]%(name)s:%(levelname)s:%(message)s')
 # console = logging.StreamHandler()
@@ -66,12 +67,15 @@ def controller(args):
     bwsData = list()
     url = "https://bws.com.au/search?searchTerm=" + args.drink
     # url = "https://www.firstchoiceliquor.com.au/search?searchTerm=" + args.drink
-    bwsData = getData(url)
+    # bwsData = getData(url)
 
     # Liquorland
     # liquourlandURL = "https://www.liquorland.com.au/search?q=" + args.drink
     # listLiquourland = list()
     # download_liquorland(liquourlandURL, "liquorland", "txt", total, listLiquourland)
+
+    # handle SQL
+    sqlhandler(bwsData, "append")
 
 
 if __name__ == '__main__':
