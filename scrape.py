@@ -1,11 +1,15 @@
+# IMPORTS
+# External
 from bs4 import BeautifulSoup
 from selenium import webdriver
 from selenium.webdriver.chrome.options import Options
-import concurrent.futures as threadingPool
-from classItem import Item, ItemCollection
 from fake_useragent import UserAgent
 from urllib.request import Request, urlopen
 import logging
+# Built-in
+import concurrent.futures as threadingPool
+# Custom
+from classItem import Item, ItemCollection
 from scrapeBWS import item_thread_bws
 from scrapeLiquorLand import item_thread_liquorland
 
