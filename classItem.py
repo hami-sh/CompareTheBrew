@@ -16,8 +16,23 @@ class Item:
     def __lt__(self, other):
         return self.efficiency < other.efficiency
 
+    def __repr__(self):
+        # Create a new string
+        reprString = "<Item>"
+        # Add the instance properties to the reprString
+        reprString + "store:" + self.store + ","
+        reprString + "brand:" + self.brand + ","
+        reprString + "name:" + self.name + ","
+        reprString + "price:" + self.price + ","
+        reprString + "link:" + self.link + ","
+        reprString + "ml:" + self.ml + ","
+        reprString + "percent:" + self.percent + ","
+        reprString + "stdDrinks:" + self.stdDrinks + ","
+        reprString + "efficiency:" + self.efficiency
+        # Return the reprString
+        return reprString
+
 class ItemCollection:
     def __init__(self):
         self._lock = threading.Lock()
         self.collection = []
-
