@@ -20,15 +20,15 @@ class Item:
         # Create a new string
         reprString = "<Item>"
         # Add the instance properties to the reprString
-        reprString + "store:" + self.store + ","
-        reprString + "brand:" + self.brand + ","
-        reprString + "name:" + self.name + ","
-        reprString + "price:" + self.price + ","
-        reprString + "link:" + self.link + ","
-        reprString + "ml:" + self.ml + ","
-        reprString + "percent:" + self.percent + ","
-        reprString + "stdDrinks:" + self.stdDrinks + ","
-        reprString + "efficiency:" + self.efficiency
+        reprString += "store:" + self.store + ","
+        reprString += "brand:" + self.brand + ","
+        reprString += "name:" + self.name + ","
+        reprString += "price:" + self.price + ","
+        reprString += "link:" + self.link + ","
+        reprString += "ml:" + self.ml + ","
+        reprString += "percent:" + self.percent + ","
+        reprString += "stdDrinks:" + self.stdDrinks + ","
+        reprString += "efficiency:" + str(self.efficiency)
         # Return the reprString
         return reprString
 
