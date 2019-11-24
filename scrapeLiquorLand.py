@@ -8,7 +8,7 @@ from fake_useragent import UserAgent
 import random
 from urllib.request import Request, urlopen
 
-def item_thread_liquorland(item, commonList):
+def item_thread_liquorland(item, commonList, _lock):
     """
     Thread function to control parsing of BWS drink details
     """
@@ -70,4 +70,6 @@ def item_thread_liquorland(item, commonList):
     print("FOUND: " + entry.brand + entry.name + " " + priceformatted + " " + str(efficiency))
 
     # Add the drinks data to the commmon list whose reference was passed into this thread
+    _lock.acquire()
     commonList.append(entry)
+    _lock.release()

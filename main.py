@@ -36,8 +36,9 @@
 #          |   | | \| |__ __)  |      |__) |__ |__ | \
 
 from classItem import ItemCollection
-import argparse
 from scrape import getData
+import argparse
+import threading
 
 # logging.basicConfig(filename='brew.log', filemode='w', format='[%(asctime)s]%(name)s:%(levelname)s:%(message)s')
 # console = logging.StreamHandler()
@@ -60,11 +61,12 @@ def controller(args):
     """
     Main controller of URL execution
     """
+    # Total collection of items
     # Scrape from the given search url with the given search term
-    drinksData = list()
-    # url = "https://bws.com.au/search?searchTerm=" + args.drink
-    url = "https://www.firstchoiceliquor.com.au/search?searchTerm=" + args.drink
-    drinksData = getData(url)
+    bwsData = list()
+    url = "https://bws.com.au/search?searchTerm=" + args.drink
+    # url = "https://www.firstchoiceliquor.com.au/search?searchTerm=" + args.drink
+    bwsData = getData(url)
 
     # Liquorland
     # liquourlandURL = "https://www.liquorland.com.au/search?q=" + args.drink

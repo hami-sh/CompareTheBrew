@@ -12,6 +12,7 @@ import concurrent.futures as threadingPool
 from classItem import Item, ItemCollection
 from scrapeBWS import item_thread_bws
 from scrapeLiquorLand import item_thread_liquorland
+from threading import Lock
 
 
 def getData(url):
@@ -53,6 +54,8 @@ def download(url):
 
     Returns: A BeautifulSoup of the page html
     """
+    # todo proxy
+
     # Configure options for the chrome web driver which is used as a headless browser to scrape html and render javascript for web pages
     chrome_options = Options()
     chrome_options.add_argument("--headless")
@@ -98,7 +101,8 @@ def getDrinks(soup, liquorSite):
     # Get the drink data for each drink profile we collected
     # Threading stuff basically executes multiple copies item_thread_XXX(item) concurrently
     threads = 0
-    with threadingPool.ThreadPoolExecutor(max_workers=3) as executor:
+    _lock = Lock()
+    with threadingPool.ThreadPoolExecutor(max_workers=1) as executor:
         for item in drinks:
             print("INIT_THREAD[" + str(threads) + "]")
             threads += 1
@@ -106,10 +110,10 @@ def getDrinks(soup, liquorSite):
             if liquorSite == "bws":
                 # Run item_thread_bws(item)
                 print(1)
-                executor.submit(item_thread_bws, item, drinksdata)
+                executor.submit(item_thread_bws, item, drinksdata, _lock)
             elif liquorSite == "liquorland":
                 # Run item_thread_liquorland(item)
-                executor.submit(item_thread_liquorland, item, drinksdata)
+                executor.submit(item_thread_liquorland, item, drinksdata, _lock)
 
     # Return the drinksData
     return drinksdata
