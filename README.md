@@ -18,29 +18,39 @@ $ python3 main.py
 ___
 
 ## TODO
+| Competed Working Stores: | Under Development Stores:       | Future Development Stores: |
+| ------------------------- | ------------------------------- | -------------------------- |
+| BWS                       | First Choice Liquor (Nicholson) | Vintage Cellars            |
+| Liquorland                | Dan Murphy's (Hamish?)          | Celebrations               |
+|                           |                                 | AMEEEERICAAAA!             |
+
 - [ ] Move to next page of search results if multiple pages
 - [ ] Remove search query dependency (waiting on mcost)
 - [ ] thread safety
 
 - [ ] Frontend
-  - [ ] Design Mockup
-  - [ ] HTML Scaffold
-  - [ ] CSS Styling
+  - [x] Design Mockup
+  - [x] HTML Scaffold
+  - [x] CSS Styling
+  - [ ] Sending inputs to backend
 
 - [ ] Backend
-  - [ ] Scraping
-    - [ ] Single Site Scraping Script (BWS)
-    - [ ] Optimisation
-    - [ ] Expansion to other Australian Liquor Stores (Liquorland, Dan Murphy's, First Choice Liquor)
+  - [x] Scraping
+    - [x] Single Site Scraping Script (BWS)
+    - [x] Optimisation
+    - [x] Expansion to other Australian Liquor Stores (Liquorland, Dan Murphy's, First Choice Liquor)
   - [ ] Expansion to American Liqour Stores
 
 - [ ] Database
-  - [ ] What would we actually need to store on a database?
+  - [ ] Basic datavase storing
+  - [ ] Storing scrape results to the database
+  - [ ] Taking queries to the database from users and sending the data to the frontend
 
 - [ ] Operations
-  - [ ] Domain and DNS
   - [ ] Hosting web server off of personal computer
-  - [ ] Hosting server in the cloud
+  - [ ] Scheduling time-staggered scraping of liquor sites (using Cron most likely)
+  - [ ] Buy a Domain and DNS
+  - [ ] Setup server hosting in the cloud on free trial program
 
 ___
 ### Made Possible by:
