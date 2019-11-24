@@ -4,6 +4,7 @@ from selenium.webdriver.chrome.options import Options
 import concurrent.futures as threadingPool
 from classItem import Item, ItemCollection
 import logging
+from scrape import *
 
 def item_thread_bws(item, commonList):
     """
@@ -20,12 +21,20 @@ def item_thread_bws(item, commonList):
     # link
     link = item.find('a', {'class':'link--no-decoration'})
     print(2)
-    # alcohol content
-    chrome_options = Options()
-    chrome_options.add_argument("--headless")
-    driver = webdriver.Chrome(options=chrome_options)
-    driver.get("https://bws.com.au" + link['href'])
-    soup = BeautifulSoup(driver.page_source, 'html.parser')
+
+    # Scrape the html using the general scrape.download function rather than duplicate fucking code
+    url = "https://bws.com.au" + link['href']
+
+    soup = download(url)
+    # # Configure options for the chrome web driver which is used as a headless browser to scrape html and render javascript for web pages
+    # chrome_options = Options()
+    # chrome_options.add_argument("--headless")
+    # driver = webdriver.Chrome(options=chrome_options)
+    # # Get the HTML from the given url
+    # driver.get(url)
+    # # Create a BeautifulSoup object from the raw HTML string, to make it easier for us to search for particular elements later
+    # soup = BeautifulSoup(driver.page_source, 'html.parser')
+
     detailsRaw = soup.find('div', {'class':'product-additional-details_container text-center ng-isolate-scope'})
     list = detailsRaw.find('ul', {'class':'text-left'})
     keys = list.findAll('strong', {'class':'list-details_header ng-binding'})
