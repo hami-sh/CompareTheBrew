@@ -25,10 +25,11 @@ def item_thread_liquorland(item, commonList):
     pricewithsymbols = " ".join(dollar.text.splitlines())
     priceformatted = pricewithsymbols.split('$')[1]
 
-    # alcohol content
+    # Setup the chromewebdriver
     ua = UserAgent(cache=False, use_cache_server=False)
     chrome_options = Options()
     chrome_options.add_argument("--headless")
+    # Scrape a proxy IP from a free proxy site on the internet
     proxies = []  # Will contain proxies [ip, port]
     proxies_req = Request('https://www.sslproxies.org/')
     proxies_req = Request('https://free-proxy-list.net/')
@@ -41,15 +42,17 @@ def item_thread_liquorland(item, commonList):
             'ip': row.find_all('td')[0].string,
             'port': row.find_all('td')[1].string
         })
-
     PROXY = proxies[0]['ip'] + ":" + proxies[0]['port']
     print(PROXY)
+    # Run the chromewebdriver to scrape with the given proxy
     chrome_options.add_argument('--proxy-server=' + PROXY)
     driver = webdriver.Chrome(options=chrome_options)
     driver.get("https://www.liquorland.com.au" + link['href'])
 
+    # Put the scraped html into a beautifulsoup
     soup = BeautifulSoup(driver.page_source, 'html.parser')
 
+    # Extract the drinks data from the page html
     detailsRaw = soup.find('ul', {'class':'pdp-detailsTable'})
     listelements = detailsRaw.findAll('li')
     details = dict()
@@ -59,10 +62,12 @@ def item_thread_liquorland(item, commonList):
         value = element.find('div', {"class":"pdp-des"}).text
         valueformatted = value.strip()
         details[keyformatted] = valueformatted
-
     efficiency = float(details['Standard Drinks']) / float(priceformatted)
-
+    # Create a new instance of the Item class and use it to store our drinksData
     entry = Item("LiquorLand", brand.text, name.text, priceformatted, "https://liquorland.com.au" + link['href'], "0",
                  details['Alcohol Content'], details['Standard Drinks'], efficiency)
+    # Print the alcohol data to the console
     print("FOUND: " + entry.brand + entry.name + " " + priceformatted + " " + str(efficiency))
+
+    # Add the drinks data to the commmon list whose reference was passed into this thread
     commonList.append(entry)

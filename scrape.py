@@ -69,13 +69,18 @@ def getDrinks(soup, liquorSite):
 
     Returns: A list of drink data
     """
+    # Print the liquor site we are scraping from
     print("site: " + liquorSite)
+    # Create a new list in which we will store the drinks data
     drinks = list()
+
     # Get the drinks profiles based on the given liquorSite
     if liquorSite == "bws":
         # Extract the drink profiles from the BeautifulSoup (configured for bws)
         drinks = soup.findAll('div', {'class':'productTile'})
     elif liquorSite == "liquorland":
+        print("Yeet!")
+        print(soup.prettify())
         # Extract the drink profiles from the BeautifulSoup (configured for liquorland)
         specials = soup.findAll('div', {'class':'product-tile-wrapper update-specials-border'})
         drinks = soup.findAll('div', {'class': 'product-tile-wrapper'})
@@ -83,7 +88,6 @@ def getDrinks(soup, liquorSite):
 
     # Print all of the drinks profiles
     print('SCRAPED ' + str(len(drinks)))
-
     # Create an empty list in which to store our drinks data (each drink will have its own Item object (see classItem) which will be added to the list)
     drinksdata = list()
 
