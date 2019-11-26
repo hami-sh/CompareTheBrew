@@ -12,14 +12,6 @@ from threading import Lock
 # Custom
 from classItem import Item, ItemCollection
 
-"""
-What do we need this script to do???
----1. Scrape the html for the search page and create beautifulsoup (generic)
----2. Get the url for each drink result in the search (specific)
-3. Follow each of the drink links utilising multiple threads to speed the process
-4. Inside of each thread, once again scrape the page to a spoup (general), then get all the drink data from the drink page (specific)
-"""
-
 def scrape(url):
     """
     The master function that handles the complete pipeline of going from a search url to returning a final list of drink items.
@@ -250,6 +242,9 @@ def getDrinksDataBws(url, drinksdata, _lock):
     # Handle the closing of the thread
     _lock.acquire()
     _lock.release()
+
+
+"""________________________________________DEBUG MAIN FUNCTION____________________________________________"""
 
 def main():
     print("START DEBUG SCRIPT")
