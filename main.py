@@ -38,7 +38,7 @@ def controller(args):
     # url = "https://bws.com.au/search?searchTerm=" + args.drink
     url = "https://bws.com.au/search?searchTerm=balter"# + args.drink
     # url = "https://www.firstchoiceliquor.com.au/search?searchTerm=" + args.drink
-    bwsData = getData(url)
+    bwsData = scrape(url)
 
     # Liquorland
     # liquourlandURL = "https://www.liquorland.com.au/search?q=" + args.drink
