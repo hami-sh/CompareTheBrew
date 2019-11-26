@@ -191,15 +191,6 @@ def getDrinksDataBws(url, drinksdata, _lock):
     Returns:
         none (simply adds the result to the common list, since this function is running within a multi-threaded environment)
     """
-
-
-    """
-    INFO I NEED TO FIND:
-    - name
-    - brand
-    - price
-    -
-    """
     # Print our current status
     print("GETTING DRINK DATA FROM A DRINK PAGE ...")
 
