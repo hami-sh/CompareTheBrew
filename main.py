@@ -6,35 +6,6 @@
 #  \____/\___/|_| |_| |_| .__/ \__,_|_|  \___\_/ |_| |_|\___\____/|_|  \___| \_/\_/
 #                       | |
 #                       |_|
-#
-#
-#                          .sssssssss.
-#                    .sssssssssssssssssss
-#                  sssssssssssssssssssssssss
-#                 ssssssssssssssssssssssssssss
-#                  @@sssssssssssssssssssssss@ss
-#                  |s@@@@sssssssssssssss@@@@s|s
-#           _______|sssss@@@@@sssss@@@@@sssss|s
-#         /         sssssssss@sssss@sssssssss|s
-#        /  .------+.ssssssss@sssss@ssssssss.|
-#       /  /       |...sssssss@sss@sssssss...|
-#      |  |        |.......sss@sss@ssss......|
-#      |  |        |..........s@ss@sss.......|
-#      |  |        |...........@ss@..........|
-#       \  \       |............ss@..........|
-#        \  '------+...........ss@...........|
-#         \________ .........................|
-#                  |.........................|
-#                 /...........................\
-#                |.............................|
-#                   |.......................|
-#                       |...............|
-#
-#
-#           __         __  __ ___      __   __  __  __
-#          |_  | |\ | |_  (_   |      |__) |_  |_  |__)
-#          |   | | \| |__ __)  |      |__) |__ |__ | \
-
 from classItem import ItemCollection
 from scrape import getData
 import argparse
@@ -64,7 +35,8 @@ def controller(args):
     # Total collection of items
     # Scrape from the given search url with the given search term
     bwsData = list()
-    url = "https://bws.com.au/search?searchTerm=" + args.drink
+    # url = "https://bws.com.au/search?searchTerm=" + args.drink
+    url = "https://bws.com.au/search?searchTerm=balter"# + args.drink
     # url = "https://www.firstchoiceliquor.com.au/search?searchTerm=" + args.drink
     bwsData = getData(url)
 
