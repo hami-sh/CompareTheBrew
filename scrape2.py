@@ -120,7 +120,7 @@ def getDrinksData(drinkUrls):
     site = getSiteFromUrl(drinkUrls[0])
 
     # Create an empty list in which to store our drinks data (each drink will have its own Item object (see classItem) which will be added to the list)
-    drinksdata = list()
+    commonList = list()
 
     # Get the drink data for each drink profile we collected
     # Note: Threading stuff basically executes multiple copies item_thread_XXX(item) concurrently
@@ -135,14 +135,14 @@ def getDrinksData(drinkUrls):
             # Extract the drink data based on the site being scraped
             if site == "bws":
                 # Retrieve drink data from bws format html
-                executor.submit(getDrinksDataBws, url, drinksdata, _lock)
+                executor.submit(getDrinksDataBws, url, commonList, _lock)
             elif site == "liquorland":
                 print("SORRY, DRINK DATA EXTRACTION IS NOT YET IMPLEMENTED FOR LIQUORLAND.")
             #     # Run item_thread_liquorland(item)
             #     executor.submit(item_thread_liquorland, item, drinksdata, _lock)
 
     # Return the drinksData
-    return drinksdata
+    return commonList
 
 """________________________________________SPECIFIC FUNCTIONS____________________________________________"""
 
@@ -170,14 +170,13 @@ def getDrinksBws(soup):
 
     return drinkUrls
 
-
-def getDrinksDataBws(url, drinksdata, _lock):
+def getDrinksDataBws(url, commonList, _lock):
     """
     Thread function to control parsing of BWS drink details
 
     Args:
         url: the url of the website for the specific drink product we are collecting the data for
-        drinksdata: the list of drink Items that all threads store their results in
+        commonList: the list of drink data that all threads store their results in
         _lock: some threading shit (ask Hamish I guess)
 
     Returns:
@@ -248,7 +247,11 @@ def getDrinksDataBws(url, drinksdata, _lock):
 
 def main():
     print("START DEBUG SCRIPT")
-    scrape("https://bws.com.au/search?searchTerm=thin")
+    commonList = scrape("https://bws.com.au/search?searchTerm=thin")
+    print("")
+    print("")
+    print("SCRAPE RESULTS: " + str(commonList))
+    print("")
     print("END DEBUG SCRIPT")
 
 main()
