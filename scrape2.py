@@ -10,9 +10,9 @@ import concurrent.futures as threadingPool
 import logging
 from threading import Lock
 # Custom
-from classItem import Item, ItemCollection
+# from classItem import Item, ItemCollection
 
-def scrape(url):
+def search(searchTerms):
     """
     The master function that handles the complete pipeline of going from a search url to returning a final list of drink items.
 
@@ -21,11 +21,25 @@ def scrape(url):
     Returns:
         drinksData: A list of Items which the data for each drink
     """
-    # 1 & 2. Scrape the html for the search page and create beautifulsoup (generic). Then get the url for each drink result in the search (specific)
-    drinkUrls = getDrinks(url)
-    # 3 & 4. Follow each of the drink links utilising multiple threads to speed the process. Inside of each thread, once again scrape the page to a spoup (general), then get all the drink data from the drink page (specific)
-    drinksData = getDrinksData(drinkUrls)
-    return drinksData
+    # These are the base search page urls that we will add our search terms to to search
+    baseSearchUrls = ["https://bws.com.au/search?searchTerm="]
+
+    # Create a list of all the drinks data that we will scrape from all of the different liquor stores
+    allDrinksData = list()
+
+    # Get the search urls for each of the liquor sites for these search terms
+    for baseSearchUrl in baseSearchUrls:
+        # Add the search terms to the base search url to get the search url to scrape
+        url = baseSearchUrl + searchTerms
+
+        # 1 & 2. Scrape the html for the search page and create beautifulsoup (generic). Then get the url for each drink result in the search (specific)
+        drinkUrls = getDrinks(url)
+
+        # 3 & 4. Follow each of the drink links utilising multiple threads to speed the process. Inside of each thread, once again scrape the page to a spoup (general), then get all the drink data from the drink page (specific)
+        allDrinksData.extend(getDrinksData(drinkUrls))
+
+    # Return the data for all of the drinks found across the liquor sites
+    return allDrinksData
 
 def download(url):
     """
@@ -197,7 +211,10 @@ def getDrinksDataBws(url, commonList, _lock):
     cents = priceElement.find('sup', {'class': 'ng-binding'}).text
     price = str(dollar) + '.' + str(cents)
 
-    # Get the element containing all the details
+    # Extract the product image link (the src attribute of the image)
+    image = soup.find('img', {'class': 'product-image'})['src']
+
+    # Get the footer element containing all the rest of the details
     detailsRaw = soup.find('div', {'class':'product-additional-details_container text-center ng-isolate-scope'})
     # Get the ul of details inside the element
     list = detailsRaw.find('ul', {'class':'text-left'})
@@ -230,7 +247,7 @@ def getDrinksDataBws(url, commonList, _lock):
 
     # Put all of the details found for the drink into an Item object
     # entry = Item("BWS", brand.text, name.text, price, "https://bws.com.au" + link['href'], details['Liquor Size'], details['Alcohol %'], details['Standard Drinks'], efficiency)
-    entry = ["BWS", details['Brand'], name, price, url, size, details['Alcohol %'], details['Standard Drinks'], efficiency]
+    entry = ["BWS", details['Brand'], name, price, url, size, details['Alcohol %'], details['Standard Drinks'], efficiency, image]
 
     # Print out the list of drink data
     print("GOT DRINK DATA FOR: " + str(entry))
@@ -244,14 +261,20 @@ def getDrinksDataBws(url, commonList, _lock):
 
 
 """________________________________________DEBUG MAIN FUNCTION____________________________________________"""
-
-def main():
-    print("START DEBUG SCRIPT")
-    commonList = scrape("https://bws.com.au/search?searchTerm=thin")
-    print("")
-    print("")
-    print("SCRAPE RESULTS: " + str(commonList))
-    print("")
-    print("END DEBUG SCRIPT")
-
-main()
+#
+# def main():
+#     # Get the initial query
+#     query = input("Please enter term to search for: ")
+#     # while query !== "q":
+#     print("START DEBUG SCRIPT")
+#     commonList = scrape("https://bws.com.au/search?searchTerm=" + query)
+#     print("")
+#     print("")
+#     print("SCRAPE RESULTS: ")
+#     for item in commonList:
+#         print(str(item))
+#     print("")
+#         # query = input("Please enter term to search for (or enter 'q' to quit): ")
+#     print("END DEBUG SCRIPT")
+#
+# main()
