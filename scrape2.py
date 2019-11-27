@@ -12,6 +12,18 @@ from threading import Lock
 # Custom
 # from classItem import Item, ItemCollection
 
+"""
+The urls we will need to scrape to populate our database:
+    bwsPopulateUrls = {'beer':'https://bws.com.au/beer/all-beer', 'wine':'https://bws.com.au/wine/all-wine', 'spirits':'https://bws.com.au/spirits/all-spirits'}
+
+    liquorlandPopulateUrls = {'beer':'https://www.liquorland.com.au/beer', 'red-wine':'https://www.liquorland.com.au/wine', 'spirits':'https://www.liquorland.com.au/spirits'}
+
+    danmurphysPopulateUrls = {'beer':'https://www.danmurphys.com.au/beer/all', 'wine':'https://www.danmurphys.com.au/list/wine', 'spirits':'https://www.danmurphys.com.au/spirits/all'}
+
+    firstchoiceliquorPopulateUrls = {'beer':'https://www.firstchoiceliquor.com.au/beer', 'wine':'https://www.firstchoiceliquor.com.au/wine', 'spirits':'https://www.firstchoiceliquor.com.au/spirits'}
+
+"""
+
 def search(searchTerms):
     """
     The master function that handles the complete pipeline of going from a search url to returning a final list of drink items.
@@ -22,7 +34,11 @@ def search(searchTerms):
         drinksData: A list of Items which the data for each drink
     """
     # These are the base search page urls that we will add our search terms to to search
-    baseSearchUrls = ["https://bws.com.au/search?searchTerm="]
+    baseSearchUrls = list()
+    baseSearchUrls.append("https://bws.com.au/search?searchTerm=")
+
+    liquorlandSearchUrls = {'beer':'https://bws.com.au/beer/all-beer', 'wine':'https://bws.com.au/wine/all-wine', 'else':'https://www.liquorland.com.au/search?q='+searchTerms}
+    miscSearchUrls = ["https://bws.com.au/search?searchTerm=", "", "https://www.danmurphys.com.au/search?searchTerm=", ]
 
     # Create a list of all the drinks data that we will scrape from all of the different liquor stores
     allDrinksData = list()
@@ -35,11 +51,17 @@ def search(searchTerms):
         # 1 & 2. Scrape the html for the search page and create beautifulsoup (generic). Then get the url for each drink result in the search (specific)
         drinkUrls = getDrinks(url)
 
-        # 3 & 4. Follow each of the drink links utilising multiple threads to speed the process. Inside of each thread, once again scrape the page to a spoup (general), then get all the drink data from the drink page (specific)
-        allDrinksData.extend(getDrinksData(drinkUrls))
+        if len(drinkUrls) == 0:
+            print("NO DRINK RESULTS FOUND AT " + url + ".")
+        else:
+            # 3 & 4. Follow each of the drink links utilising multiple threads to speed the process. Inside of each thread, once again scrape the page to a spoup (general), then get all the drink data from the drink page (specific)
+            allDrinksData.extend(getDrinksData(drinkUrls))
 
     # Sort the drinks by efficiency descending
-    allDrinksData = sortByEfficiency(allDrinksData)
+    if len(allDrinksData) == 0:
+        print("NO DRINK RESULTS FOUND ACROSS ANY SUPPORTED SITES.")
+    else:
+        allDrinksData = sortByEfficiency(allDrinksData)
 
     # Return the data for all of the drinks found across the liquor sites
     return allDrinksData
@@ -133,11 +155,15 @@ def getDrinksData(drinkUrls):
     # TODO: Remove this debug statement
     # print("###DEBUG### DRINK URLS:" + str(drinkUrls) + " ###/DEBUG###")
 
-    # Detect the liquor site we are scraping from the url. This allows to extract the drink data using the correct strategies for the specific website.
-    site = getSiteFromUrl(drinkUrls[0])
-
     # Create an empty list in which to store our drinks data (each drink will have its own Item object (see classItem) which will be added to the list)
     commonList = list()
+
+    # If there were no drinkUrls given, don't attempt to get data
+    if len(drinkUrls) == 0:
+        return commonList
+
+    # Detect the liquor site we are scraping from the url. This allows to extract the drink data using the correct strategies for the specific website.
+    site = getSiteFromUrl(drinkUrls[0])
 
     # Get the drink data for each drink profile we collected
     # Note: Threading stuff basically executes multiple copies item_thread_XXX(item) concurrently
