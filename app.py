@@ -76,6 +76,6 @@ def displayResultPage(searchTerms): # results
 #     return render_template('%s.html' % page_name)
 
 
-# Run the flask application
+# Run the flask application (won't run when the site is being hosted on a server)
 if __name__ == '__main__':
-    app.run()
+    app.run(host='127.0.0.1',port=8000,debug=True)
