@@ -38,6 +38,9 @@ def search(searchTerms):
         # 3 & 4. Follow each of the drink links utilising multiple threads to speed the process. Inside of each thread, once again scrape the page to a spoup (general), then get all the drink data from the drink page (specific)
         allDrinksData.extend(getDrinksData(drinkUrls))
 
+    # Sort the drinks by efficiency descending
+    allDrinksData = sortByEfficiency(allDrinksData)
+
     # Return the data for all of the drinks found across the liquor sites
     return allDrinksData
 
@@ -157,6 +160,23 @@ def getDrinksData(drinkUrls):
 
     # Return the drinksData
     return commonList
+
+def sortByEfficiency(drinksData):
+    """
+    A function to sort a list of drinksData by descending efficiency
+    """
+    # Print our current status
+    print("SORTING THE DRINKS DATA BY EFFICIENCY (DSC) ...")
+    # Sort the list of drinksData by descending efficiency
+    drinksData.sort(key = sortEighth, reverse = True)
+    # Return the drinks data
+    return drinksData
+
+def sortEighth(val):
+    """
+    Function to return the eighth element of the two elements passed as the parameter
+    """
+    return val[8]
 
 """________________________________________SPECIFIC FUNCTIONS____________________________________________"""
 

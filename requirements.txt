@@ -4,3 +4,4 @@ argparse
 flask
 psycopg2
 sqlite3
+fake_useragent
