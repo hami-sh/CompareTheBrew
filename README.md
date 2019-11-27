@@ -18,12 +18,6 @@ $ python3 main.py
 ___
 
 ## TODO
-| Competed Working Stores: | Under Development Stores:       | Future Development Stores: |
-| ------------------------- | ------------------------------- | -------------------------- |
-| BWS                       | First Choice Liquor (Nicholson) | Vintage Cellars            |
-| Liquorland                | Dan Murphy's (Hamish?)          | Celebrations               |
-|                           |                                 | AMEEEERICAAAA!             |
-
 - [ ] Move to next page of search results if multiple pages
 - [ ] Remove search query dependency (waiting on mcost)
 - [ ] thread safety
