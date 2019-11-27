@@ -1,28 +1,37 @@
 <!-- templates/index.html -->
 <html>
     <head>
+        <!-- Tab title -->
         <title>CompareTheBrew</title>
-        <link rel="stylesheet" href="/static/style.css">
+        <!-- Favicon -->
+        <link rel="icon" href="https://encrypted-tbn0.gstatic.com/images?q=tbn%3AANd9GcTzI0uH0_lzecaSuTinKUKNL_W1t72KKq1QWdC8hWGKG71Bue43">
+        <link rel="stylesheet" href="/static/css/results-style.css">
     </head>
     <body>
         <h1>Search Results</h1>
         <!-- Search results section -->
         <h3>Sit tight, we're scraping your search results as quickly as we can ...</h3>
         <ul style="list-style: none">
-            {%for result in results%}
-              <li>
-                  <table>
-                      <row>
-                          <col>
-                              <img src="{{result[9]}}" alt="Product Image" width="10%" height="auto">
-                              <!-- <img src="/static/images/cat.png" alt="My Cat" width="10%" height="auto"> -->
-                          </col>
-                          <col>
-                              {{result}}
-                          </col>
+        {%for result in results%}
+            <li>
+                <table>
+                    <row>
+                        <col>
+                          <img src="{{result[9]}}" alt="Product Image" width="10%" height="auto">
+                          <!-- <img src="/static/images/cat.png" alt="My Cat" width="10%" height="auto"> -->
+                        </col>
+                        <col>
+                            <ul style="list-style: none">
+                                {%for detail in result[0:-1]%}
+                                    <li>
+                                        {{detail}}
+                                    </li>
+                                {%endfor%}
+                            </ul>
+                        </col>
                       </row>
                   </table>
-              </li>
+                </li>
             {%endfor%}
         </ul>
     </body>
