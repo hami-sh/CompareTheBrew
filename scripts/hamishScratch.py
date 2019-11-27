@@ -9,6 +9,7 @@ def func():
     c = classItem.Item('bws', 'brand3', 'c', 'vodka', 1, 'https://google.com', 700, 50, 50, 50/50)
     d = classItem.Item('bws', 'brand4', 'd', 'vodka', 788764, 'https://google.com', 700, 50, 32, 32/50)
     e = classItem.Item('bws', 'brand5', 'e', 'vodka', 3234, 'https://google.com', 700, 50, 2, 2/50)
+    f = classItem.Item('123', 'brand5', 'e', 'vodka', 3234, 'https://google.com', 700, 50, 2, 2/50)
 
     drinks.append(a)
     drinks.append(b)
@@ -32,6 +33,17 @@ def func():
     update_drink_price(conn, drinks[0], 999999999)
 
     select_all_drinks_by_efficiency(conn)
+
+    print(is_drink_in_table(conn, b))
+    print(is_drink_in_table(conn, f))
+
+    newB = classItem.Item('bws', 'brand2', 'b', 'whiskey', -10, 'https://google.com', 700, 50, 123, 123/50)
+
+    update_drink_price(conn, newB, newB.price)
+
+    print("---")
+
+    select_all_drinks(conn)
 
     delete_all(conn)
 

@@ -83,6 +83,34 @@ def update_drink_price(conn, drink, newPrice):
     conn.commit()
 
 
+def is_drink_in_table(conn, drink):
+    """
+    update priority, begin_date, and end date of a task
+    :param conn:
+    :param drink:
+    :return: project id
+    """
+    sql = ''' SELECT * FROM drinks
+              WHERE store = ?
+              AND brand = ?
+              AND name = ?
+              AND type = ? 
+              AND link = ?  
+              AND ml = ?  
+              AND percent = ?  
+              AND stdDrinks = ?  
+              AND efficiency = ?  
+              '''
+    cur = conn.cursor()
+    cur.execute(sql, (drink.store, drink.brand, drink.name, drink.type, drink.link, drink.ml, drink.percent, drink.stdDrinks, drink.efficiency))
+
+    rows = cur.fetchall()
+    if len(rows) > 0:
+        return True
+    else:
+        return False
+
+
 def dbhandler(conn, list, mode):
 
     # populate or update mode
@@ -95,7 +123,8 @@ def dbhandler(conn, list, mode):
     elif mode == "u":
         # update entries with the same name / add entries who's names do not exist.
         for drink in list:
-            update_drink_price(conn, drink)
+            if is_drink_in_table(conn, drink):
+                update_drink_price(conn, drink, drink.price)
 
     conn.commit()
 
