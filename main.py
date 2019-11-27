@@ -25,6 +25,7 @@ from sql import sqlhandler
 def main():
     parser = argparse.ArgumentParser(description='Enter alcohol to search')
     parser.add_argument("--drink", default='vodka', help="The drink")
+    parser.add_argument("--mode", default='p', help="populate / update")
     args = parser.parse_args()
     controller(args)
 
@@ -35,19 +36,21 @@ def controller(args):
     """
     # Total collection of items
     # Scrape from the given search url with the given search term
-    bwsData = list()
-    # url = "https://bws.com.au/search?searchTerm=" + args.drink
-    url = "https://bws.com.au/search?searchTerm=balter"# + args.drink
-    # url = "https://www.firstchoiceliquor.com.au/search?searchTerm=" + args.drink
-    # bwsData = getData(url)
+    if args.mode == 'p':
+        bwsData = list()
+        url = "https://bws.com.au/search?searchTerm=" + args.drink
+        bwsData = getData(url)
 
-    # Liquorland
-    # liquourlandURL = "https://www.liquorland.com.au/search?q=" + args.drink
-    # listLiquourland = list()
-    # download_liquorland(liquourlandURL, "liquorland", "txt", total, listLiquourland)
+        # Liquorland
+        # liquourlandURL = "https://www.liquorland.com.au/search?q=" + args.drink
+        # listLiquourland = list()
+        # download_liquorland(liquourlandURL, "liquorland", "txt", total, listLiquourland)
 
-    # handle SQL
-    sqlhandler(bwsData, "append")
+        # handle SQL
+        sqlhandler(bwsData, "append")
+
+    # else:
+        # Update table
 
 
 if __name__ == '__main__':

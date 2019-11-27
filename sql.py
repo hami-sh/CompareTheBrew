@@ -1,48 +1,27 @@
 import os.path
 from os import path
-import psycopg2
-import sqlite3
+import csv
+import datetime
 
 def sqlhandler(list, mode):
-    # check if file present
-    if path.exists('drinks.db') == False:
-        # use SQLite3 to create the database (not recommended in postgresql)
-        conn = sqlite3.connect('drinks.db')
-        c = conn.cursor()
-        conn.commit()
-        conn.close()
+    # if path.exists('drinks.csv') == False:
+        # with open('drinks.csv', newline='') as drinks:
+            # drinks.write("#INFO#," + str(datetime.datetime) + "," + str(len(list)))
 
     # append or update mode
     if mode == "append":
-        # insert into table
-        try:
-            connection = psycopg2.connect(user="sysadmin",
-                                          password="pynative@#29",
-                                          host="127.0.0.1",
-                                          port="5432",
-                                          database="drinks.db")
+        with open('drinks.csv', mode='w') as employee_file:
+            writer = csv.writer(employee_file, delimiter=',', quotechar='"', quoting=csv.QUOTE_MINIMAL)
+            writer.writerow(['INFO', str(datetime.datetime.today()), len(list)])
 
-            cursor = connection.cursor()
-            # Print PostgreSQL Connection properties
-            print(connection.get_dsn_parameters(), "\n")
+            for drink in list:
+                writer.writerow(drink.brand + " " + drink.name, drink.stddrinks, drink.price, drink.link)
 
-            # Print PostgreSQL version
-            cursor.execute("SELECT version();")
-            record = cursor.fetchone()
-            print("You are connected to - ", record, "\n")
 
-        except (Exception, psycopg2.Error) as error:
-            print("Error while connecting to PostgreSQL", error)
-        finally:
-            # closing database connection.
-            if (connection):
-                cursor.close()
-                connection.close()
-                print("PostgreSQL connection is closed")
-
-    elif mode == "update":
-        # update entries with the same name / add entries who's names do not exist.
-        print(1)
+    #
+    # elif mode == "update":
+    #     update entries with the same name / add entries who's names do not exist.
+        # print(1)
 
 
 
