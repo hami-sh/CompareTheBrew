@@ -6,11 +6,10 @@
 #  \____/\___/|_| |_| |_| .__/ \__,_|_|  \___\_/ |_| |_|\___\____/|_|  \___| \_/\_/
 #                       | |
 #                       |_|
-from classItem import ItemCollection
-from scrape import getData
+from scripts.classItem import ItemCollection
+from scripts.scrape import getData
 import argparse
 import threading
-from sql import sqlhandler
 
 # logging.basicConfig(filename='brew.log', filemode='w', format='[%(asctime)s]%(name)s:%(levelname)s:%(message)s')
 # console = logging.StreamHandler()
