@@ -1,0 +1,22 @@
+/* static/style.css */
+
+h1 {
+    color: #722f37;
+    font-variant-caps: all-small-caps;
+    font-size: 46px;
+}
+
+h3 {
+  color: #ffdc52;
+  font-size: 20px;
+}
+
+li {
+  color: black;
+  font-size: 16px;
+}
+
+body {
+    background: white;
+    font-family: helvetica;
+}

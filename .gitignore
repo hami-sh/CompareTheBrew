@@ -1,4 +1,5 @@
 .cpython
+.pyc
 *.xml
 *.pyc
 *.xml
