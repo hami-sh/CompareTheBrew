@@ -16,11 +16,11 @@ from threading import Lock
 The urls we will need to scrape to populate our database:
     bwsPopulateUrls = {'beer':'https://bws.com.au/beer/all-beer', 'wine':'https://bws.com.au/wine/all-wine', 'spirits':'https://bws.com.au/spirits/all-spirits'}
 
-    liquorlandPopulateUrls = {'beer':'https://www.liquorland.com.au/beer', 'wine':'https://www.liquorland.com.au/wine', 'spirits':'https://www.liquorland.com.au/spirits'}
+    liquorlandPopulateUrls = {'beer':'https://www.liquorland.com.au/beer', 'wine':'https://www.liquorland.com.au/search?q=wine', 'spirits':'https://www.liquorland.com.au/spirits'}
 
     danmurphysPopulateUrls = {'beer':'https://www.danmurphys.com.au/beer/all', 'wine':'https://www.danmurphys.com.au/list/wine', 'spirits':'https://www.danmurphys.com.au/spirits/all'}
 
-    firstchoiceliquorPopulateUrls = {'beer':'https://www.firstchoiceliquor.com.au/beer', 'wine':'https://www.firstchoiceliquor.com.au/wine', 'spirits':'https://www.firstchoiceliquor.com.au/spirits'}
+    firstchoiceliquorPopulateUrls = {'beer':'https://www.firstchoiceliquor.com.au/beer', 'wine':'https://www.firstchoiceliquor.com.au/search?q=wine', 'spirits':'https://www.firstchoiceliquor.com.au/spirits'}
 
 """
 
