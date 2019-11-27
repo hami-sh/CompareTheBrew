@@ -2,9 +2,9 @@ from bs4 import BeautifulSoup
 from selenium import webdriver
 from selenium.webdriver.chrome.options import Options
 import concurrent.futures as threadingPool
-from classItem import Item, ItemCollection
+from scripts.classItem import Item, ItemCollection
 import logging
-from scrape import *
+from scripts.scrape import *
 
 def item_thread_bws(item, commonList, _lock):
     """

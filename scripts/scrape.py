@@ -9,9 +9,9 @@ import logging
 # Built-in
 import concurrent.futures as threadingPool
 # Custom
-from classItem import Item, ItemCollection
-from scrapeBWS import item_thread_bws
-from scrapeLiquorLand import item_thread_liquorland
+from scripts.classItem import Item, ItemCollection
+from scripts.scrapeBWS import item_thread_bws
+from scripts.scrapeLiquorLand import item_thread_liquorland
 from threading import Lock
 
 
