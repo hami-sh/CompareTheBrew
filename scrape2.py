@@ -107,9 +107,122 @@ def getSiteFromUrl(url):
         site = urlList[0].split("/")[2]
     return site
 
-def getAllSearchPagesBws():
+def getDrinks(url):
     """
+    A function to find the link to every drink result to a liquor site search.
+    """
+    # Create a new soup all results which holds a list of html soups of each of the results pages
+    allPageSoups = list()
+
+    # Detect the liquor site we are scraping from the url. This allows to extract the drinks using the correct strategies for the specific website.
+    site = getSiteFromUrl(url)
+
+
+    # Get a list of the html soups of all of the search pages
+    if site == "bws":
+        allPageSoups.extend(getAllSearchPagesBws(url))
+
+    elif site == "liquorland":
+        print("Sorry, LiquorLand is not currently a supported site.")
+
+
+    # Get the drinks profiles based on what site is being scraped
+    if site == "bws":
+        drinkUrls = getDrinksBws(allPageSoups)
+    elif site == "liquorland":
+        # print("Yeet!")
+        # print(soup.prettify())
+        # # Extract the drink profiles from the soup
+        # specials = soup.findAll('div', {'class':'product-tile-wrapper update-specials-border'})
+        # drinks = soup.findAll('div', {'class': 'product-tile-wrapper'})
+        # drinks.append(specials)
+        print("Sorry, LiquorLand is not currently a supported site.")
+    elif site == "danmurphys":
+        print("Sorry, Dan Murphy's is not currently a supported site.")
+        # TODO: Implement drink url extraction from dan murphys search page
+    elif site == "firstchoiceliquor":
+        print("Sorry, First Choice Liquor is not currently a supported site.")
+        # TODO: Implement drink url extraction from first choice liquor search page
+
+    # Print out how many drink urls were found on the page
+    print("FOUND " + str(len(drinkUrls)) + " DRINK URLS ON PAGE.")
+    # Return the list of drink urls for us to individually scrape later on
+    return drinkUrls
+
+def getDrinksData(drinkUrls):
+    """
+    Function to get a list of drink data from a BeautifulSoup and return the data in a list
+
+    Args:
+        drinkUrls: a list of urls to the individual pages of the drinks found
+
+    Returns: A list of drink data
+    """
+    # Now, the drink data must be extracted for each drink url found
+    print('NOW EXTRACTING DRINKS DATA FROM DRINK URLS ...')
+
+    # Create an empty list in which to store our drinks data (each drink will have its own Item object (see classItem) which will be added to the list)
+    commonList = list()
+
+    # Detect the liquor site we are scraping from the url. This allows to extract the drink data using the correct strategies for the specific website.
+    site = getSiteFromUrl(drinkUrls[0])
+
+    # Get the data from the drink url pages using the functions for the current liquor site
+    if len(drinkUrls) == 0:
+        # If there were no drinkUrls given, don't attempt to get data
+        return commonList
+    else:
+        # If there are drinkUrls, however, get the data from them
+        threads = 0
+        _lock = Lock()
+        with threadingPool.ThreadPoolExecutor(max_workers=1) as executor:
+            # Note: Threading stuff basically executes multiple copies getDrinksDataXXX(url, commonList, _lock) concurrently
+            for url in drinkUrls:
+                # Print out every time a new thread is initialised
+                print("INITIALISING THREAD " + str(threads) + ".")
+
+                # Extract the drink data based on the site being scraped
+                if site == "bws":
+                    # Retrieve drink data from bws format html
+                    executor.submit(getDrinksDataBws, url, commonList, _lock)
+                elif site == "liquorland":
+                    print("SORRY, DRINK DATA EXTRACTION IS NOT YET IMPLEMENTED FOR LIQUORLAND.")
+                    # # Run item_thread_liquorland(item)
+                    # executor.submit(item_thread_liquorland, item, drinksdata, _lock)
+            # Update how many threads we have initialised
+            threads += 1
+
+    # Return the drinksData
+    return commonList
+
+def sortByEfficiency(drinksData):
+    """
+    A function to sort a list of drinksData by descending efficiency
+    """
+    # Print our current status
+    print("SORTING THE DRINKS DATA BY EFFICIENCY (DSC) ...")
+    # Sort the list of drinksData by descending efficiency
+    drinksData.sort(key = sortEighth, reverse = True)
+    # Return the drinks data
+    return drinksData
+
+def sortEighth(val):
+    """
+    Function to return the eighth element of the two elements passed as the parameter
+    """
+    return val[8]
+
+"""________________________________________SPECIFIC FUNCTIONS____________________________________________"""
+
+def getAllSearchPagesBws(url):
+    """
+    A function to get the html soups of all the results pages for a search, given the url for the first page of results.
     If we are on bws, the results are stored on multiple pages, loaded one at a time, so we will check each page to see if there is a "show more results" button and if there is we will go the ne next results page (page number is determined by the page url)
+
+    Args:
+        url: the url of the first page of search results
+    Returns:
+        allPageSoups: a list of the html soups of all the results pages
     """
 
     # Create a new soup all results which holds a list of html soups of each of the results pages
@@ -142,112 +255,6 @@ def getAllSearchPagesBws():
     # Return the list containing all of html soup for every search page
     return allPageSoups
 
-
-def getDrinks(url):
-    """
-    A function to find the link to every drink result to a liquor site search.
-    """
-    # Create a new soup all results which holds a list of html soups of each of the results pages
-    allPageSoups = list()
-
-    # Detect the liquor site we are scraping from the url. This allows to extract the drinks using the correct strategies for the specific website.
-    site = getSiteFromUrl(url)
-
-    # Get a list of the html soups of all of the search pages
-    if site == "bws":
-        allPageSoups.append(getAllSearchPagesBws(url))
-
-    elif site == "liquorland":
-        print("Sorry, LiquorLand is not currently a supported site.")
-
-    # Get the drinks profiles based on what site is being scraped
-    if site == "bws":
-        drinkUrls = getDrinksBws(allPageSoups)
-    elif site == "liquorland":
-    #     print("Yeet!")
-    #     print(soup.prettify())
-    #     # Extract the drink profiles from the soup
-    #     specials = soup.findAll('div', {'class':'product-tile-wrapper update-specials-border'})
-    #     drinks = soup.findAll('div', {'class': 'product-tile-wrapper'})
-    #     drinks.append(specials)
-        print("Sorry, LiquorLand is not currently a supported site.")
-    elif site == "danmurphys":
-        print("Sorry, Dan Murphy's is not currently a supported site.")
-        # TODO: Implement drink url extraction from dan murphys search page
-    elif site == "firstchoiceliquor":
-        print("Sorry, First Choice Liquor is not currently a supported site.")
-        # TODO: Implement drink url extraction from first choice liquor search page
-
-    # Print out how many drink urls were found on the page
-    print("FOUND " + str(len(drinkUrls)) + " DRINK URLS ON PAGE.")
-    # Return the list of drink urls for us to individually scrape later on
-    return drinkUrls
-
-def getDrinksData(drinkUrls):
-    """
-    Function to get a list of drink data from a BeautifulSoup and return the data in a list
-
-    Args:
-        drinkUrls: a list of urls to the individual pages of the drinks found
-
-    Returns: A list of drink data
-    """
-    # Now, the drink data must be extracted for each drink url found
-    print('NOW EXTRACTING DRINKS DATA FROM DRINK URLS ...')
-
-    # TODO: Remove this debug statement
-    # print("###DEBUG### DRINK URLS:" + str(drinkUrls) + " ###/DEBUG###")
-
-    # Create an empty list in which to store our drinks data (each drink will have its own Item object (see classItem) which will be added to the list)
-    commonList = list()
-
-    # If there were no drinkUrls given, don't attempt to get data
-    if len(drinkUrls) == 0:
-        return commonList
-
-    # Detect the liquor site we are scraping from the url. This allows to extract the drink data using the correct strategies for the specific website.
-    site = getSiteFromUrl(drinkUrls[0])
-
-    # Get the drink data for each drink profile we collected
-    # Note: Threading stuff basically executes multiple copies item_thread_XXX(item) concurrently
-    threads = 0
-    _lock = Lock()
-    with threadingPool.ThreadPoolExecutor(max_workers=1) as executor:
-        for url in drinkUrls:
-            # Print out every time a new thread is initialised
-            print("INITIALISING THREAD " + str(threads) + ".")
-            threads += 1
-
-            # Extract the drink data based on the site being scraped
-            if site == "bws":
-                # Retrieve drink data from bws format html
-                executor.submit(getDrinksDataBws, url, commonList, _lock)
-            elif site == "liquorland":
-                print("SORRY, DRINK DATA EXTRACTION IS NOT YET IMPLEMENTED FOR LIQUORLAND.")
-            #     # Run item_thread_liquorland(item)
-            #     executor.submit(item_thread_liquorland, item, drinksdata, _lock)
-
-    # Return the drinksData
-    return commonList
-
-def sortByEfficiency(drinksData):
-    """
-    A function to sort a list of drinksData by descending efficiency
-    """
-    # Print our current status
-    print("SORTING THE DRINKS DATA BY EFFICIENCY (DSC) ...")
-    # Sort the list of drinksData by descending efficiency
-    drinksData.sort(key = sortEighth, reverse = True)
-    # Return the drinks data
-    return drinksData
-
-def sortEighth(val):
-    """
-    Function to return the eighth element of the two elements passed as the parameter
-    """
-    return val[8]
-
-"""________________________________________SPECIFIC FUNCTIONS____________________________________________"""
 
 def getDrinksBws(soups):
     """
