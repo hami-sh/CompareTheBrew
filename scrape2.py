@@ -9,6 +9,8 @@ from urllib.request import Request, urlopen
 import concurrent.futures as threadingPool
 import logging
 from threading import Lock
+from random import randint
+from time import sleep
 # Custom
 # from classItem import Item, ItemCollection
 
@@ -34,19 +36,18 @@ def search(searchTerms):
         drinksData: A list of Items which the data for each drink
     """
     # These are the base search page urls that we will add our search terms to to search
-    baseSearchUrls = list()
-    baseSearchUrls.append("https://bws.com.au/search?searchTerm=")
-
-    liquorlandSearchUrls = {'beer':'https://bws.com.au/beer/all-beer', 'wine':'https://bws.com.au/wine/all-wine', 'else':'https://www.liquorland.com.au/search?q='+searchTerms}
-    miscSearchUrls = ["https://bws.com.au/search?searchTerm=", "", "https://www.danmurphys.com.au/search?searchTerm=", ]
+    searchUrls = list()
+    # searchUrls.append("https://bws.com.au/search?searchTerm=" + str(searchTerms))
+    searchUrls.append("https://www.liquorland.com.au/beer")
+    # searchUrls.append("https://www.liquorland.com.au/search?q=rum")
 
     # Create a list of all the drinks data that we will scrape from all of the different liquor stores
     allDrinksData = list()
 
     # Get the search urls for each of the liquor sites for these search terms
-    for baseSearchUrl in baseSearchUrls:
+    for searchUrl in searchUrls:
         # Add the search terms to the base search url to get the search url to scrape
-        url = baseSearchUrl + searchTerms
+        url = searchUrl
 
         # 1 & 2. Scrape the html for the search page and create beautifulsoup (generic). Then get the url for each drink result in the search (specific)
         drinkUrls = getDrinks(url)
@@ -79,6 +80,11 @@ def download(url):
 
     Returns: A BeautifulSoup of the page html
     """
+    # Sleep for a random number of seconds between requests (this is the minimum time between requests)
+    secs = randint(0, 10)
+    print("WAITING " + str(secs) + " SECONDS BEFORE SENDING ANOTHER REQUEST.")
+    sleep(secs)
+
     # TODO: Possible implement ip proxy rotation to increase ban safety
     # We are now downloading the html from the given url
     print("DOWNLOADING AND RENDERING HTML FROM " + url + " ...")
@@ -91,6 +97,7 @@ def download(url):
     driver.get(url)
     # Create a BeautifulSoup object from the raw HTML string, to make it easier for us to search for particular elements later
     soup = BeautifulSoup(driver.page_source, 'html.parser')
+    # Return the soup
     return soup
 
 def getSiteFromUrl(url):
@@ -380,25 +387,33 @@ def getAllSearchPagesLiquorland(url):
     currentPage = 1
     # Print what page of results we are currently loading
     print("LOADING PAGE " + str(currentPage) + " OF RESULTS")        # Get the html for the current page of results
-    currentPageSoup = download(url + "&pageNumber=" + str(currentPage))
+    currentPageSoup = download(url)
     # Add current page soup to list
     allPageSoups.append(currentPageSoup)
-    # Get the html element for the "load more" button
-    loadMoreButtonDiv = currentPageSoup.find('div', {'class':'progressive-paging-bar--container'})
-    loadMoreButton = loadMoreButtonDiv.find('a', {'class':'btn btn-secondary btn--full-width ng-scope'})
+    # Get the html element for the page prev/next controls bar
+    nextButtonDiv = currentPageSoup.find('div', {'class':'pagination'})
+    # Get the button inside the div
+    nextButton = nextButtonDiv.find('a', {'title':'Next page'})
+    # Get the href property of the button
+    href = nextButton.get('href')
+    print("### href: " + str(href) + " ###")
+
     # While the hmtl for the "load more" button is not null there is a next page
-    while loadMoreButton != None:
+    while href != None:
         # Increment the number of the current page
         currentPage = currentPage + 1
         # Print what page of results we are currently loading
-        print("LOADING PAGE " + str(currentPage) + " OF RESULTS")
-        # Get the html for the current page of results
-        currentPageSoup = download(url + "&pageNumber=" + str(currentPage))
+        print("LOADING PAGE " + str(currentPage) + " OF RESULTS")        # Get the html for the current page of results
+        currentPageSoup = download("https://www.liquorland.com.au" + str(href))
         # Add current page soup to list
         allPageSoups.append(currentPageSoup)
-        # Get the html element for the "load more" button
-        loadMoreButtonDiv = currentPageSoup.find('div', {'class':'progressive-paging-bar--container'})
-        loadMoreButton = loadMoreButtonDiv.find('a', {'class':'btn btn-secondary btn--full-width ng-scope'})
+        # Get the html element for the page prev/next controls bar
+        nextButtonDiv = currentPageSoup.find('div', {'class':'pagination'})
+        # Get the button inside the div
+        nextButton = nextButtonDiv.find('a', {'title':'Next page'})
+        # Get the href property of the button
+        href = nextButton.get('href')
+        print("### href: " + str(href) + " ###")
 
     # Return the list containing all of html soup for every search page
     return allPageSoups
