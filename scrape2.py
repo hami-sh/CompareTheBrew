@@ -38,8 +38,8 @@ def search(searchTerms):
     # These are the base search page urls that we will add our search terms to to search
     searchUrls = list()
     # searchUrls.append("https://bws.com.au/search?searchTerm=" + str(searchTerms))
-    searchUrls.append("https://www.liquorland.com.au/beer")
-    # searchUrls.append("https://www.liquorland.com.au/search?q=rum")
+    # searchUrls.append("https://www.liquorland.com.au/beer")
+    searchUrls.append("https://www.liquorland.com.au/search?q=rum")
 
     # Create a list of all the drinks data that we will scrape from all of the different liquor stores
     allDrinksData = list()
@@ -131,7 +131,6 @@ def getDrinks(url):
 
     elif site == "liquorland":
         # TODO: Implement liquorland functionality
-        print("Sorry, LiquorLand is not currently a supported site.")
         allPageSoups.extend(getAllSearchPagesLiquorland(url))
 
 
@@ -142,6 +141,7 @@ def getDrinks(url):
         # TODO: Implement liquorland functionality
         print("Sorry, LiquorLand is not currently a supported site.")
         drinkUrls = getDrinksLiquorland(allPageSoups)
+        print("drinkUrls: " + str(drinkUrls))
         # print("Yeet!")
         # print(soup.prettify())
         # # Extract the drink profiles from the soup
@@ -434,12 +434,11 @@ def getDrinksLiquorland(soups):
         # Create a new list to store the drinks
         drinks = list()
         # Extract the drink cards from the search page soup
-        drinksList = soup.find('div', {'class':'center-panel-ui-view ng-scope'})
-        drinks = drinksList.findAll('div', {'class':'productTile'})
+        drinks = soup.findAll('div', {'class':'product-tile-wrapper'})
         for drink in drinks:
             # Extract the urls to each individual drink page
-            relativePath = drink.find('a', {'class':'link--no-decoration'})['href']
-            drinkUrls.append("https://bws.com.au" + relativePath)
+            relativePath = drink.find('a')['href']
+            drinkUrls.append("https://www.liquorland.com.au" + relativePath)
     # Return the list containing the urls to each drink on each results page
     return drinkUrls
 
