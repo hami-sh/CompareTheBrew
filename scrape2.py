@@ -107,6 +107,42 @@ def getSiteFromUrl(url):
         site = urlList[0].split("/")[2]
     return site
 
+def getAllSearchPagesBws():
+    """
+    If we are on bws, the results are stored on multiple pages, loaded one at a time, so we will check each page to see if there is a "show more results" button and if there is we will go the ne next results page (page number is determined by the page url)
+    """
+
+    # Create a new soup all results which holds a list of html soups of each of the results pages
+    allPageSoups = list()
+
+    # Start scraping at results page one
+    currentPage = 1
+    # Print what page of results we are currently loading
+    print("LOADING PAGE " + str(currentPage) + " OF RESULTS")        # Get the html for the current page of results
+    currentPageSoup = download(url + "&pageNumber=" + str(currentPage))
+    # Add current page soup to list
+    allPageSoups.append(currentPageSoup)
+    # Get the html element for the "load more" button
+    loadMoreButtonDiv = currentPageSoup.find('div', {'class':'progressive-paging-bar--container'})
+    loadMoreButton = loadMoreButtonDiv.find('a', {'class':'btn btn-secondary btn--full-width ng-scope'})
+    # While the hmtl for the "load more" button is not null there is a next page
+    while loadMoreButton != None:
+        # Increment the number of the current page
+        currentPage = currentPage + 1
+        # Print what page of results we are currently loading
+        print("LOADING PAGE " + str(currentPage) + " OF RESULTS")
+        # Get the html for the current page of results
+        currentPageSoup = download(url + "&pageNumber=" + str(currentPage))
+        # Add current page soup to list
+        allPageSoups.append(currentPageSoup)
+        # Get the html element for the "load more" button
+        loadMoreButtonDiv = currentPageSoup.find('div', {'class':'progressive-paging-bar--container'})
+        loadMoreButton = loadMoreButtonDiv.find('a', {'class':'btn btn-secondary btn--full-width ng-scope'})
+
+    # Return the list containing all of html soup for every search page
+    return allPageSoups
+
+
 def getDrinks(url):
     """
     A function to find the link to every drink result to a liquor site search.
@@ -117,33 +153,9 @@ def getDrinks(url):
     # Detect the liquor site we are scraping from the url. This allows to extract the drinks using the correct strategies for the specific website.
     site = getSiteFromUrl(url)
 
-    # Now we have to get the hmtl soups for the first results page URL that was passed into this function as well as any following pages of results
+    # Get a list of the html soups of all of the search pages
     if site == "bws":
-        # If we are on bws, the results are stored on multiple pages, loaded one at a time, so we will check each page to see if there is a "show more results" button and if there is we will go the ne next results page (page number is determined by the page url)
-
-        # Start scraping at results page one
-        currentPage = 1
-        # Print what page of results we are currently loading
-        print("LOADING PAGE " + str(currentPage) + " OF RESULTS")        # Get the html for the current page of results
-        currentPageSoup = download(url + "&pageNumber=" + str(currentPage))
-        # Add current page soup to list
-        allPageSoups.append(currentPageSoup)
-        # Get the html element for the "load more" button
-        loadMoreButtonDiv = currentPageSoup.find('div', {'class':'progressive-paging-bar--container'})
-        loadMoreButton = loadMoreButtonDiv.find('a', {'class':'btn btn-secondary btn--full-width ng-scope'})
-        # While the hmtl for the "load more" button is not null there is a next page
-        while loadMoreButton != None:
-            # Increment the number of the current page
-            currentPage = currentPage + 1
-            # Print what page of results we are currently loading
-            print("LOADING PAGE " + str(currentPage) + " OF RESULTS")
-            # Get the html for the current page of results
-            currentPageSoup = download(url + "&pageNumber=" + str(currentPage))
-            # Add current page soup to list
-            allPageSoups.append(currentPageSoup)
-            # Get the html element for the "load more" button
-            loadMoreButtonDiv = currentPageSoup.find('div', {'class':'progressive-paging-bar--container'})
-            loadMoreButton = loadMoreButtonDiv.find('a', {'class':'btn btn-secondary btn--full-width ng-scope'})
+        allPageSoups.append(getAllSearchPagesBws(url))
 
     elif site == "liquorland":
         print("Sorry, LiquorLand is not currently a supported site.")
