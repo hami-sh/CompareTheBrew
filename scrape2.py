@@ -139,15 +139,8 @@ def getDrinks(url):
         drinkUrls = getDrinksBws(allPageSoups)
     elif site == "liquorland":
         # TODO: Implement liquorland functionality
-        print("Sorry, LiquorLand is not currently a supported site.")
         drinkUrls = getDrinksLiquorland(allPageSoups)
-        print("drinkUrls: " + str(drinkUrls))
-        # print("Yeet!")
-        # print(soup.prettify())
-        # # Extract the drink profiles from the soup
-        # specials = soup.findAll('div', {'class':'product-tile-wrapper update-specials-border'})
-        # drinks = soup.findAll('div', {'class': 'product-tile-wrapper'})
-        # drinks.append(specials)
+        # print("drinkUrls: " + str(drinkUrls))
     elif site == "danmurphys":
         print("Sorry, Dan Murphy's is not currently a supported site.")
         # TODO: Implement drink url extraction from dan murphys search page
@@ -188,20 +181,21 @@ def getDrinksData(drinkUrls):
         _lock = Lock()
         with threadingPool.ThreadPoolExecutor(max_workers=1) as executor:
             # Note: Threading stuff basically executes multiple copies getDrinksDataXXX(url, commonList, _lock) concurrently
-            for url in drinkUrls:
-                # Print out every time a new thread is initialised
-                print("INITIALISING THREAD " + str(threads) + ".")
+            # TODO: Put this code back into the for loop so we can scrape all the urls
+            # for url in drinkUrls:
+            url = drinkUrls[0]
+            # Print out every time a new thread is initialised
+            print("INITIALISING THREAD " + str(threads) + ".")
 
-                # Extract the drink data based on the site being scraped
-                if site == "bws":
-                    # Retrieve drink data from bws format html
-                    executor.submit(getDrinksDataBws, url, commonList, _lock)
-                elif site == "liquorland":
-                    # TODO: Implement liquorland functionality
-                    print("SORRY, DRINK DATA EXTRACTION IS NOT YET IMPLEMENTED FOR LIQUORLAND.")
-                    executor.submit(getDrinksDataLiquorland, url, commonList, _lock)
-                    # # Run item_thread_liquorland(item)
-                    # executor.submit(item_thread_liquorland, item, drinksdata, _lock)
+            # Extract the drink data based on the site being scraped
+            if site == "bws":
+                # Retrieve drink data from bws format html
+                executor.submit(getDrinksDataBws, url, commonList, _lock)
+            elif site == "liquorland":
+                # TODO: Implement liquorland functionality
+                print("Sorry, LiquorLand is not currently a supported site.")
+                # Extract the drink data from liquorland format drink page html
+                executor.submit(getDrinksDataLiquorland, url, commonList, _lock)
             # Update how many threads we have initialised
             threads += 1
 
@@ -396,7 +390,7 @@ def getAllSearchPagesLiquorland(url):
     nextButton = nextButtonDiv.find('a', {'title':'Next page'})
     # Get the href property of the button
     href = nextButton.get('href')
-    print("### href: " + str(href) + " ###")
+    # print("### href: " + str(href) + " ###")
 
     # While the hmtl for the "load more" button is not null there is a next page
     while href != None:
@@ -413,7 +407,7 @@ def getAllSearchPagesLiquorland(url):
         nextButton = nextButtonDiv.find('a', {'title':'Next page'})
         # Get the href property of the button
         href = nextButton.get('href')
-        print("### href: " + str(href) + " ###")
+        # print("### href: " + str(href) + " ###")
 
     # Return the list containing all of html soup for every search page
     return allPageSoups
@@ -459,18 +453,32 @@ def getDrinksDataLiquorland(url, commonList, _lock):
 
     # Get the html soup for the drink page
     soup = download(url)
+    print(0)
+    # print("### " + soup + " ###")
 
     # Extract the name
-    name = soup.find('div', {'class':'detail-item_title'}).text
+    # name = soup.findAll('h2', {'class':'sm'})[0].text
+    # name = soup.find('h2', {'class':'sm'}).text
+    print(name)
+    print(1)
+
+    # Extract the product brand
+    # brand = soup.find('h1', {'class':'titleRed'}).text
+    print(brand)
+    print(2)
 
     # Extract the price
-    priceElement = soup.find('span', {'class': 'trolley-controls_volume_price'})
-    dollar = priceElement.find('span', {'class': 'ng-binding'}).text
-    cents = priceElement.find('sup', {'class': 'ng-binding'}).text
+    priceElement = soup.find('span', {'class': 'price'})
+    dollar = priceElement.text[1, -1]
+    print("dollar: " + str(dollar))
+    cents = priceElement.find('span', {'class': 'cents'}).text[1, ]
+    print("cents: " + str(cents))
     price = str(dollar) + '.' + str(cents)
+    print(3)
 
     # Extract the product image link (the src attribute of the image)
     image = soup.find('img', {'class': 'product-image'})['src']
+    print(4)
 
     # Get the footer element containing all the rest of the details
     detailsRaw = soup.find('div', {'class':'product-additional-details_container text-center ng-isolate-scope'})
@@ -486,9 +494,6 @@ def getDrinksDataLiquorland(url, commonList, _lock):
     for x in range(0, len(keys)):
         details[keys[x].text] = values[x].text
 
-    # Extract the product brand
-    brand = details['Brand']
-
     # Extract the bottle volume
     size = 0
     if details['Liquor Size'].find('mL') != -1:
@@ -499,9 +504,11 @@ def getDrinksDataLiquorland(url, commonList, _lock):
         # measurement in L
         strSize = details['Liquor Size'][0:len(details['Liquor Size']) - 1]
         size = int(strSize)
+    print(5)
 
     # Find the price per standard by getting the number of standard drinks and dividing it by the price
     efficiency = float(details['Standard Drinks']) / float(price)
+    print(6)
 
     # Put all of the details found for the drink into an Item object
     # entry = Item("BWS", brand.text, name.text, price, "https://bws.com.au" + link['href'], details['Liquor Size'], details['Alcohol %'], details['Standard Drinks'], efficiency)
