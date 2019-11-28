@@ -111,15 +111,46 @@ def getDrinks(url):
     """
     A function to find the link to every drink result to a liquor site search.
     """
-    # Scrape the html for the search page and create beautifulsoup (generic)
-    soup = download(url)
+    # Create a new soup all results which holds a list of html soups of each of the results pages
+    allPageSoups = list()
 
     # Detect the liquor site we are scraping from the url. This allows to extract the drinks using the correct strategies for the specific website.
     site = getSiteFromUrl(url)
 
+    # Now we have to get the hmtl soups for the first results page URL that was passed into this function as well as any following pages of results
+    if site == "bws":
+        # If we are on bws, the results are stored on multiple pages, loaded one at a time, so we will check each page to see if there is a "show more results" button and if there is we will go the ne next results page (page number is determined by the page url)
+
+        # Start scraping at results page one
+        currentPage = 1
+        # Print what page of results we are currently loading
+        print("LOADING PAGE " + str(currentPage) + " OF RESULTS")        # Get the html for the current page of results
+        currentPageSoup = download(url + "&pageNumber=" + str(currentPage))
+        # Add current page soup to list
+        allPageSoups.append(currentPageSoup)
+        # Get the html element for the "load more" button
+        loadMoreButtonDiv = currentPageSoup.find('div', {'class':'progressive-paging-bar--container'})
+        loadMoreButton = loadMoreButtonDiv.find('a', {'class':'btn btn-secondary btn--full-width ng-scope'})
+        # While the hmtl for the "load more" button is not null there is a next page
+        while loadMoreButton != None:
+            # Increment the number of the current page
+            currentPage = currentPage + 1
+            # Print what page of results we are currently loading
+            print("LOADING PAGE " + str(currentPage) + " OF RESULTS")
+            # Get the html for the current page of results
+            currentPageSoup = download(url + "&pageNumber=" + str(currentPage))
+            # Add current page soup to list
+            allPageSoups.append(currentPageSoup)
+            # Get the html element for the "load more" button
+            loadMoreButtonDiv = currentPageSoup.find('div', {'class':'progressive-paging-bar--container'})
+            loadMoreButton = loadMoreButtonDiv.find('a', {'class':'btn btn-secondary btn--full-width ng-scope'})
+
+    elif site == "liquorland":
+        print("Sorry, LiquorLand is not currently a supported site.")
+
     # Get the drinks profiles based on what site is being scraped
     if site == "bws":
-        drinkUrls = getDrinksBws(soup)
+        drinkUrls = getDrinksBws(allPageSoups)
     elif site == "liquorland":
     #     print("Yeet!")
     #     print(soup.prettify())
@@ -206,7 +237,7 @@ def sortEighth(val):
 
 """________________________________________SPECIFIC FUNCTIONS____________________________________________"""
 
-def getDrinksBws(soup):
+def getDrinksBws(soups):
     """
     Drink url extraction for bws
 
@@ -215,19 +246,20 @@ def getDrinksBws(soup):
     Returns:
         drinkUrls: a list of urls for specific drink pages
     """
-    # Create a new list to store the drinks
-    drinks = list()
-    # Create a new list to store the urls to each drinks
+    # Create a new list to store the urls to each of the drinks
     drinkUrls = list()
-    #
-    # Extract the drink cards from the search page soup
-    drinksList = soup.find('div', {'class':'center-panel-ui-view ng-scope'})
-    drinks = drinksList.findAll('div', {'class':'productTile'})
-    for drink in drinks:
-        # Extract the urls to each individual drink page
-        relativePath = drink.find('a', {'class':'link--no-decoration'})['href']
-        drinkUrls.append("https://bws.com.au" + relativePath)
-
+    # For each page of results, scrape all of the drink urls off of the page
+    for soup in soups:
+        # Create a new list to store the drinks
+        drinks = list()
+        # Extract the drink cards from the search page soup
+        drinksList = soup.find('div', {'class':'center-panel-ui-view ng-scope'})
+        drinks = drinksList.findAll('div', {'class':'productTile'})
+        for drink in drinks:
+            # Extract the urls to each individual drink page
+            relativePath = drink.find('a', {'class':'link--no-decoration'})['href']
+            drinkUrls.append("https://bws.com.au" + relativePath)
+    # Return the list containing the urls to each drink on each results page
     return drinkUrls
 
 def getDrinksDataBws(url, commonList, _lock):
