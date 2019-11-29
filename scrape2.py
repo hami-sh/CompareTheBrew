@@ -431,6 +431,7 @@ def getAllSearchPagesLiquorland(url):
     soup = download(url)
     return soup
 
+<<<<<<< HEAD
     # # Create a new soup all results which holds a list of html soups of each of the results pages
     # allPageSoups = list()
     #
@@ -468,6 +469,45 @@ def getAllSearchPagesLiquorland(url):
     #
     # # Return the list containing all of html soup for every search page
     # return allPageSoups
+=======
+    # Create a new soup all results which holds a list of html soups of each of the results pages
+    allPageSoups = list()
+
+    # Start scraping at results page one
+    currentPage = 1
+    # Print what page of results we are currently loading
+    print("LOADING PAGE " + str(currentPage) + " OF RESULTS")        # Get the html for the current page of results
+    currentPageSoup = download(url)
+    # Add current page soup to list
+    allPageSoups.append(currentPageSoup)
+    # Get the html element for the page prev/next controls bar
+    nextButtonDiv = currentPageSoup.find('div', {'class':'pagination'})
+    # Get the button inside the div
+    nextButton = nextButtonDiv.find('a', {'title':'Next page'})
+    # Get the href property of the button
+    href = nextButton.get('href')
+    # print("### href: " + str(href) + " ###")
+
+    # While the hmtl for the "load more" button is not null there is a next page
+    while href != None:
+        # Increment the number of the current page
+        currentPage = currentPage + 1
+        # Print what page of results we are currently loading
+        print("LOADING PAGE " + str(currentPage) + " OF RESULTS")        # Get the html for the current page of results
+        currentPageSoup = download("https://www.liquorland.com.au" + str(href))
+        # Add current page soup to list
+        allPageSoups.append(currentPageSoup)
+        # Get the html element for the page prev/next controls bar
+        nextButtonDiv = currentPageSoup.find('div', {'class':'pagination'})
+        # Get the button inside the div
+        nextButton = nextButtonDiv.find('a', {'title':'Next page'})
+        # Get the href property of the button
+        href = nextButton.get('href')
+        # print("### href: " + str(href) + " ###")
+
+    # Return the list containing all of html soup for every search page
+    return allPageSoups
+>>>>>>> 86349bdc8f9f9521d278dce146102c76e402c398
 
 def getDrinksLiquorland(soups):
     """
@@ -511,15 +551,28 @@ def getDrinksDataLiquorland(url, commonList, _lock):
 
     # Get the html soup for the drink page
     soup = download(url)
+<<<<<<< HEAD
     # print("### " + soup + " ###")
 
     # Extract the name
     name = soup.find('h2', {'class':'sm title_r1'}).text
+=======
+    print(0)
+    # print("### " + soup + " ###")
+
+    # Extract the name
+    # name = soup.findAll('h2', {'class':'sm'})[0].text
+    # name = soup.find('h2', {'class':'sm'}).text
+>>>>>>> 86349bdc8f9f9521d278dce146102c76e402c398
     print(name)
     print(1)
 
     # Extract the product brand
+<<<<<<< HEAD
     brand = soup.find('h1', {'class':'titleRed'}).text
+=======
+    # brand = soup.find('h1', {'class':'titleRed'}).text
+>>>>>>> 86349bdc8f9f9521d278dce146102c76e402c398
     print(brand)
     print(2)
 
@@ -574,6 +627,7 @@ def getDrinksDataLiquorland(url, commonList, _lock):
     detailsRaw = soup.find('ul', {'class':'pdp-detailsTable'})
     listelements = detailsRaw.findAll('li')
     details = dict()
+<<<<<<< HEAD
     for element in listelements:
         key = element.find('div', {"class":"pdp-key"}).text
         keyformatted = key.strip()
@@ -585,6 +639,30 @@ def getDrinksDataLiquorland(url, commonList, _lock):
     entry = Item("LiquorLand", brand.text, name.text, priceformatted, "https://liquorland.com.au" + link['href'], "0",
                  details['Alcohol Content'], details['Standard Drinks'], efficiency)
 
+=======
+    for x in range(0, len(keys)):
+        details[keys[x].text] = values[x].text
+
+    # Extract the bottle volume
+    size = 0
+    if details['Liquor Size'].find('mL') != -1:
+        # measurement in mL
+        strSize = details['Liquor Size'][0:len(details['Liquor Size']) - 2]
+        size = int(strSize) / 1000
+    else:
+        # measurement in L
+        strSize = details['Liquor Size'][0:len(details['Liquor Size']) - 1]
+        size = int(strSize)
+    print(5)
+
+    # Find the price per standard by getting the number of standard drinks and dividing it by the price
+    efficiency = float(details['Standard Drinks']) / float(price)
+    print(6)
+
+    # Put all of the details found for the drink into an Item object
+    # entry = Item("BWS", brand.text, name.text, price, "https://bws.com.au" + link['href'], details['Liquor Size'], details['Alcohol %'], details['Standard Drinks'], efficiency)
+    entry = ["BWS", details['Brand'], name, price, url, size, details['Alcohol %'], details['Standard Drinks'], efficiency, image]
+>>>>>>> 86349bdc8f9f9521d278dce146102c76e402c398
 
     # Print out the list of drink data
     print("GOT DRINK DATA FOR: " + str(entry))
