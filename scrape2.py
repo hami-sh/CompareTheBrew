@@ -18,7 +18,7 @@ from time import sleep
 The urls we will need to scrape to populate our database:
     bwsPopulateUrls = {'beer':'https://bws.com.au/beer/all-beer', 'wine':'https://bws.com.au/wine/all-wine', 'spirits':'https://bws.com.au/spirits/all-spirits'}
 
-    liquorlandPopulateUrls = {'beer':'https://www.liquorland.com.au/beer', 'wine':'https://www.liquorland.com.au/search?q=wine', 'spirits':'https://www.liquorland.com.au/spirits'}
+    liquorlandPopulateUrls = {'beer':'https://www.liquorland.com.au/beer?show=2000', 'wine':'https://www.liquorland.com.au/search?q=wine&show=2000', 'spirits':'https://www.liquorland.com.au/spirits?show=2000'}
 
     danmurphysPopulateUrls = {'beer':'https://www.danmurphys.com.au/beer/all', 'wine':'https://www.danmurphys.com.au/list/wine', 'spirits':'https://www.danmurphys.com.au/spirits/all'}
 
@@ -39,7 +39,7 @@ def search(searchTerms):
     searchUrls = list()
     # searchUrls.append("https://bws.com.au/search?searchTerm=" + str(searchTerms))
     # searchUrls.append("https://www.liquorland.com.au/beer")
-    searchUrls.append("https://www.liquorland.com.au/search?q=rum")
+    searchUrls.append("https://www.liquorland.com.au/search?q=balter")
 
     # Create a list of all the drinks data that we will scrape from all of the different liquor stores
     allDrinksData = list()
@@ -81,22 +81,77 @@ def download(url):
     Returns: A BeautifulSoup of the page html
     """
     # Sleep for a random number of seconds between requests (this is the minimum time between requests)
-    secs = randint(0, 10)
+    secs = randint(10, 15)
     print("WAITING " + str(secs) + " SECONDS BEFORE SENDING ANOTHER REQUEST.")
     sleep(secs)
 
-    # TODO: Possible implement ip proxy rotation to increase ban safety
-    # We are now downloading the html from the given url
-    print("DOWNLOADING AND RENDERING HTML FROM " + url + " ...")
+    # # Get an proxy ip from free-proxy-list
+    # ua = UserAgent(cache=False, use_cache_server=False)
+    # # Scrape a proxy IP from a free proxy site on the internet
+    # proxies = []  # Will contain proxies [ip, port]
+    # proxy_url = "https://free-proxy-list.net/"
+    # # proxy_url = "https://www.sslproxies.org/"
+    # proxies_req = Request(proxy_url)
+    # print("GETTING A PROXY FROM " + proxy_url + " ...")
+    # proxies_req.add_header('User-Agent', ua.random)
+    # proxies_doc = urlopen(proxies_req).read().decode('utf8')
+    # proxy_soup = BeautifulSoup(proxies_doc, 'html.parser')
+    # proxies_table = proxy_soup.find(id='proxylisttable')
+    # for row in proxies_table.tbody.find_all('tr'):
+    #     proxies.append({
+    #         'ip': row.find_all('td')[0].string,
+    #         'port': row.find_all('td')[1].string
+    #     })
+    # proxy = proxies[0]['ip'] + ":" + proxies[0]['port']
+    #
+    #
+    # # Configure options for the chrome web driver which is used as a headless browser to scrape html and render javascript for web pages. Also include the proxy's
+    # chrome_options = Options()
+    # chrome_options.add_argument("--headless")
+    # chrome_options.add_argument('--proxy-server=' + proxy) # Add the proxy ip to the chrome options
+    # driver = webdriver.Chrome(options=chrome_options)
+    #
+    # # Get the HTML from the given url
+    # driver.get(url)
+    #
+    # soup = BeautifulSoup(driver.page_source, 'html.parser')
 
-    # Configure options for the chrome web driver which is used as a headless browser to scrape html and render javascript for web pages
+
+    # Setup the chromewebdriver
+    ua = UserAgent(cache=False, use_cache_server=False)
     chrome_options = Options()
     chrome_options.add_argument("--headless")
+
+    # # Scrape a proxy IP from a free proxy site on the internet
+    # proxies = []  # Will contain proxies [ip, port]
+    # # proxy_source = 'https://free-proxy-list.net/'
+    # proxy_source = 'https://www.sslproxies.org/'
+    # proxies_req = Request(proxy_source)
+    # proxies_req.add_header('User-Agent', ua.random)
+    # proxies_doc = urlopen(proxies_req).read().decode('utf8')
+    # proxy_soup = BeautifulSoup(proxies_doc, 'html.parser')
+    # proxies_table = proxy_soup.find(id='proxylisttable')
+    # for row in proxies_table.tbody.find_all('tr'):
+    #     proxies.append({
+    #         'ip': row.find_all('td')[0].string,
+    #         'port': row.find_all('td')[1].string
+    #     })
+    # PROXY = proxies[0]['ip'] + ":" + proxies[0]['port']
+    # # PROXY = "51.158.111.242:8811"
+    # print("FOUND PROXY " + str(PROXY) + " FROM " + proxy_source + ".")
+    # # Add this proxy ip to the chromewebdriver arguments
+    # chrome_options.add_argument('--proxy-server=' + PROXY)
+    PROXY = "-"
+
+    # Run the chromewebdriver to scrape with the given proxy
     driver = webdriver.Chrome(options=chrome_options)
-    # Get the HTML from the given url
+    # We are now downloading the html from the given url
+    print("DOWNLOADING AND RENDERING HTML FROM " + url + " ...")# " WITH PROXY URL " + PROXY + " ...")
     driver.get(url)
-    # Create a BeautifulSoup object from the raw HTML string, to make it easier for us to search for particular elements later
+
+    # Put the scraped html into a beautifulsoup
     soup = BeautifulSoup(driver.page_source, 'html.parser')
+
     # Return the soup
     return soup
 
@@ -372,7 +427,48 @@ def getAllSearchPagesLiquorland(url):
     Returns:
         allPageSoups: a list of the html soups of all the results pages
     """
+    soup = download(url)
+    return soup
 
+<<<<<<< HEAD
+    # # Create a new soup all results which holds a list of html soups of each of the results pages
+    # allPageSoups = list()
+    #
+    # # Start scraping at results page one
+    # currentPage = 1
+    # # Print what page of results we are currently loading
+    # print("LOADING PAGE " + str(currentPage) + " OF RESULTS")        # Get the html for the current page of results
+    # currentPageSoup = download(url)
+    # # Add current page soup to list
+    # allPageSoups.append(currentPageSoup)
+    # # Get the html element for the page prev/next controls bar
+    # nextButtonDiv = currentPageSoup.find('div', {'class':'pagination'})
+    # # Get the button inside the div
+    # nextButton = nextButtonDiv.find('a', {'title':'Next page'})
+    # # Get the href property of the button
+    # href = nextButton.get('href')
+    # # print("### href: " + str(href) + " ###")
+    #
+    # # While the hmtl for the "load more" button is not null there is a next page
+    # while href != None:
+    #     # Increment the number of the current page
+    #     currentPage = currentPage + 1
+    #     # Print what page of results we are currently loading
+    #     print("LOADING PAGE " + str(currentPage) + " OF RESULTS")        # Get the html for the current page of results
+    #     currentPageSoup = download("https://www.liquorland.com.au" + str(href))
+    #     # Add current page soup to list
+    #     allPageSoups.append(currentPageSoup)
+    #     # Get the html element for the page prev/next controls bar
+    #     nextButtonDiv = currentPageSoup.find('div', {'class':'pagination'})
+    #     # Get the button inside the div
+    #     nextButton = nextButtonDiv.find('a', {'title':'Next page'})
+    #     # Get the href property of the button
+    #     href = nextButton.get('href')
+    #     # print("### href: " + str(href) + " ###")
+    #
+    # # Return the list containing all of html soup for every search page
+    # return allPageSoups
+=======
     # Create a new soup all results which holds a list of html soups of each of the results pages
     allPageSoups = list()
 
@@ -410,6 +506,7 @@ def getAllSearchPagesLiquorland(url):
 
     # Return the list containing all of html soup for every search page
     return allPageSoups
+>>>>>>> 86349bdc8f9f9521d278dce146102c76e402c398
 
 def getDrinksLiquorland(soups):
     """
@@ -433,6 +530,7 @@ def getDrinksLiquorland(soups):
             relativePath = drink.find('a')['href']
             drinkUrls.append("https://www.liquorland.com.au" + relativePath)
     # Return the list containing the urls to each drink on each results page
+    print("****************** HERE ARE ALL THE DRINK URLS: ")
     return drinkUrls
 
 def getDrinksDataLiquorland(url, commonList, _lock):
@@ -452,17 +550,28 @@ def getDrinksDataLiquorland(url, commonList, _lock):
 
     # Get the html soup for the drink page
     soup = download(url)
+<<<<<<< HEAD
+    # print("### " + soup + " ###")
+
+    # Extract the name
+    name = soup.find('h2', {'class':'sm title_r1'}).text
+=======
     print(0)
     # print("### " + soup + " ###")
 
     # Extract the name
     # name = soup.findAll('h2', {'class':'sm'})[0].text
     # name = soup.find('h2', {'class':'sm'}).text
+>>>>>>> 86349bdc8f9f9521d278dce146102c76e402c398
     print(name)
     print(1)
 
     # Extract the product brand
+<<<<<<< HEAD
+    brand = soup.find('h1', {'class':'titleRed'}).text
+=======
     # brand = soup.find('h1', {'class':'titleRed'}).text
+>>>>>>> 86349bdc8f9f9521d278dce146102c76e402c398
     print(brand)
     print(2)
 
@@ -488,8 +597,48 @@ def getDrinksDataLiquorland(url, commonList, _lock):
     keys = list.findAll('strong', {'class':'list-details_header ng-binding'})
     # Get all the values of the proverties
     values = list.findAll('span', {'class':'pull-right list-details_info ng-binding ng-scope'})
-    # Put the titles and values as K,V pairs into a dictionary
+    # # Put the titles and values as K,V pairs into a dictionary
+    # details = dict()
+    # for x in range(0, len(keys)):
+    #     details[keys[x].text] = values[x].text
+    #
+    # # Extract the bottle volume
+    # size = 0
+    # if details['Liquor Size'].find('mL') != -1:
+    #     # measurement in mL
+    #     strSize = details['Liquor Size'][0:len(details['Liquor Size']) - 2]
+    #     size = int(strSize) / 1000
+    # else:
+    #     # measurement in L
+    #     strSize = details['Liquor Size'][0:len(details['Liquor Size']) - 1]
+    #     size = int(strSize)
+    # print(5)
+    #
+    # # Find the price per standard by getting the number of standard drinks and dividing it by the price
+    # efficiency = float(details['Standard Drinks']) / float(price)
+    # print(6)
+    #
+    # # Put all of the details found for the drink into an Item object
+    # # entry = Item("BWS", brand.text, name.text, price, "https://bws.com.au" + link['href'], details['Liquor Size'], details['Alcohol %'], details['Standard Drinks'], efficiency)
+    # entry = ["BWS", details['Brand'], name, price, url, size, details['Alcohol %'], details['Standard Drinks'], efficiency, image]
+
+    # Extract the drinks data from the page html
+    detailsRaw = soup.find('ul', {'class':'pdp-detailsTable'})
+    listelements = detailsRaw.findAll('li')
     details = dict()
+<<<<<<< HEAD
+    for element in listelements:
+        key = element.find('div', {"class":"pdp-key"}).text
+        keyformatted = key.strip()
+        value = element.find('div', {"class":"pdp-des"}).text
+        valueformatted = value.strip()
+        details[keyformatted] = valueformatted
+    efficiency = float(details['Standard Drinks']) / float(priceformatted)
+    # Create a new instance of the Item class and use it to store our drinksData
+    entry = Item("LiquorLand", brand.text, name.text, priceformatted, "https://liquorland.com.au" + link['href'], "0",
+                 details['Alcohol Content'], details['Standard Drinks'], efficiency)
+
+=======
     for x in range(0, len(keys)):
         details[keys[x].text] = values[x].text
 
@@ -512,6 +661,7 @@ def getDrinksDataLiquorland(url, commonList, _lock):
     # Put all of the details found for the drink into an Item object
     # entry = Item("BWS", brand.text, name.text, price, "https://bws.com.au" + link['href'], details['Liquor Size'], details['Alcohol %'], details['Standard Drinks'], efficiency)
     entry = ["BWS", details['Brand'], name, price, url, size, details['Alcohol %'], details['Standard Drinks'], efficiency, image]
+>>>>>>> 86349bdc8f9f9521d278dce146102c76e402c398
 
     # Print out the list of drink data
     print("GOT DRINK DATA FOR: " + str(entry))
@@ -686,7 +836,13 @@ def getDrinksDataDanMurphy(url, commonList, _lock):
 
 """________________________________________DEBUG MAIN FUNCTION____________________________________________"""
 #
-# def main():
+def main():
+    url = "https://www.liquorland.com.au/spirits?show=5"
+    # url = "https://bws.com.au/search?searchTerm=balter"
+    soup = download(url)
+    print("###")
+    print(str(soup)[0:5000])
+    print("###")
 #     # Get the initial query
 #     query = input("Please enter term to search for: ")
 #     # while query !== "q":
@@ -701,4 +857,4 @@ def getDrinksDataDanMurphy(url, commonList, _lock):
 #         # query = input("Please enter term to search for (or enter 'q' to quit): ")
 #     print("END DEBUG SCRIPT")
 #
-# main()
+main()
