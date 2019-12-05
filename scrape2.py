@@ -356,11 +356,10 @@ def getDrinksDataBws(url, commonList, _lock):
     # Print out the list of drink data
     print("GOT DRINK DATA FOR: " + str(entry))
 
-    # Add the list of data for this drink to the list of drinksData
-    commonList.append(entry)
-
     # Handle the closing of the thread
     _lock.acquire()
+    # Add the list of data for this drink to the list of drinksData
+    commonList.append(entry)
     _lock.release()
 
 """___________________LIQUORLAND__________________"""
@@ -517,11 +516,172 @@ def getDrinksDataLiquorland(url, commonList, _lock):
     # Print out the list of drink data
     print("GOT DRINK DATA FOR: " + str(entry))
 
+    # Handle the closing of the thread
+    _lock.acquire()
     # Add the list of data for this drink to the list of drinksData
     commonList.append(entry)
+    _lock.release()
+
+
+
+"""___________________DAN MURPHY__________________"""
+def getAllSearchPagesDanMurphy(url):
+    """
+    A function to get the html soups of all the results pages for a search, given the url for the first page of results.
+
+    Args:
+        url: the url of the first page of search results
+    Returns:
+        allPageSoups: a list of the html soups of all the results pages
+    """
+
+    # Create a new soup all results which holds a list of html soups of each of the results pages
+    allPageSoups = list()
+
+    # Start scraping at results page one
+    currentPage = 1
+    # Print what page of results we are currently loading
+    print("LOADING PAGE " + str(currentPage) + " OF RESULTS")        # Get the html for the current page of results
+    currentPageSoup = download(url)
+    # Add current page soup to list
+    allPageSoups.append(currentPageSoup)
+    # # Get the html element for the page prev/next controls bar
+    # nextButtonDiv = currentPageSoup.find('div', {'class':'pagination'})
+    # # Get the button inside the div
+    # nextButton = nextButtonDiv.find('a', {'title':'Next page'})
+    # # Get the href property of the button
+    # href = nextButton.get('href')
+    # # print("### href: " + str(href) + " ###")
+
+    # While the hmtl for the "load more" button is not null there is a next page
+    while href != None:
+        # Increment the number of the current page
+        currentPage = currentPage + 1
+        # Print what page of results we are currently loading
+        print("LOADING PAGE " + str(currentPage) + " OF RESULTS")        # Get the html for the current page of results
+        currentPageSoup = download("https://www.danmurphys.com.au" + str(href))
+        # Add current page soup to list
+        allPageSoups.append(currentPageSoup)
+        # Get the html element for the page prev/next controls bar
+        nextButtonDiv = currentPageSoup.find('div', {'class':'pagination'})
+        # Get the button inside the div
+        nextButton = nextButtonDiv.find('a', {'title':'Next page'})
+        # Get the href property of the button
+        href = nextButton.get('href')
+        # print("### href: " + str(href) + " ###")
+
+    # Return the list containing all of html soup for every search page
+    return allPageSoups
+
+def getDrinksDanMurphy(soups):
+    """
+    Drink url extraction for bws
+
+    Args:
+        soup: a html soup of a liquor site search page
+    Returns:
+        drinkUrls: a list of urls for specific drink pages
+    """
+    # Create a new list to store the urls to each of the drinks
+    drinkUrls = list()
+    # For each page of results, scrape all of the drink urls off of the page
+    for soup in soups:
+        # Create a new list to store the drinks
+        drinks = list()
+        # Extract the drink cards from the search page soup
+        drinks = soup.findAll('li', {'class':'js-list col-xs-6 col-lg-4 col-md-4 col-xl-3 ng-star-inserted'})
+        for drink in drinks:
+            # Extract the urls to each individual drink page
+            relativePath = drink.find('a')['href']
+            drinkUrls.append("https://www.liquorland.com.au" + relativePath)
+    # Return the list containing the urls to each drink on each results page
+    return drinkUrls
+
+def getDrinksDataDanMurphy(url, commonList, _lock):
+    """
+    Thread function to control parsing of BWS drink details
+
+    Args:
+        url: the url of the website for the specific drink product we are collecting the data for
+        commonList: the list of drink data that all threads store their results in
+        _lock: some threading shit (ask Hamish I guess)
+
+    Returns:
+        none (simply adds the result to the common list, since this function is running within a multi-threaded environment)
+    """
+    # Print our current status
+    print("GETTING DRINK DATA FROM A DRINK PAGE ...")
+
+    # Get the html soup for the drink page
+    soup = download(url)
+    print(0)
+    # print("### " + soup + " ###")
+
+    # Extract the name
+    # name = soup.findAll('h2', {'class':'sm'})[0].text
+    # name = soup.find('h2', {'class':'sm'}).text
+    print(name)
+    print(1)
+
+    # Extract the product brand
+    # brand = soup.find('h1', {'class':'titleRed'}).text
+    print(brand)
+    print(2)
+
+    # Extract the price
+    priceElement = soup.find('span', {'class': 'price'})
+    dollar = priceElement.text[1, -1]
+    print("dollar: " + str(dollar))
+    cents = priceElement.find('span', {'class': 'cents'}).text[1, ]
+    print("cents: " + str(cents))
+    price = str(dollar) + '.' + str(cents)
+    print(3)
+
+    # Extract the product image link (the src attribute of the image)
+    image = soup.find('img', {'class': 'product-image'})['src']
+    print(4)
+
+    # Get the footer element containing all the rest of the details
+    detailsRaw = soup.find('div', {'class':'product-additional-details_container text-center ng-isolate-scope'})
+    # Get the ul of details inside the element
+    list = detailsRaw.find('ul', {'class':'text-left'})
+    # TODO: Remove this debug statement
+    # Get all the titles of the properties
+    keys = list.findAll('strong', {'class':'list-details_header ng-binding'})
+    # Get all the values of the proverties
+    values = list.findAll('span', {'class':'pull-right list-details_info ng-binding ng-scope'})
+    # Put the titles and values as K,V pairs into a dictionary
+    details = dict()
+    for x in range(0, len(keys)):
+        details[keys[x].text] = values[x].text
+
+    # Extract the bottle volume
+    size = 0
+    if details['Liquor Size'].find('mL') != -1:
+        # measurement in mL
+        strSize = details['Liquor Size'][0:len(details['Liquor Size']) - 2]
+        size = int(strSize) / 1000
+    else:
+        # measurement in L
+        strSize = details['Liquor Size'][0:len(details['Liquor Size']) - 1]
+        size = int(strSize)
+    print(5)
+
+    # Find the price per standard by getting the number of standard drinks and dividing it by the price
+    efficiency = float(details['Standard Drinks']) / float(price)
+    print(6)
+
+    # Put all of the details found for the drink into an Item object
+    # entry = Item("BWS", brand.text, name.text, price, "https://bws.com.au" + link['href'], details['Liquor Size'], details['Alcohol %'], details['Standard Drinks'], efficiency)
+    entry = ["BWS", details['Brand'], name, price, url, size, details['Alcohol %'], details['Standard Drinks'], efficiency, image]
+
+    # Print out the list of drink data
+    print("GOT DRINK DATA FOR: " + str(entry))
 
     # Handle the closing of the thread
     _lock.acquire()
+    # Add the list of data for this drink to the list of drinksData
+    commonList.append(entry)
     _lock.release()
 
 """________________________________________DEBUG MAIN FUNCTION____________________________________________"""
