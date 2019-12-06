@@ -3,6 +3,23 @@ from sqlite3 import Error
 from scripts.classItem import Item
 
 
+def create_connection():
+    conn = None
+    try:
+        conn = sqlite3.connect("drinks.db")
+
+        sql = ''' CREATE TABLE IF NOT EXISTS "drinks" ( `ID` INTEGER PRIMARY KEY AUTOINCREMENT, `store` TEXT, 
+            `brand` BLOB, `name` NUMERIC, `type` TEXT, `price` REAL, `link` TEXT, `ml` REAL, `percent` REAL, 
+            `stdDrinks` REAL, `efficiency` REAL, `image` TEXT )'''
+        cur = conn.cursor()
+        cur.execute(sql)
+        print("connected to database")
+    except Error as e:
+        print(e)
+
+    return conn
+
+
 def create_entry(conn, task):
     """
     Create a new task
@@ -11,8 +28,8 @@ def create_entry(conn, task):
     :return:
     """
 
-    sql = ''' INSERT INTO drinks(store,brand,name,type,price,link,ml,percent,stdDrinks,efficiency)
-              VALUES(?,?,?,?,?,?,?,?,?,?) '''
+    sql = ''' INSERT INTO drinks(store,brand,name,type,price,link,ml,percent,stdDrinks,efficiency,image)
+              VALUES(?,?,?,?,?,?,?,?,?,?,?) '''
     cur = conn.cursor()
     cur.execute(sql, task)
     return cur.lastrowid
@@ -117,14 +134,21 @@ def dbhandler(conn, list, mode):
     if mode == "p":
         for drink in list:
             drink_task = (drink.store, drink.brand, drink.name, drink.type, float(drink.price), drink.link, float(drink.ml),
-                          float(drink.percent), float(drink.stdDrinks), float(drink.efficiency))
+                          float(drink.percent), float(drink.stdDrinks), float(drink.efficiency), drink.link)
             create_entry(conn, drink_task)
 
     elif mode == "u":
         # update entries with the same name / add entries who's names do not exist.
         for drink in list:
             if is_drink_in_table(conn, drink):
+                print('//update')
                 update_drink_price(conn, drink, drink.price)
+            else:
+                print('//create')
+                drink_task = (drink.store, drink.brand, drink.name, drink.type, float(drink.price), drink.link,
+                              float(drink.ml), float(drink.percent), float(drink.stdDrinks), float(drink.efficiency),
+                              drink.link)
+                create_entry(conn, drink_task)
 
     conn.commit()
 
