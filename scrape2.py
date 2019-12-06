@@ -38,9 +38,13 @@ def search(searchTerms):
     """
     # These are the base search page urls that we will add our search terms to to search
     searchUrls = list()
-    searchUrls.append("https://bws.com.au/search?searchTerm=" + str(searchTerms))
+    # searchUrls.append("https://bws.com.au/search?searchTerm=" + str(searchTerms))
     # searchUrls.append("https://www.liquorland.com.au/beer")
     # searchUrls.append("https://www.liquorland.com.au/spirits?show=5")
+    # searchUrls.extend(['https://bws.com.au/wine/all-wine', 'https://bws.com.au/wine/all-wine',
+    # 'https://bws.com.au/spirits/all-spirits'])
+    searchUrls.extend('https://bws.com.au/spirits/all-spirits')
+
 
     # Create a list of all the drinks data that we will scrape from all of the different liquor stores
     allDrinksData = list()
