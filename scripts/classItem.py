@@ -22,16 +22,17 @@ class Item:
         # Create a new string
         reprString = "<Item>"
         # Add the instance properties to the reprString
-        reprString += "store:" + self.store + ","
-        reprString += "brand:" + self.brand + ","
-        reprString += "name:" + self.name + ","
-        reprString += "price:" + self.price + ","
-        reprString += "link:" + self.link + ","
-        reprString += "ml:" + self.ml + ","
-        reprString += "percent:" + self.percent + ","
-        reprString += "stdDrinks:" + self.stdDrinks + ","
-        reprString += "efficiency:" + str(self.efficiency)
-        # Return the reprString
+        reprString += self.store + ","
+        reprString += self.brand + ","
+        reprString += self.name + ","
+        reprString += str(self.price) + ","
+        reprString += self.type + ","
+        reprString += self.link + ","
+        reprString += str(self.ml) + ","
+        reprString += str(self.percent) + ","
+        reprString += str(self.stdDrinks) + ","
+        reprString += str(self.efficiency) + ","
+        reprString += self.image
         return reprString
 
 class ItemCollection:

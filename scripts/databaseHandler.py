@@ -116,7 +116,6 @@ def is_drink_in_table(conn, drink):
               AND ml = ?  
               AND percent = ?  
               AND stdDrinks = ?  
-              AND efficiency = ?  
               '''
     cur = conn.cursor()
     cur.execute(sql, (drink.store, drink.brand, drink.name, drink.type, drink.link, drink.ml, drink.percent, drink.stdDrinks, drink.efficiency))
