@@ -93,10 +93,9 @@ def update_drink_price(conn, drink, newPrice):
               SET price = ?
               WHERE name = ?
               AND brand = ?
-              AND store = ?
-              AND type = ? '''
+              AND store = ? '''
     cur = conn.cursor()
-    cur.execute(sql, (newPrice, drink.name, drink.brand, drink.store, drink.type))
+    cur.execute(sql, (newPrice, drink.name, drink.brand, drink.store))
     conn.commit()
 
 
@@ -111,14 +110,10 @@ def is_drink_in_table(conn, drink):
               WHERE store = ?
               AND brand = ?
               AND name = ?
-              AND type = ? 
               AND link = ?  
-              AND ml = ?  
-              AND percent = ?  
-              AND stdDrinks = ?  
               '''
     cur = conn.cursor()
-    cur.execute(sql, (drink.store, drink.brand, drink.name, drink.type, drink.link, drink.ml, drink.percent, drink.stdDrinks, drink.efficiency))
+    cur.execute(sql, (drink.store, drink.brand, drink.name,  drink.link))
 
     rows = cur.fetchall()
     if len(rows) > 0:

@@ -44,7 +44,7 @@ def search(searchTerms):
     # searchUrls.append('https://bws.com.au/wine/all-wine')
     # searchUrls.append('https://bws.com.au/beer/all-beer')
 
-
+    conn = create_connection()
     # Create a list of all the drinks data that we will scrape from all of the different liquor stores
     allDrinksData = list()
 
@@ -54,14 +54,15 @@ def search(searchTerms):
         url = searchUrl
         print(url)
         # 1 & 2. Scrape the html for the search page and create beautifulsoup (generic). Then get the url for each drink result in the search (specific)
-        drinkUrls = getDrinks(url)
+        itemsOnPages = getDrinks(url)
 
-        if len(drinkUrls) == 0:
+        if len(itemsOnPages) == 0:
             print("NO DRINK RESULTS FOUND AT " + url + ".")
         else:
             # 3 & 4. Follow each of the drink links utilising multiple threads to speed the process. Inside of each thread, once again scrape the page to a spoup (general), then get all the drink data from the drink page (specific)
-            allDrinksData.extend(getDrinksData(drinkUrls))
+            allDrinksData.extend(getDrinksData(itemsOnPages))
 
+    conn.close()
     # TODO remove this is done in SQL, pointless wasting compute.
     # # Sort the drinks by efficiency descending
     if len(allDrinksData) == 0:
@@ -194,12 +195,12 @@ def getDrinks(url):
         # TODO: Implement liquorland functionality
         allPageSoups.extend(getAllSearchPagesLiquorland(url))
 
-
-    # Get the drinks profiles based on what site is being scraped
+    itemsOnPage = list()
+    # Get the drink items based on what site is being scraped
     if site == "bws":
-        drinkUrls = getDrinksBws(allPageSoups)
+        itemsOnPage = getDrinksBws(allPageSoups)
     elif site == "liquorland":
-        # TODO: Implement liquorland functionality
+        # TODO: Implement liquorland functionality - REMEMBER REPLACE WITH DRINK ITEMS
         drinkUrls = getDrinksLiquorland(allPageSoups)
         # print("drinkUrls: " + str(drinkUrls))
     elif site == "danmurphys":
@@ -210,16 +211,16 @@ def getDrinks(url):
         # TODO: Implement drink url extraction from first choice liquor search page
 
     # Print out how many drink urls were found on the page
-    print("FOUND " + str(len(drinkUrls)) + " DRINK URLS ON PAGE.")
+    print("FOUND " + str(len(itemsOnPage)) + " DRINK URLS ON PAGE.")
     # Return the list of drink urls for us to individually scrape later on
-    return drinkUrls
+    return itemsOnPage
 
-def getDrinksData(drinkUrls):
+def getDrinksData(itemsOnPage):
     """
     Function to get a list of drink data from a BeautifulSoup and return the data in a list
 
     Args:
-        drinkUrls: a list of urls to the individual pages of the drinks found
+        itemsOnPage: a list of item objects to the individual pages of the drinks found
 
     Returns: A list of drink data
     """
@@ -228,40 +229,42 @@ def getDrinksData(drinkUrls):
 
     # Create an empty list in which to store our drinks data (each drink will have its own Item object (see classItem) which will be added to the list)
     commonList = list()
-
+    conn = create_connection()
     # Detect the liquor site we are scraping from the url. This allows to extract the drink data using the correct strategies for the specific website.
-    site = getSiteFromUrl(drinkUrls[0])
+    site = getSiteFromUrl(itemsOnPage[0].link)
 
     # Get the data from the drink url pages using the functions for the current liquor site
-    if len(drinkUrls) == 0:
+    if len(itemsOnPage) == 0:
         # If there were no drinkUrls given, don't attempt to get data
         return commonList
     else:
         # If there are drinkUrls, however, get the data from them
         threads = 0
         _lock = Lock()
-        f = open('bws_spirits.txt', 'w')
         with threadingPool.ThreadPoolExecutor(max_workers=1) as executor:
-            # Note: Threading stuff basically executes multiple copies getDrinksDataXXX(url, commonList, _lock) concurrently
-            # TODO: Put this code back into the for loop so we can scrape all the urls
-            for url in drinkUrls:
-                # print("NOTE: WE ARE AT THE MOMENT ONLY EXTRACTING DATA FOR THE FIRST RESULT SO WE DON'T GET BLOCKED IN TESTING.")
-                # url = drinkUrls[0]
-                # Print out every time a new thread is initialised
-                print("INITIALISING THREAD " + str(threads) + ".")
+            for drink in itemsOnPage:
+                if is_drink_in_table(conn, drink) == False:
+                    url = drink.link
+                    # Print out every time a new thread is initialised
+                    print("INITIALISING THREAD " + str(threads) + ".")
 
-                # Extract the drink data based on the site being scraped
-                if site == "bws":
-                    # Retrieve drink data from bws format html
-                    executor.submit(getDrinksDataBws, url, commonList, _lock, f)
-                elif site == "liquorland":
-                    # TODO: Implement liquorland functionality
-                    print("Sorry, LiquorLand is not currently a supported site.")
-                    # Extract the drink data from liquorland format drink page html
-                    executor.submit(getDrinksDataLiquorland, url, commonList, _lock)
-                # Update how many threads we have initialised
-                threads += 1
-        f.close()
+                    # Extract the drink data based on the site being scraped
+                    if site == "bws":
+                        # Retrieve drink data from bws format html
+                        executor.submit(getDrinksDataBws, url, commonList, _lock)
+                    elif site == "liquorland":
+                        # TODO: Implement liquorland functionality
+                        print("Sorry, LiquorLand is not currently a supported site.")
+                        # Extract the drink data from liquorland format drink page html
+                        executor.submit(getDrinksDataLiquorland, url, commonList, _lock)
+                    # Update how many threads we have initialised
+                    threads += 1
+                else:
+                    print('present: update thread')
+                    update_drink_price(conn, drink, drink.price)
+
+                # if threads == 20:
+                #     break  # todo remove for more.
 
     # Return the drinksData
     return commonList
@@ -327,6 +330,7 @@ def getAllSearchPagesBws(url):
     # Return the list containing all of html soup for every search page
     return allPageSoups
 
+
 def getDrinksBws(soups):
     """
     Drink url extraction for bws
@@ -337,7 +341,7 @@ def getDrinksBws(soups):
         drinkUrls: a list of urls for specific drink pages
     """
     # Create a new list to store the urls to each of the drinks
-    drinkUrls = list()
+    itemsOnPage = list()
     # For each page of results, scrape all of the drink urls off of the page
     for soup in soups:
         # Create a new list to store the drinks
@@ -348,12 +352,25 @@ def getDrinksBws(soups):
         for drink in drinks:
             # Extract the urls to each individual drink page
             relativePath = drink.find('a', {'class':'link--no-decoration'})['href']
-            drinkUrls.append("https://bws.com.au" + relativePath)
+
+            # Extract store, brand, name, type to check if stepping into page needed.
+            store = 'BWS'
+            brand = drink.find('h2', {'class':'productTile_brand ng-binding'}).text
+            name = drink.find('div', {'class':'productTile_name ng-binding'}).text
+            priceElement = soup.find('div', {'class': 'productTile_price ng-scope'})
+            dollar = priceElement.find('span', {'class': 'productTile_priceDollars ng-binding'}).text
+            cents = priceElement.find('span', {'class': 'productTile_priceCents ng-binding'}).text
+            price = str(dollar) + '.' + str(cents)
+            print(">>", brand, name, price)
+            entry = Item(store, brand, name, None, price, "https://bws.com.au" + relativePath, None, None, None, None,
+                         None)
+            itemsOnPage.append(entry)
+
     # Return the list containing the urls to each drink on each results page
-    return drinkUrls
+    return itemsOnPage
 
 
-def getDrinksDataBws(url, commonList, _lock, txt):
+def getDrinksDataBws(url, commonList, _lock):
     """
     Thread function to control parsing of BWS drink details
 
@@ -417,8 +434,8 @@ def getDrinksDataBws(url, commonList, _lock, txt):
     efficiency = float(numbers[0]) / float(price)
 
     # Put all of the details found for the drink into an Item object
-    entry = Item("BWS", details['Brand'], name, details['Liquor Style'], price, url, size, percent,
-                 numbers, efficiency, image)
+    entry = Item("BWS", details['Brand'], name, details['Liquor Style'], price, url, float(size), float(percent[0]),
+                 float(numbers[0]), efficiency, image)
 
     # Print out the list of drink data
     print("<" + str(len(commonList)) + "> GOT DRINK DATA FOR: " + entry.name)
@@ -426,7 +443,6 @@ def getDrinksDataBws(url, commonList, _lock, txt):
     # Thread safety
     _lock.acquire()
     commonList.append(entry)
-    txt.write(repr(entry) + '\n')
     _lock.release()
 
 """___________________LIQUORLAND__________________"""
