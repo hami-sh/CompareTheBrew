@@ -90,9 +90,7 @@ def update_drink(conn, drink, newPrice):
     :return: project id
     """
     sql = ''' UPDATE drinks
-              SET price = ?
-              SET link = ?
-              SET image = ?
+              SET price = ?, link = ?, image = ?
               WHERE name = ?
               AND brand = ?
               AND store = ? '''
@@ -139,8 +137,6 @@ def dbhandler(conn, list, mode):
             if is_drink_in_table(conn, drink):
                 print('//update')
                 update_drink(conn, drink, drink.price)
-                update_drink_image(conn, drink)
-                update_drink_image(conn, drink)
 
             else:
                 print('//create')
