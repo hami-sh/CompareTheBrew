@@ -39,16 +39,10 @@ def search(searchTerms):
     """
     # These are the base search page urls that we will add our search terms to to search
     searchUrls = list()
-<<<<<<< HEAD
-    searchUrls.append("https://bws.com.au/search?searchTerm=" + str(searchTerms))
-    # searchUrls.append("https://www.liquorland.com.au/beer")
-    # searchUrls.append("https://www.liquorland.com.au/spirits?show=5")
-=======
     # searchUrls.append("https://bws.com.au/search?searchTerm=" + str(searchTerms))
     # searchUrls.append('https://bws.com.au/spirits/all-spirits')
     searchUrls.append('https://bws.com.au/wine/all-wine')
     # searchUrls.append('https://bws.com.au/beer/all-beer')
->>>>>>> b51be7522653039f903fe25981e52789b56a2351
 
     conn = create_connection()
     # Create a list of all the drinks data that we will scrape from all of the different liquor stores
@@ -94,11 +88,7 @@ def download(url):
     """
     # Sleep for a random number of seconds between requests (this is the minimum time between requests)
     # secs = randint(10, 20)
-<<<<<<< HEAD
-    secs = randint(1, 10)
-=======
     secs = randint(1, 3)
->>>>>>> b51be7522653039f903fe25981e52789b56a2351
     print("WAITING " + str(secs) + " SECONDS BEFORE SENDING ANOTHER REQUEST.")
     sleep(secs)
 
@@ -252,27 +242,6 @@ def getDrinksData(itemsOnPage):
         threads = 0
         _lock = Lock()
         with threadingPool.ThreadPoolExecutor(max_workers=1) as executor:
-<<<<<<< HEAD
-            # Note: Threading stuff basically executes multiple copies getDrinksDataXXX(url, commonList, _lock) concurrently
-            # TODO: Put this code back into the for loop so we can scrape all the urls
-            # for url in drinkUrls:
-            print("NOTE: WE ARE AT THE MOMENT ONLY EXTRACTING DATA FOR THE FIRST RESULT SO WE DON'T GET BLOCKED IN TESTING.")
-            url = drinkUrls[0]
-            # Print out every time a new thread is initialised
-            print("INITIALISING THREAD " + str(threads) + ".")
-
-            # Extract the drink data based on the site being scraped
-            if site == "bws":
-                # Retrieve drink data from bws format html
-                executor.submit(getDrinksDataBws, url, commonList, _lock)
-            elif site == "liquorland":
-                # TODO: Implement liquorland functionality
-                print("Sorry, LiquorLand is not currently a supported site.")
-                # Extract the drink data from liquorland format drink page html
-                executor.submit(getDrinksDataLiquorland, url, commonList, _lock)
-            # Update how many threads we have initialised
-            threads += 1
-=======
             for drink in itemsOnPage:
                 if is_drink_in_table(conn, drink) == False:
                     url = drink.link
@@ -296,7 +265,6 @@ def getDrinksData(itemsOnPage):
 
                 if threads == 20:
                     break  # todo remove for more.
->>>>>>> b51be7522653039f903fe25981e52789b56a2351
 
     # Return the drinksData
     return commonList
@@ -705,13 +673,6 @@ def getDrinksDataLiquorland(url, commonList, _lock):
 
 
 def main():
-<<<<<<< HEAD
-    query = str(input("Input your search terms: "))
-    data = search(query)
-    print("### DATA: ")
-    print(str(data))
-    print("###")
-=======
     conn = create_connection()
     query = str(input("Input your search terms: "))
     data = search(query)
@@ -723,7 +684,6 @@ def main():
     # print("### DATA: ")
     # print(str(data))
     # print("###")
->>>>>>> b51be7522653039f903fe25981e52789b56a2351
 #     # Get the initial query
 #     query = input("Please enter term to search for: ")
 #     # while query !== "q":
