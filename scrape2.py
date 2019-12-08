@@ -40,8 +40,8 @@ def search(searchTerms):
     # These are the base search page urls that we will add our search terms to to search
     searchUrls = list()
     # searchUrls.append("https://bws.com.au/search?searchTerm=" + str(searchTerms))
-    searchUrls.append('https://bws.com.au/spirits/all-spirits')
-    # searchUrls.append('https://bws.com.au/wine/all-wine')
+    # searchUrls.append('https://bws.com.au/spirits/all-spirits')
+    searchUrls.append('https://bws.com.au/wine/all-wine')
     # searchUrls.append('https://bws.com.au/beer/all-beer')
 
     conn = create_connection()
@@ -261,10 +261,10 @@ def getDrinksData(itemsOnPage):
                     threads += 1
                 else:
                     print('present: update thread')
-                    update_drink_price(conn, drink, drink.price)
+                    update_drink(conn, drink, drink.price)
 
-                # if threads == 20:
-                #     break  # todo remove for more.
+                if threads == 20:
+                    break  # todo remove for more.
 
     # Return the drinksData
     return commonList

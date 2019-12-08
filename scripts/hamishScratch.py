@@ -30,7 +30,7 @@ def func():
 
     print("---")
 
-    update_drink_price(conn, drinks[0], 999999999)
+    update_drink(conn, drinks[0], 999999999)
 
     select_all_drinks_by_efficiency(conn)
 
@@ -39,7 +39,7 @@ def func():
 
     newB = classItem.Item('bws', 'brand2', 'b', 'whiskey', -10, 'https://google.com', 700, 50, 123, 123/50)
 
-    update_drink_price(conn, newB, newB.price)
+    update_drink(conn, newB, newB.price)
 
     print("---")
 

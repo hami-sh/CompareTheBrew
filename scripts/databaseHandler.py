@@ -82,7 +82,7 @@ def select_drink_by_efficiency_and_type(conn, type):
         print(row)
 
 
-def update_drink_price(conn, drink, newPrice):
+def update_drink(conn, drink, newPrice):
     """
     update priority, begin_date, and end date of a task
     :param conn:
@@ -91,11 +91,13 @@ def update_drink_price(conn, drink, newPrice):
     """
     sql = ''' UPDATE drinks
               SET price = ?
+              SET link = ?
+              SET image = ?
               WHERE name = ?
               AND brand = ?
               AND store = ? '''
     cur = conn.cursor()
-    cur.execute(sql, (newPrice, drink.name, drink.brand, drink.store))
+    cur.execute(sql, (newPrice, drink.link, drink.image, drink.name, drink.brand, drink.store))
     conn.commit()
 
 
@@ -136,12 +138,15 @@ def dbhandler(conn, list, mode):
         for drink in list:
             if is_drink_in_table(conn, drink):
                 print('//update')
-                update_drink_price(conn, drink, drink.price)
+                update_drink(conn, drink, drink.price)
+                update_drink_image(conn, drink)
+                update_drink_image(conn, drink)
+
             else:
                 print('//create')
                 drink_task = (drink.store, drink.brand, drink.name, drink.type, float(drink.price), drink.link,
                               float(drink.ml), float(drink.percent), float(drink.stdDrinks), float(drink.efficiency),
-                              drink.link)
+                              drink.image)
                 create_entry(conn, drink_task)
 
     conn.commit()
