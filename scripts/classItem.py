@@ -2,7 +2,7 @@ import threading
 
 class Item:
     # todo expand for alcohol content
-    def __init__(self, store, brand, name, cat, price, link, ml, percent, stdDrinks, efficiency):
+    def __init__(self, store, brand, name, cat, price, link, ml, percent, stdDrinks, efficiency, image):
         self.store = store
         self.brand = brand
         self.name = name
@@ -13,6 +13,7 @@ class Item:
         self.percent = percent
         self.stdDrinks = stdDrinks
         self.efficiency = efficiency
+        self.image = image
 
     def __lt__(self, other):
         return self.efficiency < other.efficiency
@@ -21,16 +22,17 @@ class Item:
         # Create a new string
         reprString = "<Item>"
         # Add the instance properties to the reprString
-        reprString += "store:" + self.store + ","
-        reprString += "brand:" + self.brand + ","
-        reprString += "name:" + self.name + ","
-        reprString += "price:" + self.price + ","
-        reprString += "link:" + self.link + ","
-        reprString += "ml:" + self.ml + ","
-        reprString += "percent:" + self.percent + ","
-        reprString += "stdDrinks:" + self.stdDrinks + ","
-        reprString += "efficiency:" + str(self.efficiency)
-        # Return the reprString
+        reprString += self.store + ","
+        reprString += self.brand + ","
+        reprString += self.name + ","
+        reprString += str(self.price) + ","
+        reprString += self.type + ","
+        reprString += self.link + ","
+        reprString += str(self.ml) + ","
+        reprString += str(self.percent) + ","
+        reprString += str(self.stdDrinks) + ","
+        reprString += str(self.efficiency) + ","
+        reprString += self.image
         return reprString
 
 class ItemCollection:

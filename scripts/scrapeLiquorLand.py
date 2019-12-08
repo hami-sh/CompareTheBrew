@@ -2,7 +2,7 @@ from bs4 import BeautifulSoup
 from selenium import webdriver
 from selenium.webdriver.chrome.options import Options
 import concurrent.futures as threadingPool
-from classItem import Item, ItemCollection
+from scripts.classItem import Item, ItemCollection
 import logging
 from fake_useragent import UserAgent
 import random
