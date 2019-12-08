@@ -62,7 +62,7 @@ def select_all_drinks_by_efficiency(conn):
     # cur.execute("SELECT type FROM drinks ORDER BY efficiency DESC") # TODO: remove
 
     rows = cur.fetchall()
-    print("### ROW item output is of type: " + str(type(rows[0])) + ". E.g.: " + str(rows[0]) + " ###") # TODO: remove debug
+    print("### NOTE: items in 'rows' are of type: " + str(type(rows[0])) + ". E.g.: " + str(rows[0]) + " ###") # TODO: remove debug
 
     return rows
 
