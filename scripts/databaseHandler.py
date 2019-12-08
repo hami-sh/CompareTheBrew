@@ -8,8 +8,8 @@ def create_connection():
     try:
         conn = sqlite3.connect("drinks.db")
 
-        sql = ''' CREATE TABLE IF NOT EXISTS "drinks" ( `ID` INTEGER PRIMARY KEY AUTOINCREMENT, `store` TEXT, 
-            `brand` BLOB, `name` NUMERIC, `type` TEXT, `price` REAL, `link` TEXT, `ml` REAL, `percent` REAL, 
+        sql = ''' CREATE TABLE IF NOT EXISTS "drinks" ( `ID` INTEGER PRIMARY KEY AUTOINCREMENT, `store` TEXT,
+            `brand` BLOB, `name` NUMERIC, `type` TEXT, `price` REAL, `link` TEXT, `ml` REAL, `percent` REAL,
             `stdDrinks` REAL, `efficiency` REAL, `image` TEXT )'''
         cur = conn.cursor()
         cur.execute(sql)
@@ -47,7 +47,7 @@ def select_all_drinks(conn):
     rows = cur.fetchall()
 
     for row in rows:
-        print(row)
+        print(type(row))
 
 
 def select_all_drinks_by_efficiency(conn):
@@ -61,9 +61,13 @@ def select_all_drinks_by_efficiency(conn):
     cur.execute("SELECT * FROM drinks ORDER BY efficiency DESC")
 
     rows = cur.fetchall()
+    # print("### ROWS output is of type: " + str(type(rows)) + " ###") # TODO: remove debug
 
-    for row in rows:
-        print(row)
+    return rows
+
+    # # Debug print of output rows
+    # for row in rows:
+    #     print(row)
 
 
 def select_drink_by_efficiency_and_type(conn, type):
@@ -77,9 +81,10 @@ def select_drink_by_efficiency_and_type(conn, type):
     cur.execute("SELECT * FROM drinks WHERE type = '%s' ORDER BY efficiency DESC" % type)
 
     rows = cur.fetchall()
+    # print("### ROWS output is of type: " + str(type(rows)) + " ###") # TODO: remove debug
 
-    for row in rows:
-        print(row)
+    # for row in rows:
+    #     print(row)
 
 
 def update_drink(conn, drink, newPrice):
@@ -112,7 +117,7 @@ def is_drink_in_table(conn, drink):
               WHERE store = ?
               AND brand = ?
               AND name = ?
-              AND link = ?  
+              AND link = ?
               '''
     cur = conn.cursor()
     cur.execute(sql, (drink.store, drink.brand, drink.name,  drink.link))

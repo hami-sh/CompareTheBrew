@@ -2,7 +2,8 @@ from flask import Flask
 from flask import render_template
 from flask import request
 from flask import redirect
-from scrape2 import search
+# from scrape2 import search
+import scripts.databaseHandler as db
 
 # Create a new flask application
 app = Flask(__name__)
@@ -30,7 +31,7 @@ def postSearchTerms():
 
 # A third test page to display search results
 @app.route("/results/<searchTerms>")
-def displayResultPage(searchTerms): # results
+def displayResultPage(searchTerms):
     """
     Displays the search results page given the search terms
 
@@ -39,15 +40,24 @@ def displayResultPage(searchTerms): # results
     Returns:
         the rendered html template for the page
     """
-    tempResults = search(searchTerms)
-    print("")
+    # Get results the old way - by running the whole scrape script for every request
+    # tempResults = search(searchTerms)
+
+    # Get results the new way - by querying the database
+    conn = db.create_connection() # connect to the database
+
+    tempResults = db.select_all_drinks_by_efficiency(conn) # get all drinks where the value in column 'type' is 'searchTerms' sorted by efficiency
+    # tempResults = db.select_drink_by_efficiency_and_type(conn, searchTerms) # get all drinks where the value in column 'type' is 'searchTerms' sorted by efficiency
+
+    # Print a summary of the search results sent to the client on the server command prompt (should also be logged in future)
     print("")
     print("")
     print("                                    SEARCH RESULTS                                     ")
     print("|||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||")
-    print(tempResults)
+    # print("Now that the database is hooked up there are too many results to show. Sorry for any inconvenience.")
+    for result in tempResults:
+        print("TYPE: " + result[4])
     print("|||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||")
-    print("")
     print("")
     print("")
     return render_template('results.html', results=tempResults)
