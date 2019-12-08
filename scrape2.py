@@ -41,8 +41,9 @@ def search(searchTerms):
     searchUrls = list()
     # searchUrls.append("https://bws.com.au/search?searchTerm=" + str(searchTerms))
     # searchUrls.append('https://bws.com.au/spirits/all-spirits')
-    searchUrls.append('https://bws.com.au/wine/all-wine')
-    # searchUrls.append('https://bws.com.au/beer/all-beer')
+    # searchUrls.append('https://bws.com.au/wine/all-wine')
+    # USE THIS URL IF YOU DON'T WANT TO FRY YOUR COMPUTER
+    searchUrls.append('https://bws.com.au/beer/all-beer')
 
     conn = create_connection()
     # Create a list of all the drinks data that we will scrape from all of the different liquor stores
@@ -674,11 +675,11 @@ def getDrinksDataLiquorland(url, commonList, _lock):
 
 def main():
     conn = create_connection()
-    query = str(input("Input your search terms: "))
-    data = search(query)
-    dbhandler(conn, data, 'u')
+    query = str(input("Input your search terms: ")) # get users search terms
+    data = search(query) # scrape all the data for those search terms from bws
+    dbhandler(conn, data, 'u') # update the database with this new information
     print("SQL output by efficiency:")
-    select_all_drinks_by_efficiency(conn)
+    select_all_drinks_by_efficiency(conn) # get all the drinks from the db sorted by efficiency
 
 
     # print("### DATA: ")
