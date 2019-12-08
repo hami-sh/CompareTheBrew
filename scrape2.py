@@ -37,9 +37,9 @@ def search(searchTerms):
     """
     # These are the base search page urls that we will add our search terms to to search
     searchUrls = list()
-    # searchUrls.append("https://bws.com.au/search?searchTerm=" + str(searchTerms))
+    searchUrls.append("https://bws.com.au/search?searchTerm=" + str(searchTerms))
     # searchUrls.append("https://www.liquorland.com.au/beer")
-    searchUrls.append("https://www.liquorland.com.au/search?q=balter")
+    # searchUrls.append("https://www.liquorland.com.au/spirits?show=5")
 
     # Create a list of all the drinks data that we will scrape from all of the different liquor stores
     allDrinksData = list()
@@ -81,7 +81,8 @@ def download(url):
     Returns: A BeautifulSoup of the page html
     """
     # Sleep for a random number of seconds between requests (this is the minimum time between requests)
-    secs = randint(10, 15)
+    # secs = randint(10, 20)
+    secs = randint(1, 10)
     print("WAITING " + str(secs) + " SECONDS BEFORE SENDING ANOTHER REQUEST.")
     sleep(secs)
 
@@ -118,7 +119,7 @@ def download(url):
 
 
     # Setup the chromewebdriver
-    ua = UserAgent(cache=False, use_cache_server=False)
+    # ua = UserAgent(cache=False, use_cache_server=False)
     chrome_options = Options()
     chrome_options.add_argument("--headless")
 
@@ -238,6 +239,7 @@ def getDrinksData(drinkUrls):
             # Note: Threading stuff basically executes multiple copies getDrinksDataXXX(url, commonList, _lock) concurrently
             # TODO: Put this code back into the for loop so we can scrape all the urls
             # for url in drinkUrls:
+            print("NOTE: WE ARE AT THE MOMENT ONLY EXTRACTING DATA FOR THE FIRST RESULT SO WE DON'T GET BLOCKED IN TESTING.")
             url = drinkUrls[0]
             # Print out every time a new thread is initialised
             print("INITIALISING THREAD " + str(threads) + ".")
@@ -421,13 +423,14 @@ def getDrinksDataBws(url, commonList, _lock):
 """___________________LIQUORLAND__________________"""
 def getAllSearchPagesLiquorland(url):
     """
-    A function to get the html soups of all the results pages for a search, given the url for the first page of results.
+    A function to get the html soups of all the results pages for a search, given the url for the first page of results. Since Liquorland allows us to simply show however many results we want, we just tell it to give us 2000 results (which is more than enough to show every item) in the url, so all the results will be on the first page.
 
     Args:
         url: the url of the first page of search results
     Returns:
         allPageSoups: a list of the html soups of all the results pages
     """
+    # print("___HERE IS WHERE WE WERE GETTING THE ERROR___")
     soup = download(url)
     return soup
 
@@ -491,7 +494,7 @@ def getDrinksLiquorland(soups):
             relativePath = drink.find('a')['href']
             drinkUrls.append("https://www.liquorland.com.au" + relativePath)
     # Return the list containing the urls to each drink on each results page
-    print("****************** HERE ARE ALL THE DRINK URLS: ")
+    print("### HERE ARE ALL THE DRINK URLS: " + str(drinkUrls) + " ###")
     return drinkUrls
 
 def getDrinksDataLiquorland(url, commonList, _lock):
@@ -512,45 +515,73 @@ def getDrinksDataLiquorland(url, commonList, _lock):
     # Get the html soup for the drink page
     soup = download(url)
     # print("### " + soup + " ###")
+    print(0)
 
     # Extract the name
     name = soup.find('h2', {'class':'sm title_r1'}).text
-    print(name)
     print(1)
+    print("NAME: " + name)
 
     # Extract the product brand
-    brand = soup.find('h1', {'class':'titleRed'}).text
-    print(brand)
+    brand = soup.find('h1', {'class':'sm brand_r1'}).text
     print(2)
+    print("BRAND: " + brand)
 
     # Extract the price
-    priceElement = soup.find('span', {'class': 'price'})
+    priceElementDiv = soup.find('div', {'class': 'pdp-bundle-price'})
+    print("priceElementDiv: " + str(priceElementDiv))
+    priceElement = priceElementDiv.find('span', {'class': 'price'})
     dollar = priceElement.text[1, -1]
     print("dollar: " + str(dollar))
-    cents = priceElement.find('span', {'class': 'cents'}).text[1, ]
+    cents = priceElement.find('span', {'class': 'cents'}).text[1:]
     print("cents: " + str(cents))
     price = str(dollar) + '.' + str(cents)
+    price = float(price)
     print(3)
+    print("PRICE: " + str(price))
 
     # Extract the product image link (the src attribute of the image)
-    image = soup.find('img', {'class': 'product-image'})['src']
+    imageElement = soup.find('figure', {'class': 'mz-figure mz-hover-zoom mz-no-expand mz-ready'})
+    image = imageElement.find('img')['src']
     print(4)
+    print("IMAGE: " + image)
+    # quit()
 
-    # Get the footer element containing all the rest of the details
-    detailsRaw = soup.find('div', {'class':'product-additional-details_container text-center ng-isolate-scope'})
-    # Get the ul of details inside the element
-    list = detailsRaw.find('ul', {'class':'text-left'})
-    # TODO: Remove this debug statement
-    # Get all the titles of the properties
-    keys = list.findAll('strong', {'class':'list-details_header ng-binding'})
-    # Get all the values of the proverties
-    values = list.findAll('span', {'class':'pull-right list-details_info ng-binding ng-scope'})
-    # # Put the titles and values as K,V pairs into a dictionary
-    # details = dict()
-    # for x in range(0, len(keys)):
-    #     details[keys[x].text] = values[x].text
-    #
-    # # Extract the bottle volume
+    # Get the list containing all the rest of the details
+    list = soup.find('ul', {'class':'pdp-detailsTable'})
+    listelements = list.findAll('li')
+    details = dict()
+    for element in listelements:
+        # Get all the titles of the properties
+        key = element.find('div', {"class":"pdp-key"}).text
+        keyformatted = key.strip()
+        # Get all the values of the proverties
+        value = element.find('div', {"class":"pdp-des"}).text
+        valueformatted = value.strip()
+        # Put the titles and values as K,V pairs into a dictionary
+        details[keyformatted] = valueformatted
+
+    # Extract the bottle volume from the name
+    size = 0 # Size in litres
+    # Forms we need to handle: "L" "Litre" "Litres" "mL"
+    if (name.find("L ") != -1) or (name.find("Litre ") != -1) or (name.find("Litres ") != -1):
+        # If the units were "L" or "Litre" or "Litres"
+        before = name[0:units_index]
+        before.strip() # Strip any spaces between the number and the units
+        before.split(" ") # split the string into its individual words (the drink size value should be the last word)
+        size = float(before[-1])
+    elif (name.find("mL") != -1):
+        # If the units were "mL"
+        before = name[0:units_index]
+        before.strip() # Strip any spaces between the number and the units
+        before.split(" ") # split the string into its individual words (the drink size value should be the last word)
+        size = float(before[-1]) / float(1000)
+    else:
+        # Else I haven't written enough else statements so i'm going to have to go and fix this
+        print("UNRECOGNISED DRINK VOLUME FORMAT FOUND FOR LIQUORLAND")
+    print(9999)
+    print("SIZE: " + str(size))
+
     # size = 0
     # if details['Liquor Size'].find('mL') != -1:
     #     # measurement in mL
@@ -561,33 +592,49 @@ def getDrinksDataLiquorland(url, commonList, _lock):
     #     strSize = details['Liquor Size'][0:len(details['Liquor Size']) - 1]
     #     size = int(strSize)
     # print(5)
-    #
-    # # Find the price per standard by getting the number of standard drinks and dividing it by the price
-    # efficiency = float(details['Standard Drinks']) / float(price)
-    # print(6)
-    #
-    # # Put all of the details found for the drink into an Item object
-    # # entry = Item("BWS", brand.text, name.text, price, "https://bws.com.au" + link['href'], details['Liquor Size'], details['Alcohol %'], details['Standard Drinks'], efficiency)
-    # entry = ["BWS", details['Brand'], name, price, url, size, details['Alcohol %'], details['Standard Drinks'], efficiency, image]
 
-    # Extract the drinks data from the page html
-    detailsRaw = soup.find('ul', {'class':'pdp-detailsTable'})
-    listelements = detailsRaw.findAll('li')
-    details = dict()
-    for element in listelements:
-        key = element.find('div', {"class":"pdp-key"}).text
-        keyformatted = key.strip()
-        value = element.find('div', {"class":"pdp-des"}).text
-        valueformatted = value.strip()
-        details[keyformatted] = valueformatted
-    efficiency = float(details['Standard Drinks']) / float(priceformatted)
-    # Create a new instance of the Item class and use it to store our drinksData
-    entry = Item("LiquorLand", brand.text, name.text, priceformatted, "https://liquorland.com.au" + link['href'], "0",
-                 details['Alcohol Content'], details['Standard Drinks'], efficiency)
+    # Get the number of standard drinks
+    standard_drinks = float(details['Standard Drinks'])
+    print(5)
+    print("STANDARD DRINKS: " + str(standard_drinks))
+
+    # Find the price per standard by getting the number of standard drinks and dividing it by the price
+    efficiency = standard_drinks / price
+    print(6)
+    print("EFFICIENCY: " + str(efficiency))
+
+    # Find the alcohol percentage
+    alcohol_percentage = float(details['Alcohol Content'])
+    print(7)
+    print("ALCOHOL PERCENTAGE: " + str(alcohol_percentage))
+
+    # Put all of the details found for the drink into an Item object
+    # entry = Item("BWS", brand.text, name.text, price, "https://bws.com.au" + link['href'], details['Liquor Size'], details['Alcohol %'], details['Standard Drinks'], efficiency)
+    entry = ["LIQUORLAND", brand, name, price, url, size, alcohol_percentage, standard_drinks, efficiency, image]
+    print(8)
+    print("ENTRY: " + str(entry))
+
+    # # Extract the drinks data from the page html
+    # detailsRaw = soup.find('ul', {'class':'pdp-detailsTable'})
+    # listelements = detailsRaw.findAll('li')
+    # details = dict()
+    # for element in listelements:
+    #     key = element.find('div', {"class":"pdp-key"}).text
+    #     keyformatted = key.strip()
+    #     value = element.find('div', {"class":"pdp-des"}).text
+    #     valueformatted = value.strip()
+    #     details[keyformatted] = valueformatted
+    # efficiency = float(details['Standard Drinks']) / float(priceformatted)
+    # # Create a new instance of the Item class and use it to store our drinksData
+    # entry = Item("LiquorLand", brand.text, name.text, priceformatted, "https://liquorland.com.au" + link['href'], "0",
+    #              details['Alcohol Content'], details['Standard Drinks'], efficiency)
 
 
     # Print out the list of drink data
     print("GOT DRINK DATA FOR: " + str(entry))
+
+    print("QUITTING ...")
+    quit()
 
     # Add the list of data for this drink to the list of drinksData
     commonList.append(entry)
@@ -599,11 +646,10 @@ def getDrinksDataLiquorland(url, commonList, _lock):
 """________________________________________DEBUG MAIN FUNCTION____________________________________________"""
 #
 def main():
-    url = "https://www.liquorland.com.au/spirits?show=5"
-    # url = "https://bws.com.au/search?searchTerm=balter"
-    soup = download(url)
-    print("###")
-    print(str(soup)[0:5000])
+    query = str(input("Input your search terms: "))
+    data = search(query)
+    print("### DATA: ")
+    print(str(data))
     print("###")
 #     # Get the initial query
 #     query = input("Please enter term to search for: ")
