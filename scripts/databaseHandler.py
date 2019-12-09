@@ -57,36 +57,31 @@ def select_all_drinks_by_efficiency(conn):
     :param priority:
     :return:
     """
+    # Create a new cursor
     cur = conn.cursor()
+    # Ececute a new query at the cursor
     cur.execute("SELECT * FROM drinks ORDER BY efficiency DESC")
-    # cur.execute("SELECT type FROM drinks ORDER BY efficiency DESC") # TODO: remove
-
+    # Fetch all of the rows that matched the query
     rows = cur.fetchall()
-    print("### NOTE: items in 'rows' are of type: " + str(type(rows[0])) + ". E.g.: " + str(rows[0]) + " ###") # TODO: remove debug
 
     return rows
-
-    # # Debug print of output rows
-    # for row in rows:
-    #     print(row)
-
 
 def select_drink_by_efficiency_and_type(conn, type):
     """
     Query tasks by priority
     :param conn: the Connection object
+    :param type: the value in the type column that we are querying for
     :param priority:
     :return:
     """
+    # Create a new cursor
     cur = conn.cursor()
-    cur.execute("SELECT * FROM drinks WHERE type = '%s' ORDER BY efficiency DESC" % type)
-
+    # Ececute a new query at the cursor
+    cur.execute("SELECT * FROM drinks WHERE type LIKE '%{}%' ORDER BY efficiency DESC".format(type))
+    # Fetch all of the rows that matched the query
     rows = cur.fetchall()
-    # print("### ROWS output is of type: " + str(type(rows)) + " ###") # TODO: remove debug
 
-    # for row in rows:
-    #     print(row)
-
+    return rows
 
 def update_drink(conn, drink, newPrice):
     """
