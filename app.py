@@ -47,9 +47,9 @@ def displayResultPage(searchTerms):
     conn = db.create_connection() # connect to the database
 
     # This is the wortking query of all drinks
-    tempResults = db.select_all_drinks_by_efficiency(conn) # get all drinks where the value in column 'type' is 'searchTerms' sorted by efficiency
+    # tempResults = db.select_all_drinks_by_efficiency(conn) # get all drinks where the value in column 'type' is 'searchTerms' sorted by efficiency
     # This is the broken query by type
-    # tempResults = db.select_drink_by_efficiency_and_type(conn, searchTerms) # get all drinks where the value in column 'type' is 'searchTerms' sorted by efficiency
+    tempResults = db.select_drink_by_efficiency_and_type(conn, searchTerms) # get all drinks where the value in column 'type' is 'searchTerms' sorted by efficiency
 
     # Print a summary of the search results sent to the client on the server command prompt (should also be logged in future)
     print("")
