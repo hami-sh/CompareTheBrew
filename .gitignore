@@ -7,3 +7,4 @@
 .idea
 .idea/workspace.xml
 *.xml
+.vscode/launch.json

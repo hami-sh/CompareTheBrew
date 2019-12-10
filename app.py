@@ -57,8 +57,6 @@ def displayResultPage(searchTerms):
     print("                                    SEARCH RESULTS                                     ")
     print("|||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||")
     # print("Now that the database is hooked up there are too many results to show. Sorry for any inconvenience.")
-    # for result in tempResults:
-    #     print("TYPE: " + str(result[3]))
     print(tempResults)
     print("|||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||")
     print("")

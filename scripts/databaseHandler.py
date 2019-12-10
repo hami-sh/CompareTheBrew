@@ -76,8 +76,8 @@ def select_drink_by_efficiency_and_type(conn, type):
     """
     # Create a new cursor
     cur = conn.cursor()
-    # Ececute a new query at the cursor
-    cur.execute("SELECT * FROM drinks WHERE type LIKE '%{}%' ORDER BY efficiency DESC".format(type))
+    # Execute a new query at the cursor
+    cur.execute("SELECT * FROM drinks WHERE type LIKE %s ORDER BY efficiency DESC", (type,))
     # Fetch all of the rows that matched the query
     rows = cur.fetchall()
 
