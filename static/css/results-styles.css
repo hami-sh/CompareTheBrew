@@ -226,14 +226,20 @@ textarea:focus, input:focus{
 .price {
 	font-weight: bolder;
 	float: left;
-	font-size: 3.8vw;
+	/* The original font size that matt had */
+	/* font-size: 3.8vw; */
+	/* Alex's adjusted font size to make the text fit into the card */
+	font-size: 2.8vw;
 	color: #cda20b;
 }
 
 .score {
 	margin-left: 7.5vw;
 	font-weight: bolder;
-	font-size: 3.8vw;
+	/* The original font size that matt had */
+	/* font-size: 3.8vw; */
+	/* Alex's adjusted font size to make the text fit into the card */
+	font-size: 2.8vw;
 	color:  #a7a7a7;
 }
 
