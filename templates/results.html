@@ -1,43 +1,118 @@
-<!-- templates/index.html -->
-<html>
-    <head>
-        <!-- Tab title -->
-        <title>CompareTheBrew</title>
-        <!-- Favicon -->
-        <link rel="icon" href="https://encrypted-tbn0.gstatic.com/images?q=tbn%3AANd9GcTzI0uH0_lzecaSuTinKUKNL_W1t72KKq1QWdC8hWGKG71Bue43">
-        <link rel="stylesheet" href="/static/css/results-style.css">
-    </head>
-    <body>
-        <h1>Search Results</h1>
-        <!-- Search results section -->
-        <!-- <bold>{{results}}</bold> -->
-        {% if results == [] %}
-            <h3>Sorry, we didn't find any results matching your search.</h3>
-        {% else %}
-            <h3>Here are your search results.</h3>
-            {% for result in results %}
-                <ul style="list-style: none">
-                    <li>
-                        <table>
-                            <row>
-                                <col>
-                                    <img src="{{result[-1]}}" alt="Product Image" width="10%" height="auto">
-                                    <!-- <img src="/static/images/cat.png" alt="My Cat" width="10%" height="auto"> -->
-                                </col>
-                                <col>
-                                    <ul style="list-style: none">
-                                        {%for detail in result[0:-1]%}
-                                            <li>
-                                                {{detail}}
-                                            </li>
-                                        {%endfor%}
-                                    </ul>
-                                </col>
-                            </row>
-                        </table>
-                    </li>
-                </ul>
-            {%endfor%}
-        {% endif %}
-    </body>
+<!doctype html>
+
+<html lang="en">
+<head>
+	<meta charset="utf-8">
+
+	<title>Compare The Brew</title>
+	<meta name="description" content="Compare The Brew">
+	<meta name="author" content="The Boys">
+
+	<link rel="stylesheet" href="/static/css/results-styles.css">
+	<link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+</head>
+
+<body>
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+	<!-- TODO: POINT THIS SCRIPTS SRC TO THE PROPER LOCATION -->
+	<script src="js/scripts.js"></script>
+	<div id="header">
+		<i class="material-icons" style="padding:1%;font-size:36px;color:#722f37;">
+			menu
+		</i>
+	</div>
+
+	<div id="content">
+		<div id="main" class="mainResults">
+			<div>
+				<form method="POST">
+					<i id="searchButton" class="material-icons" style="padding:1%;font-size:28px;color:#cda20b;right:0;position:absolute;">search</i>
+					<input name="searchTerms" id="searchDrink" type="text" class="smallSearch" placeholder="Search...">
+					<span class="underline smallLine"></span>
+				</form>
+			</div>
+			<div id="options">
+				<div class="buttons">
+					Sort by:
+					<button type="button" style="background-color:#722f37;color:#ffdc52" class="buttonSort">Score</button>
+					<button type="button" class="buttonSort">All</button>
+					<button type="button" class="buttonSort">Cost</button>
+					<button type="button" class="buttonSort">Worst</button>
+				</div>
+				<div id="priceRange">
+					Price range: Slider to be implemented
+				</div>
+			</div>
+			<div id="resultsArea">
+				<!-- <div class="resultCard">
+					<div class="cardImage">
+						<img src="https://edgmedia.bws.com.au/bws/media/products/682460-1.png?impolicy=Prod_MD" style="width:96px;height:120px;">
+					</div>
+					<div class="cardContent">
+						<div class="brand">
+							BWS
+						</div>
+						<div class="name">
+							Brown Brothers Prosecco Spritz
+						</div>	
+						<div class="details">
+							750mL - 5.1 std. - 8.5%
+						</div>
+						<div>
+							<div class="price">
+								$20
+							</div>
+							<div class="score">
+								75%
+							</div>
+						</div>
+					</div>
+				</div> -->
+				{% if results|length == 0 %}
+					<h2>Sorry, we didn't find any results matching your search.</h2>
+				{% else %}
+					{% for result in results %}
+						<div class="resultCard">
+							<div class="cardImage">
+									<img src="{{result[-1]}}" style="width:96px;height:120px;">
+									<!-- <img src="/static/images/cat.png" style="width:96px;height:120px;"> -->
+								</div>
+							<div class="cardContent">
+								<div class="brand">
+									{{result[1]}}
+								</div>
+								<div class="name">
+									{{result[2]}} {{result[3]}}
+								</div>	
+								<div class="details">
+									{{result[7]}}L - {{result[9]}} std. - {{result[8]}}%
+								</div>
+								<div>
+									<div class="price">
+										${{result[5]}}
+									</div>
+									<div class="score">
+										{{result[10]}}
+									</div>
+								</div>
+							</div>
+						</div>
+					{%endfor%}
+				{% endif %}
+			</div>
+			<div class="light">
+				Beep boop bop boop beep
+			</div>
+		</div>
+	</div>
+
+	<div id="footer">
+		<div id="footerLeft">
+			<b>©CompareTheBrew.com.au, 2019. Bhanu is a manlet. This is some placeholder text.
+		</div>
+		<div id="footerRight">
+			Drink responsibly.</b>
+		</div>
+	</div>
+</body>
 </html>

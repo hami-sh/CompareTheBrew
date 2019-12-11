@@ -40,14 +40,7 @@ def displayResultPage(searchTerms):
     Returns:
         the rendered html template for the page
     """
-    # # Get results the old way - by running the whole scrape script for every request
-    # # tempResults = search(searchTerms)
-
-    ### MY DEBUG STUFF
-    # tempResults = [[1, 2, 3], [4, 5, 6], [7, 8, 9]]
-    ###
-
-    # # Get results the new way - by querying the database
+    # Get results the new way - by querying the database
     conn = db.create_connection() # connect to the database
     tempResults = db.select_drink_by_smart_search(conn, searchTerms) # get drinks with type/brand/name matching any of the words in searchTerms
 
@@ -62,6 +55,19 @@ def displayResultPage(searchTerms):
     #     print(result)
     # print("""|||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||\n\n""")
     return render_template('results.html', results=tempResults)
+
+# # A function to get search terms from the search bar on the results page
+@app.route('/results/<arg>', methods=['POST'])
+def postNewSearchTerms(arg):
+    """
+    ...
+    """
+    # Get the search terms inputted by the user
+    searchTerms = request.form['searchTerms']
+    print("SEARCH TERMS ENTERED BY USER: " + searchTerms)
+
+    # Send the user to the results page
+    return redirect("/results/" + searchTerms)
 
 
 # # Basic test page for url /hello
