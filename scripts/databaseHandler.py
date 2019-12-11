@@ -83,6 +83,39 @@ def select_drink_by_efficiency_and_type(conn, type):
 
     return rows
 
+def select_drink_by_smart_search(conn, terms):
+    """Select all drinks that contain any of the search keywords given in their name, brand or type attributes
+    
+    Args:
+        param1: the Connection object
+        param2: the value in the type/name/brand column that we are querying for
+
+    Returns:
+        A list of rows from the drinks table matching the search terms
+    """
+    # Create a new cursor
+    cur = conn.cursor()
+    # Define a new list for which to store our final list of results
+    results = list()
+
+    # Split the search keyboards by the spaces in between words
+    terms = terms.split(" ")
+    print("SEARCH TERMS: " + str(terms))
+    # return termsList
+
+    # For each keyword, execute a new query at the cursor to find drinks matching that keyword
+    for term in terms:
+        # cur.execute("SELECT * FROM drinks WHERE type LIKE '%{}%' ORDER BY efficiency DESC".format(term))
+        cur.execute("SELECT * FROM drinks WHERE type LIKE '%{}%' OR name LIKE '%{}%' OR brand LIKE '%{}%' ORDER BY efficiency DESC".format(term, term, term))
+        rows = cur.fetchall()
+        print("NUMBER OF ROWS FOUND: " + str(len(rows)))
+        # For each row in rows, if the row is not already in the results list add it
+        for row in rows:
+            if not(row in results):
+                results.append(row)
+    # Return the final list of results
+    return results
+
 def update_drink(conn, drink, newPrice):
     """
     update priority, begin_date, and end date of a task

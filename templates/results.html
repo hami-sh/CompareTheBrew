@@ -10,29 +10,34 @@
     <body>
         <h1>Search Results</h1>
         <!-- Search results section -->
-        <h3>Sit tight, we're scraping your search results as quickly as we can ...</h3>
-        <ul style="list-style: none">
-        {%for result in results%}
-            <li>
-                <table>
-                    <row>
-                        <col>
-                          <img src="{{result[-1]}}" alt="Product Image" width="10%" height="auto">
-                          <!-- <img src="/static/images/cat.png" alt="My Cat" width="10%" height="auto"> -->
-                        </col>
-                        <col>
-                            <ul style="list-style: none">
-                                {%for detail in result[0:-1]%}
-                                    <li>
-                                        {{detail}}
-                                    </li>
-                                {%endfor%}
-                            </ul>
-                        </col>
-                      </row>
-                  </table>
-              </li>
-        {%endfor%}
-        </ul>
+        <!-- <bold>{{results}}</bold> -->
+        {% if results == [] %}
+            <h3>Sorry, we didn't find any results matching your search.</h3>
+        {% else %}
+            <h3>Here are your search results.</h3>
+            {% for result in results %}
+                <ul style="list-style: none">
+                    <li>
+                        <table>
+                            <row>
+                                <col>
+                                    <img src="{{result[-1]}}" alt="Product Image" width="10%" height="auto">
+                                    <!-- <img src="/static/images/cat.png" alt="My Cat" width="10%" height="auto"> -->
+                                </col>
+                                <col>
+                                    <ul style="list-style: none">
+                                        {%for detail in result[0:-1]%}
+                                            <li>
+                                                {{detail}}
+                                            </li>
+                                        {%endfor%}
+                                    </ul>
+                                </col>
+                            </row>
+                        </table>
+                    </li>
+                </ul>
+            {%endfor%}
+        {% endif %}
     </body>
 </html>

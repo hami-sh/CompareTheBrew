@@ -40,27 +40,27 @@ def displayResultPage(searchTerms):
     Returns:
         the rendered html template for the page
     """
-    # Get results the old way - by running the whole scrape script for every request
-    # tempResults = search(searchTerms)
+    # # Get results the old way - by running the whole scrape script for every request
+    # # tempResults = search(searchTerms)
 
-    # Get results the new way - by querying the database
+    ### MY DEBUG STUFF
+    # tempResults = [[1, 2, 3], [4, 5, 6], [7, 8, 9]]
+    ###
+
+    # # Get results the new way - by querying the database
     conn = db.create_connection() # connect to the database
+    tempResults = db.select_drink_by_smart_search(conn, searchTerms) # get drinks with type/brand/name matching any of the words in searchTerms
 
-    # This is the wortking query of all drinks
-    # tempResults = db.select_all_drinks_by_efficiency(conn) # get all drinks where the value in column 'type' is 'searchTerms' sorted by efficiency
-    # This is the broken query by type
-    tempResults = db.select_drink_by_efficiency_and_type(conn, searchTerms) # get all drinks where the value in column 'type' is 'searchTerms' sorted by efficiency
+    # # This is the working query of all drinks
+    # # tempResults = db.select_all_drinks_by_efficiency(conn) # get all drinks where the value in column 'type' is 'searchTerms' sorted by efficiency
+    # # This is the broken query by type
+    # # tempResults = db.select_drink_by_efficiency_and_type(conn, searchTerms) # get all drinks where the value in column 'type' is 'searchTerms' sorted by efficiency
 
     # Print a summary of the search results sent to the client on the server command prompt (should also be logged in future)
-    print("")
-    print("")
-    print("                                    SEARCH RESULTS                                     ")
-    print("|||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||")
-    # print("Now that the database is hooked up there are too many results to show. Sorry for any inconvenience.")
-    print(tempResults)
-    print("|||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||")
-    print("")
-    print("")
+    # print("""\n\n                                    SEARCH RESULTS                                     \n|||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||""")
+    # for result in tempResults:
+    #     print(result)
+    # print("""|||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||\n\n""")
     return render_template('results.html', results=tempResults)
 
 
