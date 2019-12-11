@@ -52,9 +52,8 @@ def select_all_drinks(conn):
 
 def select_all_drinks_by_efficiency(conn):
     """
-    Query tasks by priority
+    Query tasks by efficiency
     :param conn: the Connection object
-    :param priority:
     :return:
     """
     # Create a new cursor
@@ -65,6 +64,37 @@ def select_all_drinks_by_efficiency(conn):
     rows = cur.fetchall()
 
     return rows
+
+def select_all_drinks_by_cost_asc(conn):
+    """
+    Query tasks by price ascending
+    :param conn: the Connection object
+    :return:
+    """
+    # Create a new cursor
+    cur = conn.cursor()
+    # Ececute a new query at the cursor
+    cur.execute("SELECT * FROM drinks ORDER BY price ASC")
+    # Fetch all of the rows that matched the query
+    rows = cur.fetchall()
+
+    return rows
+
+def select_all_drinks_by_cost_desc(conn):
+    """
+    Query tasks by price descending
+    :param conn: the Connection object
+    :return:
+    """
+    # Create a new cursor
+    cur = conn.cursor()
+    # Ececute a new query at the cursor
+    cur.execute("SELECT * FROM drinks ORDER BY price DESC")
+    # Fetch all of the rows that matched the query
+    rows = cur.fetchall()
+
+    return rows
+
 
 def select_drink_by_efficiency_and_type(conn, type):
     """
