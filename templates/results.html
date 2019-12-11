@@ -44,35 +44,11 @@
 				</div>
 			</div>
 			<div id="resultsArea">
-				<!-- <div class="resultCard">
-					<div class="cardImage">
-						<img src="https://edgmedia.bws.com.au/bws/media/products/682460-1.png?impolicy=Prod_MD" style="width:96px;height:120px;">
-					</div>
-					<div class="cardContent">
-						<div class="brand">
-							BWS
-						</div>
-						<div class="name">
-							Brown Brothers Prosecco Spritz
-						</div>	
-						<div class="details">
-							750mL - 5.1 std. - 8.5%
-						</div>
-						<div>
-							<div class="price">
-								$20
-							</div>
-							<div class="score">
-								75%
-							</div>
-						</div>
-					</div>
-				</div> -->
 				{% if results|length == 0 %}
 					<h2>Sorry, we didn't find any results matching your search.</h2>
 				{% else %}
 					{% for result in results %}
-						<div class="resultCard">
+						<a class="resultCard" href="{{result[6]}}">
 							<div class="cardImage">
 									<img src="{{result[-1]}}" style="width:96px;height:120px;">
 									<!-- <img src="/static/images/cat.png" style="width:96px;height:120px;"> -->
@@ -96,7 +72,7 @@
 									</div>
 								</div>
 							</div>
-						</div>
+						</a>
 					{%endfor%}
 				{% endif %}
 			</div>

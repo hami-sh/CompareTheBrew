@@ -282,3 +282,7 @@ textarea:focus, input:focus{
 ::selection {
   background: #ffdc52;
 }
+
+a {
+    text-decoration: none;
+}
