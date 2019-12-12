@@ -219,14 +219,21 @@ textarea:focus, input:focus{
 	font-weight: bolder;
 	font-size: 2vw;
 	color: #722f37;
-	overflow: hidden;
-	text-overflow: ellipsis;
+/*	overflow: hidden;
+	text-overflow: ellipsis;*/
 	display: -webkit-box;
 	-webkit-box-orient: vertical;
 	-webkit-line-clamp: 2;
 	line-height: 2.2vw;
 	padding-bottom: 8px;
 	margin-top: -2px;
+
+	overflow: hidden;
+  	text-overflow: ellipsis;
+	word-wrap: break-word;
+	/*display: block;*/
+	line-height: 1em;
+	max-height: 1.7em;
 }
 
 .details {
