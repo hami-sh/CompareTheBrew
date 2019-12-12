@@ -3,7 +3,7 @@ from scripts.databaseHandler import *
 
 def davo():
     conn = create_connection()
-    drinks = select_drink_by_efficiency_and_type(conn, 'vodka')
+    drinks = select_drink_by_efficiency_and_type(conn, 'beer')
 
     for drink in drinks:
         print(drink)

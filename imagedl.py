@@ -39,10 +39,11 @@ def main():
                 with open(path, 'wb') as out_file:
                     shutil.copyfileobj(response.raw, out_file)
                 del response
+                secs = randint(1, 3)
+                sleep(secs)
 
             i += 1
-            secs = randint(1, 3)
-            sleep(secs)
+
         except:
             print("-----------------------------------------")
             print("broke")

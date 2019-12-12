@@ -95,7 +95,7 @@ def select_all_drinks_by_cost_desc(conn):
 
 def select_all_drinks_between_cost(conn, value1, value2):
     """
-    Query tasks by price ascending
+    Query tasks by selecting drinks between a cost
     :param conn: the Connection object
     :return:
     """
@@ -120,7 +120,7 @@ def select_drink_by_efficiency_and_type(conn, type):
     # Create a new cursor
     cur = conn.cursor()
     # Execute a new query at the cursor
-    cur.execute("SELECT * FROM drinks WHERE type LIKE %s ORDER BY efficiency DESC", (type,))
+    cur.execute("SELECT * FROM drinks WHERE type LIKE '%{}%' ORDER BY efficiency DESC".format(type))
     # Fetch all of the rows that matched the query
     rows = cur.fetchall()
 
