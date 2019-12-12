@@ -43,6 +43,14 @@
 					Price range: Slider to be implemented
 				</div>
 			</div>
+			
+			<div class="resultsNumber">
+				{% if results|length == 1 %}
+					We found 1 drink that matched your search.
+				{% else %}
+					We found {{results|length}} drinks matching your search.
+				{% endif %}
+			</div>
 			<div id="resultsArea">
 				{% if results|length == 0 %}
 					<h2>Sorry, we didn't find any results matching your search.</h2>
@@ -50,8 +58,8 @@
 					{% for result in results %}
 						<a class="resultCard" href="{{result[6]}}">
 							<div class="cardImage">
-									<img src="{{result[-1]}}" style="width:96px;height:120px;">
-									<!-- <img src="/static/images/cat.png" style="width:96px;height:120px;"> -->
+									<!-- <img src="{{result[-1]}}" style="width:96px;height:120px;"> -->
+									<img src="/static/images/cat.png" style="width:96px;height:120px;">
 								</div>
 							<div class="cardContent">
 								<div class="brand">

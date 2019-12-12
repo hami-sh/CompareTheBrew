@@ -59,7 +59,10 @@ body {
 	font-size: 30px;
 	position: absolute;
 	left: 50%;
-	top: 120px;
+	/* Matts old */
+	/* top: 120px; */
+	/* Alexs updated */
+	top: 80px;
 	-webkit-transform: translate(-50%, 0);
 	transform: translate(-50%, 0);
 	width: 80%;
@@ -91,6 +94,12 @@ input[type="search"]::-webkit-search-results-decoration {
 
 .light {
 	padding-top: 65px;
+	font-size: 14px;
+	color: #a7a7a7;
+}
+
+.resultsNumber {
+	padding-top: 50px;
 	font-size: 14px;
 	color: #a7a7a7;
 }
@@ -166,7 +175,10 @@ textarea:focus, input:focus{
 #resultsArea {
 	display: grid;
 	grid-template-columns: 1fr 1fr 1fr;
-	padding-top: 60px;
+	/* Matts old */
+	/* padding-top: 60px; */
+	/* Alex's updated */
+	padding-top: 5px;
 	flex-wrap: wrap;
 	flex-direction: row;
 }

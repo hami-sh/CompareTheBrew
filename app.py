@@ -69,30 +69,6 @@ def postNewSearchTerms(arg):
     # Send the user to the results page
     return redirect("/results/" + searchTerms)
 
-
-# # Basic test page for url /hello
-# @app.route('/test1')
-# def hello():
-#     return "Hello World!"
-
-# # A second test page now rendering a basic html page
-# @app.route('/<string:page_name>/')
-# def render_static(page_name):
-#     return render_template('%s.html' % page_name)
-
-# # A function to get search results from a page
-# @app.route('/results', methods=['POST'])
-# def my_form_post():
-#     text = request.form['text']
-#     print("OLD: " + text)
-#     # processed_text = text.upper()
-#     return text
-
-# @app.route('/<string:page_name>/')
-# def render_static(page_name):
-#     return render_template('%s.html' % page_name)
-
-
 # Run the flask application (won't run when the site is being hosted on a server)
 if __name__ == '__main__':
     app.run(host='127.0.0.1', port=8000, debug=True)
