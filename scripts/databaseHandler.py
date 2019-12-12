@@ -93,6 +93,21 @@ def select_all_drinks_by_cost_desc(conn):
 
     return rows
 
+def select_all_drinks_between_cost(conn, value1, value2):
+    """
+    Query tasks by price ascending
+    :param conn: the Connection object
+    :return:
+    """
+    # Create a new cursor
+    cur = conn.cursor()
+
+    # Ececute a new query at the cursor
+    cur.execute("SELECT * FROM drinks WHERE price BETWEEN {} AND {} ORDER BY efficiency DESC".format(value1, value2))
+    # Fetch all of the rows that matched the query
+    rows = cur.fetchall()
+
+    return rows
 
 def select_drink_by_efficiency_and_type(conn, type):
     """
