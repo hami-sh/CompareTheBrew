@@ -44,47 +44,49 @@
 				</div>
 			</div>
 			
-			<div class="resultsNumber">
+			<div class="light">
 				{% if results|length == 1 %}
 					We found 1 drink that matched your search.
 				{% else %}
 					We found {{results|length}} drinks matching your search. I've set it so it only shows the first 8 for testing.
 				{% endif %}
 			</div>
-			<div id="resultsArea">
-				{% if results|length == 0 %}
-					<h2>Sorry, we didn't find any results matching your search.</h2>
-				{% else %}
-					{% for result in results[:8] %}
-					<!-- Testing phase, don't need to load every result atm. Just taking the first 8 -->
-					<!-- Develop so only loads more when scrolls down -->
-						<a class="resultCard" href="{{result[6]}}">
-							<div class="cardImage">
-									<!-- <img src="{{result[-1]}}" style="width:96px;height:120px;"> -->
-									<img src="/static/images/cat.png" style="width:96px;height:120px;">
-								</div>
-							<div class="cardContent">
-								<div class="brand">
-									{{result[1]}}
-								</div>
-								<div class="name">
-									{{result[2]}} {{result[3]}}
-								</div>	
-								<div class="details">
-									{{result[7]}}L - {{result[9]}} std. - {{result[8]}}%
-								</div>
-								<div>
-									<div class="price">
-										${{result[5]}}
+			<div class="areaContainer">
+				<div id="resultsArea">
+					{% if results|length == 0 %}
+						<h2>Sorry, we didn't find any results matching your search.</h2>
+					{% else %}
+						{% for result in results[:8] %}
+						<!-- Testing phase, don't need to load every result atm. Just taking the first 8 -->
+						<!-- Develop so only loads more when scrolls down -->
+							<a class="resultCard" href="{{result[6]}}">
+								<div class="cardImage">
+										<!-- <img src="{{result[-1]}}" style="width:96px;height:120px;"> -->
+										<img src="/static/images/cat.png" style="width:96px;height:120px;">
 									</div>
-									<div class="score">
-										{{'%0.0f'| format(result[10] * 100)}}%
+								<div class="cardContent">
+									<div class="brand">
+										{{result[1]}}
+									</div>
+									<div class="name">
+										{{result[2]}} {{result[3]}}
+									</div>	
+									<div class="details">
+										{{result[7]}}L - {{result[9]}} std. - {{result[8]}}%
+									</div>
+									<div>
+										<div class="score">
+											{{'%0.0f'| format(result[10] * 100)}}%
+										</div>
+										<div class="price">
+											${{result[5]}}											
+										</div>
 									</div>
 								</div>
-							</div>
-						</a>
-					{%endfor%}
-				{% endif %}
+							</a>
+						{%endfor%}
+					{% endif %}
+				</div>
 			</div>
 			<div class="light">
 				Beep boop bop boop beep
