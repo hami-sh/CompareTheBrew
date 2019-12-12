@@ -9,6 +9,9 @@ import os.path
 import urllib.request
 from random import randint
 from time import sleep
+import shutil
+import requests
+
 
 def main():
     print(1)
@@ -18,42 +21,34 @@ def main():
     i = 0
     print("total: " + str(len(images)))
     for link in images:
-        print(i)
-        print(link[0])
-        # if os.path.exists("images/" + link[0]):
-        #     print("exists<" + link[0] + ">")
-        # else:
-        #     print("save<" + link[0] + ">")
-        #     urllib.request.urlretrieve(link[0], str("images/" + link[0]))
-        # i += 1
-        #
-        # if i == 1:
-        #     break
-        # secs = randint(1, 3)
-        # sleep(secs)
+        try:
+            print(i)
+            url = str(link[0])
+            url = url.replace("/", "~")
+            url = url.replace("?", "+")
+            url = url.replace(":", ",")
+            url = url.split('~')[-1]
+            path = "images/" + url + '.webp'
 
+            if os.path.exists(path):
+                print("exists<" + link[0] + ">")
+            else:
+                print("save<" + link[0] + ">")
+                print(path)
+                response = requests.get(link[0], stream=True)
+                with open(path, 'wb') as out_file:
+                    shutil.copyfileobj(response.raw, out_file)
+                del response
 
-def davo():
-    print(1)
-    conn = create_connection()
-    images = select_all_drinks(conn)
+            i += 1
+            secs = randint(1, 3)
+            sleep(secs)
+        except:
+            print("-----------------------------------------")
+            print("broke")
+            print(link)
+            print("-----------------------------------------")
 
-    i = 0
-    print("total: " + str(len(images)))
-    for link in images:
-        print(link[0])
-        # if os.path.exists("images/" + link[0]):
-        #     print("exists<" + link[0] + ">")
-        # else:
-        #     print("save<" + link[0] + ">")
-        #     urllib.request.urlretrieve(link[0], str("images/" + link[0]))
-        # i += 1
-        #
-        # if i == 1:
-        #     break
-        # secs = randint(1, 3)
-        # sleep(secs)
 
 if __name__ == "__main__":
-    # main()
-    davo()
+    main()

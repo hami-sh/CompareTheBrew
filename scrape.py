@@ -40,8 +40,8 @@ def search(searchTerms):
     # These are the base search page urls that we will add our search terms to to search
     searchUrls = list()
     # searchUrls.append("https://bws.com.au/search?searchTerm=" + str(searchTerms))
-    searchUrls.append('https://bws.com.au/spirits/all-spirits')
-    # searchUrls.append('https://bws.com.au/wine/all-wine')
+    # searchUrls.append('https://bws.com.au/spirits/all-spirits')
+    searchUrls.append('https://bws.com.au/wine/all-wine')
     # USE THIS URL IF YOU DON'T WANT TO FRY YOUR COMPUTER
     # searchUrls.append('https://bws.com.au/beer/all-beer')
 
