@@ -46,8 +46,7 @@ def select_all_drinks(conn):
 
     rows = cur.fetchall()
 
-    for row in rows:
-        print(type(row))
+    return rows
 
 
 def select_all_drinks_by_efficiency(conn):
@@ -62,7 +61,6 @@ def select_all_drinks_by_efficiency(conn):
     cur.execute("SELECT * FROM drinks ORDER BY efficiency DESC")
     # Fetch all of the rows that matched the query
     rows = cur.fetchall()
-
     return rows
 
 def select_all_drinks_by_cost_asc(conn):
@@ -108,6 +106,21 @@ def select_drink_by_efficiency_and_type(conn, type):
     cur = conn.cursor()
     # Execute a new query at the cursor
     cur.execute("SELECT * FROM drinks WHERE type LIKE %s ORDER BY efficiency DESC", (type,))
+    # Fetch all of the rows that matched the query
+    rows = cur.fetchall()
+
+    return rows
+
+def select_image_links(conn):
+    """
+    Query all image links
+    :param conn: the Connection object
+    :return:
+    """
+    # Create a new cursor
+    cur = conn.cursor()
+    # Execute a new query at the cursor
+    cur.execute("SELECT image FROM drinks")
     # Fetch all of the rows that matched the query
     rows = cur.fetchall()
 
