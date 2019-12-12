@@ -27,7 +27,7 @@ url = 'https://httpbin.org/ip'
 #     proxy = next(proxy_pool)
 #     print("Checking proxy #%d"%i)
 #     try:
-#         response = requests.get(url,proxies={"http": proxy, "https": proxy}, timeout=3)
+#         response = requests.get(url,proxies={"http": proxy, "https.png": proxy}, timeout=3)
 #         print(response.json())
 #     except:
 #         #Most free proxies will often get connection errors. You will have retry the entire request using another proxy to work.
@@ -40,7 +40,7 @@ while (working_proxy_found == False) and (i < len(proxies)):
     proxy = proxy_pool[i]
     print("Checking proxy #%d"%i)
     try:
-        response = requests.get(url,proxies={"http": proxy, "https": proxy}, timeout=3)
+        response = requests.get(url,proxies={"http": proxy, "https.png": proxy}, timeout=3)
         response_string = str(response.json())
         working_proxy_found = True
     except:
