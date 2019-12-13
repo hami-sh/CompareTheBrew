@@ -14,7 +14,10 @@ import requests
 
 
 def main():
-    print(1)
+    print("are you sure? you may get banned without vpn [Y/n]")
+    s = input()
+    if s != 'Y':
+        return
     conn = create_connection()
     images = select_image_links(conn)
 

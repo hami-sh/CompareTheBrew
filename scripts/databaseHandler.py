@@ -182,12 +182,12 @@ def update_drink(conn, drink, newPrice):
     :return: project id
     """
     sql = ''' UPDATE drinks
-              SET price = ?, link = ?, image = ?
+              SET price = ?, link = ?, image = ?, efficiency = ?
               WHERE name = ?
               AND brand = ?
               AND store = ? '''
     cur = conn.cursor()
-    cur.execute(sql, (newPrice, drink.link, drink.image, drink.name, drink.brand, drink.store))
+    cur.execute(sql, (newPrice, drink.link, drink.image, float(newPrice/drink.stdDrinks), drink.name, drink.brand, drink.store))
     conn.commit()
 
 
