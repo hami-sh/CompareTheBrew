@@ -186,9 +186,15 @@ def update_drink(conn, drink, newPrice):
               WHERE name = ?
               AND brand = ?
               AND store = ? '''
-    cur = conn.cursor()
-    cur.execute(sql, (newPrice, drink.link, drink.image, float(newPrice/drink.stdDrinks), drink.name, drink.brand, drink.store))
-    conn.commit()
+
+    result = get_drinks_stddrinks(conn, drink)
+    if result == False:
+        print("failed to update drink... here are the details")
+        print(drink)
+    else:
+        cur = conn.cursor()
+        cur.execute(sql, (newPrice, drink.link, drink.image, float(float(newPrice)/float(result)), drink.name, drink.brand, drink.store))
+        conn.commit()
 
 
 def is_drink_in_table(conn, drink):
@@ -210,6 +216,28 @@ def is_drink_in_table(conn, drink):
     rows = cur.fetchall()
     if len(rows) > 0:
         return True
+    else:
+        return False
+
+
+def get_drinks_stddrinks(conn, drink):
+    """
+    get the standard drinks of a drink
+    :param conn:
+    :param drink:
+    :return: project id
+    """
+    sql = ''' SELECT * FROM drinks
+              WHERE store = ?
+              AND brand = ?
+              AND name = ?
+              '''
+    cur = conn.cursor()
+    cur.execute(sql, (drink.store, drink.brand, drink.name))
+
+    rows = cur.fetchall()
+    if len(rows) > 0:
+        return rows[0][8]
     else:
         return False
 

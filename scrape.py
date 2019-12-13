@@ -314,6 +314,11 @@ def getAllSearchPagesBws(url):
     # Get the html element for the "load more" button
     loadMoreButtonDiv = currentPageSoup.find('div', {'class':'progressive-paging-bar--container'})
     loadMoreButton = loadMoreButtonDiv.find('a', {'class':'btn btn-secondary btn--full-width ng-scope'})
+
+    # todo remove for normal.
+    # if currentPage == 1:
+    #     return allPageSoups
+
     # While the html for the "load more" button is not null there is a next page
     while loadMoreButton != None:
         # Increment the number of the current page
