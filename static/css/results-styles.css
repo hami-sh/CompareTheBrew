@@ -190,8 +190,8 @@ textarea:focus, input:focus{
 	display: flex;
 	align-items: center;
 	/*width: 30%;*/
-	padding: 10px;
-	margin: 15px;
+	padding: 14px;
+	margin: 12px;
 	border-radius: 9px;
 	background-color: white;
 	box-shadow: 0 5px 13px rgba(0,0,0,0.075), 0 1px 2px rgba(0,0,0,0.22);
@@ -235,8 +235,8 @@ textarea:focus, input:focus{
 	word-wrap: break-word;
 	/*display: block;*/
 	line-height: 1em;
-	max-height: 1.4em;
-	min-height: 1.4em;
+	max-height: 2.8vw;
+	min-height: 2.8vw;
 }
 
 .details {
@@ -245,26 +245,27 @@ textarea:focus, input:focus{
 	color: #a7a7a7;
 }
 
+#scorePriceContainer {
+	width: 100;
+}
+
 .price {
-	font-weight: bolder;
-	float: right;
-	display: inline;
+/*	font-weight: bolder;
+	float: right;*/
+/*	width: 30%;*/
+	 display: inline-block;
 	/* The original font size that matt had */
 	/* font-size: 3.8vw; */
 	/* Alex's adjusted font size to make the text fit into the card */
-	font-size: 3.0vw;
+/*	font-size: 3.0vw;*/
 	color: #cda20b;
-	-webkit-transform:scale(1,1.1); /* Safari and Chrome */
-    -moz-transform:scale(1,1.1); /* Firefox */
-    -ms-transform:scale(1,1.1); /* IE 9 */
-    -o-transform:scale(1,1.1); /* Opera */
-    transform:scale(1,1.1); /* W3C */
 }
 
 .score {
 /*	margin-left: 7.5vw;*/
 	font-weight: bolder;
-	float: left;
+/*	float: left;*/
+/*	width: 30%;*/
 	/* The original font size that matt had */
 	/* font-size: 3.8vw; */
 	/* Alex's adjusted font size to make the text fit into the card */
@@ -275,6 +276,8 @@ textarea:focus, input:focus{
     -ms-transform:scale(1,1.1); /* IE 9 */
     -o-transform:scale(1,1.1); /* Opera */
     transform:scale(1,1.1); /* W3C */
+    display: inline-block;
+  	white-space: nowrap;
 }
 
 #footer {
