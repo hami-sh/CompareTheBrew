@@ -185,7 +185,7 @@ textarea:focus, input:focus{
 
 #resultsArea {
 	display: grid;
-	grid-template-columns: 1fr 1fr 1fr;
+	grid-template-columns: 1fr;
 	/* Matts old */
 	/* padding-top: 60px; */
 	/* Alex's updated */
@@ -194,6 +194,12 @@ textarea:focus, input:focus{
 	margin-right: -15px;
 	flex-wrap: wrap;
 	flex-direction: row;
+}
+
+@media (min-width: 1000px) {
+	#resultsArea {
+		grid-template-columns: 1fr 1fr 1fr;
+	}
 }
 
 .resultCard {
@@ -256,10 +262,10 @@ textarea:focus, input:focus{
 	color: #a7a7a7;
 }
 
-#scorePriceContainer {
-	width: 100;
+/*#scorePriceContainer {
+	width: 100%;
 }
-
+*/
 .price {
 /*	font-weight: bolder;
 	float: right;*/
