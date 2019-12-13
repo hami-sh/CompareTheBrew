@@ -68,17 +68,22 @@
 									<div class="brand">
 										{{result[1]}}
 									</div>
-									<div class="name">
-										{{result[2]}} {{result[3]}}
-									</div>	
+									<div>
+										<div class="name">
+											{{result[2]}} {{result[3]}}
+										</div>
+									</div>
+									<span class="searchLine"></span>
 									<div class="details">
 										{{result[7]}}L - {{result[9]}} std. - {{result[8]}}%
 									</div>
-									<div class="scorePriceContainer">
-										<div class="score responsive_head">
-											{{'%0.0f'| format(result[10] * 100)}}%
-											<div class="price">
-												${{result[5]}}											
+									<div>
+										<div class="scorePriceContainer">
+											<div class="score responsive_head">
+												{{'%0.0f'| format(result[10] * 100)}}%
+												<div class="price">
+													${{result[5]}}											
+												</div>
 											</div>
 										</div>
 									</div>

@@ -92,6 +92,17 @@ input[type="search"]::-webkit-search-results-decoration {
 	top: 42px;
 }
 
+.searchLine {
+	background-color: #ffdc52;
+	display: block;
+	height: 3px;
+	left: 0px;
+	position: relative;
+	width: 100%;
+	border-radius: 5px;
+	/*top: 20px;*/
+}
+
 .light {
 	padding-top: 65px;
 	font-size: 14px;
@@ -229,7 +240,6 @@ textarea:focus, input:focus{
 	line-height: 2.2vw;
 	padding-bottom: 18px;
 	margin-top: -2px;
-
 	overflow: hidden;
   	text-overflow: ellipsis;
 	word-wrap: break-word;
@@ -240,6 +250,7 @@ textarea:focus, input:focus{
 }
 
 .details {
+	margin-top: -18px;
 	font-weight: bolder;
 	font-size: 1.4vw;
 	color: #a7a7a7;
