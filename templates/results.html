@@ -15,7 +15,7 @@
 <body>
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
 	<!-- TODO: POINT THIS SCRIPTS SRC TO THE PROPER LOCATION -->
-	<script src="js/scripts.js"></script>
+	<script src="/static/js/scripts.js"></script>
 	<div id="header">
 		<i class="material-icons" style="padding:1%;font-size:36px;color:#722f37;">
 			menu
@@ -68,18 +68,23 @@
 									<div class="brand">
 										{{result[1]}}
 									</div>
-									<div class="name">
-										{{result[2]}} {{result[3]}}
-									</div>	
+									<div>
+										<div class="name">
+											{{result[2]}} {{result[3]}}
+										</div>
+									</div>
+									<span class="searchLine"></span>
 									<div class="details">
 										{{result[7]}}L - {{result[9]}} std. - {{result[8]}}%
 									</div>
 									<div>
-										<div class="score">
-											{{'%0.0f'| format(result[10] * 100)}}%
-										</div>
-										<div class="price">
-											${{result[5]}}											
+										<div class="scorePriceContainer">
+											<div class="score responsive_head">
+												{{'%0.0f'| format(result[10] * 100)}}%
+												<div class="price">
+													${{result[5]}}											
+												</div>
+											</div>
 										</div>
 									</div>
 								</div>
@@ -102,5 +107,14 @@
 			Drink responsibly.</b>
 		</div>
 	</div>
+	<script src="/static/js/fitty.min.js"></script>
+	<script>
+		fitty('.responsive_head');
+		// fitty('.scorePriceContainer');
+		fitty('.details');
+		window.onresize = function onresize() {
+			fitty.fitAll();
+		}
+	</script>
 </body>
 </html>
