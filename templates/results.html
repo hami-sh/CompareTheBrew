@@ -56,40 +56,44 @@
 					{% if results|length == 0 %}
 						<h2>Sorry, we didn't find any results matching your search.</h2>
 					{% else %}
+						<div id="cardsArea">
 						{% for result in results[:8] %}
 						<!-- Testing phase, don't need to load every result atm. Just taking the first 8 -->
 						<!-- Develop so only loads more when scrolls down -->
-							<a class="resultCard" href="{{result[6]}}">
-								<div class="cardImage">
-										<!-- <img src="{{result[-1]}}" style="width:96px;height:120px;"> -->
-										<img src="/images/{{result[12]}}" alt={{result[2] result[3]}} style="width:96px;height:120px;">
-									</div>
-								<div class="cardContent">
-									<div class="brand">
-										{{result[1]}}
-									</div>
-									<div>
-										<div class="name">
-											{{result[2]}} {{result[3]}}
+							<div class="item">	
+								<a class="resultCard" href="{{result[6]}}">
+									<div class="cardImage">
+											<!-- <img src="{{result[-1]}}" style="width:96px;height:120px;"> -->
+											<img src="/static/images/drinkimages/{{result[12]}}.webp.webp" alt={{result[2]}} {{result[3]}} style="width:96px;height:120px;">
 										</div>
-									</div>
-									<span class="searchLine"></span>
-									<div class="details">
-										{{result[7]}}L - {{result[9]}} std. - {{result[8]}}%
-									</div>
-									<div>
-										<div class="scorePriceContainer">
-											<div class="score responsive_head">
-												{{'%0.0f'| format(result[10] * 100)}}%
-												<div class="price">
-													${{result[5]}}											
+									<div class="cardContent">
+										<div class="brand">
+											{{result[1]}}
+										</div>
+										<div>
+											<div class="name">
+												{{result[2]}} {{result[3]}}
+											</div>
+										</div>
+										<span class="searchLine"></span>
+										<div class="details">
+											{{result[7]}}L - {{result[9]}} std. - {{result[8]}}%
+										</div>
+										<div>
+											<div class="scorePriceContainer">
+												<div class="score responsive_head">
+													{{'%0.0f'| format(result[10] * 100)}}%
+													<div class="price">
+														${{result[5]}}											
+													</div>
 												</div>
 											</div>
 										</div>
 									</div>
-								</div>
-							</a>
+								</a>
+							</div>
 						{%endfor%}
+						</div>
 					{% endif %}
 				</div>
 			</div>

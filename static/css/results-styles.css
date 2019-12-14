@@ -183,23 +183,39 @@ textarea:focus, input:focus{
 	display: inline;
 }
 
+#areaContainer {
+	margin-bottom: 200px;
+}
+
 #resultsArea {
-	display: grid;
-	grid-template-columns: 1fr;
+/*	display: grid;
+	grid-template-columns: 1fr;*/
 	/* Matts old */
 	/* padding-top: 60px; */
 	/* Alex's updated */
 	padding-top: 15px;
 	margin-left: -15px;
 	margin-right: -15px;
-	flex-wrap: wrap;
-	flex-direction: row;
+/*	flex-wrap: wrap;
+	flex-direction: row;*/
+}
+
+#cardsArea{
+	column-count: 1;
+  	column-gap: 12px;
 }
 
 @media (min-width: 1000px) {
-	#resultsArea {
-		grid-template-columns: 1fr 1fr 1fr;
+	#cardsArea {
+		column-count: 3;
+		/*grid-template-columns: 1fr 1fr 1fr;*/
 	}
+}
+
+.item {
+	display: inline-block;
+	margin: 0 0 12px;
+	width: 100%;
 }
 
 .resultCard {
@@ -208,7 +224,7 @@ textarea:focus, input:focus{
 	align-items: center;
 	/*width: 30%;*/
 	padding: 14px;
-	margin: 12px;
+/*	margin: 12px;*/
 	border-radius: 9px;
 	background-color: white;
 	box-shadow: 0 5px 13px rgba(0,0,0,0.075), 0 1px 2px rgba(0,0,0,0.22);
@@ -222,6 +238,9 @@ textarea:focus, input:focus{
 
 .cardImage {
 	flex: 0 0 25%;
+	padding-left: 10px;
+	padding-right: 10px;
+	font-size: 8px;
 }
 
 .cardContent {
@@ -243,16 +262,14 @@ textarea:focus, input:focus{
 	display: -webkit-box;
 	-webkit-box-orient: vertical;
 	-webkit-line-clamp: 2;
-	line-height: 2.2vw;
-	padding-bottom: 18px;
+/*	padding-bottom: 18px;*/
 	margin-top: -2px;
 	overflow: hidden;
   	text-overflow: ellipsis;
 	word-wrap: break-word;
 	/*display: block;*/
 	line-height: 1em;
-	max-height: 2.8vw;
-	min-height: 2.8vw;
+	max-height: 3.2em;
 }
 
 .details {
