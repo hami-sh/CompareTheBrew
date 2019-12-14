@@ -14,7 +14,12 @@ from random import randint
 from time import sleep
 # Custom
 from scripts.databaseHandler import *
-# from classItem import Item, ItemCollection
+import argparse
+
+# GLOBAL VARIABLES
+store = None
+category = None
+pages = None
 
 """
 The urls we will need to scrape to populate our database:
@@ -39,11 +44,19 @@ def search(searchTerms):
     """
     # These are the base search page urls that we will add our search terms to to search
     searchUrls = list()
-    # searchUrls.append("https://bws.com.au/search?searchTerm=" + str(searchTerms))
-    searchUrls.append('https://bws.com.au/spirits/all-spirits')
-    # searchUrls.append('https://bws.com.au/wine/all-wine')
-    # USE THIS URL IF YOU DON'T WANT TO FRY YOUR COMPUTER
-    # searchUrls.append('https://bws.com.au/beer/all-beer')
+    global store
+    if store == 'bws':
+        if searchTerms == 'beer':
+            searchUrls.append('https://bws.com.au/beer/all-beer')
+        elif searchTerms == 'wine':
+            searchUrls.append('https://bws.com.au/wine/all-wine')
+        elif searchTerms == 'spirits':
+            searchUrls.append('https://bws.com.au/spirits/all-spirits')
+        else:
+            searchUrls.append("https://bws.com.au/search?searchTerm=" + str(searchTerms))
+    elif store == 'liquorland':
+        print("IMPLEMENT")
+        quit()
 
     conn = create_connection()
     # Create a list of all the drinks data that we will scrape from all of the different liquor stores
@@ -315,9 +328,10 @@ def getAllSearchPagesBws(url):
     loadMoreButtonDiv = currentPageSoup.find('div', {'class':'progressive-paging-bar--container'})
     loadMoreButton = loadMoreButtonDiv.find('a', {'class':'btn btn-secondary btn--full-width ng-scope'})
 
-    # todo remove for normal.
-    # if currentPage == 1:
-    #     return allPageSoups
+    # quit if we have reached end of required pages
+    global pages
+    if currentPage == pages:
+        return allPageSoups
 
     # While the html for the "load more" button is not null there is a next page
     while loadMoreButton != None:
@@ -332,6 +346,10 @@ def getAllSearchPagesBws(url):
         # Get the html element for the "load more" button
         loadMoreButtonDiv = currentPageSoup.find('div', {'class':'progressive-paging-bar--container'})
         loadMoreButton = loadMoreButtonDiv.find('a', {'class':'btn btn-secondary btn--full-width ng-scope'})
+
+        # quit if we have reached end of required pages
+        if currentPage == pages:
+            return allPageSoups
 
     # Return the list containing all of html soup for every search page
     return allPageSoups
@@ -680,29 +698,24 @@ def getDrinksDataLiquorland(url, commonList, _lock):
 
 
 def main():
+    # get arguments from the command line
+    parser = argparse.ArgumentParser(description='scrape drinks from websites')
+    parser.add_argument('store', type=str, help='bws or NOT IMPLEMENTED YET')
+    parser.add_argument('category', type=str, help='beer or wine or spirits or SEARCH TERM')
+    parser.add_argument('pages', type=int, help='how many pages to parse [0 for all]')
+    args = parser.parse_args()
+
+    global store
+    store = args.store
+    global category
+    category = args.category
+    global pages
+    pages = args.pages
+
+    data = search(category)  # scrape all the data for those search terms from bws
     conn = create_connection()
-    query = str(input("Input your search terms: ")) # get users search terms
-    data = search(query) # scrape all the data for those search terms from bws
-    dbhandler(conn, data, 'u') # update the database with this new information
-    print("SQL output by efficiency:")
-    select_all_drinks_by_efficiency(conn) # get all the drinks from the db sorted by efficiency
+    dbhandler(conn, data, 'u')  # append new drinks to the database.
 
 
-    # print("### DATA: ")
-    # print(str(data))
-    # print("###")
-#     # Get the initial query
-#     query = input("Please enter term to search for: ")
-#     # while query !== "q":
-#     print("START DEBUG SCRIPT")
-#     commonList = scrape("https://bws.com.au/search?searchTerm=" + query)
-#     print("")
-#     print("")
-#     print("SCRAPE RESULTS: ")
-#     for item in commonList:
-#         print(str(item))
-#     print("")
-#         # query = input("Please enter term to search for (or enter 'q' to quit): ")
-#     print("END DEBUG SCRIPT")
-#
-main()
+if __name__ == "__main__":
+    main()
