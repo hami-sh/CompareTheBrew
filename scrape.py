@@ -382,8 +382,14 @@ def getDrinksBws(soups):
             brand = drink.find('h2', {'class':'productTile_brand ng-binding'}).text
             name = drink.find('div', {'class':'productTile_name ng-binding'}).text
             priceElement = drink.find('div', {'class': 'productTile_price ng-scope'})
-            dollar = priceElement.find('span', {'class': 'productTile_priceDollars ng-binding'}).text
-            cents = priceElement.find('span', {'class': 'productTile_priceCents ng-binding'}).text
+
+            try:
+                dollar = priceElement.find('span', {'class': 'productTile_priceDollars ng-binding'}).text
+                cents = priceElement.find('span', {'class': 'productTile_priceCents ng-binding'}).text
+            except AttributeError as e:
+                print(e)
+                print("at" + relativePath)
+                continue
             price = str(dollar) + '.' + str(cents)
             image = drink.find('img', {'class':'productTile_image'})['src']
             print(">>", brand, name, price)
