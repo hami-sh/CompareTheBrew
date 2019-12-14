@@ -7,7 +7,7 @@ $ bash setup.sh
 ```
 
 ## Run:
-# SCRAPING
+#### SCRAPING
 ```bash
 $ python3 scrape.py [store] [category] [# pages]
 ```
@@ -17,7 +17,7 @@ $ python3 scrape.py [store] [category] [# pages]
 
 -> # pages (0 for all)
 
-# WEB SERVER
+#### WEB SERVER
 ```bash
 $ python3 app.py
 ```
