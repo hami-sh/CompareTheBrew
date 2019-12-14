@@ -381,7 +381,7 @@ def getDrinksBws(soups):
             store = 'BWS'
             brand = drink.find('h2', {'class':'productTile_brand ng-binding'}).text
             name = drink.find('div', {'class':'productTile_name ng-binding'}).text
-            priceElement = soup.find('div', {'class': 'productTile_price ng-scope'})
+            priceElement = drink.find('div', {'class': 'productTile_price ng-scope'})
             dollar = priceElement.find('span', {'class': 'productTile_priceDollars ng-binding'}).text
             cents = priceElement.find('span', {'class': 'productTile_priceCents ng-binding'}).text
             price = str(dollar) + '.' + str(cents)
