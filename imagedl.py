@@ -53,6 +53,16 @@ def main():
             print(link)
             print("-----------------------------------------")
 
+    conn = create_connection()
+    images = select_image_links(conn)
+    conn.close()
+
+    for image in images:
+        conn = create_connection()
+        print("----")
+        save_short_link(conn, image[0])
+        conn.close()
+
 
 if __name__ == "__main__":
     main()

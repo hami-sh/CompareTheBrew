@@ -10,7 +10,7 @@ def create_connection():
 
         sql = ''' CREATE TABLE IF NOT EXISTS "drinks" ( `ID` INTEGER PRIMARY KEY AUTOINCREMENT, `store` TEXT,
             `brand` BLOB, `name` NUMERIC, `type` TEXT, `price` REAL, `link` TEXT, `ml` REAL, `percent` REAL,
-            `stdDrinks` REAL, `efficiency` REAL, `image` TEXT )'''
+            `stdDrinks` REAL, `efficiency` REAL, `image` TEXT, `shortimage` TEXT )'''
         cur = conn.cursor()
         cur.execute(sql)
         print("connected to database")
@@ -63,6 +63,7 @@ def select_all_drinks_by_efficiency(conn):
     rows = cur.fetchall()
     return rows
 
+
 def select_all_drinks_by_cost_asc(conn):
     """
     Query tasks by price ascending
@@ -77,6 +78,7 @@ def select_all_drinks_by_cost_asc(conn):
     rows = cur.fetchall()
 
     return rows
+
 
 def select_all_drinks_by_cost_desc(conn):
     """
@@ -93,6 +95,7 @@ def select_all_drinks_by_cost_desc(conn):
 
     return rows
 
+
 def select_all_drinks_between_cost(conn, value1, value2):
     """
     Query tasks by selecting drinks between a cost
@@ -108,6 +111,7 @@ def select_all_drinks_between_cost(conn, value1, value2):
     rows = cur.fetchall()
 
     return rows
+
 
 def select_drink_by_efficiency_and_type(conn, type):
     """
@@ -126,6 +130,7 @@ def select_drink_by_efficiency_and_type(conn, type):
 
     return rows
 
+
 def select_image_links(conn):
     """
     Query all image links
@@ -140,6 +145,7 @@ def select_image_links(conn):
     rows = cur.fetchall()
 
     return rows
+
 
 def select_drink_by_smart_search(conn, terms):
     """Select all drinks that contain any of the search keywords given in their name, brand or type attributes
@@ -164,15 +170,18 @@ def select_drink_by_smart_search(conn, terms):
     # For each keyword, execute a new query at the cursor to find drinks matching that keyword
     for term in terms:
         # cur.execute("SELECT * FROM drinks WHERE type LIKE '%{}%' ORDER BY efficiency DESC".format(term))
-        cur.execute("SELECT * FROM drinks WHERE type LIKE '%{}%' OR name LIKE '%{}%' OR brand LIKE '%{}%' ORDER BY efficiency DESC".format(term, term, term))
+        cur.execute(
+            "SELECT * FROM drinks WHERE type LIKE '%{}%' OR name LIKE '%{}%' OR brand LIKE '%{}%' ORDER BY efficiency DESC".format(
+                term, term, term))
         rows = cur.fetchall()
         print("NUMBER OF ROWS FOUND: " + str(len(rows)))
         # For each row in rows, if the row is not already in the results list add it
         for row in rows:
-            if not(row in results):
+            if not (row in results):
                 results.append(row)
     # Return the final list of results
     return results
+
 
 def update_drink(conn, drink, newPrice):
     """
@@ -190,10 +199,15 @@ def update_drink(conn, drink, newPrice):
     result = get_drinks_stddrinks(conn, drink)
     if result == False:
         print("failed to update drink... here are the details")
-        print(drink)
+        try:
+            print(drink)
+        except:
+            print("couldnt print drink!")
     else:
         cur = conn.cursor()
-        cur.execute(sql, (newPrice, drink.link, drink.image, float(float(newPrice)/float(result)), drink.name, drink.brand, drink.store))
+        cur.execute(sql, (
+        newPrice, drink.link, drink.image, float(float(newPrice) / float(result)), drink.name, drink.brand,
+        drink.store))
         conn.commit()
 
 
@@ -211,7 +225,7 @@ def is_drink_in_table(conn, drink):
               AND link = ?
               '''
     cur = conn.cursor()
-    cur.execute(sql, (drink.store, drink.brand, drink.name,  drink.link))
+    cur.execute(sql, (drink.store, drink.brand, drink.name, drink.link))
 
     rows = cur.fetchall()
     if len(rows) > 0:
@@ -241,14 +255,46 @@ def get_drinks_stddrinks(conn, drink):
     else:
         return False
 
+# def remove_duplicates(conn):
+#     sql = ''' DELETE FROM drinks WHERE rowid NOT IN (SELECT min(rowid) FROM drinks GROUP BY address, body)'''
+#     cur = conn.cursor()
+#     cur.execute(sql, (drink.store, drink.brand, drink.name))
+
+def save_short_link(conn, image):
+    """
+    get the standard drinks of a drink
+    :param conn:
+    :param drink:
+    :return: project id
+    """
+    sql = ''' UPDATE drinks
+              SET shortimage = ?
+              WHERE image = ? '''
+    cur = conn.cursor()
+
+    if image != None:
+        url = str(image)
+        oldurl = url
+        url = url.replace("/", "~")
+        url = url.replace("?", "+")
+        url = url.replace(":", ",")
+        print(url)
+        url = url.split('~')[-1]
+        shortimage = url.split("'")[0]
+        print(shortimage)
+        print(oldurl)
+        cur.execute(sql, (shortimage, oldurl))
+        conn.commit()
+        print('done')
+
 
 def dbhandler(conn, list, mode):
-
     # populate or update mode
     if mode == "p":
         for drink in list:
-            drink_task = (drink.store, drink.brand, drink.name, drink.type, float(drink.price), drink.link, float(drink.ml),
-                          float(drink.percent), float(drink.stdDrinks), float(drink.efficiency), drink.link)
+            drink_task = (
+            drink.store, drink.brand, drink.name, drink.type, float(drink.price), drink.link, float(drink.ml),
+            float(drink.percent), float(drink.stdDrinks), float(drink.efficiency), drink.link)
             create_entry(conn, drink_task)
 
     elif mode == "u":

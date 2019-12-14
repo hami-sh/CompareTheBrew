@@ -8,5 +8,6 @@ def davo():
     for drink in drinks:
         print(drink)
 
+
 if __name__ == "__main__":
     davo()
