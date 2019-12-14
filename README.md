@@ -1,5 +1,5 @@
 # CompareTheBrew.com.au
-🍺🍺 Get the cheapest drink possible 🍺🍺
+🍺🍺 Get the cheapest drink possible, and make money doing so 🍺🍺
 
 ## Setup:
 ```bash
@@ -7,18 +7,32 @@ $ bash setup.sh
 ```
 
 ## Run:
+#### SCRAPING
 ```bash
-$ python3 main.py
+$ python3 scrape.py [store] [category] [# pages]
+```
+-> store (bws, others not implemented yet)
+
+-> category (beer, wine, spirits)
+
+-> # pages (0 for all)
+
+#### WEB SERVER
+```bash
+$ python3 app.py
 ```
 
 ## Dependancies (installed in setup)
 - BeautifulSoup4
 - Selenium
 - ChromeWebDriver (headless)
+- flask
+- sqlite3
 ___
 
 ## TODO
-- [ ] 
+- [ ] finalise image displays [nearly done, files are present but waiting on mcost and alex]
+- [ ] beer parsing for bws. find an efficient approach? 
 
 - [ ] Setup hosting on aws
   - [ ] Setup hosting on aws
