@@ -264,7 +264,7 @@ def getDrinksData(itemsOnPage):
                 if is_drink_in_table(conn, drink) == False:
                     url = drink.link
                     # Print out every time a new thread is initialised
-                    print("INITIALISING THREAD " + str(threads) + ".")
+                    print("INITIALISING THREAD " + str(threads) + "." + " LINK: " + str(url))
 
                     # Extract the drink data based on the site being scraped
                     if site == "bws":
@@ -278,7 +278,7 @@ def getDrinksData(itemsOnPage):
                     # Update how many threads we have initialised
                     threads += 1
                 else:
-                    print('present: update thread')
+                    print('THIS DRINK IS PRESENT IN THE DATABASE: update thread')
                     update_drink(conn, drink, drink.price)
 
                 # if threads == 20:
@@ -374,17 +374,16 @@ def getDrinksBws(soups):
 
     print("---------")
     global beer
-    print(beer)
+    print("BEER = " + str(beer))
     if beer:
         for soup in soups:
-            print('ayy')
             # Create a new list to store the drinks
             drinks = list()
             # Extract the drink cards from the search page soup
             drinksList = soup.find('div', {'class': 'center-panel-ui-view ng-scope'})
             drinks = drinksList.findAll('div', {'class': 'productTile'})
             for drink in drinks:
-                print('hi')
+                print('FOUND A CARD!')
                 # Extract the urls to each individual drink page
                 relativePath = drink.find('a', {'class': 'link--no-decoration'})['href']
 
@@ -395,22 +394,25 @@ def getDrinksBws(soups):
 
                 # Determine how many sections there are
                 sections = drink.findAll('div', {'class':'trolley-controls_volume'})
-                print(len(sections))
+                print("CARD HAS " + str(len(sections)) + " SECTIONS.")
                 for section in sections:
-                    print("section")
                     name = section.find('span', {'class':'trolley-controls_volume_title ng-binding'}).text
+                    name = name.strip()
+                    name = name.split(" ")
+                    name = name[0]
                     count = None
                     try:
                         count = section.find('small', {'class':'text-xs ng-binding ng-scope'}).text
                     except:
-                        count = '1'
+                        count = '(1)'
                     combinedName = overname + " - " + name + " " + count
+                    # print(">>", overname, "---", name, "###", count, "###")
                     price = section.find('span', {'class':'trolley-controls_volume_price'})
-                    dollars = section.find('span', {'class':'ng-binding'}).text
-                    cents = section.find('sup', {'class':'ng-binding'}).text
+                    dollars = price.find('span', {'class':'ng-binding'}).text
+                    cents = price.find('sup', {'class':'ng-binding'}).text
                     priceStr = str(dollars) + '.' + str(cents)
                     image = None
-                    print(">>", brand, name, priceStr)
+                    # print(">>", brand, "###", combinedName, "###", priceStr, "###")
                     entry = Item(store, brand, name, None, price, "https://bws.com.au" + relativePath, None, None, None,
                              None, image)
                     itemsOnPage.append(entry)
@@ -444,7 +446,9 @@ def getDrinksBws(soups):
                 entry = Item(store, brand, name, None, price, "https://bws.com.au" + relativePath, None, None, None, None,
                              image)
                 itemsOnPage.append(entry)
-
+    # print(itemsOnPage)
+    # print("QUIT")
+    # quit()
     # Return the list containing the urls to each drink on each results page
     return itemsOnPage
 
