@@ -153,3 +153,116 @@ textarea:focus, input:focus{
 ::selection {
   background: #ffdc52;
 }
+
+/* ___BEGIN___ section for styles for the drink of the day card */
+a {
+    text-decoration: none;
+}
+
+.resultCard {
+	position: relative;
+	display: flex;
+	align-items: center;
+	/* width: 30%; */
+	padding: 14px;
+	margin: 10px 0 0 100px;
+	border-radius: 9px;
+	/* background-color: white; */
+	background-color: gold;
+	box-shadow: 0 5px 13px rgba(0,0,0,0.075), 0 1px 2px rgba(0,0,0,0.22);
+  	transition: all 0.3s cubic-bezier(.25,.8,.25,1);
+	overflow: hidden;
+	/* ALEXs addition to make the card smaller when it sits alone in the front page */
+	width: 320px;
+	height: 180px;
+}
+
+.resultCard:hover {
+  box-shadow: 0 12px 24px rgba(0,0,0,0.13), 0 10px 10px rgba(0,0,0,0.13);
+}
+
+.cardImage {
+	flex: 0 0 25%;
+	padding-left: 10px;
+	padding-right: 10px;
+	font-size: 8px;
+}
+
+.cardContent {
+	flex: 1;
+}
+
+.brand {
+	font-weight: bold;
+	font-size: 1.6vw;
+	color: #cda20b;
+}
+
+.name {
+	font-weight: bolder;
+	font-size: 2vw;
+	color: #722f37;
+/*	overflow: hidden;
+	text-overflow: ellipsis;*/
+	display: -webkit-box;
+	-webkit-box-orient: vertical;
+	-webkit-line-clamp: 2;
+/*	padding-bottom: 18px;*/
+	margin-top: -2px;
+	overflow: hidden;
+  	text-overflow: ellipsis;
+	word-wrap: break-word;
+	/*display: block;*/
+	line-height: 1em;
+	max-height: 3.2em;
+}
+
+.searchLine {
+	background-color: #ffdc52;
+	display: block;
+	height: 3px;
+	left: 0px;
+	position: relative;
+	width: 100%;
+	border-radius: 5px;
+	/*top: 20px;*/
+}
+
+.details {
+	margin-top: -18px;
+	font-weight: bolder;
+	font-size: 1.4vw;
+	color: #a7a7a7;
+}
+
+.score {
+	/*	margin-left: 7.5vw;*/
+	font-weight: bolder;
+	/*	float: left;*/
+	/*	width: 30%;*/
+	/* The original font size that matt had */
+	/* font-size: 3.8vw; */
+	/* Alex's adjusted font size to make the text fit into the card */
+	font-size: 3.0vw;
+	color:  #a7a7a7;
+	-webkit-transform:scale(1,1.1); /* Safari and Chrome */
+	-moz-transform:scale(1,1.1); /* Firefox */
+	-ms-transform:scale(1,1.1); /* IE 9 */
+	-o-transform:scale(1,1.1); /* Opera */
+	transform:scale(1,1.1); /* W3C */
+	display: inline-block;
+	white-space: nowrap;
+}
+
+.price {
+	/*	font-weight: bolder;
+	float: right;*/
+	/*	width: 30%;*/
+	display: inline-block;
+	/* The original font size that matt had */
+	/* font-size: 3.8vw; */
+	/* Alex's adjusted font size to make the text fit into the card */
+	/*	font-size: 3.0vw;*/
+	color: #cda20b;
+}
+/* ___END___ section for styles for the drink of the day card */

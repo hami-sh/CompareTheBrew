@@ -14,7 +14,10 @@ def displaySearchPage():
     """
     ...
     """
-    return render_template('index.html')
+    # Get the current top drink from the database
+    conn = db.create_connection() # connect to the database
+    topDrink = db.select_all_drinks_by_efficiency(conn)[0] # get the first result from all of the drinks sorted by efficiency desc
+    return render_template('index.html', result=topDrink)
 
 # A function to get search terms from the search page
 @app.route('/', methods=['POST'])
