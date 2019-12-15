@@ -204,10 +204,15 @@ def update_drink(conn, drink, newPrice):
         except:
             print("couldnt print drink!")
     else:
+        print('---------------')
+        print(drink.brand + " " + drink.name)
         cur = conn.cursor()
         cur.execute(sql, (
-        newPrice, drink.link, drink.image, float(float(newPrice) / float(result)), drink.name, drink.brand,
+        newPrice, drink.link, drink.image, float(float(result) / float(newPrice)), drink.name, drink.brand,
         drink.store))
+        print(float(newPrice))
+        print(float(result))
+        print(float(result)/float(newPrice))
         conn.commit()
 
 
@@ -251,7 +256,7 @@ def get_drinks_stddrinks(conn, drink):
 
     rows = cur.fetchall()
     if len(rows) > 0:
-        return rows[0][8]
+        return rows[0][9]
     else:
         return False
 
