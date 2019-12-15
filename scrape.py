@@ -20,6 +20,7 @@ import argparse
 store = None
 category = None
 pages = None
+beer = False
 
 """
 The urls we will need to scrape to populate our database:
@@ -48,6 +49,8 @@ def search(searchTerms):
     if store == 'bws':
         if searchTerms == 'beer':
             searchUrls.append('https://bws.com.au/beer/all-beer')
+            global beer
+            beer = True
         elif searchTerms == 'wine':
             searchUrls.append('https://bws.com.au/wine/all-wine')
         elif searchTerms == 'spirits':
@@ -367,35 +370,79 @@ def getDrinksBws(soups):
     # Create a new list to store the urls to each of the drinks
     itemsOnPage = list()
     # For each page of results, scrape all of the drink urls off of the page
-    for soup in soups:
-        # Create a new list to store the drinks
-        drinks = list()
-        # Extract the drink cards from the search page soup
-        drinksList = soup.find('div', {'class':'center-panel-ui-view ng-scope'})
-        drinks = drinksList.findAll('div', {'class':'productTile'})
-        for drink in drinks:
-            # Extract the urls to each individual drink page
-            relativePath = drink.find('a', {'class':'link--no-decoration'})['href']
 
-            # Extract store, brand, name, type to check if stepping into page needed.
-            store = 'BWS'
-            brand = drink.find('h2', {'class':'productTile_brand ng-binding'}).text
-            name = drink.find('div', {'class':'productTile_name ng-binding'}).text
-            priceElement = drink.find('div', {'class': 'productTile_price ng-scope'})
+    print("---------")
+    global beer
+    print(beer)
+    if beer:
+        for soup in soups:
+            print('ayy')
+            # Create a new list to store the drinks
+            drinks = list()
+            # Extract the drink cards from the search page soup
+            drinksList = soup.find('div', {'class': 'center-panel-ui-view ng-scope'})
+            drinks = drinksList.findAll('div', {'class': 'productTile'})
+            for drink in drinks:
+                print('hi')
+                # Extract the urls to each individual drink page
+                relativePath = drink.find('a', {'class': 'link--no-decoration'})['href']
 
-            try:
-                dollar = priceElement.find('span', {'class': 'productTile_priceDollars ng-binding'}).text
-                cents = priceElement.find('span', {'class': 'productTile_priceCents ng-binding'}).text
-            except AttributeError as e:
-                print(e)
-                print("at" + relativePath)
-                continue
-            price = str(dollar) + '.' + str(cents)
-            image = drink.find('img', {'class':'productTile_image'})['src']
-            print(">>", brand, name, price)
-            entry = Item(store, brand, name, None, price, "https://bws.com.au" + relativePath, None, None, None, None,
-                         image)
-            itemsOnPage.append(entry)
+                # Extract store, brand
+                store = 'BWS'
+                brand = drink.find('h2', {'class': 'productTile_brand ng-binding'}).text
+                overname = drink.find('div', {'class': 'productTile_name ng-binding'}).text
+
+                # Determine how many sections there are
+                sections = drink.findAll('div', {'class':'trolley-controls_volume'})
+                print(len(sections))
+                for section in sections:
+                    print("section")
+                    name = section.find('span', {'class':'trolley-controls_volume_title ng-binding'}).text
+                    count = None
+                    try:
+                        count = section.find('small', {'class':'text-xs ng-binding ng-scope'}).text
+                    except:
+                        count = '1'
+                    combinedName = overname + " - " + name + " " + count
+                    price = section.find('span', {'class':'trolley-controls_volume_price'})
+                    dollars = section.find('span', {'class':'ng-binding'}).text
+                    cents = section.find('sup', {'class':'ng-binding'}).text
+                    priceStr = str(dollars) + '.' + str(cents)
+                    image = None
+                    print(">>", brand, name, priceStr)
+                    entry = Item(store, brand, name, None, price, "https://bws.com.au" + relativePath, None, None, None,
+                             None, image)
+                    itemsOnPage.append(entry)
+    else:
+        for soup in soups:
+            # Create a new list to store the drinks
+            drinks = list()
+            # Extract the drink cards from the search page soup
+            drinksList = soup.find('div', {'class':'center-panel-ui-view ng-scope'})
+            drinks = drinksList.findAll('div', {'class':'productTile'})
+            for drink in drinks:
+                # Extract the urls to each individual drink page
+                relativePath = drink.find('a', {'class':'link--no-decoration'})['href']
+
+                # Extract store, brand, name, type to check if stepping into page needed.
+                store = 'BWS'
+                brand = drink.find('h2', {'class':'productTile_brand ng-binding'}).text
+                name = drink.find('div', {'class':'productTile_name ng-binding'}).text
+                priceElement = drink.find('div', {'class': 'productTile_price ng-scope'})
+
+                try:
+                    dollar = priceElement.find('span', {'class': 'productTile_priceDollars ng-binding'}).text
+                    cents = priceElement.find('span', {'class': 'productTile_priceCents ng-binding'}).text
+                except AttributeError as e:
+                    print(e)
+                    print("at" + relativePath)
+                    continue
+                price = str(dollar) + '.' + str(cents)
+                image = drink.find('img', {'class':'productTile_image'})['src']
+                print(">>", brand, name, price)
+                entry = Item(store, brand, name, None, price, "https://bws.com.au" + relativePath, None, None, None, None,
+                             image)
+                itemsOnPage.append(entry)
 
     # Return the list containing the urls to each drink on each results page
     return itemsOnPage
