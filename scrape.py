@@ -269,7 +269,7 @@ def getDrinksData(itemsOnPage):
                     # Extract the drink data based on the site being scraped
                     if site == "bws":
                         # Retrieve drink data from bws format html
-                        executor.submit(getDrinksDataBws, url, commonList, _lock)
+                        executor.submit(getDrinksDataBws, drink, commonList, _lock)
                     elif site == "liquorland":
                         # TODO: Implement liquorland functionality
                         print("Sorry, LiquorLand is not currently a supported site.")
@@ -277,6 +277,9 @@ def getDrinksData(itemsOnPage):
                         executor.submit(getDrinksDataLiquorland, url, commonList, _lock)
                     # Update how many threads we have initialised
                     threads += 1
+
+                    # if threads == 20:
+                    #     break
                 else:
                     print('THIS DRINK IS PRESENT IN THE DATABASE: update thread')
                     update_drink(conn, drink, drink.price)
@@ -383,6 +386,7 @@ def getDrinksBws(soups):
             drinksList = soup.find('div', {'class': 'center-panel-ui-view ng-scope'})
             drinks = drinksList.findAll('div', {'class': 'productTile'})
             for drink in drinks:
+                print("--------")
                 print('FOUND A CARD!')
                 # Extract the urls to each individual drink page
                 relativePath = drink.find('a', {'class': 'link--no-decoration'})['href']
@@ -406,14 +410,14 @@ def getDrinksBws(soups):
                     except:
                         count = '(1)'
                     combinedName = overname + " - " + name + " " + count
-                    # print(">>", overname, "---", name, "###", count, "###")
+                    print(">>", overname, "---", name, "###", count, "###")
                     price = section.find('span', {'class':'trolley-controls_volume_price'})
                     dollars = price.find('span', {'class':'ng-binding'}).text
                     cents = price.find('sup', {'class':'ng-binding'}).text
                     priceStr = str(dollars) + '.' + str(cents)
                     image = None
-                    # print(">>", brand, "###", combinedName, "###", priceStr, "###")
-                    entry = Item(store, brand, name, None, price, "https://bws.com.au" + relativePath, None, None, None,
+                    print("||", brand, "###", combinedName, "###", priceStr, "###")
+                    entry = Item(store, brand, combinedName, None, priceStr, "https://bws.com.au" + relativePath, None, None, None,
                              None, image)
                     itemsOnPage.append(entry)
     else:
@@ -453,12 +457,12 @@ def getDrinksBws(soups):
     return itemsOnPage
 
 
-def getDrinksDataBws(url, commonList, _lock):
+def getDrinksDataBws(drink, commonList, _lock):
     """
     Thread function to control parsing of BWS drink details
 
     Args:
-        url: the url of the website for the specific drink product we are collecting the data for
+        drink: object to parse from
         commonList: the list of drink data that all threads store their results in
         _lock: some threading shit (ask Hamish I guess)
 
@@ -469,64 +473,242 @@ def getDrinksDataBws(url, commonList, _lock):
     print("GETTING DRINK DATA FROM A DRINK PAGE ...")
 
     # Get the html soup for the drink page
+    url = drink.link
     soup = download(url)
 
-    # Extract the name
-    name = soup.find('div', {'class':'detail-item_title'}).text
-    # Extract the price
-    priceElement = soup.find('span', {'class': 'trolley-controls_volume_price'})
-    dollar = priceElement.find('span', {'class': 'ng-binding'}).text
-    cents = priceElement.find('sup', {'class': 'ng-binding'}).text
-    price = str(dollar) + '.' + str(cents)
+    print(beer)
+    if beer:
+        # treat product as beer
+        # find what is on the page
+        print(0)
+        canOrBottle = False
+        pack = False
+        case = False
+        control = soup.find('div', {'class':'product-detail_controls-col'})
+        print(0.25)
+        products = control.findAll('span', {'class':'trolley-controls_volume_title ng-binding'})
 
-    # Extract the product image link (the src attribute of the image)
-    image = soup.find('img', {'class': 'product-image'})['src']
+        print(0.5)
+        for product in products:
+            if 'Can' in product.text or 'Bottle' in product.text:
+                canOrBottle = True
+            elif 'Pack' in product.text:
+                pack = True
+            elif 'Case' in product.text:
+                case = True
 
-    # Get the footer element containing all the rest of the details
-    detailsRaw = soup.find('div', {'class':'product-additional-details_container text-center ng-isolate-scope'})
-    # Get the ul of details inside the element
-    list = detailsRaw.find('ul', {'class':'text-left'})
-    # TODO: Remove this debug statement
-    # Get all the titles of the properties
-    keys = list.findAll('strong', {'class':'list-details_header ng-binding'})
-    # Get all the values of the proverties
-    values = list.findAll('span', {'class':'pull-right list-details_info ng-binding ng-scope'})
-    # Put the titles and values as K,V pairs into a dictionary
-    details = dict()
-    for x in range(0, len(keys)):
-        details[keys[x].text] = values[x].text
+        print(1)
+        # Get the footer element containing all the rest of the details
+        detailsRaw = soup.find('div', {'class': 'product-additional-details_container text-center ng-isolate-scope'})
+        # Get the ul of details inside the element
+        list = detailsRaw.find('ul', {'class': 'text-left'})
+        # Get all the titles of the properties
+        keys = list.findAll('strong', {'class': 'list-details_header ng-binding'})
+        # Get all the values of the proverties
+        values = list.findAll('span', {'class': 'pull-right list-details_info ng-binding ng-scope'})
+        # Put the titles and values as K,V pairs into a dictionary
+        details = dict()
+        for x in range(0, len(keys)):
+            details[keys[x].text] = values[x].text
 
-    # Extract the product brand
-    brand = details['Brand']
+        print(2)
 
-    # Extract the bottle volume
-    size = 0
-    if details['Liquor Size'].find('mL') != -1:
-        # measurement in mL
-        strSize = details['Liquor Size'][0:len(details['Liquor Size']) - 2]
-        size = int(strSize) / 1000
+        # Extract the product brand
+        brand = details['Brand']
+        old_name = drink.name
+
+        # Extract the bottle volume
+        size = 0
+        if details['Liquor Size'].find('mL') != -1:
+            # measurement in mL
+            strSize = details['Liquor Size'][0:len(details['Liquor Size']) - 2]
+            size = int(strSize) / 1000
+        else:
+            # measurement in L
+            strSize = details['Liquor Size'][0:len(details['Liquor Size']) - 1]
+            size = int(strSize)
+
+        print(3)
+
+        # standard drinks float extract
+        numbers = re.findall(r"[-+]?\d*\.\d+|\d+", details['Standard Drinks'])
+        percent = re.findall(r"[-+]?\d*\.\d+|\d+", details['Alcohol %'])
+
+        print(drink.name)
+        split = drink.name.split("-")[-1]
+        standard_drinks_parsed = None
+        if "Can" in split or "Bottle" in split:
+            print("a")
+            standard_drinks_parsed = float(numbers[0])
+            print(standard_drinks_parsed)
+        elif "Pack" in split or "Case" in split:
+            print("b")
+            try:
+                split_name = drink.name.split('-')[-1]
+                drink_count_in_item = re.findall(r"\((\d+)\)", split_name)[0]
+                standard_drinks_parsed = float(float(numbers[0]) * float(drink_count_in_item))
+                print(split_name)
+                print(drink_count_in_item)
+                print(standard_drinks_parsed)
+            except Exception as e:
+                print(e)
+
+        try:
+            print(type(drink.price))
+            print(drink.price)
+        except Exception as e:
+            print(e)
+
+        # Find the price per standard by getting the number of standard drinks and dividing it by the price
+        efficiency = standard_drinks_parsed / float(drink.price)
+        print('x')
+        # get image - slick track holds all images
+        slick_track = soup.find('div', {'class':'slick-track'})
+        print('y')
+        # count number of images inside.
+        images = soup.findAll('img', {'class':'product-image'})
+        print(len(images))
+        link_images = dict()
+        i = 0
+        for image in images:
+            link_images[i] = image['src']
+            i += 1
+
+        for bruh in link_images.values():
+            print(bruh)
+            print("-----")
+
+        print('z')
+
+        print(5)
+
+        try:
+            image = None
+            if not canOrBottle and not pack and case:
+                # F F T
+                if 'Case' in old_name:
+                    image = link_images[0]
+            elif not canOrBottle and pack and not case:
+                # F T F
+                if 'Pack' in old_name:
+                    image = link_images[0]
+            elif not canOrBottle and pack and case:
+                # F T T
+                if 'Pack' in old_name:
+                    image = link_images[0]
+                if 'Case' in old_name:
+                    image = link_images[1]
+            elif canOrBottle and not pack and not case:
+                # T F F
+                if 'Can' in old_name or 'Bottle' in old_name:
+                    image = link_images[0]
+            elif canOrBottle and not case and pack:
+                # T F T
+                if 'Can' in old_name or 'Bottle' in old_name:
+                    image = link_images[0]
+                if 'Pack' in old_name:
+                    image = link_images[1]
+            elif canOrBottle and case and not pack:
+                # T T F
+                if 'Can' in old_name or 'Bottle' in old_name:
+                    image = link_images[0]
+                if 'Case' in old_name:
+                    image = link_images[1]
+            elif canOrBottle and case and pack:
+                # T T T
+                if 'Can' in old_name or 'Bottle' in old_name:
+                    image = link_images[0]
+                if 'Case' in old_name:
+                    image = link_images[1]
+                if 'Pack' in old_name:
+                    image = link_images[2]
+        except Exception as e:
+            print(e)
+        print(6)
+
+        print(details['Brand'])
+        print(old_name)
+        print(details['Liquor Style'])
+        print(drink.price)
+        print(url)
+        print(float(size))
+        print(float(percent[0]))
+        print(standard_drinks_parsed)
+        print(efficiency)
+        print(image)
+
+        # Put all of the details found for the drink into an Item object
+        entry = Item("BWS", details['Brand'], old_name, details['Liquor Style'], drink.price, url, float(size),
+                     float(percent[0]), standard_drinks_parsed, float(efficiency), image)
+
+        print(7)
+
+        # Print out the list of drink data
+        print("<" + str(len(commonList)) + "> GOT DRINK DATA FOR: " + entry.name)
+
+        # Thread safety
+        _lock.acquire()
+        commonList.append(entry)
+        _lock.release()
+
     else:
-        # measurement in L
-        strSize = details['Liquor Size'][0:len(details['Liquor Size']) - 1]
-        size = int(strSize)
+        # Extract the name
+        name = soup.find('div', {'class': 'detail-item_title'}).text
+        # Extract the price
+        priceElement = soup.find('span', {'class': 'trolley-controls_volume_price'})
+        dollar = priceElement.find('span', {'class': 'ng-binding'}).text
+        cents = priceElement.find('sup', {'class': 'ng-binding'}).text
+        price = str(dollar) + '.' + str(cents)
 
-    # standard drinks float extract
-    numbers = re.findall(r"[-+]?\d*\.\d+|\d+", details['Standard Drinks'])
-    percent = re.findall(r"[-+]?\d*\.\d+|\d+", details['Alcohol %'])
-    # Find the price per standard by getting the number of standard drinks and dividing it by the price
-    efficiency = float(numbers[0]) / float(price)
+        # Extract the product image link (the src attribute of the image)
+        image = soup.find('img', {'class': 'product-image'})['src']
 
-    # Put all of the details found for the drink into an Item object
-    entry = Item("BWS", details['Brand'], name, details['Liquor Style'], price, url, float(size), float(percent[0]),
-                 float(numbers[0]), efficiency, image)
+        # Get the footer element containing all the rest of the details
+        detailsRaw = soup.find('div', {'class': 'product-additional-details_container text-center ng-isolate-scope'})
+        # Get the ul of details inside the element
+        list = detailsRaw.find('ul', {'class': 'text-left'})
+        # TODO: Remove this debug statement
+        # Get all the titles of the properties
+        keys = list.findAll('strong', {'class': 'list-details_header ng-binding'})
+        # Get all the values of the proverties
+        values = list.findAll('span', {'class': 'pull-right list-details_info ng-binding ng-scope'})
+        # Put the titles and values as K,V pairs into a dictionary
+        details = dict()
+        for x in range(0, len(keys)):
+            details[keys[x].text] = values[x].text
 
-    # Print out the list of drink data
-    print("<" + str(len(commonList)) + "> GOT DRINK DATA FOR: " + entry.name)
+        # Extract the product brand
+        brand = details['Brand']
 
-    # Thread safety
-    _lock.acquire()
-    commonList.append(entry)
-    _lock.release()
+        # Extract the bottle volume
+        size = 0
+        if details['Liquor Size'].find('mL') != -1:
+            # measurement in mL
+            strSize = details['Liquor Size'][0:len(details['Liquor Size']) - 2]
+            size = int(strSize) / 1000
+        else:
+            # measurement in L
+            strSize = details['Liquor Size'][0:len(details['Liquor Size']) - 1]
+            size = int(strSize)
+
+        # standard drinks float extract
+        numbers = re.findall(r"[-+]?\d*\.\d+|\d+", details['Standard Drinks'])
+        percent = re.findall(r"[-+]?\d*\.\d+|\d+", details['Alcohol %'])
+        # Find the price per standard by getting the number of standard drinks and dividing it by the price
+        efficiency = float(numbers[0]) / float(price)
+
+        # Put all of the details found for the drink into an Item object
+        entry = Item("BWS", details['Brand'], name, details['Liquor Style'], price, url, float(size), float(percent[0]),
+                     float(numbers[0]), efficiency, image)
+
+        # Print out the list of drink data
+        print("<" + str(len(commonList)) + "> GOT DRINK DATA FOR: " + entry.name)
+
+        # Thread safety
+        _lock.acquire()
+        commonList.append(entry)
+        _lock.release()
+
 
 """___________________LIQUORLAND__________________"""
 def getAllSearchPagesLiquorland(url):
