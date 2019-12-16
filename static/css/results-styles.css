@@ -264,7 +264,7 @@ textarea:focus, input:focus{
   	text-overflow: ellipsis;
 	word-wrap: break-word;
 	/*display: block;*/
-	line-height: 1em;
+	line-height: 1.2em;
 	max-height: 3.2em;
 }
 
