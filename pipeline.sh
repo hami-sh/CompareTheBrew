@@ -11,7 +11,8 @@ do
    time="$(date +"%Y-%m-%d %T")"
    log="$workdir/log/beer-$time.log"
    err="$workdir/log/beer-$time.err"
-   echo "$PATH" > "$log" 2> "$err" && break
+   cmd="python3 ./scrape.py bws beer 0"
+   echo "$cmd" > "$log" 2> "$err" && break
    n=$[$n+1]
    sleep 1
 done
@@ -25,7 +26,8 @@ do
    time="$(date +"%Y-%m-%d %T")"
    log="$workdir/log/wine-$time.log"
    err="$workdir/log/wine-$time.err"
-   echo "$PATH" > "$log" 2> "$err" && break
+   cmd="python3 ./scrape.py bws wine 0"
+   echo "$cmd" > "$log" 2> "$err" && break
    n=$[$n+1]
    sleep 1
 done
@@ -39,7 +41,8 @@ do
    time="$(date +"%Y-%m-%d %T")"
    log="$workdir/log/spirits-$time.log"
    err="$workdir/log/spirits-$time.err"
-   echo "$PATH" > "$log" 2> "$err" && break
+   cmd="python3 ./scrape.py bws spirits 0"
+   echo "$cmd" > "$log" 2> "$err" && break
    n=$[$n+1]
    sleep 1
 done
@@ -51,4 +54,5 @@ done
 # ...
 
 # download images
-python
+time="$(date +"%Y-%m-%d %T")"
+python3 imagedl.py > "$workdir/log/image-$time.log"
