@@ -8,6 +8,7 @@ $ bash setup.sh
 
 ## Run:
 #### SCRAPING
+###### locally
 ```bash
 $ python3 scrape.py [store] [category] [# pages]
 ```
@@ -17,9 +18,26 @@ $ python3 scrape.py [store] [category] [# pages]
 
 -> # pages (0 for all)
 
+###### lightsail instance (done automatically via `cron`)
+```bash
+$ pipeline.sh
+```
+
+
 #### WEB SERVER
+###### locally
 ```bash
 $ python3 app.py
+```
+###### lightsail instance
+```bash
+$ ./startserver.sh
+```
+```bash
+$ ./seeserver.sh
+```
+```bash
+$ ./killserver.sh
 ```
 
 ## Dependancies (installed in setup)
