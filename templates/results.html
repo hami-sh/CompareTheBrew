@@ -1,43 +1,128 @@
-<!-- templates/index.html -->
-<html>
-    <head>
-        <!-- Tab title -->
-        <title>CompareTheBrew</title>
-        <!-- Favicon -->
-        <link rel="icon" href="https://encrypted-tbn0.gstatic.com/images?q=tbn%3AANd9GcTzI0uH0_lzecaSuTinKUKNL_W1t72KKq1QWdC8hWGKG71Bue43">
-        <link rel="stylesheet" href="/static/css/results-style.css">
-    </head>
-    <body>
-        <h1>Search Results</h1>
-        <!-- Search results section -->
-        <!-- <bold>{{results}}</bold> -->
-        {% if results == [] %}
-            <h3>Sorry, we didn't find any results matching your search.</h3>
-        {% else %}
-            <h3>Here are your search results.</h3>
-            {% for result in results %}
-                <ul style="list-style: none">
-                    <li>
-                        <table>
-                            <row>
-                                <col>
-                                    <img src="{{result[-1]}}" alt="Product Image" width="10%" height="auto">
-                                    <!-- <img src="/static/images/cat.png" alt="My Cat" width="10%" height="auto"> -->
-                                </col>
-                                <col>
-                                    <ul style="list-style: none">
-                                        {%for detail in result[0:-1]%}
-                                            <li>
-                                                {{detail}}
-                                            </li>
-                                        {%endfor%}
-                                    </ul>
-                                </col>
-                            </row>
-                        </table>
-                    </li>
-                </ul>
-            {%endfor%}
-        {% endif %}
-    </body>
+<!doctype html>
+
+<html lang="en">
+<head>
+	<meta charset="utf-8">
+
+	<title>Compare The Brew</title>
+	<meta name="description" content="Compare The Brew">
+	<meta name="author" content="The Boys">
+
+	<link rel="stylesheet" href="/static/css/results-styles.css">
+	<link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+</head>
+
+<body>
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+	<!-- TODO: POINT THIS SCRIPTS SRC TO THE PROPER LOCATION -->
+	<script src="/static/js/scripts.js"></script>
+	<div id="header">
+		<i class="material-icons" style="padding:1%;font-size:36px;color:#722f37;">
+			menu
+		</i>
+	</div>
+
+	<div id="content">
+		<div id="main" class="mainResults">
+			<div>
+				<form method="POST">
+					<i id="searchButton" class="material-icons" style="padding:1%;font-size:28px;color:#cda20b;right:0;position:absolute;margin-right:-1%;margin-top:-0.4%;">search</i>
+					<input name="searchTerms" id="searchDrink" type="text" class="smallSearch" placeholder="Search...">
+					<span class="underline smallLine"></span>
+				</form>
+			</div>
+			<div id="options">
+				<div class="buttons">
+					Sort by:
+					<button type="button" style="background-color:#722f37;color:#ffdc52" class="buttonSort">Score</button>
+					<button type="button" class="buttonSort">All</button>
+					<button type="button" class="buttonSort">Cost</button>
+					<button type="button" class="buttonSort">Worst</button>
+				</div>
+				<div id="priceRange">
+					Price range: Slider to be implemented
+				</div>
+			</div>
+			
+			<div class="light">
+				{% if results|length == 1 %}
+					We found 1 drink that matched your search.
+				{% else %}
+					We found {{results|length}} drinks matching your search. I've set it so it only shows the first 8 for testing.
+				{% endif %}
+			</div>
+			<div class="areaContainer">
+				<div id="resultsArea">
+					{% if results|length == 0 %}
+						<h2>Sorry, we didn't find any results matching your search.</h2>
+					{% else %}
+						<div id="cardsArea">
+						{% for result in results[:8] %}
+						<!-- Testing phase, don't need to load every result atm. Just taking the first 8 -->
+						<!-- Develop so only loads more when scrolls down -->
+							<div class="item">	
+								<a class="resultCard" href="{{result[6]}}">
+									<div class="cardImage">
+										<!-- <img src="{{result[-1]}}" style="width:96px;height:120px;"> -->
+										<img src="/static/images/drinkimages/{{result[12]}}.webp.webp" alt={{result[2]}} {{result[3]}} style="max-width:100%;max-height:100%;">
+									</div>
+									<div class="cardContent">
+										<div class="brand">
+											{{result[1]}}
+										</div>
+										<div>
+											<div class="name">
+												{{result[2]}} {{result[3]}}
+											</div>
+										</div>
+										<span class="searchLine"></span>
+										<div class="details" style="white-space: nowrap; display: inline-block;">
+											{{result[7]}}L - {{'%0.0f'| format(result[9])}} std. - {{result[8]}}%
+										</div>
+										<div>
+											<div class="scorePriceContainer">
+												<div class="score responsive_head" style="white-space: nowrap; display: inline-block;">
+													{{'%0.0f'| format(result[10] * 100)}}%
+													<div class="price">
+														${{result[5]}}											
+													</div>
+												</div>
+											</div>
+										</div>
+									</div>
+								</a>
+							</div>
+						{%endfor%}
+						</div>
+					{% endif %}
+				</div>
+			</div>
+			<div class="light">
+				Beep boop bop boop beep
+			</div>
+		</div>
+	</div>
+
+	<div id="footer">
+		<div id="footerLeft">
+			<b>©CompareTheBrew.com.au, 2019. Bhanu is a manlet. This is some placeholder text.
+		</div>
+		<div id="footerRight">
+			Drink responsibly.</b>
+		</div>
+	</div>
+	<script src="/static/js/fitty.min.js"></script>
+	<script>
+		fitty('.responsive_head', {
+			maxSize: 80,
+		});
+		// fitty('.scorePriceContainer');
+		fitty('.details', {
+			minSize: 12,
+		});
+		// window.onresize = function onresize() {
+		// 	fitty.fitAll();
+		// }
+	</script>
+</body>
 </html>

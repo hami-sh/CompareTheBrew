@@ -39,12 +39,46 @@
             </form> -->
 
 			<form method="POST">
-                <i id="searchButton" class="material-icons" style="padding:1%;font-size:44px;color:#cda20b;right:0;position:absolute;">search</i>
+                <i id="searchButton" class="material-icons" style="padding:1%;font-size:44px;color:#cda20b;right:0;position:absolute;margin-right:-1%;margin-top:-0.4%;">search</i>
 				<input name="searchTerms" id="searchDrink" type="text" placeholder="Search...">
 				<span class="underline"></span>
 			</form>
 			<div class="light">
 				Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
+			</div>
+			<div class="drink-of-the-day">
+				<div class="item">	
+						<a class="resultCard" href="{{result[6]}}">
+							<div class="cardImage">
+									<!-- <img src="{{result[-1]}}" style="width:96px;height:120px;"> -->
+									<img src="/static/images/drinkimages/{{result[12]}}.webp.webp" alt={{result[2]}} {{result[3]}} style="width:96px;height:120px;">
+								</div>
+							<div class="cardContent">
+								<div class="brand">
+									{{result[1]}}
+								</div>
+								<div>
+									<div class="name">
+										{{result[2]}} {{result[3]}}
+									</div>
+								</div>
+								<span class="searchLine"></span>
+								<div class="details">
+									{{result[7]}}L - {{result[9]}} std. - {{result[8]}}%
+								</div>
+								<div>
+									<div class="scorePriceContainer">
+										<div class="score responsive_head">
+											{{'%0.0f'| format(result[10] * 100)}}%
+											<div class="price">
+												${{result[5]}}											
+											</div>
+										</div>
+									</div>
+								</div>
+							</div>
+						</a>
+					</div>
 			</div>
 		</div>
 	</div>

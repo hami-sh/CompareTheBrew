@@ -14,7 +14,10 @@ def displaySearchPage():
     """
     ...
     """
-    return render_template('index.html')
+    # Get the current top drink from the database
+    conn = db.create_connection() # connect to the database
+    topDrink = db.select_all_drinks_by_efficiency(conn)[0] # get the first result from all of the drinks sorted by efficiency desc
+    return render_template('index.html', result=topDrink)
 
 # A function to get search terms from the search page
 @app.route('/', methods=['POST'])
@@ -40,14 +43,7 @@ def displayResultPage(searchTerms):
     Returns:
         the rendered html template for the page
     """
-    # # Get results the old way - by running the whole scrape script for every request
-    # # tempResults = search(searchTerms)
-
-    ### MY DEBUG STUFF
-    # tempResults = [[1, 2, 3], [4, 5, 6], [7, 8, 9]]
-    ###
-
-    # # Get results the new way - by querying the database
+    # Get results the new way - by querying the database
     conn = db.create_connection() # connect to the database
     tempResults = db.select_drink_by_smart_search(conn, searchTerms) # get drinks with type/brand/name matching any of the words in searchTerms
 
@@ -63,29 +59,18 @@ def displayResultPage(searchTerms):
     # print("""|||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||\n\n""")
     return render_template('results.html', results=tempResults)
 
+# # A function to get search terms from the search bar on the results page
+@app.route('/results/<arg>', methods=['POST'])
+def postNewSearchTerms(arg):
+    """
+    ...
+    """
+    # Get the search terms inputted by the user
+    searchTerms = request.form['searchTerms']
+    print("SEARCH TERMS ENTERED BY USER: " + searchTerms)
 
-# # Basic test page for url /hello
-# @app.route('/test1')
-# def hello():
-#     return "Hello World!"
-
-# # A second test page now rendering a basic html page
-# @app.route('/<string:page_name>/')
-# def render_static(page_name):
-#     return render_template('%s.html' % page_name)
-
-# # A function to get search results from a page
-# @app.route('/results', methods=['POST'])
-# def my_form_post():
-#     text = request.form['text']
-#     print("OLD: " + text)
-#     # processed_text = text.upper()
-#     return text
-
-# @app.route('/<string:page_name>/')
-# def render_static(page_name):
-#     return render_template('%s.html' % page_name)
-
+    # Send the user to the results page
+    return redirect("/results/" + searchTerms)
 
 # Run the flask application (won't run when the site is being hosted on a server)
 if __name__ == '__main__':

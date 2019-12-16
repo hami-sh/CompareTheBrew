@@ -1,0 +1,374 @@
+@font-face {
+    font-family: 'louis_george_cafe';
+    src: url('louis_george_cafe/louis_george_cafe_bold-webfont.eot');
+    src: url('louis_george_cafe/louis_geo/rge_cafe_bold-webfont.eot?#iefix') format('embedded-opentype'),
+         url('louis_george_cafe/louis_george_cafe_bold-webfont.woff2') format('woff2'),
+         url('louis_george_cafe/louis_george_cafe_bold-webfont.woff') format('woff'),
+         url('louis_george_cafe/louis_george_cafe_bold-webfont.ttf') format('truetype'),
+         url('louis_george_cafe/louis_george_cafe_bold-webfont.svg#louis_george_cafebold') format('svg');
+    font-weight: bold;
+    font-style: normal;
+
+}
+
+@font-face {
+    font-family: 'louis_george_cafe';
+    src: url('louis_george_cafe/louis_george_cafe-webfont.eot');
+    src: url('louis_george_cafe/louis_george_cafe-webfont.eot?#iefix') format('embedded-opentype'),
+         url('louis_george_cafe/louis_george_cafe-webfont.woff2') format('woff2'),
+         url('louis_george_cafe/louis_george_cafe-webfont.woff') format('woff'),
+         url('louis_george_cafe/louis_george_cafe-webfont.ttf') format('truetype'),
+         url('louis_george_cafe/louis_george_cafe-webfont.svg#louis_george_caferegular') format('svg');
+    font-weight: normal;
+    font-style: normal;
+
+}
+
+body {
+	font-family: 'louis_george_cafe', Arial, sans-serif;
+	font-weight: 500;
+	font-style: normal;
+	font-size: 14px;
+	margin: 0;
+	padding: 0;
+}
+
+.hamburger {
+	padding: 1%;
+	font-size: 48px;
+	color: #722f37;
+}
+
+#content {
+	
+}
+
+.main {
+	font-size: 30px;
+	position: absolute;
+	left: 50%;
+	top: 50%;
+	-webkit-transform: translate(-50%, -50%);
+	transform: translate(-50%, -50%);
+	margin-bottom: 80px;
+}
+
+.mainResults {
+	/*margin-top: 100px;*/
+	margin-bottom: 80px;
+	font-size: 30px;
+	position: absolute;
+	left: 50%;
+	/* Matts old */
+	/* top: 120px; */
+	/* Alexs updated */
+	top: 80px;
+	-webkit-transform: translate(-50%, 0);
+	transform: translate(-50%, 0);
+	width: 80%;
+	max-width: 1360px;
+}
+
+input[type="search"]::-webkit-search-decoration,
+input[type="search"]::-webkit-search-cancel-button,
+input[type="search"]::-webkit-search-results-button,
+input[type="search"]::-webkit-search-results-decoration {
+	-webkit-appearance:none;
+}
+
+.underline {
+	background-color: #cda20b;
+	display: inline-block;
+	height: 2px;
+	transition: height .075s ease-in-out;
+	left: 0px;
+	margin-top: -0.3%;
+	position: absolute;
+	top: 105px;
+	width: 100%;
+	border-radius: 25px;
+}
+
+.smallLine {
+	top: 42px;
+}
+
+.searchLine {
+	background-color: #ffdc52;
+	display: block;
+	height: 3px;
+	left: 0px;
+	position: relative;
+	width: 100%;
+	border-radius: 5px;
+	/*top: 20px;*/
+}
+
+.light {
+	padding-top: 65px;
+	font-size: 14px;
+	color: #a7a7a7;
+}
+
+.resultsNumber {
+	padding-top: 50px;
+	font-size: 14px;
+	color: #a7a7a7;
+}
+
+#question {
+	font-size: 23px;
+	font-weight: 700;
+	color: #722f37;
+	padding-bottom: 2.1%;
+}
+
+#searchDrink {
+	border: none;
+	background: none;
+	display: inline;
+	width: 92%;
+	font-family: 'louis_george_cafe', Arial, sans-serif;
+	font-weight: 500;
+	font-style: normal;
+	color: #353535;
+}
+
+.bigSearch {
+	font-size: 44px;
+}
+
+.smallSearch {
+	font-size: 28px;
+}
+
+textarea:focus, input:focus{
+    outline: none;
+}
+
+#searchDrink:focus + .underline{
+	transition: height .075s ease-in-out;
+	height: 4px;
+}
+
+#options {
+	padding-top: 24px;
+	font-size: 16px;
+	font-weight: bold;
+	color: #722f37;
+}
+
+.buttons {
+	display: inline;
+}
+
+.buttonSort {
+	border: none;
+	padding: 11px;
+	padding-left: 20px;
+	padding-right: 20px;
+	margin-left: 10px;
+	font-size: 18px;
+ 	background-color: #ffdc52;
+ 	color: #cda20b;
+	border-radius: 9px;
+}
+
+#priceRange {
+	margin-top: 11px;
+	font-size: 16px;
+	font-weight: bold;
+	color: #722f37;
+	right:0;
+	position: absolute;
+	display: inline;
+}
+
+#areaContainer {
+	margin-bottom: 200px;
+}
+
+#resultsArea {
+/*	display: grid;
+	grid-template-columns: 1fr;*/
+	/* Matts old */
+	/* padding-top: 60px; */
+	/* Alex's updated */
+	padding-top: 15px;
+	margin-left: -15px;
+	margin-right: -15px;
+/*	flex-wrap: wrap;
+	flex-direction: row;*/
+}
+
+#cardsArea{
+	column-count: 1;
+  	column-gap: 12px;
+}
+
+.item {
+	display: inline-block;
+	margin: 0 0 12px;
+	width: 100%;
+}
+
+.resultCard {
+	position: relative;
+	display: flex;
+	align-items: center;
+	/*width: 30%;*/
+	padding: 14px;
+/*	margin: 12px;*/
+	border-radius: 9px;
+	background-color: white;
+	box-shadow: 0 5px 13px rgba(0,0,0,0.075), 0 1px 2px rgba(0,0,0,0.22);
+  	transition: all 0.3s cubic-bezier(.25,.8,.25,1);
+  	overflow: hidden;
+}
+
+.resultCard:hover {
+  box-shadow: 0 12px 24px rgba(0,0,0,0.13), 0 10px 10px rgba(0,0,0,0.13);
+}
+
+.cardImage {
+	flex: 0 0 25%;
+	padding-left: 10px;
+	padding-right: 10px;
+	font-size: 8px;
+}
+
+.cardContent {
+	flex: 1;
+	min-width: 0;
+}
+
+.brand {
+	font-weight: bold;
+	font-size: 1.6vmax;
+	color: #cda20b;
+}
+
+.name {
+	font-weight: bolder;
+	font-size: 4vmax;
+	color: #722f37;
+/*	overflow: hidden;
+	text-overflow: ellipsis;*/
+	display: -webkit-box;
+	-webkit-box-orient: vertical;
+	-webkit-line-clamp: 2;
+/*	padding-bottom: 18px;*/
+	margin-top: 0.5%;
+	margin-bottom: 3%;
+	overflow: hidden;
+  	text-overflow: ellipsis;
+	word-wrap: break-word;
+	/*display: block;*/
+	line-height: 1.2em;
+	max-height: 3.2em;
+}
+
+@media (min-width: 1000px) {
+	#cardsArea {
+		column-count: 3;
+		/*grid-template-columns: 1fr 1fr 1fr;*/
+	}
+	.name {
+		font-size: 2vmax;
+	}
+	.brand {
+		font-size: 1.5vmax;
+	}
+}
+
+
+@media (min-width: 2000px) {
+	.name {
+		font-size: 1.4vmax;
+		/*grid-template-columns: 1fr 1fr 1fr;*/
+	}
+}
+
+.details {
+	margin-top: 5.2%;
+	font-weight: bolder;
+	font-size: 1.4vw;
+	color: #a7a7a7;
+}
+
+/*#scorePriceContainer {
+	width: 100%;
+}
+*/
+.price {
+/*	font-weight: bolder;
+	float: right;*/
+/*	width: 30%;*/
+	 display: inline-block;
+	/* The original font size that matt had */
+	/* font-size: 3.8vw; */
+	/* Alex's adjusted font size to make the text fit into the card */
+/*	font-size: 3.0vw;*/
+	color: #cda20b;
+}
+
+.score {
+/*	margin-left: 7.5vw;*/
+	font-weight: bolder;
+/*	float: left;*/
+/*	width: 30%;*/
+	/* The original font size that matt had */
+	/* font-size: 3.8vw; */
+	/* Alex's adjusted font size to make the text fit into the card */
+	font-size: 3.0vw;
+	color:  #a7a7a7;
+	-webkit-transform:scale(1,1.1); /* Safari and Chrome */
+    -moz-transform:scale(1,1.1); /* Firefox */
+    -ms-transform:scale(1,1.1); /* IE 9 */
+    -o-transform:scale(1,1.1); /* Opera */
+    transform:scale(1,1.1); /* W3C */
+}
+
+#footer {
+	position: fixed;
+	padding: 1%;
+ 	left: 0;
+ 	bottom: 0;
+ 	width: 100%;
+ 	background-color: #722f37;
+ 	color: #ffdc52;
+}
+
+#footerRight {
+	float: right;
+	margin-right: 2%;
+}
+
+#footerLeft {
+	float: left;
+}
+
+::placeholder { /* Chrome, Firefox, Opera, Safari 10.1+ */
+  color: #cda20b;
+  opacity: 1; /* Firefox */
+}
+
+:-ms-input-placeholder { /* Internet Explorer 10-11 */
+  color: #cda20b;
+}
+
+::-ms-input-placeholder { /* Microsoft Edge */
+  color: #cda20b;
+}
+
+::-moz-selection { /* Code for Firefox */
+  background: #ffdc52;
+}
+
+::selection {
+  background: #ffdc52;
+}
+
+a {
+    text-decoration: none;
+}
