@@ -113,7 +113,9 @@
 	</div>
 	<script src="/static/js/fitty.min.js"></script>
 	<script>
-		fitty('.responsive_head');
+		fitty('.responsive_head', {
+			maxSize: 80,
+		});
 		// fitty('.scorePriceContainer');
 		fitty('.details', {
 			minSize: 12,

@@ -259,7 +259,7 @@ textarea:focus, input:focus{
 	-webkit-line-clamp: 2;
 /*	padding-bottom: 18px;*/
 	margin-top: 0.5%;
-	margin-bottom: 1%;
+	margin-bottom: 3%;
 	overflow: hidden;
   	text-overflow: ellipsis;
 	word-wrap: break-word;
@@ -277,7 +277,7 @@ textarea:focus, input:focus{
 		font-size: 2vmax;
 	}
 	.brand {
-
+		font-size: 1.5vmax;
 	}
 }
 
