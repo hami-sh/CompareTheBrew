@@ -639,7 +639,7 @@ def getDrinksDataBws(drink, commonList, _lock):
 
         # Put all of the details found for the drink into an Item object
         entry = Item("BWS", details['Brand'], old_name, details['Liquor Style'], drink.price, url, float(size),
-                     float(percent[0]), standard_drinks_parsed, float(efficiency), image)
+                     float(percent[0]), standard_drinks_parsed, float(efficiency), image, None)
 
         print(7)
 
@@ -699,7 +699,7 @@ def getDrinksDataBws(drink, commonList, _lock):
 
         # Put all of the details found for the drink into an Item object
         entry = Item("BWS", details['Brand'], name, details['Liquor Style'], price, url, float(size), float(percent[0]),
-                     float(numbers[0]), efficiency, image)
+                     float(numbers[0]), efficiency, image, None)
 
         # Print out the list of drink data
         print("<" + str(len(commonList)) + "> GOT DRINK DATA FOR: " + entry.name)

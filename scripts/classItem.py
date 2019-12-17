@@ -2,7 +2,7 @@ import threading
 
 class Item:
     # todo expand for alcohol content
-    def __init__(self, store, brand, name, type, price, link, ml, percent, stdDrinks, efficiency, image):
+    def __init__(self, store, brand, name, type, price, link, ml, percent, stdDrinks, efficiency, image, shortimage):
         self.store = store
         self.brand = brand
         self.name = name
@@ -14,6 +14,7 @@ class Item:
         self.stdDrinks = stdDrinks
         self.efficiency = efficiency
         self.image = image
+        self.shortimage = shortimage
 
     def __lt__(self, other):
         return self.efficiency < other.efficiency

@@ -64,6 +64,21 @@ def select_all_drinks_by_efficiency(conn):
     return rows
 
 
+def select_all_drinks_by_worst_efficiency(conn):
+    """
+    Query tasks by efficiency
+    :param conn: the Connection object
+    :return:
+    """
+    # Create a new cursor
+    cur = conn.cursor()
+    # Ececute a new query at the cursor
+    cur.execute("SELECT * FROM drinks ORDER BY efficiency ASC")
+    # Fetch all of the rows that matched the query
+    rows = cur.fetchall()
+    return rows
+
+
 def select_all_drinks_by_cost_asc(conn):
     """
     Query tasks by price ascending
@@ -260,10 +275,6 @@ def get_drinks_stddrinks(conn, drink):
     else:
         return False
 
-# def remove_duplicates(conn):
-#     sql = ''' DELETE FROM drinks WHERE rowid NOT IN (SELECT min(rowid) FROM drinks GROUP BY address, body)'''
-#     cur = conn.cursor()
-#     cur.execute(sql, (drink.store, drink.brand, drink.name))
 
 def save_short_link(conn, image):
     """
@@ -291,6 +302,43 @@ def save_short_link(conn, image):
         cur.execute(sql, (shortimage, oldurl))
         conn.commit()
         print('done')
+
+
+def fix_missing_beer_images(conn):
+    """
+    get the standard drinks of a drink
+    :param conn:
+    :param drink:
+    :return: project id
+    """
+    drinks = select_all_drinks(conn)
+    emptyImageDrinks = list()
+
+    for drink in drinks:
+        print(drink[11])
+        if drink[11] is None:
+            emptyImageDrinks.append(drink)
+
+    print(len(emptyImageDrinks))
+
+    for empty in emptyImageDrinks:
+        for drink in drinks:
+            old_empty = empty[3].split("-")[0]
+            old_drink = drink[3].split("-")[0]
+            if old_empty == old_drink:
+                if empty[0] != drink[0]:
+                    if empty[2] == drink[2]:
+                        if empty[11] is None:
+                            if drink[11] is not None:
+                                print("--------------------------------")
+                                print(drink)
+                                print(empty)
+                                sql = ''' UPDATE drinks
+                                          SET shortimage = ?, image = ?
+                                          WHERE name = ? '''
+                                cur = conn.cursor()
+                                cur.execute(sql, (drink[12], drink[11], empty[3]))
+                                conn.commit()
 
 
 def dbhandler(conn, list, mode):
