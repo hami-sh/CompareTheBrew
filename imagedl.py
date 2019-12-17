@@ -31,26 +31,28 @@ def main():
             url = url.replace("?", "+")
             url = url.replace(":", ",")
             url = url.split('~')[-1]
-            path = "images/" + url + '.webp'
-
-            if os.path.exists(path):
+            uncompressed_path = "static/images/uncompressed/" + url + '.webp'
+            compressed_path = "static/images/drinkimages/" + url + '.webp.webp '
+            if os.path.exists(compressed_path):
                 print("exists<" + link[0] + ">")
             else:
                 print("save<" + link[0] + ">")
-                print(path)
+                print(uncompressed_path)
                 response = requests.get(link[0], stream=True)
-                with open(path, 'wb') as out_file:
+                with open(uncompressed_path, 'wb') as out_file:
                     shutil.copyfileobj(response.raw, out_file)
                 del response
                 secs = randint(1, 3)
+                print("sleeping " + str(secs) + ". . .")
                 sleep(secs)
 
             i += 1
 
-        except:
+        except Exception as e:
             print("-----------------------------------------")
             print("broke")
             print(link)
+            print(e)
             print("-----------------------------------------")
 
     conn = create_connection()
