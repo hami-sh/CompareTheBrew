@@ -7,6 +7,28 @@
  * Restarting with stat
  * Debugger is active!
  * Debugger PIN: 142-300-033
-159.89.16.121 - - [16/Dec/2019 13:41:06] "GET / HTTP/1.0" 200 -
-220.239.3.4 - - [16/Dec/2019 13:41:41] "GET / HTTP/1.1" 200 -
-220.239.3.4 - - [16/Dec/2019 13:41:41] "GET /static/images/drinkimages/None.webp.webp HTTP/1.1" 404 -
+220.239.3.4 - - [17/Dec/2019 06:07:06] "GET / HTTP/1.1" 200 -
+220.239.3.4 - - [17/Dec/2019 06:07:07] "GET /static/images/drinkimages/None.webp.webp HTTP/1.1" 404 -
+220.239.3.4 - - [17/Dec/2019 06:07:08] "GET / HTTP/1.1" 200 -
+220.239.3.4 - - [17/Dec/2019 06:07:08] "GET /static/images/drinkimages/None.webp.webp HTTP/1.1" 404 -
+220.239.3.4 - - [17/Dec/2019 06:07:16] "POST / HTTP/1.1" 302 -
+220.239.3.4 - - [17/Dec/2019 06:07:17] "GET /results/vodka HTTP/1.1" 200 -
+220.239.3.4 - - [17/Dec/2019 06:07:17] "GET /static/css/results-styles.css HTTP/1.1" 304 -
+220.239.3.4 - - [17/Dec/2019 06:07:17] "GET /static/js/fitty.min.js HTTP/1.1" 304 -
+220.239.3.4 - - [17/Dec/2019 06:07:17] "GET /static/images/drinkimages/781501-1.png+impolicy=Prod_SM.webp.webp HTTP/1.1" 304 -
+220.239.3.4 - - [17/Dec/2019 06:07:17] "GET /static/images/drinkimages/904137-1.png+impolicy=Prod_SM.webp.webp HTTP/1.1" 304 -
+220.239.3.4 - - [17/Dec/2019 06:07:17] "GET /static/images/drinkimages/801554-1.png+impolicy=Prod_MD.webp.webp HTTP/1.1" 304 -
+220.239.3.4 - - [17/Dec/2019 06:07:17] "GET /static/images/drinkimages/901767-1.png+impolicy=Prod_SM.webp.webp HTTP/1.1" 304 -
+220.239.3.4 - - [17/Dec/2019 06:07:17] "GET /static/images/drinkimages/906081-1.png+impolicy=Prod_SM.webp.webp HTTP/1.1" 304 -
+220.239.3.4 - - [17/Dec/2019 06:07:17] "GET /static/images/drinkimages/333499-1.png+impolicy=Prod_MD.webp.webp HTTP/1.1" 304 -
+220.239.3.4 - - [17/Dec/2019 06:07:17] "GET /static/images/drinkimages/902023-1.png+impolicy=Prod_SM.webp.webp HTTP/1.1" 304 -
+220.239.3.4 - - [17/Dec/2019 06:07:17] "GET /static/images/drinkimages/916540-1.png+impolicy=Prod_SM.webp.webp HTTP/1.1" 304 -
+220.239.3.4 - - [17/Dec/2019 06:07:17] "GET /favicon.ico HTTP/1.1" 404 -
+220.239.3.4 - - [17/Dec/2019 06:07:20] "POST /results/vodka HTTP/1.1" 302 -
+220.239.3.4 - - [17/Dec/2019 06:07:20] "GET /results/wine HTTP/1.1" 200 -
+220.239.3.4 - - [17/Dec/2019 06:07:20] "GET /static/images/drinkimages/None.webp.webp HTTP/1.1" 404 -
+220.239.3.4 - - [17/Dec/2019 06:07:20] "GET /static/images/drinkimages/727813-1.png+impolicy=Prod_MD.webp.webp HTTP/1.1" 404 -
+220.239.3.4 - - [17/Dec/2019 06:07:28] "POST /results/wine HTTP/1.1" 302 -
+220.239.3.4 - - [17/Dec/2019 06:07:29] "GET /results/red HTTP/1.1" 200 -
+220.239.3.4 - - [17/Dec/2019 06:07:29] "GET /static/images/drinkimages/None.webp.webp HTTP/1.1" 404 -
+220.239.3.4 - - [17/Dec/2019 06:07:29] "GET /static/images/drinkimages/901253-1.png+impolicy=Prod_MD.webp.webp HTTP/1.1" 404 -
