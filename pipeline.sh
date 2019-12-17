@@ -56,3 +56,15 @@ done
 # download images
 time="$(date +"%Y-%m-%d")"
 python3 imagedl.py > "$workdir/log/image-$time.log"
+
+# convert to webp format
+imagedir="/home/ubuntu/CompareTheBrewDev/static/images"
+for file in $imagedir/uncompressed/*; do
+        echo "$file"
+        cwebp -q 80 "$file" -o "$file.webp"
+        mv "$file.webp" "$imagedir/drinkimages/"
+done
+
+## delete extra images that have otherwise been compressed
+rm -rf $imagedir/uncompressed/*
+

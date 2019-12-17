@@ -40,3 +40,4 @@
 220.239.3.4 - - [17/Dec/2019 16:38:11] "GET /static/js/fitty.min.js HTTP/1.1" 200 -
 220.239.3.4 - - [17/Dec/2019 16:38:12] "GET /static/images/drinkimages/None.webp.webp HTTP/1.1" 404 -
 220.239.3.4 - - [17/Dec/2019 16:38:12] "GET /favicon.ico HTTP/1.1" 404 -
+173.212.218.126 - - [17/Dec/2019 17:12:51] "GET / HTTP/1.0" 200 -
