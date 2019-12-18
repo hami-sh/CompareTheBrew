@@ -17,9 +17,31 @@
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
 	<script src="/static/js/scripts.js"></script>
 	<div id="header">
-		<i class="material-icons" style="padding:1%;font-size:36px;color:#722f37;">
-			menu
-		</i>
+		<nav role="navigation">
+			<div id="menuToggle">
+			  <!--
+			  Hidden checkbox
+			  -->
+			  <input type="checkbox" />
+			  
+			  <!--
+			  Some spans to act as a hamburger.
+			  Don't remove this u monkey it looks dumb but it works
+			  -->
+			  <span></span>
+			  <span></span>
+			  <span></span>
+			  
+			  <!--
+			  Links
+			  -->
+			  <ul id="menu">
+				<a href="/"><li>Home</li></a>
+				<a href="/FAQ"><li>FAQ</li></a>
+				<a href="/About"><li>About</li></a>
+			  </ul>
+			</div>
+		  </nav>
 	</div>
 
 
