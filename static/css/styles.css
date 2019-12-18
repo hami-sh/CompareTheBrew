@@ -129,7 +129,8 @@ textarea:focus, input:focus{
  	bottom: 0;
  	width: 100%;
  	background-color: #722f37;
- 	color: #ffdc52;
+	color: #ffdc52;
+	z-index: 2;
 }
 
 #footerRight {
@@ -290,7 +291,7 @@ a {
   top: 50px;
   left: 50px;
   
-  /*z-index: 1;*/
+  z-index: 1;
   
   -webkit-user-select: none;
   user-select: none;
@@ -394,10 +395,11 @@ CSS for when the menu is actually open
 #menu
 {
   position: absolute;
-  /* width and height of the bar */
-  width: 80px;
-  /* height needs adjusting to be made fully responsive */
-  height: 600px;
+  /* width and height of the bar in percentage of window size
+  this code is technically responsive. try it and see if it is ok */
+  width: 10vw;
+  height: 100vh;
+  max-width: 60px;
   margin: -100px 0 0 -50px;
   padding: 50px;
   padding-top: 125px;
@@ -434,5 +436,19 @@ CSS for when the menu is actually open
 	}
 	li {
 		color: white;
+	}
+}
+
+/* START Responsive for hamburger menu */
+
+/* Test code for small devices */
+@media (max-width: 460px) {
+	#menu {
+		width: 25vw;
+		height: 100vh;
+		max-width: 600px;
+	}
+	#menu li {
+		  font-size: 38px;
 	}
 }
