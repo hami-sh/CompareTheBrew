@@ -72,6 +72,16 @@ def postNewSearchTerms(arg):
     # Send the user to the results page
     return redirect("/results/" + searchTerms)
 
+# Route for About Us page
+@app.route('/about', methods=['GET', 'POST'])
+def viewabout():
+    return render_template('About.html')  # render a template
+
+# Route for About Us page
+@app.route('/faq', methods=['GET', 'POST'])
+def viewFAQ():
+    return render_template('FAQ.html')  # render a template
+
 # Run the flask application (won't run when the site is being hosted on a server)
 if __name__ == '__main__':
     app.run(host='0.0.0.0', port=80, debug=True)

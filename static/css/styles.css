@@ -87,6 +87,12 @@ input[type="search"]::-webkit-search-results-decoration {
 	color: #a7a7a7;
 }
 
+.light_nospacing {
+	padding-top: 10px;
+	font-size: 14px;
+	color: #a7a7a7;
+}
+
 #question {
 	font-size: 23px;
 	font-weight: 700;
@@ -390,7 +396,7 @@ CSS for when the menu is actually open
   /* width and height of the bar */
   width: 80px;
   /* height needs adjusting to be made fully responsive */
-  height: 800px;
+  height: 600px;
   margin: -100px 0 0 -50px;
   padding: 50px;
   padding-top: 125px;
