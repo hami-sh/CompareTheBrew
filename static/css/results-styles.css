@@ -28,14 +28,12 @@ body {
 	font-family: 'louis_george_cafe', Arial, sans-serif;
 	font-weight: 500;
 	font-style: normal;
-	font-size: 14px;
+	font-size: 20px;
 	margin: 0;
 	padding: 0;
 }
 
 .hamburger {
-	padding: 1%;
-	font-size: 48px;
 	color: #722f37;
 }
 
@@ -62,7 +60,6 @@ body {
 	/* Matts old */
 	/* top: 120px; */
 	/* Alexs updated */
-	top: 80px;
 	-webkit-transform: translate(-50%, 0);
 	transform: translate(-50%, 0);
 	width: 80%;
@@ -79,7 +76,7 @@ input[type="search"]::-webkit-search-results-decoration {
 .underline {
 	background-color: #cda20b;
 	display: inline-block;
-	height: 2px;
+	height: 7px;
 	transition: height .075s ease-in-out;
 	left: 0px;
 	margin-top: -0.3%;
@@ -90,7 +87,7 @@ input[type="search"]::-webkit-search-results-decoration {
 }
 
 .smallLine {
-	top: 42px;
+	/*top: 42px;*/
 }
 
 .searchLine {
@@ -106,7 +103,7 @@ input[type="search"]::-webkit-search-results-decoration {
 
 .light {
 	padding-top: 65px;
-	font-size: 14px;
+	font-size: 36px;
 	color: #a7a7a7;
 }
 
@@ -139,7 +136,7 @@ input[type="search"]::-webkit-search-results-decoration {
 }
 
 .smallSearch {
-	font-size: 28px;
+	font-size: 88px;
 }
 
 textarea:focus, input:focus{
@@ -148,12 +145,12 @@ textarea:focus, input:focus{
 
 #searchDrink:focus + .underline{
 	transition: height .075s ease-in-out;
-	height: 4px;
+	height: 10px;
 }
 
 #options {
-	padding-top: 24px;
-	font-size: 16px;
+	padding-top: 42px;
+	font-size: 36px;
 	font-weight: bold;
 	color: #722f37;
 }
@@ -164,24 +161,24 @@ textarea:focus, input:focus{
 
 .buttonSort {
 	border: none;
-	padding: 11px;
-	padding-left: 20px;
-	padding-right: 20px;
+	padding: 17px;
+	padding-left: 30px;
+	padding-right: 30px;
 	margin-left: 10px;
-	font-size: 18px;
+	font-size: 36px;
  	background-color: #ffdc52;
  	color: #cda20b;
 	border-radius: 9px;
 }
 
 #priceRange {
-	margin-top: 11px;
-	font-size: 16px;
+	margin-top: 42px;
+	font-size: 36px;
 	font-weight: bold;
 	color: #722f37;
 	right:0;
-	position: absolute;
-	display: inline;
+/*	position: absolute;
+	display: inline;*/
 }
 
 #areaContainer {
@@ -203,12 +200,12 @@ textarea:focus, input:focus{
 
 #cardsArea{
 	column-count: 1;
-  	column-gap: 12px;
+  	column-gap: 42px;
 }
 
 .item {
 	display: inline-block;
-	margin: 0 0 12px;
+	margin: 0 0 42px;
 	width: 100%;
 }
 
@@ -268,27 +265,6 @@ textarea:focus, input:focus{
 	max-height: 3.2em;
 }
 
-@media (min-width: 1000px) {
-	#cardsArea {
-		column-count: 3;
-		/*grid-template-columns: 1fr 1fr 1fr;*/
-	}
-	.name {
-		font-size: 2vmax;
-	}
-	.brand {
-		font-size: 1.5vmax;
-	}
-}
-
-
-@media (min-width: 2000px) {
-	.name {
-		font-size: 1.4vmax;
-		/*grid-template-columns: 1fr 1fr 1fr;*/
-	}
-}
-
 .details {
 	margin-top: 5.2%;
 	font-weight: bolder;
@@ -332,6 +308,8 @@ textarea:focus, input:focus{
 #footer {
 	position: fixed;
 	padding: 1%;
+	padding-top: 2%;
+	padding-bottom: 2%;
  	left: 0;
  	bottom: 0;
  	width: 100%;
@@ -371,4 +349,78 @@ textarea:focus, input:focus{
 
 a {
     text-decoration: none;
+}
+
+@media (min-width: 1000px) {
+	body {
+		font-size: 15px;
+	}
+	.hamburger {
+		font-size: 36px !important;
+	}
+	.light {
+		font-size: 14px;
+	}
+	.mainResults {
+		top: 80px;
+	}
+	#cardsArea {
+		column-count: 3;
+		/*grid-template-columns: 1fr 1fr 1fr;*/
+	}
+	.name {
+		font-size: 2vmax;
+	}
+	.brand {
+		font-size: 1.5vmax;
+	}
+	.smallSearch {
+		font-size: 28px;
+	}
+	.underline {
+		height: 2px;
+	}
+	#searchDrink:focus + .underline{
+		height: 4px;
+	}
+	.smallLine {
+		top: 42px;
+	}
+	#searchButton {
+		font-size: 28px !important;
+		margin-top: -0.4% !important;
+	}
+	#priceRange {
+		font-size: 16px;
+		margin-top: 11px;
+		position: absolute;
+		display: inline;
+	}
+	#cardsArea{
+	  	column-gap: 12px;
+	}
+	.item {
+		margin: 0 0 12px;
+	}
+	#options {
+		font-size: 16px;
+		padding-top: 24px;
+	}
+	.buttonSort {
+		font-size: 18px;
+		padding: 11px;
+		padding-left: 20px;
+		padding-right: 20px;
+	}
+	#footer {
+		padding: 1%;
+	}
+}
+
+
+@media (min-width: 2000px) {
+	.name {
+		font-size: 1.4vmax;
+		/*grid-template-columns: 1fr 1fr 1fr;*/
+	}
 }
