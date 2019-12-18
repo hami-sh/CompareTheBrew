@@ -442,13 +442,29 @@ CSS for when the menu is actually open
 /* START Responsive for hamburger menu */
 
 /* Test code for small devices */
-@media (max-width: 460px) {
-	#menu {
-		width: 25vw;
-		height: 100vh;
-		max-width: 600px;
-	}
-	#menu li {
-		  font-size: 38px;
-	}
+/* Pixel ratio 2 */
+@media only screen 
+    and (max-width: 500px) 
+    and (-webkit-device-pixel-ratio: 2) {
+		#menu {
+			width: 30vw;
+			height: 100vh;
+			max-width: 6000px;
+		}
+		#menu li {
+			  font-size: 50px;
+		}
+}
+/* Pixel ratio 3 */
+@media only screen 
+    and (max-width : 500px) 
+    and (-webkit-device-pixel-ratio : 3) {
+		#menu {
+			width: 30vw;
+			height: 100vh;
+			max-width: 6000px;
+		}
+		#menu li {
+			  font-size: 50px;
+		}
 }
