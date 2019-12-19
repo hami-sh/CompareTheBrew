@@ -427,9 +427,11 @@ CSS for when the menu is actually open
 
 /* END of hamburger menu CSS */
 
+/* Dark Mode */
+
 @media (prefers-color-scheme: dark) {
 	body {
-		background-color: black;
+		background-color: #1c1c1e;
 	}
 	#menu {
 		background-color: #353535;
@@ -437,34 +439,31 @@ CSS for when the menu is actually open
 	li {
 		color: white;
 	}
-}
-
-/* START Responsive for hamburger menu */
-
-/* Test code for small devices */
-/* Pixel ratio 2 */
-@media only screen 
-    and (max-width: 500px) 
-    and (-webkit-device-pixel-ratio: 2) {
-		#menu {
-			width: 30vw;
-			height: 100vh;
-			max-width: 6000px;
-		}
-		#menu li {
-			  font-size: 50px;
-		}
-}
-/* Pixel ratio 3 */
-@media only screen 
-    and (max-width : 500px) 
-    and (-webkit-device-pixel-ratio : 3) {
-		#menu {
-			width: 30vw;
-			height: 100vh;
-			max-width: 6000px;
-		}
-		#menu li {
-			  font-size: 50px;
-		}
+	.resultCard {
+		background-color: #48484a
+	}
+	.name {
+		color: #64d3ff;
+	}
+	#priceRange {
+		color: #64d3ff;
+	}
+	.buttonSort {
+		background-color: #346173;
+	}
+	.buttonSortActive {
+		background-color: #64d3ff;
+	}
+	.sortbytext {
+		color: #64d3ff;
+	}
+	.indexdetails {
+		color: #a7a7a7;
+	}
+	#question {
+		color: #64d3ff;
+	}
+	#footer {
+		background-color:#346173;
+	}
 }

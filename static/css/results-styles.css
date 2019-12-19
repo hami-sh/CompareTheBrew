@@ -171,6 +171,18 @@ textarea:focus, input:focus{
 	border-radius: 9px;
 }
 
+.buttonSortActive {
+	border: none;
+	padding: 17px;
+	padding-left: 30px;
+	padding-right: 30px;
+	margin-left: 10px;
+	font-size: 36px;
+ 	background-color: #722f37;
+ 	color: #cda20b;
+	border-radius: 9px;
+}
+
 #priceRange {
 	margin-top: 42px;
 	font-size: 36px;
@@ -412,6 +424,12 @@ a {
 		padding-left: 20px;
 		padding-right: 20px;
 	}
+	.buttonSortActive {
+		font-size: 18px;
+		padding: 11px;
+		padding-left: 20px;
+		padding-right: 20px;
+	}
 	#footer {
 		padding: 1%;
 	}
@@ -422,5 +440,47 @@ a {
 	.name {
 		font-size: 1.4vmax;
 		/*grid-template-columns: 1fr 1fr 1fr;*/
+	}
+}
+
+/* Dark Mode */
+
+@media (prefers-color-scheme: dark) {
+	body {
+		background-color: #1c1c1e;
+	}
+	#menu {
+		background-color: #353535;
+	}
+	li {
+		color: white;
+	}
+	.resultCard {
+		background-color: #48484a
+	}
+	.name {
+		color: #64d3ff;
+	}
+	#priceRange {
+		color: #64d3ff;
+	}
+	.buttonSort {
+		background-color: #346173;
+	}
+	.buttonSortActive {
+		background-color: #64d3ff;
+		color: black;
+	}
+	.sortbytext {
+		color: #64d3ff;
+	}
+	.indexdetails {
+		color: #a7a7a7;
+	}
+	#question {
+		color: #64d3ff;
+	}
+	#footer {
+		background-color:#346173;
 	}
 }
