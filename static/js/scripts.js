@@ -1,8 +1,5 @@
 $(document).ready(function(e) {
-        // $('#searchDrink').on('focusin', function() {
-        //         $('#searchButton').text("close");
-        // });
-        // $('#searchDrink').on('focusout', function() {
-        //         $('#searchButton').text("search");
-        // });
+        document.getElementById("menuToggle").addEventListener('click', function() {
+                document.getElementById("cover").classList.toggle("shadow");
+        });
 });
