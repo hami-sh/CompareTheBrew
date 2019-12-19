@@ -52,7 +52,6 @@ body {
 }
 
 .mainResults {
-	/*margin-top: 100px;*/
 	margin-bottom: 80px;
 	font-size: 30px;
 	position: absolute;
@@ -60,8 +59,8 @@ body {
 	/* Matts old */
 	/* top: 120px; */
 	/* Alexs updated */
-	-webkit-transform: translate(-50%, 0);
-	transform: translate(-50%, 0);
+	-webkit-transform: translate(-50%, 2.2%);
+	transform: translate(-50%, 2.2%);
 	width: 80%;
 	max-width: 1360px;
 }
@@ -326,7 +325,8 @@ textarea:focus, input:focus{
  	bottom: 0;
  	width: 100%;
  	background-color: #722f37;
- 	color: #ffdc52;
+	 color: #ffdc52;
+	 z-index: 3;
 }
 
 #footerRight {
@@ -363,7 +363,163 @@ a {
     text-decoration: none;
 }
 
+/* START of hamburger menu CSS*/
+
+#menuToggle
+{
+  display: block;
+  position: fixed;
+  top: 50px;
+  left: 50px;
+  
+  z-index: 1;
+  
+  -webkit-user-select: none;
+  user-select: none;
+}
+
+#menuToggle a
+{
+  text-decoration: none;
+  color: #232323;
+  
+  transition: color 0.3s ease;
+}
+
+/* colour change when hovering over the menu items (dunno what colour this should be */
+#menuToggle a:hover
+{
+  color: #722f37;
+}
+
+
+#menuToggle input
+{
+  display: block;
+  width: 40px;
+  height: 32px;
+  position: absolute;
+  top: -7px;
+  left: -5px;
+  
+  cursor: pointer;
+  
+  opacity: 0; /* hide this */
+  z-index: 2; /* and place it over the hamburger */
+  
+  -webkit-touch-callout: none;
+}
+
+/*
+ This is the CSS for the toggle (when it is not activated)
+ */
+#menuToggle span
+{
+  display: block;
+  width: 33px;
+  height: 4px;
+  margin-bottom: 5px;
+  position: relative;
+  
+  background: #cda20b;
+  border-radius: 3px;
+  
+  z-index: 1;
+  
+  transform-origin: 4px 0px;
+  
+  transition: transform 0.5s cubic-bezier(0.77,0.2,0.05,1.0),
+              background 0.5s cubic-bezier(0.77,0.2,0.05,1.0),
+              opacity 0.55s ease;
+}
+
+#menuToggle span:first-child
+{
+  transform-origin: 0% 0%;
+}
+
+#menuToggle span:nth-last-child(2)
+{
+  transform-origin: 0% 100%;
+}
+
+/* 
+ Animation to move top line into cross
+ */
+#menuToggle input:checked ~ span
+{
+  opacity: 1;
+  transform: rotate(45deg) translate(-2px, -1px);
+  background: #cda20b;
+}
+
+/*
+ Fade out the middle line 
+ */
+#menuToggle input:checked ~ span:nth-last-child(3)
+{
+  opacity: 0;
+  transform: rotate(0deg) scale(0.2, 0.2);
+}
+
+/*
+ Animation to move bottom line into cross
+ */
+#menuToggle input:checked ~ span:nth-last-child(2)
+{
+  transform: rotate(-45deg) translate(0, -1px);
+}
+
+/*
+CSS for when the menu is actually open
+ */
+#menu
+{
+  position: absolute;
+  /* width and height of the bar in percentage of window size
+  this code is technically responsive. try it and see if it is ok */
+  width: 30vw;
+  height: 100vh;
+  margin: -100px 0 0 -50px;
+  padding: 50px;
+  padding-top: 125px;
+  
+  background-color: #ededed;
+  list-style-type: none;
+  -webkit-font-smoothing: antialiased;
+  
+  transform-origin: 0% 0%;
+  transform: translate(-100%, 0);
+  
+  transition: transform 0.5s cubic-bezier(0.77,0.2,0.05,1.0);
+}
+
+#menu li
+{
+  padding: 10px 0;
+  font-size: 100px;
+}
+
+#menuToggle input:checked ~ ul
+{
+  transform: none;
+}
+
+/* END of hamburger menu CSS */
+
+
+
+
+
 @media (min-width: 1000px) {
+	#menu {
+		width: 10vw;
+		height: 100vh;
+		max-width: 65px;
+	}
+	#menu li {
+		font-size: 22px;
+	}
 	body {
 		font-size: 15px;
 	}
@@ -375,6 +531,8 @@ a {
 	}
 	.mainResults {
 		top: 80px;
+		-webkit-transform: translate(-50%, 0%);
+		transform: translate(-50%, 0%);
 	}
 	#cardsArea {
 		column-count: 3;
@@ -432,9 +590,9 @@ a {
 	}
 	#footer {
 		padding: 1%;
+		z-index: 3;
 	}
 }
-
 
 @media (min-width: 2000px) {
 	.name {
