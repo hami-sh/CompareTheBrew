@@ -41,16 +41,17 @@ body {
 }
 
 #content {
-
+	
 }
 
 #main {
+	width: 80%;
 	font-size: 20px;
 	position: absolute;
 	left: 50%;
 	top: 50%;
-	-webkit-transform: translate(-50%, -50%);
-	transform: translate(-50%, -50%);
+	-webkit-transform: translate(-50%, -40vh);
+	transform: translate(-50%, -40vh);
 	max-width: 1360px;
 }
 
@@ -75,7 +76,7 @@ input[type="search"]::-webkit-search-results-decoration {
 	height: 2px;
 	transition: height .075s ease-in-out;
 	left: 0px;
-	margin-top: -4px;
+	margin-top: 480px;
 	position: absolute;
 	top: 105px;
 	width: 100%;
@@ -84,7 +85,7 @@ input[type="search"]::-webkit-search-results-decoration {
 
 .light {
 	padding-top: 65px;
-	font-size: 14px;
+	font-size: 40px;
 	color: #a7a7a7;
 }
 
@@ -95,10 +96,12 @@ input[type="search"]::-webkit-search-results-decoration {
 }
 
 #question {
-	font-size: 23px;
+	font-size: 100px;
 	font-weight: 700;
 	color: #722f37;
-	padding-bottom: 2.1%;
+	padding-bottom: 12.1%;
+	padding-top: 100px;
+	text-align: center;
 }
 
 #searchDrink {
@@ -109,7 +112,7 @@ input[type="search"]::-webkit-search-results-decoration {
 	font-family: 'louis_george_cafe', Arial, sans-serif;
 	font-weight: 500;
 	font-style: normal;
-	font-size: 40px;
+	font-size: 100px;
 	color: #353535;
 }
 
@@ -202,7 +205,7 @@ a {
 	position: relative;
 	display: flex;
 	align-items: center;*/
-	height: 100%;
+	height: 300%;
 	width: 95%;
 	padding: 16px;
 	border-radius: 9px; */
@@ -230,13 +233,13 @@ a {
 
 .brand {
 	font-weight: bold;
-	font-size: 1.6vw;
+	font-size: 5vw;
 	color: #cda20b;
 }
 
 .name {
 	font-weight: bolder;
-	font-size: 2vw;
+	font-size: 7vw;
 	color: #722f37;
 /*	overflow: hidden;
 	text-overflow: ellipsis;*/
@@ -253,10 +256,15 @@ a {
 	max-height: 3.2em;
 }
 
+.score_responsive_head {
+	font-size: 5vw;
+	color: #8e8e93;
+}
+
 .indexdetails {
 	margin-top: 6px;
 	font-weight: bolder;
-	font-size: 1.4vw;
+	font-size: 5vw;
 	color: #353535;
 }
 
@@ -474,6 +482,146 @@ CSS for when the menu is actually open
 /* END of hamburger menu CSS */
 
 @media (min-width: 1000px) {
+	#main {
+	-webkit-transform: translate(-50%, -60%);
+	transform: translate(-50%, -60%);
+	max-width: 600px;
+	}
+	.underline {
+		background-color: #cda20b;
+		display: inline-block;
+		height: 2px;
+		transition: height .075s ease-in-out;
+		left: 0px;
+		margin-top: 190px;
+		position: absolute;
+		top: 105px;
+		width: 100%;
+		border-radius: 25px;
+	}
+	.light {
+		padding-top: 65px;
+		font-size: 14px;
+		color: #a7a7a7;
+	}
+	#question {
+		font-size: 50px;
+		font-weight: 700;
+		color: #722f37;
+		padding-bottom: 2.1%;
+		text-align: left;
+	}
+	.resultCard {
+		background-color: #ededed;
+		position: relative;
+		display: flex;
+		align-items: center;*/
+		height: 100%;
+		width: 95%;
+		padding: 16px;
+		border-radius: 9px; */
+		/* background-color: white; */
+		box-shadow: 0 5px 13px rgba(0,0,0,0.075), 0 1px 2px rgba(0,0,0,0.22);
+		  transition: all 0.3s cubic-bezier(.25,.8,.25,1);
+		overflow: hidden;
+		box-shadow:0 0 20px #d4ae13;
+	}
+	.brand {
+		font-weight: bold;
+		font-size: 1.6vw;
+		color: #cda20b;
+	}
+	
+	.name {
+		font-weight: bolder;
+		font-size: 2vw;
+		color: #722f37;
+	/*	overflow: hidden;
+		text-overflow: ellipsis;*/
+		display: -webkit-box;
+		-webkit-box-orient: vertical;
+		-webkit-line-clamp: 2;
+	/*	padding-bottom: 18px;*/
+		margin-top: -2px;
+		overflow: hidden;
+		  text-overflow: ellipsis;
+		word-wrap: break-word;
+		/*display: block;*/
+		line-height: 1em;
+		max-height: 3.2em;
+	}
+	
+	.indexdetails {
+		margin-top: 6px;
+		font-weight: bolder;
+		font-size: 1.4vw;
+		color: #353535;
+	}
+	.searchButton {
+		font-size: 22px;
+	}
+	.score_responsive_head {
+		font-size: 2.2px;
+	}
+	.searchLine {
+		background-color: #ffdc52;
+		display: block;
+		height: 3px;
+		left: 0px;
+		position: relative;
+		width: 100%;
+		border-radius: 5px;
+		/*top: 20px;*/
+	}
+	
+	.details {
+		margin-top: -18px;
+		font-weight: bolder;
+		font-size: 1.4vw;
+		color: #a7a7a7;
+	}
+	
+	.score {
+		/*	margin-left: 7.5vw;*/
+		font-weight: bolder;
+		/*	float: left;*/
+		/*	width: 30%;*/
+		/* The original font size that matt had */
+		/* font-size: 3.8vw; */
+		/* Alex's adjusted font size to make the text fit into the card */
+		font-size: 3.0vw;
+		color:  #a7a7a7;
+		-webkit-transform:scale(1,1.1); /* Safari and Chrome */
+		-moz-transform:scale(1,1.1); /* Firefox */
+		-ms-transform:scale(1,1.1); /* IE 9 */
+		-o-transform:scale(1,1.1); /* Opera */
+		transform:scale(1,1.1); /* W3C */
+		display: inline-block;
+		white-space: nowrap;
+	}
+	
+	.price {
+		/*	font-weight: bolder;
+		float: right;*/
+		/*	width: 30%;*/
+		display: inline-block;
+		/* The original font size that matt had */
+		/* font-size: 3.8vw; */
+		/* Alex's adjusted font size to make the text fit into the card */
+		/*	font-size: 3.0vw;*/
+		color: #cda20b;
+	}
+	#searchDrink {
+		border: none;
+		background: none;
+		display: inline;
+		width: 92%;
+		font-family: 'louis_george_cafe', Arial, sans-serif;
+		font-weight: 500;
+		font-style: normal;
+		font-size: 40px;
+		color: #353535;
+	}	
 	#menu {
 		width: 10vw;
 		height: 100vh;

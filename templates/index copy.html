@@ -54,7 +54,6 @@
 		<div id="main">
 			<div id="question">
 				What drink are you looking for?
-				<br>
 			</div>
 
             <!-- <form method="POST">
@@ -63,7 +62,7 @@
             </form> -->
 
 			<form id="query" method="POST">
-                <i id="searchButton" class="material-icons" style="padding:1%;font-size:88px;color:#cda20b;right:0;position:absolute;margin-right:-1%;margin-top:-0.4%;cursor:pointer;">search</i>
+                <i id="searchButton" class="material-icons" style="padding:1%;font-size:44px;color:#cda20b;right:0;position:absolute;margin-right:-1%;margin-top:-0.4%;cursor:pointer;">search</i>
 				<input name="searchTerms" id="searchDrink" type="text" placeholder="Search...">
 				<span class="underline"></span>
 			</form>
@@ -94,7 +93,7 @@
 								</div>
 								<div>
 									<div class="scorePriceContainer">
-										<div class="score_responsive_head">
+										<div class="score responsive_head">
 											{{'%0.0f'| format(result[10] * 100)}}%
 											<div class="price">
 												${{result[5]}}											
