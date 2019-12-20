@@ -52,6 +52,7 @@ body {
 }
 
 .mainResults {
+	margin-top: 6vh;
 	margin-bottom: 80px;
 	font-size: 30px;
 	position: absolute;
@@ -428,11 +429,10 @@ a {
 #menuToggle input
 {
   display: block;
-  width: 40px;
-  height: 32px;
   position: absolute;
-  top: -7px;
-  left: -5px;
+
+  width: 100%;
+  height: 100%;
   
   cursor: pointer;
   
@@ -448,9 +448,10 @@ a {
 #menuToggle span
 {
   display: block;
-  width: 33px;
-  height: 4px;
-  margin-bottom: 5px;
+  width: 100px;
+  height: 12px;
+  margin-bottom: 20px;
+
   position: relative;
   
   background: #cda20b;
@@ -513,9 +514,9 @@ CSS for when the menu is actually open
   this code is technically responsive. try it and see if it is ok */
   width: 60vw;
   height: 100vh;
-  margin: -100px 0 0 -55px;
+  margin: -146px 0 0 -55px;
   padding: 50px;
-  padding-top: 125px;
+  padding-top: 232px;
   
   background-color: #ededed;
   list-style-type: none;
@@ -572,15 +573,28 @@ CSS for when the menu is actually open
 		width: 10vw;
 		height: 100vh;
 		max-width: 65px;
+		margin: -100px 0 0 -55px;
+		padding-top: 125px;
 	}
 	#menu li {
 		font-size: 22px;
+	}
+	#menuToggle input {
+		  width: 40px;
+		  height: 32px;
+		  top: -7px;
+		  left: -5px;
 	}
 	body {
 		font-size: 15px;
 	}
 	.hamburger {
 		font-size: 36px !important;
+	}
+	#menuToggle span {
+		width: 33px;
+		height: 4px;
+		margin-bottom: 5px;
 	}
 	.light {
 		font-size: 14px;

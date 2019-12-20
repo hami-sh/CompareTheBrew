@@ -52,6 +52,7 @@ body {
 	-webkit-transform: translate(-50%, -50%);
 	transform: translate(-50%, -50%);
 	max-width: 1360px;
+	width: 80%;
 }
 
 /* #compare-the-brew {
@@ -72,30 +73,41 @@ input[type="search"]::-webkit-search-results-decoration {
 .underline {
 	background-color: #cda20b;
 	display: inline-block;
-	height: 2px;
+	height: 7px;
 	transition: height .075s ease-in-out;
 	left: 0px;
 	margin-top: -4px;
 	position: absolute;
-	top: 105px;
+	top: 175px;
 	width: 100%;
 	border-radius: 25px;
 }
 
+.searchLine {
+	background-color: #ffdc52;
+	display: block;
+	height: 3px;
+	left: 0px;
+	position: relative;
+	width: 100%;
+	border-radius: 5px;
+	/*top: 20px;*/
+}
+
 .light {
 	padding-top: 65px;
-	font-size: 14px;
+	font-size: 36px;
 	color: #a7a7a7;
 }
 
 .light_nospacing {
 	padding-top: 10px;
-	font-size: 14px;
+	font-size: 36px;
 	color: #a7a7a7;
 }
 
 #question {
-	font-size: 23px;
+	font-size: 36px;
 	font-weight: 700;
 	color: #722f37;
 	padding-bottom: 2.1%;
@@ -109,7 +121,7 @@ input[type="search"]::-webkit-search-results-decoration {
 	font-family: 'louis_george_cafe', Arial, sans-serif;
 	font-weight: 500;
 	font-style: normal;
-	font-size: 40px;
+	font-size: 88px;
 	color: #353535;
 }
 
@@ -119,7 +131,7 @@ textarea:focus, input:focus{
 
 #searchDrink:focus + .underline{
 	transition: height .075s ease-in-out;
-	height: 4px;
+	height: 10px;
 }
 
 #footer {
@@ -133,7 +145,7 @@ textarea:focus, input:focus{
  	width: 100%;
  	background-color: #722f37;
 	color: #ffdc52;
-	z-index: 3;
+	z-index: 0;
 }
 
 #footerRight {
@@ -244,17 +256,6 @@ a {
 	color: #353535;
 }
 
-.searchLine {
-	background-color: #ffdc52;
-	display: block;
-	height: 3px;
-	left: 0px;
-	position: relative;
-	width: 100%;
-	border-radius: 5px;
-	/*top: 20px;*/
-}
-
 .details {
 	margin-top: -18px;
 	font-weight: bolder;
@@ -328,11 +329,9 @@ a {
 #menuToggle input
 {
   display: block;
-  width: 40px;
-  height: 32px;
   position: absolute;
-  top: -7px;
-  left: -5px;
+  width: 100%;
+  height: 100%;
   
   cursor: pointer;
   
@@ -348,9 +347,9 @@ a {
 #menuToggle span
 {
   display: block;
-  width: 33px;
-  height: 4px;
-  margin-bottom: 5px;
+  width: 100px;
+  height: 12px;
+  margin-bottom: 20px;
   position: relative;
   
   background: #cda20b;
@@ -413,9 +412,9 @@ CSS for when the menu is actually open
   this code is technically responsive. try it and see if it is ok */
   width: 60vw;
   height: 100vh;
-  margin: -100px 0 0 -50px;
+  margin: -146px 0 0 -50px;
   padding: 50px;
-  padding-top: 125px;
+  padding-top: 232px;
   
   background-color: #ededed;
   list-style-type: none;
@@ -467,13 +466,24 @@ CSS for when the menu is actually open
 /* END of hamburger menu CSS */
 
 @media (min-width: 1000px) {
+	#main {
+		width: auto;
+	}
 	#menu {
 		width: 10vw;
 		height: 100vh;
 		max-width: 65px;
+		margin: -100px 0 0 -55px;
+		padding-top: 125px;
 	}
 	#menu li {
 		font-size: 22px;
+	}
+	#menuToggle input {
+		  width: 40px;
+		  height: 32px;
+		  top: -7px;
+		  left: -5px;
 	}
 	#menuToggle span {
 		display: block;
@@ -492,6 +502,34 @@ CSS for when the menu is actually open
 		transition: transform 0.5s cubic-bezier(0.77,0.2,0.05,1.0),
 					background 0.5s cubic-bezier(0.77,0.2,0.05,1.0),
 					opacity 0.55s ease;
+	}
+	.underline {
+		background-color: #cda20b;
+		display: inline-block;
+		height: 2px;
+		transition: height .075s ease-in-out;
+		left: 0px;
+		margin-top: -4px;
+		position: absolute;
+		top: 105px;
+		width: 100%;
+		border-radius: 25px;
+	}
+	#searchDrink:focus + .underline{
+		height: 4px;
+	}
+	#searchDrink {
+		font-size: 40px;
+	}
+	#searchButton {
+		font-size: 44px !important;
+		margin-top: -0.4% !important;
+	}
+	#question {
+		font-size: 23px;
+	}
+	.light {
+		font-size: 14px;
 	}
 	#footer {
 		padding: 1%;
