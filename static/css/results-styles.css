@@ -127,7 +127,7 @@ input[type="search"]::-webkit-search-results-decoration {
 	border: none;
 	background: none;
 	display: inline;
-	width: 92%;
+	width: 85%;
 	font-family: 'louis_george_cafe', Arial, sans-serif;
 	font-weight: 500;
 	font-style: normal;
@@ -626,6 +626,7 @@ CSS for when the menu is actually open
 		font-size: 1.5vmax;
 	}
 	.smallSearch {
+		width: 82%;
 		font-size: 28px;
 		margin-top: 0;
 		margin-bottom: 0;
