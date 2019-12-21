@@ -451,7 +451,7 @@ a {
 }
 
 #slide:hover ~ span {
-	background: #ffdc52;
+	background: #cda20b;
 }
 
 /*
@@ -606,6 +606,9 @@ CSS for when the menu is actually open
 		width: 33px;
 		height: 4px;
 		margin-bottom: 5px;
+	}
+	#slide:hover ~ span {
+		background:#ffdc52;
 	}
 	.light {
 		font-size: 14px;
