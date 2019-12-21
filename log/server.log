@@ -7,37 +7,234 @@
  * Restarting with stat
  * Debugger is active!
  * Debugger PIN: 142-300-033
-220.239.3.4 - - [17/Dec/2019 16:17:27] "GET / HTTP/1.1" 200 -
-220.239.3.4 - - [17/Dec/2019 16:17:27] "GET /static/images/drinkimages/None.webp.webp HTTP/1.1" 404 -
-220.239.3.4 - - [17/Dec/2019 16:17:58] "GET / HTTP/1.1" 200 -
-220.239.3.4 - - [17/Dec/2019 16:17:59] "GET /static/css/styles.css HTTP/1.1" 200 -
-220.239.3.4 - - [17/Dec/2019 16:17:59] "GET /static/images/drinkimages/None.webp.webp HTTP/1.1" 404 -
-220.239.3.4 - - [17/Dec/2019 16:17:59] "GET /static/js/scripts.js HTTP/1.1" 200 -
-220.239.3.4 - - [17/Dec/2019 16:17:59] "GET /static/css/louis_george_cafe/louis_george_cafe-webfont.woff2 HTTP/1.1" 200 -
-220.239.3.4 - - [17/Dec/2019 16:17:59] "GET /static/css/louis_george_cafe/louis_george_cafe_bold-webfont.woff2 HTTP/1.1" 200 -
-130.102.13.27 - - [17/Dec/2019 16:32:38] "GET / HTTP/1.1" 200 -
-130.102.13.27 - - [17/Dec/2019 16:32:39] "GET /static/css/styles.css HTTP/1.1" 200 -
-130.102.13.27 - - [17/Dec/2019 16:32:39] "GET /static/js/scripts.js HTTP/1.1" 200 -
-130.102.13.27 - - [17/Dec/2019 16:32:39] "GET /static/images/drinkimages/None.webp.webp HTTP/1.1" 404 -
-130.102.13.27 - - [17/Dec/2019 16:32:39] "GET /static/images/drinkimages/None.webp.webp HTTP/1.1" 404 -
-130.102.13.27 - - [17/Dec/2019 16:32:39] "GET /static/css/louis_george_cafe/louis_george_cafe-webfont.woff2 HTTP/1.1" 200 -
-130.102.13.27 - - [17/Dec/2019 16:32:39] "GET /static/css/louis_george_cafe/louis_george_cafe_bold-webfont.woff2 HTTP/1.1" 200 -
-130.102.13.27 - - [17/Dec/2019 16:32:53] "POST / HTTP/1.1" 302 -
-130.102.13.27 - - [17/Dec/2019 16:32:53] "GET /results/Beer HTTP/1.1" 200 -
-130.102.13.27 - - [17/Dec/2019 16:32:53] "GET /static/images/drinkimages/None.webp.webp HTTP/1.1" 404 -
-130.102.13.27 - - [17/Dec/2019 16:32:54] "GET /static/css/results-styles.css HTTP/1.1" 200 -
-130.102.13.27 - - [17/Dec/2019 16:32:54] "GET /static/js/fitty.min.js HTTP/1.1" 200 -
-130.102.13.27 - - [17/Dec/2019 16:32:54] "GET /static/images/drinkimages/None.webp.webp HTTP/1.1" 404 -
-130.102.13.27 - - [17/Dec/2019 16:33:24] "POST /results/Beer HTTP/1.1" 302 -
-130.102.13.27 - - [17/Dec/2019 16:33:24] "GET /results/HollandIa HTTP/1.1" 200 -
-130.102.13.27 - - [17/Dec/2019 16:33:24] "GET /static/images/drinkimages/None.webp.webp HTTP/1.1" 404 -
-130.102.13.27 - - [17/Dec/2019 16:33:24] "GET /static/images/drinkimages/706694-1.png+impolicy=Prod_MD.webp.webp HTTP/1.1" 200 -
-220.239.3.4 - - [17/Dec/2019 16:38:07] "GET / HTTP/1.1" 200 -
-220.239.3.4 - - [17/Dec/2019 16:38:07] "GET /static/images/drinkimages/None.webp.webp HTTP/1.1" 404 -
-220.239.3.4 - - [17/Dec/2019 16:38:11] "POST / HTTP/1.1" 302 -
-220.239.3.4 - - [17/Dec/2019 16:38:11] "GET /results/burleigh HTTP/1.1" 200 -
-220.239.3.4 - - [17/Dec/2019 16:38:11] "GET /static/css/results-styles.css HTTP/1.1" 200 -
-220.239.3.4 - - [17/Dec/2019 16:38:11] "GET /static/js/fitty.min.js HTTP/1.1" 200 -
-220.239.3.4 - - [17/Dec/2019 16:38:12] "GET /static/images/drinkimages/None.webp.webp HTTP/1.1" 404 -
-220.239.3.4 - - [17/Dec/2019 16:38:12] "GET /favicon.ico HTTP/1.1" 404 -
-173.212.218.126 - - [17/Dec/2019 17:12:51] "GET / HTTP/1.0" 200 -
+116.240.1.178 - - [21/Dec/2019 12:56:58] "GET / HTTP/1.1" 200 -
+116.240.1.178 - - [21/Dec/2019 12:57:07] "GET / HTTP/1.1" 200 -
+116.240.1.178 - - [21/Dec/2019 12:57:14] "POST / HTTP/1.1" 302 -
+116.240.1.178 - - [21/Dec/2019 12:57:14] "GET /results/Vodka HTTP/1.1" 200 -
+116.240.1.178 - - [21/Dec/2019 12:57:17] "GET / HTTP/1.1" 200 -
+120.22.16.223 - - [21/Dec/2019 13:36:13] "GET / HTTP/1.1" 200 -
+120.22.16.223 - - [21/Dec/2019 13:36:16] "GET / HTTP/1.1" 200 -
+120.22.16.223 - - [21/Dec/2019 13:36:42] "GET / HTTP/1.1" 200 -
+120.22.16.223 - - [21/Dec/2019 13:36:42] "GET /static/images/drinkimages/772832-1.png+impolicy=Prod_SM.webp.png HTTP/1.1" 200 -
+120.22.16.223 - - [21/Dec/2019 13:36:42] "GET /static/css/styles.css HTTP/1.1" 200 -
+120.22.16.223 - - [21/Dec/2019 13:38:10] "GET / HTTP/1.1" 200 -
+198.211.125.39 - - [21/Dec/2019 13:47:00] "GET / HTTP/1.1" 200 -
+144.134.96.119 - - [21/Dec/2019 13:58:29] "GET / HTTP/1.1" 200 -
+144.134.96.119 - - [21/Dec/2019 13:58:35] "GET / HTTP/1.1" 200 -
+144.134.96.119 - - [21/Dec/2019 13:58:38] "GET /about HTTP/1.1" 200 -
+144.134.96.119 - - [21/Dec/2019 13:58:41] "GET / HTTP/1.1" 200 -
+149.129.243.159 - - [21/Dec/2019 14:30:23] "GET / HTTP/1.0" 200 -
+116.240.1.178 - - [21/Dec/2019 14:44:45] "GET / HTTP/1.1" 200 -
+116.240.1.178 - - [21/Dec/2019 14:44:47] "GET /apple-touch-icon-precomposed.png HTTP/1.1" 404 -
+116.240.1.178 - - [21/Dec/2019 14:44:47] "GET /apple-touch-icon.png HTTP/1.1" 404 -
+116.240.1.178 - - [21/Dec/2019 14:44:47] "GET /favicon.ico HTTP/1.1" 404 -
+116.240.1.178 - - [21/Dec/2019 14:44:48] "GET /apple-touch-icon.png HTTP/1.1" 404 -
+116.240.1.178 - - [21/Dec/2019 14:44:48] "GET /apple-touch-icon-precomposed.png HTTP/1.1" 404 -
+116.240.1.178 - - [21/Dec/2019 14:44:48] "GET /favicon.ico HTTP/1.1" 404 -
+116.240.1.178 - - [21/Dec/2019 14:44:51] "GET / HTTP/1.1" 200 -
+116.240.1.178 - - [21/Dec/2019 14:44:51] "GET /apple-touch-icon-120x120-precomposed.png HTTP/1.1" 404 -
+116.240.1.178 - - [21/Dec/2019 14:44:51] "GET /apple-touch-icon-120x120.png HTTP/1.1" 404 -
+116.240.1.178 - - [21/Dec/2019 14:44:51] "GET /apple-touch-icon-precomposed.png HTTP/1.1" 404 -
+116.240.1.178 - - [21/Dec/2019 14:44:51] "GET /apple-touch-icon.png HTTP/1.1" 404 -
+116.240.1.178 - - [21/Dec/2019 14:45:05] "GET / HTTP/1.1" 200 -
+201.106.72.21 - - [21/Dec/2019 14:58:45] "GET / HTTP/1.1" 200 -
+144.134.96.119 - - [21/Dec/2019 15:43:11] "GET / HTTP/1.1" 200 -
+101.165.145.123 - - [21/Dec/2019 15:44:37] "GET / HTTP/1.1" 200 -
+101.165.145.123 - - [21/Dec/2019 15:44:37] "GET /static/css/styles.css HTTP/1.1" 200 -
+101.165.145.123 - - [21/Dec/2019 15:44:37] "GET /static/js/fitty.min.js HTTP/1.1" 200 -
+101.165.145.123 - - [21/Dec/2019 15:44:37] "GET /static/js/scripts.js HTTP/1.1" 200 -
+101.165.145.123 - - [21/Dec/2019 15:44:37] "GET /static/images/drinkimages/772832-1.png+impolicy=Prod_SM.webp.png HTTP/1.1" 200 -
+101.165.145.123 - - [21/Dec/2019 15:44:38] "GET /static/css/louis_george_cafe/louis_george_cafe-webfont.woff2 HTTP/1.1" 200 -
+101.165.145.123 - - [21/Dec/2019 15:44:38] "GET /static/css/louis_george_cafe/louis_george_cafe_bold-webfont.woff2 HTTP/1.1" 200 -
+101.165.145.123 - - [21/Dec/2019 15:45:07] "POST / HTTP/1.1" 302 -
+101.165.145.123 - - [21/Dec/2019 15:45:07] "GET /results/Cruiser HTTP/1.1" 200 -
+101.165.145.123 - - [21/Dec/2019 15:45:07] "GET /static/css/results-styles.css HTTP/1.1" 200 -
+101.165.145.123 - - [21/Dec/2019 15:45:07] "GET /favicon.ico HTTP/1.1" 404 -
+101.165.145.123 - - [21/Dec/2019 15:45:16] "POST /results/Cruiser HTTP/1.1" 302 -
+101.165.145.123 - - [21/Dec/2019 15:45:16] "GET /results/Bundaberg HTTP/1.1" 200 -
+101.165.145.123 - - [21/Dec/2019 15:45:17] "GET /static/images/drinkimages/91195-1.png+impolicy=Prod_SM.webp.png HTTP/1.1" 200 -
+101.165.145.123 - - [21/Dec/2019 15:45:17] "GET /static/images/drinkimages/91530-1.png+impolicy=Prod_SM.webp.png HTTP/1.1" 200 -
+101.165.145.123 - - [21/Dec/2019 15:45:17] "GET /static/images/drinkimages/916962-1.png+impolicy=Prod_SM.webp.png HTTP/1.1" 200 -
+101.165.145.123 - - [21/Dec/2019 15:45:17] "GET /static/images/drinkimages/728545-1.png+impolicy=Prod_SM.webp.png HTTP/1.1" 200 -
+101.165.145.123 - - [21/Dec/2019 15:45:17] "GET /static/images/drinkimages/482301-1.png+impolicy=Prod_SM.webp.png HTTP/1.1" 200 -
+101.165.145.123 - - [21/Dec/2019 15:45:17] "GET /static/images/drinkimages/917478-1.png+impolicy=Prod_SM.webp.png HTTP/1.1" 200 -
+101.165.145.123 - - [21/Dec/2019 15:45:17] "GET /static/images/drinkimages/347699-1.png+impolicy=Prod_SM.webp.png HTTP/1.1" 200 -
+101.165.145.123 - - [21/Dec/2019 15:45:17] "GET /static/images/drinkimages/720379-1.png+impolicy=Prod_SM.webp.png HTTP/1.1" 200 -
+101.165.145.123 - - [21/Dec/2019 15:45:28] "POST /results/Bundaberg HTTP/1.1" 302 -
+101.165.145.123 - - [21/Dec/2019 15:45:28] "GET /results/Goon HTTP/1.1" 200 -
+101.165.145.123 - - [21/Dec/2019 15:45:33] "POST /results/Goon HTTP/1.1" 302 -
+101.165.145.123 - - [21/Dec/2019 15:45:33] "GET /results/Goon HTTP/1.1" 200 -
+101.165.145.123 - - [21/Dec/2019 15:45:45] "POST /results/Goon HTTP/1.1" 302 -
+101.165.145.123 - - [21/Dec/2019 15:45:46] "GET /results/Wine HTTP/1.1" 200 -
+101.165.145.123 - - [21/Dec/2019 15:45:46] "GET /static/images/drinkimages/49378-1.png+impolicy=Prod_SM.webp.png HTTP/1.1" 200 -
+101.165.145.123 - - [21/Dec/2019 15:45:46] "GET /static/images/drinkimages/73881-1.png+impolicy=Prod_SM.webp.png HTTP/1.1" 200 -
+101.165.145.123 - - [21/Dec/2019 15:45:46] "GET /static/images/drinkimages/17193-1.png+impolicy=Prod_SM.webp.png HTTP/1.1" 200 -
+101.165.145.123 - - [21/Dec/2019 15:45:46] "GET /static/images/drinkimages/14502-1.png+impolicy=Prod_SM.webp.png HTTP/1.1" 200 -
+101.165.145.123 - - [21/Dec/2019 15:45:46] "GET /static/images/drinkimages/727813-1.png+impolicy=Prod_SM.webp.png HTTP/1.1" 200 -
+101.165.145.123 - - [21/Dec/2019 15:45:46] "GET /static/images/drinkimages/67186-1.png+impolicy=Prod_SM.webp.png HTTP/1.1" 200 -
+101.165.145.123 - - [21/Dec/2019 15:45:46] "GET /static/images/drinkimages/67570-1.png+impolicy=Prod_SM.webp.png HTTP/1.1" 200 -
+101.165.145.123 - - [21/Dec/2019 15:45:46] "GET /static/images/drinkimages/800031-1.png+impolicy=Prod_SM.webp.png HTTP/1.1" 200 -
+101.165.145.123 - - [21/Dec/2019 15:46:24] "POST /results/Wine HTTP/1.1" 302 -
+101.165.145.123 - - [21/Dec/2019 15:46:24] "GET /results/Port HTTP/1.1" 200 -
+101.165.145.123 - - [21/Dec/2019 15:46:24] "GET /static/images/drinkimages/750024-1.png+impolicy=Prod_MD.webp.png HTTP/1.1" 200 -
+101.165.145.123 - - [21/Dec/2019 15:46:24] "GET /static/images/drinkimages/759764-1.png+impolicy=Prod_MD.webp.png HTTP/1.1" 200 -
+101.165.145.123 - - [21/Dec/2019 15:46:24] "GET /static/images/drinkimages/default.png+impolicy=Prod_MD.webp.png HTTP/1.1" 200 -
+101.165.145.123 - - [21/Dec/2019 15:46:25] "GET /static/images/drinkimages/413695-1.png+impolicy=Prod_SM.webp.png HTTP/1.1" 200 -
+101.165.145.123 - - [21/Dec/2019 15:46:26] "GET /static/images/drinkimages/23788-1.png+impolicy=Prod_MD.webp.png HTTP/1.1" 200 -
+101.165.145.123 - - [21/Dec/2019 15:46:26] "GET /static/images/drinkimages/383430-1.png+impolicy=Prod_SM.webp.png HTTP/1.1" 200 -
+101.165.145.123 - - [21/Dec/2019 15:46:27] "GET /static/images/drinkimages/383424-1.png+impolicy=Prod_SM.webp.png HTTP/1.1" 200 -
+101.165.145.123 - - [21/Dec/2019 15:46:29] "GET /static/images/drinkimages/928466-1.png+impolicy=Prod_SM.webp.png HTTP/1.1" 200 -
+213.191.22.26 - - [21/Dec/2019 15:56:17] code 400, message Bad request version ('HTTP')
+213.191.22.26 - - [21/Dec/2019 15:56:17] "GET ../../ HTTP" HTTPStatus.BAD_REQUEST -
+2.56.8.189 - - [21/Dec/2019 16:46:20] "GET / HTTP/1.1" 200 -
+92.118.37.91 - - [21/Dec/2019 16:53:44] "GET / HTTP/1.1" 200 -
+114.77.249.76 - - [21/Dec/2019 17:08:00] "GET / HTTP/1.1" 200 -
+114.77.249.76 - - [21/Dec/2019 17:08:02] "GET /static/css/styles.css HTTP/1.1" 200 -
+114.77.249.76 - - [21/Dec/2019 17:08:02] "GET /static/js/scripts.js HTTP/1.1" 200 -
+114.77.249.76 - - [21/Dec/2019 17:08:02] "GET /static/js/fitty.min.js HTTP/1.1" 200 -
+114.77.249.76 - - [21/Dec/2019 17:08:02] "GET /static/images/drinkimages/772832-1.png+impolicy=Prod_SM.webp.png HTTP/1.1" 200 -
+114.77.249.76 - - [21/Dec/2019 17:08:03] "GET /static/css/louis_george_cafe/louis_george_cafe-webfont.woff2 HTTP/1.1" 200 -
+114.77.249.76 - - [21/Dec/2019 17:08:03] "GET /static/css/louis_george_cafe/louis_george_cafe_bold-webfont.woff2 HTTP/1.1" 200 -
+114.77.249.76 - - [21/Dec/2019 17:08:28] "POST / HTTP/1.1" 302 -
+114.77.249.76 - - [21/Dec/2019 17:08:28] "GET /results/Smirnoff HTTP/1.1" 200 -
+114.77.249.76 - - [21/Dec/2019 17:08:28] "GET /static/css/results-styles.css HTTP/1.1" 200 -
+114.77.249.76 - - [21/Dec/2019 17:08:28] "GET /static/images/drinkimages/907623-1.png+impolicy=Prod_SM.webp.png HTTP/1.1" 200 -
+114.77.249.76 - - [21/Dec/2019 17:08:28] "GET /static/images/drinkimages/680981-1.png+impolicy=Prod_SM.webp.png HTTP/1.1" 200 -
+114.77.249.76 - - [21/Dec/2019 17:08:28] "GET /static/images/drinkimages/19252-1.png+impolicy=Prod_SM.webp.png HTTP/1.1" 200 -
+114.77.249.76 - - [21/Dec/2019 17:08:28] "GET /static/images/drinkimages/773952-1.png+impolicy=Prod_SM.webp.png HTTP/1.1" 200 -
+114.77.249.76 - - [21/Dec/2019 17:08:29] "GET /static/images/drinkimages/907510-1.png+impolicy=Prod_SM.webp.png HTTP/1.1" 200 -
+114.77.249.76 - - [21/Dec/2019 17:08:29] "GET /static/images/drinkimages/55067-1.png+impolicy=Prod_SM.webp.png HTTP/1.1" 200 -
+114.77.249.76 - - [21/Dec/2019 17:08:29] "GET /static/images/drinkimages/907508-1.png+impolicy=Prod_SM.webp.png HTTP/1.1" 200 -
+114.77.249.76 - - [21/Dec/2019 17:08:29] "GET /static/images/drinkimages/54973-1.png+impolicy=Prod_SM.webp.png HTTP/1.1" 200 -
+114.77.249.76 - - [21/Dec/2019 17:08:29] "GET /favicon.ico HTTP/1.1" 404 -
+114.77.249.76 - - [21/Dec/2019 17:09:17] "POST /results/Smirnoff HTTP/1.1" 302 -
+114.77.249.76 - - [21/Dec/2019 17:09:17] "GET /results/ HTTP/1.1" 404 -
+114.77.249.76 - - [21/Dec/2019 17:09:17] "GET /favicon.ico HTTP/1.1" 404 -
+92.118.37.91 - - [21/Dec/2019 17:25:14] "GET /login/login.do HTTP/1.1" 404 -
+120.18.62.141 - - [21/Dec/2019 18:38:58] "GET / HTTP/1.1" 200 -
+120.18.62.141 - - [21/Dec/2019 18:39:00] "GET / HTTP/1.1" 200 -
+120.18.62.141 - - [21/Dec/2019 18:39:02] "GET / HTTP/1.1" 200 -
+120.18.62.141 - - [21/Dec/2019 18:40:03] "GET / HTTP/1.1" 200 -
+120.18.62.141 - - [21/Dec/2019 18:40:10] "GET / HTTP/1.1" 200 -
+120.18.62.141 - - [21/Dec/2019 18:40:28] "GET / HTTP/1.1" 200 -
+120.18.62.141 - - [21/Dec/2019 18:40:31] "GET / HTTP/1.1" 200 -
+120.18.62.141 - - [21/Dec/2019 18:40:37] "GET / HTTP/1.1" 200 -
+116.240.1.178 - - [21/Dec/2019 18:41:31] "GET / HTTP/1.1" 200 -
+116.240.1.178 - - [21/Dec/2019 18:41:31] "GET /static/css/styles.css HTTP/1.1" 200 -
+116.240.1.178 - - [21/Dec/2019 18:41:31] "GET /static/images/drinkimages/772832-1.png+impolicy=Prod_SM.webp.png HTTP/1.1" 304 -
+116.240.1.178 - - [21/Dec/2019 18:41:31] "GET /static/js/scripts.js HTTP/1.1" 200 -
+116.240.1.178 - - [21/Dec/2019 18:41:31] "GET /static/js/fitty.min.js HTTP/1.1" 304 -
+116.240.1.178 - - [21/Dec/2019 18:41:31] "GET /static/css/louis_george_cafe/louis_george_cafe-webfont.woff2 HTTP/1.1" 304 -
+116.240.1.178 - - [21/Dec/2019 18:41:31] "GET /static/css/louis_george_cafe/louis_george_cafe_bold-webfont.woff2 HTTP/1.1" 304 -
+116.240.1.178 - - [21/Dec/2019 18:41:44] "POST / HTTP/1.1" 302 -
+116.240.1.178 - - [21/Dec/2019 18:41:45] "GET /results/jamieson HTTP/1.1" 200 -
+116.240.1.178 - - [21/Dec/2019 18:41:45] "GET /static/css/results-styles.css HTTP/1.1" 200 -
+116.240.1.178 - - [21/Dec/2019 18:41:45] "GET /static/images/drinkimages/350029-1.png+impolicy=Prod_MD.webp.png HTTP/1.1" 200 -
+116.240.1.178 - - [21/Dec/2019 18:41:45] "GET /static/images/drinkimages/25759-1.png+impolicy=Prod_SM.webp.png HTTP/1.1" 200 -
+116.240.1.178 - - [21/Dec/2019 18:41:45] "GET /static/images/drinkimages/349988-1.png+impolicy=Prod_MD.webp.png HTTP/1.1" 200 -
+116.240.1.178 - - [21/Dec/2019 18:41:45] "GET /static/images/drinkimages/350054-1.png+impolicy=Prod_MD.webp.png HTTP/1.1" 200 -
+116.240.1.178 - - [21/Dec/2019 18:41:45] "GET /static/images/drinkimages/350052-1.png+impolicy=Prod_MD.webp.png HTTP/1.1" 200 -
+116.240.1.178 - - [21/Dec/2019 18:41:45] "GET /static/images/drinkimages/902673-1.png+impolicy=Prod_SM.webp.png HTTP/1.1" 200 -
+116.240.1.178 - - [21/Dec/2019 18:41:45] "GET /static/images/drinkimages/25661-1.png+impolicy=Prod_SM.webp.png HTTP/1.1" 200 -
+116.240.1.178 - - [21/Dec/2019 18:41:45] "GET /favicon.ico HTTP/1.1" 404 -
+54.36.63.4 - - [21/Dec/2019 19:01:22] "GET / HTTP/1.0" 200 -
+167.179.160.30 - - [21/Dec/2019 19:08:25] "GET / HTTP/1.1" 200 -
+167.179.160.30 - - [21/Dec/2019 19:08:26] "GET /static/css/styles.css HTTP/1.1" 200 -
+167.179.160.30 - - [21/Dec/2019 19:08:26] "GET /static/js/scripts.js HTTP/1.1" 200 -
+167.179.160.30 - - [21/Dec/2019 19:08:26] "GET /static/js/fitty.min.js HTTP/1.1" 200 -
+167.179.160.30 - - [21/Dec/2019 19:08:26] "GET /static/images/drinkimages/772832-1.png+impolicy=Prod_SM.webp.png HTTP/1.1" 200 -
+167.179.160.30 - - [21/Dec/2019 19:08:26] "GET /static/css/louis_george_cafe/louis_george_cafe-webfont.woff2 HTTP/1.1" 200 -
+167.179.160.30 - - [21/Dec/2019 19:08:26] "GET /static/css/louis_george_cafe/louis_george_cafe_bold-webfont.woff2 HTTP/1.1" 200 -
+167.179.160.30 - - [21/Dec/2019 19:08:30] "POST / HTTP/1.1" 302 -
+167.179.160.30 - - [21/Dec/2019 19:08:30] "GET /results/brandy HTTP/1.1" 200 -
+167.179.160.30 - - [21/Dec/2019 19:08:30] "GET /static/css/results-styles.css HTTP/1.1" 200 -
+167.179.160.30 - - [21/Dec/2019 19:08:30] "GET /static/images/drinkimages/900596-1.png+impolicy=Prod_SM.webp.png HTTP/1.1" 200 -
+167.179.160.30 - - [21/Dec/2019 19:08:30] "GET /static/images/drinkimages/935332-1.png+impolicy=Prod_SM.webp.png HTTP/1.1" 200 -
+167.179.160.30 - - [21/Dec/2019 19:08:30] "GET /static/images/drinkimages/63404-1.png+impolicy=Prod_SM.webp.png HTTP/1.1" 200 -
+167.179.160.30 - - [21/Dec/2019 19:08:30] "GET /static/images/drinkimages/48147-1.png+impolicy=Prod_SM.webp.png HTTP/1.1" 200 -
+167.179.160.30 - - [21/Dec/2019 19:08:30] "GET /static/images/drinkimages/36506-1.png+impolicy=Prod_SM.webp.png HTTP/1.1" 200 -
+167.179.160.30 - - [21/Dec/2019 19:08:30] "GET /static/images/drinkimages/697089-1.png+impolicy=Prod_SM.webp.png HTTP/1.1" 200 -
+167.179.160.30 - - [21/Dec/2019 19:08:30] "GET /static/images/drinkimages/43637-1.png+impolicy=Prod_SM.webp.png HTTP/1.1" 200 -
+167.179.160.30 - - [21/Dec/2019 19:08:30] "GET /static/images/drinkimages/379302-1.png+impolicy=Prod_SM.webp.png HTTP/1.1" 200 -
+167.179.160.30 - - [21/Dec/2019 19:08:30] "GET /favicon.ico HTTP/1.1" 404 -
+52.38.214.62 - - [21/Dec/2019 19:10:19] "GET / HTTP/1.1" 200 -
+95.158.140.123 - - [21/Dec/2019 19:42:14] "GET / HTTP/1.1" 200 -
+ * Detected change in '/home/ubuntu/CompareTheBrewDev/app.py', reloading
+connected to database
+connected to database
+SEARCH TERMS ENTERED BY USER: Vodka
+connected to database
+SEARCH TERMS: ['Vodka']
+NUMBER OF ROWS FOUND: 55
+connected to database
+connected to database
+connected to database
+connected to database
+connected to database
+connected to database
+connected to database
+connected to database
+connected to database
+connected to database
+connected to database
+connected to database
+connected to database
+connected to database
+connected to database
+connected to database
+SEARCH TERMS ENTERED BY USER: Cruiser
+connected to database
+SEARCH TERMS: ['Cruiser']
+NUMBER OF ROWS FOUND: 0
+SEARCH TERMS ENTERED BY USER: Bundaberg
+connected to database
+SEARCH TERMS: ['Bundaberg']
+NUMBER OF ROWS FOUND: 25
+SEARCH TERMS ENTERED BY USER: Goon
+connected to database
+SEARCH TERMS: ['Goon']
+NUMBER OF ROWS FOUND: 0
+SEARCH TERMS ENTERED BY USER: Goon
+connected to database
+SEARCH TERMS: ['Goon']
+NUMBER OF ROWS FOUND: 0
+SEARCH TERMS ENTERED BY USER: Wine
+connected to database
+SEARCH TERMS: ['Wine']
+NUMBER OF ROWS FOUND: 25
+SEARCH TERMS ENTERED BY USER: Port
+connected to database
+SEARCH TERMS: ['Port']
+NUMBER OF ROWS FOUND: 15
+connected to database
+connected to database
+connected to database
+SEARCH TERMS ENTERED BY USER: Smirnoff
+connected to database
+SEARCH TERMS: ['Smirnoff']
+NUMBER OF ROWS FOUND: 11
+SEARCH TERMS ENTERED BY USER: 
+connected to database
+connected to database
+connected to database
+connected to database
+connected to database
+connected to database
+connected to database
+connected to database
+connected to database
+SEARCH TERMS ENTERED BY USER: jamieson
+connected to database
+SEARCH TERMS: ['jamieson']
+NUMBER OF ROWS FOUND: 7
+connected to database
+connected to database
+SEARCH TERMS ENTERED BY USER: brandy
+connected to database
+SEARCH TERMS: ['brandy']
+NUMBER OF ROWS FOUND: 12
+connected to database
+connected to database
+ * Restarting with stat
+ * Debugger is active!
+ * Debugger PIN: 142-300-033

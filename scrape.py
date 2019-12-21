@@ -170,8 +170,8 @@ def download(url):
     PROXY = "-"
 
     # Run the chromewebdriver to scrape with the given proxy - SECOND FOR WINDOWS, FIRST FOR SERVER
-    driver = webdriver.Chrome('/usr/local/bin', options=chrome_options)
-    # driver = webdriver.Chrome(options=chrome_options)
+    # driver = webdriver.Chrome('/usr/local/bin', options=chrome_options)
+    driver = webdriver.Chrome(options=chrome_options)
     # We are now downloading the html from the given url
     print("DOWNLOADING AND RENDERING HTML FROM " + url + " ...")# " WITH PROXY URL " + PROXY + " ...")
     driver.get(url)
@@ -421,7 +421,7 @@ def getDrinksBws(soups):
                     image = None
                     print("||", brand, "###", combinedName, "###", priceStr, "###")
                     entry = Item(store, brand, combinedName, None, priceStr, "https://bws.com.au" + relativePath, None, None, None,
-                             None, image)
+                             None, image, None)
                     itemsOnPage.append(entry)
     else:
         for soup in soups:

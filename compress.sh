@@ -6,4 +6,4 @@ for file in $imagedir/uncompressed/*; do
 	mv "$file.webp" "$imagedir/drinkimages/"
 done
 
-#rm -rf $imagedir/uncompressed/*
+rm -rf $imagedir/uncompressed/*

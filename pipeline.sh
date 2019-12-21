@@ -11,8 +11,8 @@ do
    time="$(date +"%Y-%m-%d")"
    log="$workdir/log/beer-$time.log"
    err="$workdir/log/beer-$time.err"
-   cmd="python3 ./scrape.py bws beer 0"
-   echo "$(cmd)" > "$log" 2> "$err" && break
+   cmd="$(sudo python3 $workdir/scrape.py bws beer 0)"
+   "$cmd" #> "$log" 2> "$err" && break
    n=$[$n+1]
    sleep 5
 done
@@ -26,8 +26,8 @@ do
    time="$(date +"%Y-%m-%d")"
    log="$workdir/log/wine-$time.log"
    err="$workdir/log/wine-$time.err"
-   cmd="python3 ./scrape.py bws wine 0"
-   echo "$(cmd)" > "$log" 2> "$err" && break
+   cmd="$(python3 $workdir/scrape.py bws wine 0)"
+   echo "$cmd" > "$log" 2> "$err" && break
    n=$[$n+1]
    sleep 5
 done
@@ -41,8 +41,8 @@ do
    time="$(date +"%Y-%m-%d")"
    log="$workdir/log/spirits-$time.log"
    err="$workdir/log/spirits-$time.err"
-   cmd="python3 ./scrape.py bws spirits 0"
-   echo "$(cmd)" > "$log" 2> "$err" && break
+   cmd="$(python3 $workdir/scrape.py bws spirits 0)"
+   echo "$cmd" > "$log" 2> "$err" && break
    n=$[$n+1]
    sleep 5
 done
