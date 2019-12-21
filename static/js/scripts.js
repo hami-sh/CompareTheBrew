@@ -13,4 +13,6 @@ $(document).ready(function(e) {
                 document.getElementById("cover").classList.toggle("shadow");
                 document.getElementById("cover").classList.toggle("clickable");
         });
+
+        document.getElementById("slide").checked = false;
 });

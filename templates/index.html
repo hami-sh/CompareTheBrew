@@ -70,14 +70,12 @@
 				Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
 			</div>
 			<div class="drink-of-the-day">
-				<!-- I am aware that adding a br here is sloppy but it is 3AM and I don't care -->
-				<br><br>
 				<div class="item">	
 						<a class="resultCard" href="{{result[6]}}">
 							<div class="cardImage">
 									<!-- <img src="{{result[-1]}}" style="width:96px;height:120px;"> -->
 									<img src="/static/images/drinkimages/{{result[12]}}.webp.png" alt={{result[2]}} {{result[3]}} style="width:96px;height:120px;">
-								</div>
+							</div>
 							<div class="cardContent">
 								<div class="brand">
 									{{result[1]}}
@@ -103,7 +101,7 @@
 								</div>
 							</div>
 						</a>
-					</div>
+				</div>
 			</div>
 		</div>
 	</div>
@@ -116,5 +114,18 @@
 			Drink responsibly.</b>
 		</div>
 	</div>
+	<script src="/static/js/fitty.min.js"></script>
+	<script>
+		fitty('.responsive_head', {
+			maxSize: 100,
+		});
+		fitty('.indexdetails', {
+			minSize: 12,
+		});
+		fitty('.name', {
+			minSize: 14,
+			multiLine: true,
+		});
+	</script>
 </body>
 </html>

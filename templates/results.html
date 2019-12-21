@@ -145,12 +145,17 @@
 	<script src="/static/js/fitty.min.js"></script>
 	<script>
 		fitty('.responsive_head', {
-			maxSize: 80,
+			maxSize: 100,
 		});
 		// fitty('.scorePriceContainer');
 		fitty('.details', {
 			minSize: 12,
 		});
+		fitty('.name', {
+			minSize: 26,
+			multiLine: true,
+		});
+
 		// window.onresize = function onresize() {
 		// 	fitty.fitAll();
 		// }

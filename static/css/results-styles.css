@@ -25,6 +25,8 @@
 }
 
 body {
+	-webkit-font-smoothing: antialiased;
+  	-moz-osx-font-smoothing: grayscale;
 	font-family: 'louis_george_cafe', Arial, sans-serif;
 	font-weight: 500;
 	font-style: normal;
@@ -138,10 +140,10 @@ input[type="search"]::-webkit-search-results-decoration {
 
 .smallSearch {
 	font-size: 88px;
-	margin-top: -2%;
-	margin-bottom: 2%;
+	margin-top: -3%;
+	margin-bottom: 3%;
 	position: relative;
-	left: -4.5%;
+	left: -5.5%;
 }
 
 textarea:focus, input:focus{
@@ -174,6 +176,7 @@ textarea:focus, input:focus{
  	background-color: #ffdc52;
  	color: #cda20b;
 	border-radius: 9px;
+	cursor: pointer;
 }
 
 .buttonSortActive {
@@ -258,7 +261,7 @@ textarea:focus, input:focus{
 
 .brand {
 	font-weight: bold;
-	font-size: 1.6vmax;
+	font-size: 3vmax;
 	color: #cda20b;
 }
 
@@ -274,12 +277,12 @@ textarea:focus, input:focus{
 /*	padding-bottom: 18px;*/
 	margin-top: 0.5%;
 	margin-bottom: 3%;
-	overflow: hidden;
+/*	overflow: hidden;
   	text-overflow: ellipsis;
 	word-wrap: break-word;
-	/*display: block;*/
+	/*display: block;
 	line-height: 1.2em;
-	max-height: 3.2em;
+	max-height: 3.2em;*/
 }
 
 .details {
@@ -390,6 +393,11 @@ textarea:focus, input:focus{
     background-color: #cda20b;
     margin-bottom: 6px;
     font-weight: bold;
+    color: #ededed;
+}
+
+.navButton:hover {
+	background-color: #ffdc52;
 }
 
 a {
@@ -442,6 +450,10 @@ a {
   -webkit-touch-callout: none;
 }
 
+#slide:hover ~ span {
+	background: #ffdc52;
+}
+
 /*
  This is the CSS for the toggle (when it is not activated)
  */
@@ -483,7 +495,6 @@ a {
 {
   opacity: 1;
   transform: rotate(45deg) translate(-2px, -1px);
-  background: #cda20b;
 }
 
 /*
@@ -627,7 +638,7 @@ CSS for when the menu is actually open
 		height: 4px;
 	}
 	.smallLine {
-		top: 42px;
+		top: 45px;
 	}
 	#searchButton {
 		font-size: 28px !important;
@@ -666,8 +677,11 @@ CSS for when the menu is actually open
 		z-index: 3;
 		position: fixed;
 		display: initial;
+		font-size: 16px;
+
 	}
 	#mobileFooter{
+		font-size: 16px;
 		display: none;
 	}
 }
@@ -681,7 +695,7 @@ CSS for when the menu is actually open
 
 /* Dark Mode */
 
-@media (prefers-color-scheme: dark) {
+/*@media (prefers-color-scheme: dark) {
 	body {
 		background-color: #1c1c1e;
 	}
@@ -725,4 +739,4 @@ CSS for when the menu is actually open
 	#searchDrink {
 		color:#8e8e93;
 	}
-}
+}*/
