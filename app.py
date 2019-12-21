@@ -82,6 +82,17 @@ def viewabout():
 def viewFAQ():
     return render_template('FAQ.html')  # render a template
 
+# Ajunner Error Handling
+# 404
+@app.errorhandler(404)
+def page_not_found404(e):
+    return render_template('/404.html'), 404
+
+# 500
+@app.errorhandler(500)
+def page_not_found500(e):
+    return render_template('/500.html'), 500
+
 # Run the flask application (won't run when the site is being hosted on a server)
 if __name__ == '__main__':
     app.run(host='0.0.0.0', port=80, debug=True)
