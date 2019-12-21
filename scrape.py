@@ -145,6 +145,8 @@ def download(url):
     # ua = UserAgent(cache=False, use_cache_server=False)
     chrome_options = Options()
     chrome_options.add_argument("--headless")
+    chrome_options.add_argument('--no-sandbox')
+    chrome_options.add_argument('--disable-dev-shm-usage')
 
     # # Scrape a proxy IP from a free proxy site on the internet
     # proxies = []  # Will contain proxies [ip, port]
@@ -167,8 +169,9 @@ def download(url):
     # chrome_options.add_argument('--proxy-server=' + PROXY)
     PROXY = "-"
 
-    # Run the chromewebdriver to scrape with the given proxy
-    driver = webdriver.Chrome(options=chrome_options)
+    # Run the chromewebdriver to scrape with the given proxy - SECOND FOR WINDOWS, FIRST FOR SERVER
+    driver = webdriver.Chrome('/usr/local/bin', options=chrome_options)
+    # driver = webdriver.Chrome(options=chrome_options)
     # We are now downloading the html from the given url
     print("DOWNLOADING AND RENDERING HTML FROM " + url + " ...")# " WITH PROXY URL " + PROXY + " ...")
     driver.get(url)
