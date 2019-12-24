@@ -1,7 +1,8 @@
 import sqlite3
 from sqlite3 import Error
 from scripts.classItem import Item
-
+from intellisearch import *
+import re
 
 def create_connection():
     conn = None
@@ -161,6 +162,11 @@ def select_image_links(conn):
 
     return rows
 
+# def functionRegex(value, pattern):
+#     print(r"/^" + pattern.lower() + r"| {1}" + pattern.lower() + r"/gm")
+#     c_pattern = re.compile(r"\^" + pattern.lower() + r"| {1}" + pattern.lower() + r"/gm")
+#     return c_pattern.search(value) is not None
+
 
 def select_drink_by_smart_search(conn, terms):
     """Select all drinks that contain any of the search keywords given in their name, brand or type attributes
@@ -172,6 +178,7 @@ def select_drink_by_smart_search(conn, terms):
     Returns:
         A list of rows from the drinks table matching the search terms
     """
+    # conn.create_function('regexp', 2, functionRegex)
     # Create a new cursor
     cur = conn.cursor()
     # Define a new list for which to store our final list of results
@@ -181,19 +188,42 @@ def select_drink_by_smart_search(conn, terms):
     terms = terms.split(" ")
     print("SEARCH TERMS: " + str(terms))
     # return termsList
+    print("-------------------<OLD>-------------------")
+    print(terms)
+    # now run intellisense search to get better result parity
+    print("-------------------(NEW)-------------------")
+    intelliterms = intellisearch(terms)
+    # print(intelliterms)
 
     # For each keyword, execute a new query at the cursor to find drinks matching that keyword
-    for term in terms:
-        # cur.execute("SELECT * FROM drinks WHERE type LIKE '%{}%' ORDER BY efficiency DESC".format(term))
+    for term in intelliterms:
+        # cur.execute("SELECT * FROM drinks WHERE type LIKE '%{}
         cur.execute(
             "SELECT * FROM drinks WHERE type LIKE '%{}%' OR name LIKE '%{}%' OR brand LIKE '%{}%' ORDER BY efficiency DESC".format(
                 term, term, term))
+        # cur.execute('SELECT * FROM drinks WHERE REGEXP(type, ?) OR REGEXP(name, ?) OR REGEXP(brand, ?) ORDER BY efficiency DESC', (term, term, term,))
+
         rows = cur.fetchall()
+        print("FOR " + term)
+
         print("NUMBER OF ROWS FOUND: " + str(len(rows)))
         # For each row in rows, if the row is not already in the results list add it
         for row in rows:
             if not (row in results):
-                results.append(row)
+                # print(row[2], row[3], row[4])
+                # print(re.match(r"^"+term+"| {1}"+term, row[2].lower(), re.M))
+                # print(re.match(r"^"+term+"| {1}"+term, row[3], re.M))
+                # print(re.match(r"^"+term+"| {1}"+term, row[4], re.M))
+                if re.search(r'^'+term+'| {1}'+term, row[2].lower(), re.M) or re.search(r'^'+term+'| {1}'+term, row[3].lower(), re.M)\
+                        or re.search(r'^'+term+'| {1}'+term, row[4].lower(), re.M):
+                    # print("HERE")
+                    # print(row)
+                    results.append(row)
+
+    print("NUMBER OF RESULTS FOUND: " + str(len(results)))
+    # organise results based on efficiency - currently only sorted per term.
+    results.sort(key=lambda tup: tup[10], reverse=True)
+
     # Return the final list of results
     return results
 

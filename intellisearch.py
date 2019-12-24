@@ -87,7 +87,7 @@ def intellisearch(terms):
     term_map['light beer'] = ['beer', 'healthy']
     term_map['medium dry'] = ['wine']
 
-    print(term_map)
+    # print(term_map)
 
     # we now need to see if any terms are in the values of each key
     dupOutput = list()
@@ -98,7 +98,7 @@ def intellisearch(terms):
             for value in term_map.get(key):  # O(n^3) - oh yeah baby kill me
                 # print("(" + value + ")")
                 if term.find(value) != -1 or value.find(term) != -1:
-                    print("MATCH (k:v)" + key + ":" + value)
+                    # print("MATCH (k:v)" + key + ":" + value)
                     dupOutput.append(key)
                     dupOutput.append(value)
 

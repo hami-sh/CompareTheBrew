@@ -317,7 +317,7 @@ textarea:focus, input:focus{
 	/* font-size: 3.8vw; */
 	/* Alex's adjusted font size to make the text fit into the card */
 	font-size: 3.0vw;
-	color:  #a7a7a7;
+	color:  #eb7734;
 	-webkit-transform:scale(1,1.1); /* Safari and Chrome */
     -moz-transform:scale(1,1.1); /* Firefox */
     -ms-transform:scale(1,1.1); /* IE 9 */
