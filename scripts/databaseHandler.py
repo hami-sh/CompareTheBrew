@@ -185,9 +185,12 @@ def select_drink_by_smart_search(conn, terms):
     results = list()
 
     # Split the search keyboards by the spaces in between words
-    terms = terms.split(" ")
-    print("SEARCH TERMS: " + str(terms))
+    inputs = terms.split(" ")
+    print("SEARCH TERMS: " + str(inputs))
     # return termsList
+    terms = list()
+    for term in inputs:
+        terms.append(term.lower())
     print("-------------------<OLD>-------------------")
     print(terms)
     # now run intellisense search to get better result parity
@@ -198,6 +201,7 @@ def select_drink_by_smart_search(conn, terms):
     # For each keyword, execute a new query at the cursor to find drinks matching that keyword
     for term in intelliterms:
         # cur.execute("SELECT * FROM drinks WHERE type LIKE '%{}
+        term = term.lower()
         cur.execute(
             "SELECT * FROM drinks WHERE type LIKE '%{}%' OR name LIKE '%{}%' OR brand LIKE '%{}%' ORDER BY efficiency DESC".format(
                 term, term, term))
