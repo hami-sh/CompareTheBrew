@@ -7,36 +7,55 @@
  * Restarting with stat
  * Debugger is active!
  * Debugger PIN: 142-300-033
-49.182.7.115 - - [25/Dec/2019 10:13:35] "GET / HTTP/1.1" 200 -
-49.182.7.115 - - [25/Dec/2019 10:13:35] "GET /static/images/drinkimages/772832-1.png+impolicy=Prod_SM.webp.png HTTP/1.1" 200 -
-49.182.7.115 - - [25/Dec/2019 10:13:39] "POST / HTTP/1.1" 302 -
-49.182.7.115 - - [25/Dec/2019 10:13:39] "GET /results/vodka HTTP/1.1" 200 -
-49.182.7.115 - - [25/Dec/2019 10:13:40] "GET /static/images/drinkimages/801554-1.png+impolicy=Prod_SM.webp.png HTTP/1.1" 200 -
-49.182.7.115 - - [25/Dec/2019 10:13:40] "GET /static/css/results-styles.css HTTP/1.1" 200 -
-49.182.7.115 - - [25/Dec/2019 10:13:40] "GET /static/images/drinkimages/901767-1.png+impolicy=Prod_SM.webp.png HTTP/1.1" 200 -
-49.182.7.115 - - [25/Dec/2019 10:13:40] "GET /static/images/drinkimages/904137-1.png+impolicy=Prod_SM.webp.png HTTP/1.1" 200 -
-49.182.7.115 - - [25/Dec/2019 10:13:40] "GET /static/images/drinkimages/781501-1.png+impolicy=Prod_SM.webp.png HTTP/1.1" 200 -
-49.182.7.115 - - [25/Dec/2019 10:13:40] "GET /static/images/drinkimages/902023-1.png+impolicy=Prod_SM.webp.png HTTP/1.1" 200 -
-49.182.7.115 - - [25/Dec/2019 10:13:40] "GET /static/images/drinkimages/906081-1.png+impolicy=Prod_SM.webp.png HTTP/1.1" 200 -
-49.182.7.115 - - [25/Dec/2019 10:13:41] "GET /static/images/drinkimages/333499-1.png+impolicy=Prod_SM.webp.png HTTP/1.1" 200 -
-49.182.7.115 - - [25/Dec/2019 10:13:41] "GET /static/images/drinkimages/916540-1.png+impolicy=Prod_SM.webp.png HTTP/1.1" 200 -
-49.182.7.115 - - [25/Dec/2019 10:13:41] "GET /favicon.ico HTTP/1.1" 404 -
-49.182.7.115 - - [25/Dec/2019 10:13:44] "POST /results/vodka HTTP/1.1" 302 -
-49.182.7.115 - - [25/Dec/2019 10:13:44] "GET /results/christmas HTTP/1.1" 200 -
-49.182.7.115 - - [25/Dec/2019 10:13:49] "POST /results/christmas HTTP/1.1" 302 -
-49.182.7.115 - - [25/Dec/2019 10:13:50] "GET /results/pale%20ale HTTP/1.1" 200 -
-49.182.7.115 - - [25/Dec/2019 10:13:50] "GET /static/images/drinkimages/75482-1.png+impolicy=Prod_MD.webp.png HTTP/1.1" 200 -
-49.182.7.115 - - [25/Dec/2019 10:13:50] "GET /static/images/drinkimages/799414-2.png+impolicy=Prod_MD.webp.png HTTP/1.1" 200 -
-49.182.7.115 - - [25/Dec/2019 10:13:50] "GET /static/images/drinkimages/652308-1.png+impolicy=Prod_MD.webp.png HTTP/1.1" 200 -
-49.182.7.115 - - [25/Dec/2019 10:13:50] "GET /static/images/drinkimages/989803-1.png+impolicy=Prod_MD.webp.png HTTP/1.1" 200 -
-49.182.7.115 - - [25/Dec/2019 10:13:50] "GET /static/images/drinkimages/10481-1.png+impolicy=Prod_MD.webp.png HTTP/1.1" 200 -
-49.182.7.115 - - [25/Dec/2019 10:13:52] "GET /static/images/drinkimages/987611-1.png+impolicy=Prod_MD.webp.png HTTP/1.1" 200 -
-49.182.7.115 - - [25/Dec/2019 10:13:52] "GET /static/images/drinkimages/325104-1.png+impolicy=Prod_MD.webp.png HTTP/1.1" 200 -
-49.182.7.115 - - [25/Dec/2019 10:13:52] "GET /static/images/drinkimages/371258-1.png+impolicy=Prod_MD.webp.png HTTP/1.1" 200 -
-49.182.7.115 - - [25/Dec/2019 10:13:53] "POST /results/pale%20ale HTTP/1.1" 302 -
-49.182.7.115 - - [25/Dec/2019 10:13:53] "GET /results/ale HTTP/1.1" 200 -
-49.182.7.115 - - [25/Dec/2019 10:13:53] "GET /static/images/drinkimages/881513-1.png+impolicy=Prod_MD.webp.png HTTP/1.1" 200 -
-49.182.7.115 - - [25/Dec/2019 10:13:53] "GET /static/images/drinkimages/501999-1.png+impolicy=Prod_SM.webp.png HTTP/1.1" 200 -
-49.182.7.115 - - [25/Dec/2019 10:13:53] "GET /static/images/drinkimages/916541-1.png+impolicy=Prod_SM.webp.png HTTP/1.1" 200 -
-49.182.7.115 - - [25/Dec/2019 10:13:53] "GET /static/images/drinkimages/3613-1.png+impolicy=Prod_MD.webp.png HTTP/1.1" 200 -
-49.182.7.115 - - [25/Dec/2019 10:13:53] "GET /static/images/drinkimages/991501-1.png+impolicy=Prod_MD.webp.png HTTP/1.1" 200 -
+49.182.7.115 - - [25/Dec/2019 10:20:14] "GET / HTTP/1.1" 200 -
+49.182.7.115 - - [25/Dec/2019 10:20:17] "POST / HTTP/1.1" 302 -
+49.182.7.115 - - [25/Dec/2019 10:20:17] "GET /results/vodka HTTP/1.1" 200 -
+49.182.7.115 - - [25/Dec/2019 10:20:20] "POST /results/vodka HTTP/1.1" 302 -
+49.182.7.115 - - [25/Dec/2019 10:20:20] "GET /results/ale HTTP/1.1" 200 -
+49.182.7.115 - - [25/Dec/2019 10:20:20] "GET /static/images/drinkimages/916902-1.png+impolicy=Prod_MD.webp.png HTTP/1.1" 200 -
+49.182.7.115 - - [25/Dec/2019 10:20:20] "GET /static/images/drinkimages/914084-1.png+impolicy=Prod_MD.webp.png HTTP/1.1" 200 -
+49.182.7.115 - - [25/Dec/2019 10:20:29] "POST /results/ale HTTP/1.1" 302 -
+49.182.7.115 - - [25/Dec/2019 10:20:29] "GET /results/vodka HTTP/1.1" 200 -
+ * Detected change in '/home/ubuntu/CompareTheBrewDev/intellisearch.py', reloading
+connected to database
+SEARCH TERMS ENTERED BY USER: vodka
+connected to database
+SEARCH TERMS: ['vodka']
+-------------------<OLD>-------------------
+['vodka']
+-------------------(NEW)-------------------
+[]
+NUMBER OF RESULTS FOUND: 0
+SEARCH TERMS ENTERED BY USER: ale
+connected to database
+SEARCH TERMS: ['ale']
+-------------------<OLD>-------------------
+['ale']
+-------------------(NEW)-------------------
+['pilsner', 'pale', 'dark', 'ale', 'golden ale', 'xpa', 'ipa']
+FOR pilsner
+NUMBER OF ROWS FOUND: 17
+FOR pale
+NUMBER OF ROWS FOUND: 187
+FOR dark
+NUMBER OF ROWS FOUND: 14
+FOR ale
+NUMBER OF ROWS FOUND: 318
+FOR golden ale
+NUMBER OF ROWS FOUND: 13
+FOR xpa
+NUMBER OF ROWS FOUND: 18
+FOR ipa
+NUMBER OF ROWS FOUND: 51
+NUMBER OF RESULTS FOUND: 365
+SEARCH TERMS ENTERED BY USER: vodka
+connected to database
+SEARCH TERMS: ['vodka']
+-------------------<OLD>-------------------
+['vodka']
+-------------------(NEW)-------------------
+[]
+NUMBER OF RESULTS FOUND: 0
+ * Restarting with stat
+ * Debugger is active!
+ * Debugger PIN: 142-300-033

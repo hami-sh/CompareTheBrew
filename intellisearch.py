@@ -102,6 +102,9 @@ def intellisearch(terms):
                     dupOutput.append(key)
                     dupOutput.append(value)
 
+    for term in terms:
+        dupOutput.append(term)
+
     cleanOutput = list(dict.fromkeys(dupOutput))
 
     print(cleanOutput)
