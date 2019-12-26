@@ -3,6 +3,7 @@ from sqlite3 import Error
 from scripts.classItem import Item
 from intellisearch import *
 import re
+from app import *
 
 def create_connection():
     conn = None
@@ -20,6 +21,21 @@ def create_connection():
 
     return conn
 
+def create_metrics_connection():
+    conn = None
+    try:
+        conn = sqlite3.connect("drinks.db")
+
+        sql = ''' CREATE TABLE IF NOT EXISTS "metrics" ( `ID` INTEGER PRIMARY KEY AUTOINCREMENT, `IP` TEXT,
+            `query` TEXT, `datetime` TEXT, `country` TEXT, `region` TEXT, `city` TEXT, `lat` REAL, `long` REAL,
+            `hostname` TEXT, `org` TEXT )'''
+        cur = conn.cursor()
+        cur.execute(sql)
+        print("connected to metrics")
+    except Error as e:
+        print(e)
+
+    return conn
 
 def create_entry(conn, task):
     """
@@ -35,6 +51,25 @@ def create_entry(conn, task):
     cur.execute(sql, task)
     return cur.lastrowid
 
+def create_metric_entry(conn, task):
+    """
+    Create a new task
+    :param conn:
+    :param task:
+    :return:
+    """
+    print(1)
+    sql = ''' INSERT INTO metrics(IP,query,datetime,country,region,city,lat,long,hostname,org)
+              VALUES(?,?,?,?,?,?,?,?,?,?) '''
+    print(2)
+    cur = conn.cursor()
+    print(3)
+    cur.execute(sql, task)
+    print(4)
+    conn.commit()
+    ID = cur.lastrowid
+    conn.close()
+    return ID
 
 def select_all_drinks(conn):
     """

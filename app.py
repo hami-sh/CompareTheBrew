@@ -2,6 +2,12 @@ from flask import Flask
 from flask import render_template
 from flask import request
 from flask import redirect
+from flask import jsonify
+from datetime import datetime
+import re
+import json
+from urllib.request import urlopen
+
 # from scrape2 import search
 import scripts.databaseHandler as db
 
@@ -57,6 +63,41 @@ def displayResultPage(searchTerms):
     # for result in tempResults:
     #     print(result)
     # print("""|||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||\n\n""")
+
+
+    # gather metrics info
+    TOQ = datetime.now().strftime('%H:%M:%S %Y-%m-%d')
+    print(TOQ)
+    query = ""
+    for term in searchTerms:
+        query += term
+    print(query)
+    url = 'http://ipinfo.io/json'
+    response = urlopen(url)
+    data = json.load(response)
+    hostname = data['hostname']
+    print(hostname)
+    IP = data['ip']
+    print(IP)
+    org = data['org']
+    print(org)
+    city = data['city']
+    print(city)
+    country = data['country']
+    print(country)
+    region = data['region']
+    location = data['loc']
+    lat = location.split(",")[0]
+    long = location.split(",")[1]
+
+    print(region)
+    print(lat)
+    print(long)
+
+    metconn = db.create_metrics_connection()
+    metric = (str(IP), str(query), str(TOQ), str(country), str(region), str(city), float(lat), float(long), str(hostname), str(org))
+    ID = db.create_metric_entry(metconn, metric)
+    print("ID: " + str(ID))
     return render_template('results.html', results=tempResults)
 
 # # A function to get search terms from the search bar on the results page
@@ -92,6 +133,12 @@ def page_not_found404(e):
 @app.errorhandler(500)
 def page_not_found500(e):
     return render_template('/500.html'), 500
+
+# Hamish Section
+@app.route("/get_my_ip", methods=["GET"])
+def get_my_ip():
+    return jsonify({'ip': request.remote_addr}), 200
+
 
 # Run the flask application (won't run when the site is being hosted on a server)
 if __name__ == '__main__':
