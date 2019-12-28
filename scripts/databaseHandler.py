@@ -3,7 +3,6 @@ from sqlite3 import Error
 from scripts.classItem import Item
 from intellisearch import *
 import re
-from app import *
 
 def create_connection():
     conn = None

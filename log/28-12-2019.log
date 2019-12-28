@@ -1,0 +1,149 @@
+\033[0;32mBEER <00:00:01>\033[0m
+start
+Traceback (most recent call last):
+  File "/home/ubuntu/CompareTheBrewDev/scrape.py", line 16, in <module>
+    from scripts.databaseHandler import *
+  File "/home/ubuntu/CompareTheBrewDev/scripts/databaseHandler.py", line 6, in <module>
+    from app import *
+  File "/home/ubuntu/CompareTheBrewDev/app.py", line 12, in <module>
+    import scripts.databaseHandler as db
+AttributeError: module 'scripts' has no attribute 'databaseHandler'
+\033[0;32mBEER <00:00:07>\033[0m
+start
+Traceback (most recent call last):
+  File "/home/ubuntu/CompareTheBrewDev/scrape.py", line 16, in <module>
+    from scripts.databaseHandler import *
+  File "/home/ubuntu/CompareTheBrewDev/scripts/databaseHandler.py", line 6, in <module>
+    from app import *
+  File "/home/ubuntu/CompareTheBrewDev/app.py", line 12, in <module>
+    import scripts.databaseHandler as db
+AttributeError: module 'scripts' has no attribute 'databaseHandler'
+\033[0;32mBEER <00:00:12>\033[0m
+start
+Traceback (most recent call last):
+  File "/home/ubuntu/CompareTheBrewDev/scrape.py", line 16, in <module>
+    from scripts.databaseHandler import *
+  File "/home/ubuntu/CompareTheBrewDev/scripts/databaseHandler.py", line 6, in <module>
+    from app import *
+  File "/home/ubuntu/CompareTheBrewDev/app.py", line 12, in <module>
+    import scripts.databaseHandler as db
+AttributeError: module 'scripts' has no attribute 'databaseHandler'
+\033[0;32mBEER <00:00:17>\033[0m
+start
+Traceback (most recent call last):
+  File "/home/ubuntu/CompareTheBrewDev/scrape.py", line 16, in <module>
+    from scripts.databaseHandler import *
+  File "/home/ubuntu/CompareTheBrewDev/scripts/databaseHandler.py", line 6, in <module>
+    from app import *
+  File "/home/ubuntu/CompareTheBrewDev/app.py", line 12, in <module>
+    import scripts.databaseHandler as db
+AttributeError: module 'scripts' has no attribute 'databaseHandler'
+\033[0;32mBEER <00:00:23>\033[0m
+start
+Traceback (most recent call last):
+  File "/home/ubuntu/CompareTheBrewDev/scrape.py", line 16, in <module>
+    from scripts.databaseHandler import *
+  File "/home/ubuntu/CompareTheBrewDev/scripts/databaseHandler.py", line 6, in <module>
+    from app import *
+  File "/home/ubuntu/CompareTheBrewDev/app.py", line 12, in <module>
+    import scripts.databaseHandler as db
+AttributeError: module 'scripts' has no attribute 'databaseHandler'
+\033[0;32mWINE <00:00:28>\033[0m
+Traceback (most recent call last):
+  File "/home/ubuntu/CompareTheBrewDev/scrape.py", line 16, in <module>
+    from scripts.databaseHandler import *
+  File "/home/ubuntu/CompareTheBrewDev/scripts/databaseHandler.py", line 6, in <module>
+    from app import *
+  File "/home/ubuntu/CompareTheBrewDev/app.py", line 12, in <module>
+    import scripts.databaseHandler as db
+AttributeError: module 'scripts' has no attribute 'databaseHandler'
+\033[0;32mWINE <00:00:34>\033[0m
+Traceback (most recent call last):
+  File "/home/ubuntu/CompareTheBrewDev/scrape.py", line 16, in <module>
+    from scripts.databaseHandler import *
+  File "/home/ubuntu/CompareTheBrewDev/scripts/databaseHandler.py", line 6, in <module>
+    from app import *
+  File "/home/ubuntu/CompareTheBrewDev/app.py", line 12, in <module>
+    import scripts.databaseHandler as db
+AttributeError: module 'scripts' has no attribute 'databaseHandler'
+\033[0;32mWINE <00:00:39>\033[0m
+Traceback (most recent call last):
+  File "/home/ubuntu/CompareTheBrewDev/scrape.py", line 16, in <module>
+    from scripts.databaseHandler import *
+  File "/home/ubuntu/CompareTheBrewDev/scripts/databaseHandler.py", line 6, in <module>
+    from app import *
+  File "/home/ubuntu/CompareTheBrewDev/app.py", line 12, in <module>
+    import scripts.databaseHandler as db
+AttributeError: module 'scripts' has no attribute 'databaseHandler'
+\033[0;32mWINE <00:00:44>\033[0m
+Traceback (most recent call last):
+  File "/home/ubuntu/CompareTheBrewDev/scrape.py", line 16, in <module>
+    from scripts.databaseHandler import *
+  File "/home/ubuntu/CompareTheBrewDev/scripts/databaseHandler.py", line 6, in <module>
+    from app import *
+  File "/home/ubuntu/CompareTheBrewDev/app.py", line 12, in <module>
+    import scripts.databaseHandler as db
+AttributeError: module 'scripts' has no attribute 'databaseHandler'
+\033[0;32mWINE <00:00:50>\033[0m
+Traceback (most recent call last):
+  File "/home/ubuntu/CompareTheBrewDev/scrape.py", line 16, in <module>
+    from scripts.databaseHandler import *
+  File "/home/ubuntu/CompareTheBrewDev/scripts/databaseHandler.py", line 6, in <module>
+    from app import *
+  File "/home/ubuntu/CompareTheBrewDev/app.py", line 12, in <module>
+    import scripts.databaseHandler as db
+AttributeError: module 'scripts' has no attribute 'databaseHandler'
+\033[0;32mSPIRITS <00:00:55>\033[0m
+Traceback (most recent call last):
+  File "/home/ubuntu/CompareTheBrewDev/scrape.py", line 16, in <module>
+    from scripts.databaseHandler import *
+  File "/home/ubuntu/CompareTheBrewDev/scripts/databaseHandler.py", line 6, in <module>
+    from app import *
+  File "/home/ubuntu/CompareTheBrewDev/app.py", line 12, in <module>
+    import scripts.databaseHandler as db
+AttributeError: module 'scripts' has no attribute 'databaseHandler'
+\033[0;32mSPIRITS <00:01:01>\033[0m
+Traceback (most recent call last):
+  File "/home/ubuntu/CompareTheBrewDev/scrape.py", line 16, in <module>
+    from scripts.databaseHandler import *
+  File "/home/ubuntu/CompareTheBrewDev/scripts/databaseHandler.py", line 6, in <module>
+    from app import *
+  File "/home/ubuntu/CompareTheBrewDev/app.py", line 12, in <module>
+    import scripts.databaseHandler as db
+AttributeError: module 'scripts' has no attribute 'databaseHandler'
+\033[0;32mSPIRITS <00:01:06>\033[0m
+Traceback (most recent call last):
+  File "/home/ubuntu/CompareTheBrewDev/scrape.py", line 16, in <module>
+    from scripts.databaseHandler import *
+  File "/home/ubuntu/CompareTheBrewDev/scripts/databaseHandler.py", line 6, in <module>
+    from app import *
+  File "/home/ubuntu/CompareTheBrewDev/app.py", line 12, in <module>
+    import scripts.databaseHandler as db
+AttributeError: module 'scripts' has no attribute 'databaseHandler'
+\033[0;32mSPIRITS <00:01:11>\033[0m
+Traceback (most recent call last):
+  File "/home/ubuntu/CompareTheBrewDev/scrape.py", line 16, in <module>
+    from scripts.databaseHandler import *
+  File "/home/ubuntu/CompareTheBrewDev/scripts/databaseHandler.py", line 6, in <module>
+    from app import *
+  File "/home/ubuntu/CompareTheBrewDev/app.py", line 12, in <module>
+    import scripts.databaseHandler as db
+AttributeError: module 'scripts' has no attribute 'databaseHandler'
+\033[0;32mSPIRITS <00:01:17>\033[0m
+Traceback (most recent call last):
+  File "/home/ubuntu/CompareTheBrewDev/scrape.py", line 16, in <module>
+    from scripts.databaseHandler import *
+  File "/home/ubuntu/CompareTheBrewDev/scripts/databaseHandler.py", line 6, in <module>
+    from app import *
+  File "/home/ubuntu/CompareTheBrewDev/app.py", line 12, in <module>
+    import scripts.databaseHandler as db
+AttributeError: module 'scripts' has no attribute 'databaseHandler'
+\033[0;32mIMAGES\033[0m
+python3: can't open file 'imagedl.py': [Errno 2] No such file or directory
+\033[0;32mPNG CONVERT\033[0m
+cannot open input file '/tmp/magick-6171b0qI2YxZhUqa'
+mogrify-im6.q16: unable to open image `*.webp': No such file or directory @ error/blob.c/OpenBlob/2701.
+mogrify-im6.q16: delegate failed `'dwebp' -pam '%i' -o '%o'' @ error/delegate.c/InvokeDelegate/1919.
+mogrify-im6.q16: unable to open file `/tmp/magick-6171I5ov7XohRrCg': No such file or directory @ error/constitute.c/ReadImage/544.
+/home/ubuntu/CompareTheBrewDev/static/images/uncompressed/*
+mv: cannot stat '/home/ubuntu/CompareTheBrewDev/static/images/uncompressed/*.png': No such file or directory

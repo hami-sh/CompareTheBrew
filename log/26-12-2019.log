@@ -1,0 +1,89 @@
+\033[0;32mBEER <00:00:01>\033[0m
+start
+Traceback (most recent call last):
+  File "/home/ubuntu/CompareTheBrewDev/scrape.py", line 3, in <module>
+    from bs4 import BeautifulSoup
+ModuleNotFoundError: No module named 'bs4'
+\033[0;32mBEER <00:00:06>\033[0m
+start
+Traceback (most recent call last):
+  File "/home/ubuntu/CompareTheBrewDev/scrape.py", line 3, in <module>
+    from bs4 import BeautifulSoup
+ModuleNotFoundError: No module named 'bs4'
+\033[0;32mBEER <00:00:11>\033[0m
+start
+Traceback (most recent call last):
+  File "/home/ubuntu/CompareTheBrewDev/scrape.py", line 3, in <module>
+    from bs4 import BeautifulSoup
+ModuleNotFoundError: No module named 'bs4'
+\033[0;32mBEER <00:00:16>\033[0m
+start
+Traceback (most recent call last):
+  File "/home/ubuntu/CompareTheBrewDev/scrape.py", line 3, in <module>
+    from bs4 import BeautifulSoup
+ModuleNotFoundError: No module named 'bs4'
+\033[0;32mBEER <00:00:21>\033[0m
+start
+Traceback (most recent call last):
+  File "/home/ubuntu/CompareTheBrewDev/scrape.py", line 3, in <module>
+    from bs4 import BeautifulSoup
+ModuleNotFoundError: No module named 'bs4'
+\033[0;32mWINE <00:00:27>\033[0m
+Traceback (most recent call last):
+  File "/home/ubuntu/CompareTheBrewDev/scrape.py", line 3, in <module>
+    from bs4 import BeautifulSoup
+ModuleNotFoundError: No module named 'bs4'
+\033[0;32mWINE <00:00:32>\033[0m
+Traceback (most recent call last):
+  File "/home/ubuntu/CompareTheBrewDev/scrape.py", line 3, in <module>
+    from bs4 import BeautifulSoup
+ModuleNotFoundError: No module named 'bs4'
+\033[0;32mWINE <00:00:37>\033[0m
+Traceback (most recent call last):
+  File "/home/ubuntu/CompareTheBrewDev/scrape.py", line 3, in <module>
+    from bs4 import BeautifulSoup
+ModuleNotFoundError: No module named 'bs4'
+\033[0;32mWINE <00:00:42>\033[0m
+Traceback (most recent call last):
+  File "/home/ubuntu/CompareTheBrewDev/scrape.py", line 3, in <module>
+    from bs4 import BeautifulSoup
+ModuleNotFoundError: No module named 'bs4'
+\033[0;32mWINE <00:00:47>\033[0m
+Traceback (most recent call last):
+  File "/home/ubuntu/CompareTheBrewDev/scrape.py", line 3, in <module>
+    from bs4 import BeautifulSoup
+ModuleNotFoundError: No module named 'bs4'
+\033[0;32mSPIRITS <00:00:52>\033[0m
+Traceback (most recent call last):
+  File "/home/ubuntu/CompareTheBrewDev/scrape.py", line 3, in <module>
+    from bs4 import BeautifulSoup
+ModuleNotFoundError: No module named 'bs4'
+\033[0;32mSPIRITS <00:00:57>\033[0m
+Traceback (most recent call last):
+  File "/home/ubuntu/CompareTheBrewDev/scrape.py", line 3, in <module>
+    from bs4 import BeautifulSoup
+ModuleNotFoundError: No module named 'bs4'
+\033[0;32mSPIRITS <00:01:02>\033[0m
+Traceback (most recent call last):
+  File "/home/ubuntu/CompareTheBrewDev/scrape.py", line 3, in <module>
+    from bs4 import BeautifulSoup
+ModuleNotFoundError: No module named 'bs4'
+\033[0;32mSPIRITS <00:01:08>\033[0m
+Traceback (most recent call last):
+  File "/home/ubuntu/CompareTheBrewDev/scrape.py", line 3, in <module>
+    from bs4 import BeautifulSoup
+ModuleNotFoundError: No module named 'bs4'
+\033[0;32mSPIRITS <00:01:13>\033[0m
+Traceback (most recent call last):
+  File "/home/ubuntu/CompareTheBrewDev/scrape.py", line 3, in <module>
+    from bs4 import BeautifulSoup
+ModuleNotFoundError: No module named 'bs4'
+\033[0;32mIMAGES\033[0m
+python3: can't open file 'imagedl.py': [Errno 2] No such file or directory
+\033[0;32mPNG CONVERT\033[0m
+cannot open input file '/tmp/magick-9732pRmzlFa64seZ'
+mogrify-im6.q16: unable to open image `*.webp': No such file or directory @ error/blob.c/OpenBlob/2701.
+mogrify-im6.q16: delegate failed `'dwebp' -pam '%i' -o '%o'' @ error/delegate.c/InvokeDelegate/1919.
+mogrify-im6.q16: unable to open file `/tmp/magick-9732QaBeWYKv9KoN': No such file or directory @ error/constitute.c/ReadImage/544.
+/home/ubuntu/CompareTheBrewDev/static/images/uncompressed/*
+mv: cannot stat '/home/ubuntu/CompareTheBrewDev/static/images/uncompressed/*.png': No such file or directory
