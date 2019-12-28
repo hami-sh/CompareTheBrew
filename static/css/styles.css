@@ -25,10 +25,13 @@
 }
 
 body {
+	-webkit-font-smoothing: antialiased;
+  	-moz-osx-font-smoothing: grayscale;
+	background-color: white;
 	font-family: 'louis_george_cafe', Arial, sans-serif;
 	font-weight: 500;
 	font-style: normal;
-	font-size: 14px;
+	font-size: 15px;
 	margin: 0;
 	padding: 0;
 }
@@ -44,13 +47,14 @@ body {
 }
 
 #main {
-	font-size: 20px;
+	font-size: 30px;
 	position: absolute;
 	left: 50%;
-	top: 50%;
-	-webkit-transform: translate(-50%, -50%);
-	transform: translate(-50%, -50%);
+	top: 58%;
+	-webkit-transform: translate(-50%, -58%);
+	transform: translate(-50%, -58%);
 	max-width: 1360px;
+	width: 80%;
 }
 
 /* #compare-the-brew {
@@ -71,24 +75,41 @@ input[type="search"]::-webkit-search-results-decoration {
 .underline {
 	background-color: #cda20b;
 	display: inline-block;
-	height: 2px;
+	height: 7px;
 	transition: height .075s ease-in-out;
 	left: 0px;
 	margin-top: -4px;
 	position: absolute;
-	top: 105px;
+	top: 175px;
 	width: 100%;
 	border-radius: 25px;
 }
 
+.searchLine {
+	background-color: #cda20b;
+	display: block;
+	height: 3px;
+	left: 0px;
+	position: relative;
+	width: 100%;
+	border-radius: 5px;
+	/*top: 20px;*/
+}
+
 .light {
 	padding-top: 65px;
-	font-size: 14px;
+	font-size: 36px;
+	color: #a7a7a7;
+}
+
+.light_nospacing {
+	padding-top: 10px;
+	font-size: 36px;
 	color: #a7a7a7;
 }
 
 #question {
-	font-size: 23px;
+	font-size: 36px;
 	font-weight: 700;
 	color: #722f37;
 	padding-bottom: 2.1%;
@@ -98,12 +119,16 @@ input[type="search"]::-webkit-search-results-decoration {
 	border: none;
 	background: none;
 	display: inline;
-	width: 92%;
+	width: 85%;
 	font-family: 'louis_george_cafe', Arial, sans-serif;
 	font-weight: 500;
 	font-style: normal;
-	font-size: 40px;
+	font-size: 88px;
 	color: #353535;
+	margin-top: -3%;
+	margin-bottom: 3%;
+	position: relative;
+	left: -5.5%;
 }
 
 textarea:focus, input:focus{
@@ -112,17 +137,21 @@ textarea:focus, input:focus{
 
 #searchDrink:focus + .underline{
 	transition: height .075s ease-in-out;
-	height: 4px;
+	height: 10px;
 }
 
 #footer {
+	font-size: 30px;
 	position: fixed;
 	padding: 1%;
+	padding-top: 2%;
+	padding-bottom: 2%;
  	left: 0;
  	bottom: 0;
  	width: 100%;
  	background-color: #722f37;
- 	color: #ffdc52;
+	color: #ffdc52;
+	z-index: 0;
 }
 
 #footerRight {
@@ -155,25 +184,66 @@ textarea:focus, input:focus{
   background: #ffdc52;
 }
 
+.navButton {
+	padding: 20px;
+	margin-left: -200px;
+	padding-right: 800px;
+    padding-left: 200px;
+    background-color: #cda20b;
+    margin-bottom: 6px;
+    font-weight: bold;
+    color: white;
+}
+
+.navButton:hover {
+	background-color: #ffdc52;
+}
+
 /* ___BEGIN___ section for styles for the drink of the day card */
 a {
     text-decoration: none;
 }
 
+.item {
+	display: inline-block;
+	margin: 0 0 42px;
+	width: 100%;
+}
+
 .resultCard {
-	background-color: #e3e3e3;
 	position: relative;
 	display: flex;
-	align-items: center;*/
-	height: 100%;
-	width: 95%;
-	padding: 16px;
-	border-radius: 9px; */
-	/* background-color: white; */
+	align-items: center;
+	/*width: 30%;*/
+	padding: 14px;
+/*	margin: 12px;*/
+	border-radius: 9px;
+	background-color: #ffdc52;
 	box-shadow: 0 5px 13px rgba(0,0,0,0.075), 0 1px 2px rgba(0,0,0,0.22);
   	transition: all 0.3s cubic-bezier(.25,.8,.25,1);
-	overflow: hidden;
-    box-shadow:0 0 20px #d4ae13;
+  	overflow: hidden;
+
+  	background-repeat: repeat-y;
+  	background-position:-115% 0;
+  	background-size: 150px 50px;
+  	animation:glide 2050ms infinite;
+  	background-image: -moz-linear-gradient(left, rgba(255,255,255,0) 0%, rgba(255,255,255,0.3) 50%, rgba(128,186,232,0) 99%, rgba(125,185,232,0) 100%); /* FF3.6+ */
+	background-image: -webkit-gradient(linear, left top, right top, color-stop(0%,rgba(255,255,255,0)), color-stop(50%,rgba(255,255,255,0.3)), color-stop(99%,rgba(128,186,232,0)), color-stop(100%,rgba(125,185,232,0))); /* Chrome,Safari4+ */
+	background-image: -webkit-linear-gradient(left, rgba(255,255,255,0) 0%,rgba(255,255,255,0.3) 50%,rgba(128,186,232,0) 99%,rgba(125,185,232,0) 100%); /* Chrome10+,Safari5.1+ */
+	background-image: -o-linear-gradient(left, rgba(255,255,255,0) 0%,rgba(255,255,255,0.3) 50%,rgba(128,186,232,0) 99%,rgba(125,185,232,0) 100%); /* Opera 11.10+ */
+	background-image: -ms-linear-gradient(left, rgba(255,255,255,0) 0%,rgba(255,255,255,0.3) 50%,rgba(128,186,232,0) 99%,rgba(125,185,232,0) 100%); /* IE10+ */
+	background-image: linear-gradient(to right, rgba(255,255,255,0) 0%,rgba(255,255,255,0.3) 50%,rgba(128,186,232,0) 99%,rgba(125,185,232,0) 100%); /* W3C */
+	filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#00ffffff', endColorstr='#00ffffff',GradientType=1 ); /* IE6-9 */
+}
+
+/* animation */
+
+@-webkit-keyframes glide {
+  from {
+    background-position:-215% 0;
+  } to {
+    background-position:300% 0;
+  }
 }
 
 .resultCard:hover {
@@ -189,17 +259,18 @@ a {
 
 .cardContent {
 	flex: 1;
+	min-width: 0;
 }
 
 .brand {
 	font-weight: bold;
-	font-size: 1.6vw;
+	font-size: 3vmax;
 	color: #cda20b;
 }
 
 .name {
 	font-weight: bolder;
-	font-size: 2vw;
+	font-size: 4vmax;
 	color: #722f37;
 /*	overflow: hidden;
 	text-overflow: ellipsis;*/
@@ -207,57 +278,54 @@ a {
 	-webkit-box-orient: vertical;
 	-webkit-line-clamp: 2;
 /*	padding-bottom: 18px;*/
-	margin-top: -2px;
-	overflow: hidden;
+	margin-top: 0.5%;
+	margin-bottom: 3%;
+/*	overflow: hidden;
   	text-overflow: ellipsis;
 	word-wrap: break-word;
-	/*display: block;*/
-	line-height: 1em;
-	max-height: 3.2em;
+	/*display: block;
+	line-height: 1.2em;
+	max-height: 3.2em;*/
 }
 
 .indexdetails {
-	margin-top: 6px;
+	margin-top: 5.2%;
 	font-weight: bolder;
 	font-size: 1.4vw;
-	color: #353535;
+	color: #722f37;
 }
 
-.searchLine {
-	background-color: #ffdc52;
-	display: block;
-	height: 3px;
-	left: 0px;
-	position: relative;
+/*#scorePriceContainer {
 	width: 100%;
-	border-radius: 5px;
-	/*top: 20px;*/
 }
-
-.details {
-	margin-top: -18px;
-	font-weight: bolder;
-	font-size: 1.4vw;
-	color: #a7a7a7;
+*/
+.price {
+/*	font-weight: bolder;
+	float: right;*/
+/*	width: 30%;*/
+	 display: inline-block;
+	/* The original font size that matt had */
+	/* font-size: 3.8vw; */
+	/* Alex's adjusted font size to make the text fit into the card */
+/*	font-size: 3.0vw;*/
+	color: #722f37;
 }
 
 .score {
-	/*	margin-left: 7.5vw;*/
+/*	margin-left: 7.5vw;*/
 	font-weight: bolder;
-	/*	float: left;*/
-	/*	width: 30%;*/
+/*	float: left;*/
+/*	width: 30%;*/
 	/* The original font size that matt had */
 	/* font-size: 3.8vw; */
 	/* Alex's adjusted font size to make the text fit into the card */
 	font-size: 3.0vw;
-	color:  #a7a7a7;
+	color:  #722f37;
 	-webkit-transform:scale(1,1.1); /* Safari and Chrome */
-	-moz-transform:scale(1,1.1); /* Firefox */
-	-ms-transform:scale(1,1.1); /* IE 9 */
-	-o-transform:scale(1,1.1); /* Opera */
-	transform:scale(1,1.1); /* W3C */
-	display: inline-block;
-	white-space: nowrap;
+    -moz-transform:scale(1,1.1); /* Firefox */
+    -ms-transform:scale(1,1.1); /* IE 9 */
+    -o-transform:scale(1,1.1); /* Opera */
+    transform:scale(1,1.1); /* W3C */
 }
 
 .price {
@@ -271,4 +339,317 @@ a {
 	/*	font-size: 3.0vw;*/
 	color: #cda20b;
 }
+
+.drink-of-the-day {
+	margin-top: 6vh;
+	width: 75%;
+}
 /* ___END___ section for styles for the drink of the day card */
+
+
+/* START of hamburger menu CSS*/
+
+#menuToggle
+{
+  display: block;
+  position: fixed;
+  top: 50px;
+  left: 50px;
+  
+  z-index: 1;
+  
+  -webkit-user-select: none;
+  user-select: none;
+}
+
+#menuToggle a
+{
+  text-decoration: none;
+  color: #232323;
+  
+  transition: color 0.3s ease;
+}
+
+/* colour change when hovering over the menu items (dunno what colour this should be */
+#menuToggle a:hover
+{
+  color: #722f37;
+}
+
+
+#menuToggle input
+{
+  display: block;
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  
+  cursor: pointer;
+  
+  opacity: 0; /* hide this */
+  z-index: 2; /* and place it over the hamburger */
+  
+  -webkit-touch-callout: none;
+}
+
+#slide:hover ~ span {
+	background:#cda20b;
+}
+
+/*
+ This is the CSS for the toggle (when it is not activated)
+ */
+#menuToggle span
+{
+  display: block;
+  width: 100px;
+  height: 12px;
+  margin-bottom: 20px;
+  position: relative;
+  
+  background: #cda20b;
+  border-radius: 3px;
+  
+  z-index: 1;
+  
+  transform-origin: 4px 0px;
+  
+  transition: transform 0.5s cubic-bezier(0.77,0.2,0.05,1.0),
+              background 0.5s cubic-bezier(0.77,0.2,0.05,1.0),
+              opacity 0.55s ease;
+}
+
+#menuToggle span:first-child
+{
+  transform-origin: 0% 0%;
+}
+
+#menuToggle span:nth-last-child(2)
+{
+  transform-origin: 0% 100%;
+}
+
+/* 
+ Animation to move top line into cross
+ */
+#menuToggle input:checked ~ span
+{
+  opacity: 1;
+  transform: rotate(45deg) translate(-2px, -1px);
+  background: #cda20b;
+}
+
+/*
+ Fade out the middle line 
+ */
+#menuToggle input:checked ~ span:nth-last-child(3)
+{
+  opacity: 0;
+  transform: rotate(0deg) scale(0.2, 0.2);
+}
+
+/*
+ Animation to move bottom line into cross
+ */
+#menuToggle input:checked ~ span:nth-last-child(2)
+{
+  transform: rotate(-45deg) translate(0, -1px);
+}
+
+/*
+CSS for when the menu is actually open
+ */
+#menu
+{
+	overflow: hidden;
+  position: absolute;
+  /* width and height of the bar in percentage of window size
+  this code is technically responsive. try it and see if it is ok */
+  width: 60vw;
+  height: 100vh;
+  margin: -146px 0 0 -50px;
+  padding: 50px;
+  padding-top: 232px;
+  
+  background-color: #ededed;
+  list-style-type: none;
+  -webkit-font-smoothing: antialiased;
+  
+  transform-origin: 0% 0%;
+  transform: translate(-100%, 0);
+  
+  transition: transform 0.5s cubic-bezier(0.77,0.2,0.05,1.0);
+}
+
+#menu li
+{
+/*  padding: 10px 0;*/
+  font-size: 90px;
+}
+
+#menuToggle input:checked ~ ul
+{
+  transform: none;
+}
+
+#cover {
+	opacity: 0;
+	position: fixed;
+	width: 100%;
+	height: 100%;
+	transition: opacity 0.3s cubic-bezier(.25,.8,.25,1);
+	pointer-events: none;
+}
+
+.clickable {
+	pointer-events: auto !important;
+}
+
+.shadow {
+	background-color: black;
+	opacity: 0.8 !important;
+	z-index: 1;
+	cursor: pointer;
+}
+
+#menuToggle input:checked + .shadow
+{
+  display: inline;
+}
+
+
+/* END of hamburger menu CSS */
+
+@media (min-width: 1000px) {
+	#main {
+		width: auto;
+	}
+	#menu {
+		width: 10vw;
+		height: 100vh;
+		max-width: 65px;
+		margin: -100px 0 0 -55px;
+		padding-top: 125px;
+	}
+	#menu li {
+		font-size: 22px;
+	}
+	#menuToggle input {
+		  width: 40px;
+		  height: 32px;
+		  top: -7px;
+		  left: -5px;
+	}
+	#menuToggle span {
+		display: block;
+		width: 33px;
+		height: 4px;
+		margin-bottom: 5px;
+		position: relative;
+		
+		background: #cda20b;
+		border-radius: 3px;
+		
+		z-index: 1;
+		
+		transform-origin: 4px 0px;
+		
+		transition: transform 0.5s cubic-bezier(0.77,0.2,0.05,1.0),
+					background 0.5s cubic-bezier(0.77,0.2,0.05,1.0),
+					opacity 0.55s ease;
+	}
+	#slide:hover ~ span {
+		background:#ffdc52;
+	}
+	.underline {
+		background-color: #cda20b;
+		display: inline-block;
+		height: 2px;
+		transition: height .075s ease-in-out;
+		left: 0px;
+		margin-top: -4px;
+		position: absolute;
+		top: 95px;
+		width: 100%;
+		border-radius: 25px;
+	}
+	#searchDrink:focus + .underline{
+		height: 4px;
+	}
+	#searchDrink {
+		width: 92%;
+		font-size: 40px;
+		margin-top: 0;
+		margin-bottom: 0;
+		left: 0;
+	}
+	#searchButton {
+		font-size: 44px !important;
+		margin-top: -0.4% !important;
+	}
+	#question {
+		font-size: 23px;
+	}
+	.light {
+		font-size: 14px;
+	}
+	.drink-of-the-day {
+		margin-top: 6vh;
+		width: 45%;
+	}
+	.name {
+		font-size: 2vmax;
+	}
+	.brand {
+		font-size: 1.5vmax;
+	}
+	#footer {
+		padding: 1%;
+		z-index: 3;
+		font-size: 16px;
+	}
+}
+
+/* Dark Mode */
+
+/*@media (prefers-color-scheme: dark) {
+	body {
+		background-color: #1c1c1e;
+	}
+	#menu {
+		background-color: #353535;
+	}
+	li {
+		color: white;
+	}
+	.resultCard {
+		background-color: #48484a
+	}
+	.name {
+		color: #64d3ff;
+	}
+	#priceRange {
+		color: #64d3ff;
+	}
+	.buttonSort {
+		background-color: #346173;
+	}
+	.buttonSortActive {
+		background-color: #64d3ff;
+	}
+	.sortbytext {
+		color: #64d3ff;
+	}
+	.indexdetails {
+		color: #a7a7a7;
+	}
+	#question {
+		color: #64d3ff;
+	}
+	#footer {
+		background-color:#346173;
+	}
+	#searchDrink {
+		color:#8e8e93;
+	}
+}*/

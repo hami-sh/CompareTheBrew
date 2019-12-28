@@ -1,7 +1,8 @@
 import sqlite3
 from sqlite3 import Error
 from scripts.classItem import Item
-
+from intellisearch import *
+import re
 
 def create_connection():
     conn = None
@@ -19,6 +20,21 @@ def create_connection():
 
     return conn
 
+def create_metrics_connection():
+    conn = None
+    try:
+        conn = sqlite3.connect("drinks.db")
+
+        sql = ''' CREATE TABLE IF NOT EXISTS "metrics" ( `ID` INTEGER PRIMARY KEY AUTOINCREMENT, `IP` TEXT,
+            `query` TEXT, `datetime` TEXT, `country` TEXT, `region` TEXT, `city` TEXT, `lat` REAL, `long` REAL,
+            `hostname` TEXT, `org` TEXT )'''
+        cur = conn.cursor()
+        cur.execute(sql)
+        print("connected to metrics")
+    except Error as e:
+        print(e)
+
+    return conn
 
 def create_entry(conn, task):
     """
@@ -34,6 +50,25 @@ def create_entry(conn, task):
     cur.execute(sql, task)
     return cur.lastrowid
 
+def create_metric_entry(conn, task):
+    """
+    Create a new task
+    :param conn:
+    :param task:
+    :return:
+    """
+    print(1)
+    sql = ''' INSERT INTO metrics(IP,query,datetime,country,region,city,lat,long,hostname,org)
+              VALUES(?,?,?,?,?,?,?,?,?,?) '''
+    print(2)
+    cur = conn.cursor()
+    print(3)
+    cur.execute(sql, task)
+    print(4)
+    conn.commit()
+    ID = cur.lastrowid
+    conn.close()
+    return ID
 
 def select_all_drinks(conn):
     """
@@ -161,6 +196,11 @@ def select_image_links(conn):
 
     return rows
 
+# def functionRegex(value, pattern):
+#     print(r"/^" + pattern.lower() + r"| {1}" + pattern.lower() + r"/gm")
+#     c_pattern = re.compile(r"\^" + pattern.lower() + r"| {1}" + pattern.lower() + r"/gm")
+#     return c_pattern.search(value) is not None
+
 
 def select_drink_by_smart_search(conn, terms):
     """Select all drinks that contain any of the search keywords given in their name, brand or type attributes
@@ -172,28 +212,56 @@ def select_drink_by_smart_search(conn, terms):
     Returns:
         A list of rows from the drinks table matching the search terms
     """
+    # conn.create_function('regexp', 2, functionRegex)
     # Create a new cursor
     cur = conn.cursor()
     # Define a new list for which to store our final list of results
     results = list()
 
     # Split the search keyboards by the spaces in between words
-    terms = terms.split(" ")
-    print("SEARCH TERMS: " + str(terms))
+    inputs = terms.split(" ")
+    print("SEARCH TERMS: " + str(inputs))
     # return termsList
+    terms = list()
+    for term in inputs:
+        terms.append(term.lower())
+    print("-------------------<OLD>-------------------")
+    print(terms)
+    # now run intellisense search to get better result parity
+    print("-------------------(NEW)-------------------")
+    intelliterms = intellisearch(terms)
+    # print(intelliterms)
 
     # For each keyword, execute a new query at the cursor to find drinks matching that keyword
-    for term in terms:
-        # cur.execute("SELECT * FROM drinks WHERE type LIKE '%{}%' ORDER BY efficiency DESC".format(term))
+    for term in intelliterms:
+        # cur.execute("SELECT * FROM drinks WHERE type LIKE '%{}
+        term = term.lower()
         cur.execute(
             "SELECT * FROM drinks WHERE type LIKE '%{}%' OR name LIKE '%{}%' OR brand LIKE '%{}%' ORDER BY efficiency DESC".format(
                 term, term, term))
+        # cur.execute('SELECT * FROM drinks WHERE REGEXP(type, ?) OR REGEXP(name, ?) OR REGEXP(brand, ?) ORDER BY efficiency DESC', (term, term, term,))
+
         rows = cur.fetchall()
+        print("FOR " + term)
+
         print("NUMBER OF ROWS FOUND: " + str(len(rows)))
         # For each row in rows, if the row is not already in the results list add it
         for row in rows:
             if not (row in results):
-                results.append(row)
+                # print(row[2], row[3], row[4])
+                # print(re.match(r"^"+term+"| {1}"+term, row[2].lower(), re.M))
+                # print(re.match(r"^"+term+"| {1}"+term, row[3], re.M))
+                # print(re.match(r"^"+term+"| {1}"+term, row[4], re.M))
+                if re.search(r'^'+term+'| {1}'+term, row[2].lower(), re.M) or re.search(r'^'+term+'| {1}'+term, row[3].lower(), re.M)\
+                        or re.search(r'^'+term+'| {1}'+term, row[4].lower(), re.M):
+                    # print("HERE")
+                    # print(row)
+                    results.append(row)
+
+    print("NUMBER OF RESULTS FOUND: " + str(len(results)))
+    # organise results based on efficiency - currently only sorted per term.
+    results.sort(key=lambda tup: tup[10], reverse=True)
+
     # Return the final list of results
     return results
 

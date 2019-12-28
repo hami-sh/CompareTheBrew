@@ -15,9 +15,9 @@ import requests
 
 def main():
     print("are you sure? you may get banned without vpn [Y/n]")
-    s = input()
-    if s != 'Y':
-        return
+    #s = input()
+    #if s != 'Y':
+    #    return
     conn = create_connection()
     images = select_image_links(conn)
 
@@ -32,7 +32,7 @@ def main():
             url = url.replace(":", ",")
             url = url.split('~')[-1]
             uncompressed_path = "static/images/uncompressed/" + url + '.webp'
-            compressed_path = "static/images/drinkimages/" + url + '.webp.webp '
+            compressed_path = "static/images/drinkimages/" + url + '.webp.png'
             if os.path.exists(compressed_path):
                 print("exists<" + link[0] + ">")
             else:

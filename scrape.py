@@ -145,6 +145,8 @@ def download(url):
     # ua = UserAgent(cache=False, use_cache_server=False)
     chrome_options = Options()
     chrome_options.add_argument("--headless")
+    chrome_options.add_argument('--no-sandbox')
+    # chrome_options.add_argument('--disable-dev-shm-usage')
 
     # # Scrape a proxy IP from a free proxy site on the internet
     # proxies = []  # Will contain proxies [ip, port]
@@ -165,17 +167,20 @@ def download(url):
     # print("FOUND PROXY " + str(PROXY) + " FROM " + proxy_source + ".")
     # # Add this proxy ip to the chromewebdriver arguments
     # chrome_options.add_argument('--proxy-server=' + PROXY)
-    PROXY = "-"
+    # PROXY = "-"
 
-    # Run the chromewebdriver to scrape with the given proxy
+    # Run the chromewebdriver to scrape with the given proxy - SECOND FOR WINDOWS, FIRST FOR SERVER
+    # driver = webdriver.Chrome('/usr/local/bin', options=chrome_options)
     driver = webdriver.Chrome(options=chrome_options)
     # We are now downloading the html from the given url
     print("DOWNLOADING AND RENDERING HTML FROM " + url + " ...")# " WITH PROXY URL " + PROXY + " ...")
     driver.get(url)
+    print("Done downloading")
 
     # Put the scraped html into a beautifulsoup
     soup = BeautifulSoup(driver.page_source, 'html.parser')
-
+    driver.close()
+    
     # Return the soup
     return soup
 
@@ -418,7 +423,7 @@ def getDrinksBws(soups):
                     image = None
                     print("||", brand, "###", combinedName, "###", priceStr, "###")
                     entry = Item(store, brand, combinedName, None, priceStr, "https://bws.com.au" + relativePath, None, None, None,
-                             None, image)
+                             None, image, None)
                     itemsOnPage.append(entry)
     else:
         for soup in soups:
@@ -448,7 +453,7 @@ def getDrinksBws(soups):
                 image = drink.find('img', {'class':'productTile_image'})['src']
                 print(">>", brand, name, price)
                 entry = Item(store, brand, name, None, price, "https://bws.com.au" + relativePath, None, None, None, None,
-                             image)
+                             image, None)
                 itemsOnPage.append(entry)
     # print(itemsOnPage)
     # print("QUIT")

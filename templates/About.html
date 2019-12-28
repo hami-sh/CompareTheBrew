@@ -1,0 +1,92 @@
+<!doctype html>
+
+<html lang="en">
+<head>
+	<meta charset="utf-8">
+    <!-- Tab title -->
+	<title>Compare The Brew</title>
+	<meta name="description" content="Compare The Brew">
+	<meta name="author" content="The Boys">
+    <!-- Favicon -->
+    <link rel="icon" href="https://encrypted-tbn0.gstatic.com/images?q=tbn%3AANd9GcTzI0uH0_lzecaSuTinKUKNL_W1t72KKq1QWdC8hWGKG71Bue43">
+	<link rel="stylesheet" href="/static/css/styles.css">
+	<link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+</head>
+
+<body>
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+	<script src="/static/js/scripts.js"></script>
+	<div id="cover"></div>
+	<div id="header">
+		<nav role="navigation">
+			<div id="menuToggle">
+			  <!--
+			  Hidden checkbox
+			  -->
+			  <input id="slide" type="checkbox" />
+			  
+			  <!--
+			  Some spans to act as a hamburger.
+			  Don't remove this u monkey it looks dumb but it works
+			  -->
+			  <span></span>
+			  <span></span>
+			  <span></span>
+			  
+			  <!--
+			  Links
+			  -->
+			  <ul id="menu">
+				<a href="/"><li class="navButton">Home</li></a>
+				<a href="/about"><li class="navButton">About</li></a>
+				<a href="/faq"><li class="navButton">FAQ</li></a>
+			  </ul>
+			</div>
+		  </nav>
+	</div>
+
+
+	<div id="content">
+        <!-- <div id="compare-the-brew">
+            CompareTheBrew
+        </div> -->
+
+		<div id="main">
+			<div id="question">
+				About Us
+			</div>
+
+            <!-- <form method="POST">
+                <input name="text">
+                <input type="submit">
+			</form> -->
+			
+			<div class="light">
+				Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
+			</div>
+		</div>
+	</div>
+
+	<div id="footer">
+		<div id="footerLeft">
+			<b>©CompareTheBrew.com.au, 2019.
+		</div>
+		<div id="footerRight">
+			Drink responsibly.</b>
+		</div>
+	</div>
+	<script src="/static/js/fitty.min.js"></script>
+	<script>
+		fitty('.responsive_head', {
+			maxSize: 100,
+		});
+		fitty('.indexdetails', {
+			minSize: 12,
+		});
+		fitty('.name', {
+			minSize: 14,
+			multiLine: true,
+		});
+	</script>
+</body>
+</html>
