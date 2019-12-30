@@ -325,6 +325,14 @@ textarea:focus, input:focus{
     transform:scale(1,1.1); /* W3C */
 }
 
+.sideways {
+	writing-mode: vertical-rl;
+	text-orientation: mixed;
+	display: inline-block;
+	overflow: visible;
+	max-height: 100%;
+}
+
 #footer {
 	display: none;
 	position: fixed;
