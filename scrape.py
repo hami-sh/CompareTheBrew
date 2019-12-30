@@ -146,7 +146,7 @@ def download(url):
     chrome_options = Options()
     chrome_options.add_argument("--headless")
     chrome_options.add_argument('--no-sandbox')
-    # chrome_options.add_argument('--disable-dev-shm-usage')
+    chrome_options.add_argument('--disable-dev-shm-usage')
 
     # # Scrape a proxy IP from a free proxy site on the internet
     # proxies = []  # Will contain proxies [ip, port]
@@ -179,7 +179,7 @@ def download(url):
 
     # Put the scraped html into a beautifulsoup
     soup = BeautifulSoup(driver.page_source, 'html.parser')
-    driver.close()
+    driver.quit()
     
     # Return the soup
     return soup
