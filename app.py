@@ -8,6 +8,7 @@ import re
 import json
 from urllib.request import urlopen
 import ipinfo
+import random
 
 # from scrape2 import search
 import scripts.databaseHandler as db
