@@ -81,7 +81,7 @@
                         <h2>Sorry, we didn't find any results matching your search.</h2>
                     {% else %}
                         <div id="cardsArea">
-                        {% for result in results %}
+                        {% for result in results[:16] %}
                             <!-- If this item is a google ad item -->
                             {% if result|length == 1 %}
                                 <div class="item">
