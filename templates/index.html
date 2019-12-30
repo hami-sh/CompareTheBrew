@@ -39,9 +39,9 @@
 			  Links
 			  -->
 			  <ul id="menu">
-				<a href="/"><li class="navButton">Home</li></a>
-				<a href="/about"><li class="navButton">About</li></a>
-				<a href="/faq"><li class="navButton">FAQ</li></a>
+				<a href="/"><li class="navButton">🏠Home</li></a>
+				<a href="/about"><li class="navButton">❓About</li></a>
+				<a href="https://www.redbubble.com/people/comparethebrew/shop"><li class="navButton">👕Merch</li></a>
 			  </ul>
 			</div>
 		  </nav>
@@ -69,8 +69,12 @@
 				<span class="underline"></span>
 			</form>
 			<div class="light">
-				Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
-			</div>
+                <centre>
+                <h1>🍻 🔎 👓</h1>
+                    <h2>Why waste money when you can <i><b>CompareTheBrew</b></i>?</h2>
+                    <h2>Search above to find the best alcohol for your dollar!</h2>
+                </centre>
+            </div>
 			<div class="drink-of-the-day">
 				<div class="item">	
 						<a class="resultCard" href="{{result[6]}}">
@@ -97,7 +101,7 @@
 								<div>
 									<div class="scorePriceContainer">
 										<div class="score responsive_head">
-											{{'%0.0f'| format(result[10] * 100)}}%
+											{{'%0.00f'| format(result[10])}}
 											<div class="price">
 												${{result[5]}}											
 											</div>
@@ -116,11 +120,11 @@
 			<b>©CompareTheBrew.com, 2019.
 		</div>
 		<div id="footerRight">
-			<form action="https://www.paypal.com/cgi-bin/webscr" method="post" target="_top">
+			<form style="display:inline-block;position:absolute;margin-left:-15%" action="https://www.paypal.com/cgi-bin/webscr" method="post" target="_top">
 			<input type="hidden" name="cmd" value="_donations" />
 			<input type="hidden" name="business" value="LTES4FLSL72YL" />
 			<input type="hidden" name="currency_code" value="AUD" />
-			<input type="image" src="https://www.paypalobjects.com/en_AU/i/btn/btn_donateCC_LG.gif" border="0" name="submit" title="PayPal - The safer, easier way to pay online!" alt="Donate with PayPal button" />
+			<input type="image" style="max-height: 25px" src="/static/images/donate.png" border="0" name="submit" title="PayPal - The safer, easier way to pay online!" alt="Donate with PayPal button" />
 			<img alt="" border="0" src="https://www.paypal.com/en_AU/i/scr/pixel.gif" width="1" height="1" />
 			</form>
 

@@ -3,6 +3,9 @@ from sqlite3 import Error
 from scripts.classItem import Item
 from intellisearch import *
 import re
+import itertools
+import operator
+
 
 def create_connection():
     conn = None
@@ -20,6 +23,7 @@ def create_connection():
 
     return conn
 
+
 def create_metrics_connection():
     conn = None
     try:
@@ -36,6 +40,7 @@ def create_metrics_connection():
 
     return conn
 
+
 def create_entry(conn, task):
     """
     Create a new task
@@ -49,6 +54,7 @@ def create_entry(conn, task):
     cur = conn.cursor()
     cur.execute(sql, task)
     return cur.lastrowid
+
 
 def create_metric_entry(conn, task):
     """
@@ -69,6 +75,7 @@ def create_metric_entry(conn, task):
     ID = cur.lastrowid
     conn.close()
     return ID
+
 
 def select_all_drinks(conn):
     """
@@ -196,6 +203,7 @@ def select_image_links(conn):
 
     return rows
 
+
 # def functionRegex(value, pattern):
 #     print(r"/^" + pattern.lower() + r"| {1}" + pattern.lower() + r"/gm")
 #     c_pattern = re.compile(r"\^" + pattern.lower() + r"| {1}" + pattern.lower() + r"/gm")
@@ -252,8 +260,9 @@ def select_drink_by_smart_search(conn, terms):
                 # print(re.match(r"^"+term+"| {1}"+term, row[2].lower(), re.M))
                 # print(re.match(r"^"+term+"| {1}"+term, row[3], re.M))
                 # print(re.match(r"^"+term+"| {1}"+term, row[4], re.M))
-                if re.search(r'^'+term+'| {1}'+term, row[2].lower(), re.M) or re.search(r'^'+term+'| {1}'+term, row[3].lower(), re.M)\
-                        or re.search(r'^'+term+'| {1}'+term, row[4].lower(), re.M):
+                if re.search(r'^' + term + '| {1}' + term, row[2].lower(), re.M) or re.search(
+                        r'^' + term + '| {1}' + term, row[3].lower(), re.M) \
+                        or re.search(r'^' + term + '| {1}' + term, row[4].lower(), re.M):
                     # print("HERE")
                     # print(row)
                     results.append(row)
@@ -291,11 +300,11 @@ def update_drink(conn, drink, newPrice):
         print(drink.brand + " " + drink.name)
         cur = conn.cursor()
         cur.execute(sql, (
-        newPrice, drink.link, drink.image, float(float(result) / float(newPrice)), drink.name, drink.brand,
-        drink.store))
+            newPrice, drink.link, drink.image, float(float(result) / float(newPrice)), drink.name, drink.brand,
+            drink.store))
         print(float(newPrice))
         print(float(result))
-        print(float(result)/float(newPrice))
+        print(float(result) / float(newPrice))
         conn.commit()
 
 
@@ -414,8 +423,8 @@ def dbhandler(conn, list, mode):
     if mode == "p":
         for drink in list:
             drink_task = (
-            drink.store, drink.brand, drink.name, drink.type, float(drink.price), drink.link, float(drink.ml),
-            float(drink.percent), float(drink.stdDrinks), float(drink.efficiency), drink.link)
+                drink.store, drink.brand, drink.name, drink.type, float(drink.price), drink.link, float(drink.ml),
+                float(drink.percent), float(drink.stdDrinks), float(drink.efficiency), drink.link)
             create_entry(conn, drink_task)
 
     elif mode == "u":
@@ -459,3 +468,46 @@ def delete_all(conn):
     cur = conn.cursor()
     cur.execute(sql)
     conn.commit()
+
+
+# [[metrics section
+# total searches
+
+def total_search(conn):
+    sql = 'SELECT * FROM metrics'
+    cur = conn.cursor()
+    cur.execute(sql)
+    rows = cur.fetchall()
+    return len(rows)
+
+
+def most_common(L):
+    # get an iterable of (item, iterable) pairs
+    SL = sorted((x, i) for i, x in enumerate(L))
+    # print 'SL:', SL
+    groups = itertools.groupby(SL, key=operator.itemgetter(0))
+
+    # auxiliary function to get "quality" for an item
+    def _auxfun(g):
+        item, iterable = g
+        count = 0
+        min_index = len(L)
+        for _, where in iterable:
+            count += 1
+            min_index = min(min_index, where)
+        # print 'item %r, count %r, minind %r' % (item, count, min_index)
+        return count, -min_index
+
+    # pick the highest-count/earliest item
+    return max(groups, key=_auxfun)[0]
+
+
+def most_searched(conn):
+    sql = 'SELECT * FROM metrics'
+    cur = conn.cursor()
+    cur.execute(sql)
+    rows = cur.fetchall()
+    results = list()
+    for row in rows:
+        results.append(row[2])
+    return most_common(results)
