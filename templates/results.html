@@ -37,9 +37,9 @@
 			  Links
 			  -->
 			  <ul id="menu">
-				<a href="/"><li class="navButton">Home</li></a>
-				<a href="/about"><li class="navButton">About</li></a>
-				<a href="/faq"><li class="navButton">FAQ</li></a>
+				<a href="/"><li class="navButton">🏠Home</li></a>
+				<a href="/about"><li class="navButton">❓About</li></a>
+				<a href="https://www.redbubble.com/people/comparethebrew/shop"><li class="navButton">👕Merch</li></a>
 			  </ul>
 			</div>
 		  </nav>
@@ -110,8 +110,9 @@
 										<div>
 											<div class="scorePriceContainer">
 												<div class="score responsive_head" style="white-space: nowrap; display: inline-block;">
-													{{result[10]}}
-													<div class="price">
+													{{'%0.0f'| format(result[10])}}
+                                                    <img src="/static/images/emoji_score.png" alt="Score" style="width:50px;height:60px">
+                                                    <div class="price">
 														${{result[5]}}											
 													</div>
 												</div>
@@ -144,13 +145,14 @@
 			<b>©CompareTheBrew.com.au, 2019.
 		</div>
 		<div id="footerRight">
-			<form style="display:inline-block" action="https://www.paypal.com/cgi-bin/webscr" method="post" target="_top">
+			<form style="display:inline-block;position:absolute;margin-left:-15%" action="https://www.paypal.com/cgi-bin/webscr" method="post" target="_top">
 			<input type="hidden" name="cmd" value="_donations" />
 			<input type="hidden" name="business" value="LTES4FLSL72YL" />
 			<input type="hidden" name="currency_code" value="AUD" />
-			<input type="image" src="https://www.paypalobjects.com/en_AU/i/btn/btn_donateCC_LG.gif" border="0" name="submit" title="PayPal - The safer, easier way to pay online!" alt="Donate with PayPal button" />
+			<input type="image" style="max-height: 25px" src="/static/images/donate.png" border="0" name="submit" title="PayPal - The safer, easier way to pay online!" alt="Donate with PayPal button" />
 			<img alt="" border="0" src="https://www.paypal.com/en_AU/i/scr/pixel.gif" width="1" height="1" />
 			</form>
+
 
 			Drink responsibly.</b>
 		</div>

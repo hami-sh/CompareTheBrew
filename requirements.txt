@@ -3,3 +3,4 @@ selenium
 argparse
 flask
 fake_useragent
+ipinfo

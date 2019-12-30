@@ -39,9 +39,9 @@
 			  Links
 			  -->
 			  <ul id="menu">
-				<a href="/"><li class="navButton">Home</li></a>
-				<a href="/about"><li class="navButton">About</li></a>
-				<a href="/faq"><li class="navButton">FAQ</li></a>
+				<a href="/"><li class="navButton">🏠Home</li></a>
+				<a href="/about"><li class="navButton">❓About</li></a>
+				<a href="https://www.redbubble.com/people/comparethebrew/shop"><li class="navButton">👕Merch</li></a>
 			  </ul>
 			</div>
 		  </nav>
@@ -69,8 +69,12 @@
 				<span class="underline"></span>
 			</form>
 			<div class="light">
-				Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
-			</div>
+                <centre>
+                <h1>🍻 🔎 👓</h1>
+                    <h2>Why waste money when you can <i><b>CompareTheBrew</b></i>?</h2>
+                    <h2>Search above to find the best alcohol for your dollar!</h2>
+                </centre>
+            </div>
 			<div class="drink-of-the-day">
 				<div class="item">	
 						<a class="resultCard" href="{{result[6]}}">
@@ -97,7 +101,7 @@
 								<div>
 									<div class="scorePriceContainer">
 										<div class="score responsive_head">
-											{{result[10]}}
+											{{'%0.00f'| format(result[10])}}
 											<div class="price">
 												${{result[5]}}											
 											</div>
