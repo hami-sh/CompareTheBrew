@@ -74,58 +74,69 @@
 					We found {{results|length}} drinks matching your search. I've set it so it only shows the first 8 for testing.
 				{% endif %}
 			</div>
-			<div class="areaContainer">
-				<div id="resultsArea">
-					{% if results|length == 0 %}
-						<h2>Sorry, we didn't find any results matching your search.</h2>
-					{% else %}
-						<div id="cardsArea">
-						{% for result in results[:8] %}
-						<!-- Testing phase, don't need to load every result atm. Just taking the first 8 -->
-						<!-- Develop so only loads more when scrolls down -->
-							<div class="item">	
-								<a class="resultCard" href="{{result[6]}}">
-									<div class="cardImage">
-										<!-- <img src="{{result[-1]}}" style="width:96px;height:120px;"> -->
 
-										<!-- For deployment -->
-										<img src="/static/images/drinkimages/{{result[12]}}.webp.png" alt={{result[2]}} {{result[3]}} style="max-width:100%;max-height:100%;">
-										<!-- For testing (uncomment this and comment above to see images when testing code -->
-										<!-- <img src="/static/images/drinkimages/{{result[12]}}.webp.webp.png" alt={{result[2]}} {{result[3]}} style="max-width:100%;max-height:100%;"> -->
+            <div class="areaContainer">
+                <div id="resultsArea">
+                    {% if results|length == 0 %}
+                        <h2>Sorry, we didn't find any results matching your search.</h2>
+                    {% else %}
+                        <div id="cardsArea">
+                        {% for result in results %}
+                            <!-- If this item is a google ad item -->
+                            {% if result|length == 1 %}
+                                <div class="item">
+                                    <a class="resultCard" href="https://youtube.com" style="width: 300px; height:200px;">
+                                        I LOVE MEMES!
+                                    </a>
+                                </div>
+                            <!-- If this item is a normal drink item -->
+                            {% else %}
+                                <!-- Testing phase, don't need to load every result atm. Just taking the first 8 -->
+                                <!-- Develop so only loads more when scrolls down -->
+                                <div class="item">  
+                                    <a class="resultCard" href="{{result[6]}}">
+                                        <div class="cardImage">
+                                            <!-- <img src="{{result[-1]}}" style="width:96px;height:120px;"> -->
 
-									</div>
-									<div class="cardContent">
-										<div class="brand">
-											{{result[1]}}
-										</div>
-										<div>
-											<div class="name">
-												{{result[2]}} {{result[3]}}
-											</div>
-										</div>
-										<span class="searchLine"></span>
-										<div class="details" style="white-space: nowrap; display: inline-block;">
-											{{result[7]}}L - {{'%0.0f'| format(result[9])}} std. - {{result[8]}}%
-										</div>
-										<div>
-											<div class="scorePriceContainer">
-												<div class="score responsive_head" style="white-space: nowrap; display: inline-block;">
-													{{'%0.0f'| format(result[10])}}
-                                                    <img src="/static/images/emoji_score.png" alt="Score" style="width:50px;height:60px">
-                                                    <div class="price">
-														${{result[5]}}											
-													</div>
-												</div>
-											</div>
-										</div>
-									</div>
-								</a>
-							</div>
-						{%endfor%}
-						</div>
-					{% endif %}
-				</div>
+                                            <!-- For deployment -->
+                                            <img src="/static/images/drinkimages/{{result[12]}}.webp.png" alt={{result[2]}} {{result[3]}} style="max-width:100%;max-height:100%;">
+                                            <!-- For testing (uncomment this and comment above to see images when testing code -->
+                                            <!-- <img src="/static/images/drinkimages/{{result[12]}}.webp.webp.png" alt={{result[2]}} {{result[3]}} style="max-width:100%;max-height:100%;"> -->
+
+                                        </div>
+                                        <div class="cardContent">
+                                            <div class="brand">
+                                                {{result[1]}}
+                                            </div>
+                                            <div>
+                                                <div class="name">
+                                                    {{result[2]}} {{result[3]}}
+                                                </div>
+                                            </div>
+                                            <span class="searchLine"></span>
+                                            <div class="details" style="white-space: nowrap; display: inline-block;">
+                                                {{result[7]}}L - {{'%0.0f'| format(result[9])}} std. - {{result[8]}}%
+                                            </div>
+                                            <div>
+                                                <div class="scorePriceContainer">
+                                                    <div class="score responsive_head" style="white-space: nowrap; display: inline-block;">
+                                                        {{'%0.0f'| format(result[10] * 100)}}%
+                                                        <div class="price">
+                                                            ${{result[5]}}                                          
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </a>
+                                </div>
+                            {% endif %}
+                        {%endfor%}
+                        </div>
+                    {% endif %}
+                </div>
 			</div>
+			
 			<div class="light">
 				Beep boop bop boop beep
 			</div>
