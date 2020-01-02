@@ -23,7 +23,7 @@ def displaySearchPage():
     ...
     """
     # Get the current top drink from the database
-    conn = db.create_connection() # connect to the database
+    conn = db.create_connection()  # connect to the database
     topDrink = db.select_all_drinks_by_efficiency(conn)[0] # get the first result from all of the drinks sorted by efficiency desc
     return render_template('index.html', result=topDrink)
 
@@ -40,9 +40,13 @@ def postSearchTerms():
     # Send the user to the results page
     return redirect("/results/" + searchTerms)
 
-# A third test page to display search results
+# --------------------------------------
+#
+#                 SCORE (best)
+#
+# --------------------------------------
 @app.route("/results/<searchTerms>")
-def displayResultPage(searchTerms):
+def display_bestscore_ResultPage(searchTerms):
     """
     Displays the search results page given the search terms
 
@@ -53,34 +57,183 @@ def displayResultPage(searchTerms):
     """
     # Get results the new way - by querying the database
     conn = db.create_connection() # connect to the database
-    tempResults = db.select_drink_by_smart_search(conn, searchTerms) # get drinks with type/brand/name matching any of the words in searchTerms
-    print("### OG LIST: " + str(tempResults) + " ###")
-    
-    num_ads = 0 # hom wnay ads are currently added to the list
-    next_ad_index = 1 # the index we will place the next ad item at
-    drinks_per_ad = 5 # hom many legitimate drinks cards (-1) we will have until we show the next drink card  i.e. 3 = 1 ad per 3 drinks
-    while next_ad_index < len(tempResults): # While we have not yet finished putting ads all through the list
-        tempResults.insert(next_ad_index, ['GOOGLE_AD']) # Add an advertisement item to the list
-        num_ads = num_ads + 1 # increment the number of ads we have added to the page
-        next_ad_index = (num_ads * drinks_per_ad)+ random.randint(1, drinks_per_ad) # calculate the position in which we will put the next drink card
-    print("### NEW LIST: ")
-    for result in tempResults:
-        print(result)
-    print("###")
-
-    # # This is the working query of all drinks
-    # # tempResults = db.select_all_drinks_by_efficiency(conn) # get all drinks where the value in column 'type' is 'searchTerms' sorted by efficiency
-    # # This is the broken query by type
-    # # tempResults = db.select_drink_by_efficiency_and_type(conn, searchTerms) # get all drinks where the value in column 'type' is 'searchTerms' sorted by efficiency
-
-    # Print a summary of the search results sent to the client on the server command prompt (should also be logged in future)
-    # print("""\n\n                                    SEARCH RESULTS                                     \n|||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||""")
-    # for result in tempResults:
-    #     print(result)
-    # print("""|||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||\n\n""")
-
+    tempResults = db.select_drink_by_smart_search(conn, searchTerms, 'DESC_efficiency')
+    insert_ads_amongst_results(tempResults)
 
     # gather metrics info
+    metrics(searchTerms)
+    return render_template('results.html', results=tempResults)
+
+
+# --------------------------------------
+#
+#                 SCORE (worst)
+#
+# --------------------------------------
+@app.route("/results=score-asc/<searchTerms>")
+def display_worstscore_ResultPage(searchTerms):
+    """
+    Displays the search results page given the search terms
+
+    Args:
+        searchTerms: the searchTerms entered in the search (currently just the initial search terms entered)
+    Returns:
+        the rendered html template for the page
+    """
+    # Get results the new way - by querying the database
+    conn = db.create_connection()  # connect to the database
+    tempResults = db.select_drink_by_smart_search(conn, searchTerms, 'ASC_efficiency')
+    insert_ads_amongst_results(tempResults)
+
+    # gather metrics info
+    metrics(searchTerms)
+    return render_template('results.html', results=tempResults)
+
+
+# --------------------------------------
+#
+#                 PRICE (asc)
+#
+# --------------------------------------
+@app.route("/results=price-asc/<searchTerms>")
+def display_bestprice_ResultPage(searchTerms):
+    """
+    Displays the search results page given the search terms
+
+    Args:
+        searchTerms: the searchTerms entered in the search (currently just the initial search terms entered)
+    Returns:
+        the rendered html template for the page
+    """
+    # Get results the new way - by querying the database
+    conn = db.create_connection()  # connect to the database
+    tempResults = db.select_drink_by_smart_search(conn, searchTerms, 'ASC_price')
+    insert_ads_amongst_results(tempResults)
+
+    # gather metrics info
+    metrics(searchTerms)
+
+    return render_template('results.html', results=tempResults)
+
+# --------------------------------------
+#
+#                 PRICE (desc)
+#
+# --------------------------------------
+@app.route("/results=price-desc/<searchTerms>")
+def display_worstprice_ResultPage(searchTerms):
+    """
+    Displays the search results page given the search terms
+
+    Args:
+        searchTerms: the searchTerms entered in the search (currently just the initial search terms entered)
+    Returns:
+        the rendered html template for the page
+    """
+    # Get results the new way - by querying the database
+    conn = db.create_connection()  # connect to the database
+    tempResults = db.select_drink_by_smart_search(conn, searchTerms, 'DESC_price')
+    insert_ads_amongst_results(tempResults)
+
+    # gather metrics info
+    metrics(searchTerms)
+
+    return render_template('results.html', results=tempResults)
+
+# --------------------------------------
+#
+#                 size of drink (desc)
+#
+# --------------------------------------
+@app.route("/results=size-desc/<searchTerms>")
+def display_largest_ResultPage(searchTerms):
+    """
+    Displays the search results page given the search terms
+
+    Args:
+        searchTerms: the searchTerms entered in the search (currently just the initial search terms entered)
+    Returns:
+        the rendered html template for the page
+    """
+    # Get results the new way - by querying the database
+    conn = db.create_connection()  # connect to the database
+    tempResults = db.select_drink_by_smart_search(conn, searchTerms, 'DESC_ml')
+    insert_ads_amongst_results(tempResults)
+
+    # gather metrics info
+    metrics(searchTerms)
+
+    return render_template('results.html', results=tempResults)
+
+# --------------------------------------
+#
+#                 size of drink (asc)
+#
+# --------------------------------------
+@app.route("/results=size-asc/<searchTerms>")
+def display_smallest_ResultPage(searchTerms):
+    """
+    Displays the search results page given the search terms
+
+    Args:
+        searchTerms: the searchTerms entered in the search (currently just the initial search terms entered)
+    Returns:
+        the rendered html template for the page
+    """
+    # Get results the new way - by querying the database
+    conn = db.create_connection()  # connect to the database
+    tempResults = db.select_drink_by_smart_search(conn, searchTerms, 'ASC_ml')
+    insert_ads_amongst_results(tempResults)
+
+    # gather metrics info
+    metrics(searchTerms)
+
+    return render_template('results.html', results=tempResults)
+
+# --------------------------------------
+#
+#                 pecent (desc)
+#
+# --------------------------------------
+@app.route("/results=percent-desc/<searchTerms>")
+def display_largepercent_ResultPage(searchTerms):
+    """
+    Displays the search results page given the search terms
+
+    Args:
+        searchTerms: the searchTerms entered in the search (currently just the initial search terms entered)
+    Returns:
+        the rendered html template for the page
+    """
+    # Get results the new way - by querying the database
+    conn = db.create_connection()  # connect to the database
+    tempResults = db.select_drink_by_smart_search(conn, searchTerms, 'DESC_percent')
+    insert_ads_amongst_results(tempResults)
+
+    # gather metrics info
+    metrics(searchTerms)
+
+    return render_template('results.html', results=tempResults)
+
+
+# ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+#
+#                 advert insert
+#
+# ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+def insert_ads_amongst_results(tempResults):
+    num_ads = 0  # hom wnay ads are currently added to the list
+    next_ad_index = 1  # the index we will place the next ad item at
+    drinks_per_ad = 5  # hom many legitimate drinks cards (-1) we will have until we show the next drink card  i.e. 3 = 1 ad per 3 drinks
+    while next_ad_index < len(tempResults):  # While we have not yet finished putting ads all through the list
+        tempResults.insert(next_ad_index, ['GOOGLE_AD'])  # Add an advertisement item to the list
+        num_ads = num_ads + 1  # increment the number of ads we have added to the page
+        next_ad_index = (num_ads * drinks_per_ad) + random.randint(1,
+                                                                   drinks_per_ad)  # calculate the position in which we will put the next drink card
+    return tempResults
+
+
+def metrics(searchTerms):
     try:
         TOQ = datetime.now().strftime('%H:%M:%S %Y-%m-%d')
         print(TOQ)
@@ -116,13 +269,13 @@ def displayResultPage(searchTerms):
 
         metconn = db.create_metrics_connection()
         metric = (
-        str(IP), str(query), str(TOQ), str(country), str(region), str(city), float(lat), float(long), str(hostname),
-        str(org))
+            str(IP), str(query), str(TOQ), str(country), str(region), str(city), float(lat), float(long), str(hostname),
+            str(org))
         ID = db.create_metric_entry(metconn, metric)
         print("ID: " + str(ID))
     except Exception as e:
-       print(e)
-    return render_template('results.html', results=tempResults)
+        print(e)
+
 
 # # A function to get search terms from the search bar on the results page
 @app.route('/results/<arg>', methods=['POST'])
@@ -166,5 +319,5 @@ def get_my_ip():
 
 # Run the flask application (won't run when the site is being hosted on a server)
 if __name__ == '__main__':
-    # app.run(host='0.0.0.0', port=80, debug=True)
-    app.run(host='127.0.0.1', port=8000, debug=True)
+    app.run(host='0.0.0.0', port=80, debug=True)
+    # app.run(host='127.0.0.1', port=8000, debug=True)
