@@ -210,13 +210,13 @@ def select_image_links(conn):
 #     return c_pattern.search(value) is not None
 
 
-def select_drink_by_smart_search(conn, terms):
+def select_drink_by_smart_search(conn, terms, thing):
     """Select all drinks that contain any of the search keywords given in their name, brand or type attributes
     
     Args:
-        param1: the Connection object
-        param2: the value in the type/name/brand column that we are querying for
-
+        conn: the Connection object
+        terms: the value in the type/name/brand column that we are querying for
+        thing: search by 'ASC_' | 'DESC_' += 'efficiency'; 'price'; 'percent'; 'ml';
     Returns:
         A list of rows from the drinks table matching the search terms
     """
@@ -240,14 +240,18 @@ def select_drink_by_smart_search(conn, terms):
     intelliterms = intellisearch(terms)
     # print(intelliterms)
 
+    # get the category to search by:
+    print(thing)
+    parts = thing.split("_")
+    category = parts[1]
+    order = parts[0]
+
     # For each keyword, execute a new query at the cursor to find drinks matching that keyword
     for term in intelliterms:
-        # cur.execute("SELECT * FROM drinks WHERE type LIKE '%{}
         term = term.lower()
         cur.execute(
-            "SELECT * FROM drinks WHERE type LIKE '%{}%' OR name LIKE '%{}%' OR brand LIKE '%{}%' ORDER BY efficiency DESC".format(
-                term, term, term))
-        # cur.execute('SELECT * FROM drinks WHERE REGEXP(type, ?) OR REGEXP(name, ?) OR REGEXP(brand, ?) ORDER BY efficiency DESC', (term, term, term,))
+            "SELECT * FROM drinks WHERE type LIKE '%{}%' OR name LIKE '%{}%' OR brand LIKE '%{}%' ORDER BY {} {}".format(
+                term, term, term, category, order))
 
         rows = cur.fetchall()
         print("FOR " + term)
@@ -268,8 +272,33 @@ def select_drink_by_smart_search(conn, terms):
                     results.append(row)
 
     print("NUMBER OF RESULTS FOUND: " + str(len(results)))
-    # organise results based on efficiency - currently only sorted per term.
-    results.sort(key=lambda tup: tup[10], reverse=True)
+
+    # organise results based on category and order - currently only sorted per term.
+    if category == 'efficiency':
+        if order == 'ASC':
+            results.sort(key=lambda tup: tup[10], reverse=False)
+        elif order == 'DESC':
+            results.sort(key=lambda tup: tup[10], reverse=True)
+
+    elif category == 'price':
+        if order == 'ASC':
+            results.sort(key=lambda tup: tup[5], reverse=False)
+        elif order == 'DESC':
+            results.sort(key=lambda tup: tup[5], reverse=True)
+
+    elif category == 'percent':
+        if order == 'ASC':
+            results.sort(key=lambda tup: tup[8], reverse=False)
+        elif order == 'DESC':
+            results.sort(key=lambda tup: tup[8], reverse=True)
+
+    elif category == 'ml':
+        if order == 'ASC':
+            results.sort(key=lambda tup: tup[7], reverse=False)
+        elif order == 'DESC':
+            results.sort(key=lambda tup: tup[7], reverse=True)
+
+
 
     # Return the final list of results
     return results
