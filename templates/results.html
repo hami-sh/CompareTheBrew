@@ -79,7 +79,7 @@
                         {#                    </div>#}
                     </div>
                 </div>
-                <a href="#unique-id" class="btn"><img src="/static/images/help.svg" alt=""></a>
+             
             </div>
         </div>
 </div>
@@ -116,6 +116,8 @@
                 We found {{ results|length }} drinks matching your search. I've set it so it only shows the first 16 for
                 testing.
             {% endif %}
+            <a href="#unique-id" class="btn" style="fill:#A7A7A7;vertical-align:middle;max-width:50px;float:right"><img src="/static/images/help.svg" alt=""></a>
+        </div>
         <div class="areaContainer">
             <div id="resultsArea">
                 {% if results|length == 0 %}
@@ -128,7 +130,6 @@
                                 <div class="item">
                                     <a class="resultCard ad" href="https://youtube.com"
                                        style="/*width: 300px; */height:200px;">
-
                                     </a>
                                 </div>
                                 <!-- If this item is a normal drink item -->
