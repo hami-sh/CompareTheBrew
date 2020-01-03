@@ -291,9 +291,9 @@ def postNewSearchTerms(arg):
     return redirect("/results=score-desc/" + searchTerms)
 
 # Route for About Us page
-@app.route('/about', methods=['GET', 'POST'])
-def viewabout():
-    return render_template('About.html')  # render a template
+# @app.route('/about', methods=['GET', 'POST'])
+# def viewabout():
+#     return render_template('About.html')  # render a template
 
 # Route for About Us page
 @app.route('/faq', methods=['GET', 'POST'])
@@ -319,5 +319,5 @@ def get_my_ip():
 
 # Run the flask application (won't run when the site is being hosted on a server)
 if __name__ == '__main__':
-    # app.run(host='0.0.0.0', port=80, debug=True)
-    app.run(host='127.0.0.1', port=8000, debug=True)
+    app.run(host='0.0.0.0', port=80, debug=True)
+    # app.run(host='127.0.0.1', port=8000, debug=True)
