@@ -50,7 +50,7 @@ body {
 	font-size: 30px;
 	position: absolute;
 	left: 50%;
-	top: 58%;
+	top: 62%;
 	-webkit-transform: translate(-50%, -58%);
 	transform: translate(-50%, -58%);
 	max-width: 1360px;
@@ -97,7 +97,7 @@ input[type="search"]::-webkit-search-results-decoration {
 }
 
 .light {
-	padding-top: 65px;
+	padding-top: 30px;
 	font-size: 36px;
 	color: #a7a7a7;
 }
@@ -563,7 +563,7 @@ CSS for when the menu is actually open
 
 @media (min-width: 1000px) {
 	#main {
-		width: auto;
+		width: 55%;
 	}
 	#menu {
 		width: 10vw;
@@ -635,8 +635,8 @@ CSS for when the menu is actually open
 		font-size: 14px;
 	}
 	.drink-of-the-day {
-		margin-top: 6vh;
-		width: 45%;
+		margin-top: 5vh;
+		width: 40%;
 	}
 	.name {
 		font-size: 2vmax;
