@@ -38,14 +38,14 @@ def postSearchTerms():
     print("SEARCH TERMS ENTERED BY USER: " + searchTerms)
 
     # Send the user to the results page
-    return redirect("/results/" + searchTerms)
+    return redirect("/results=score-desc/" + searchTerms)
 
 # --------------------------------------
 #
 #                 SCORE (best)
 #
 # --------------------------------------
-@app.route("/results/<searchTerms>")
+@app.route("/results=score-desc/<searchTerms>")
 def display_bestscore_ResultPage(searchTerms):
     """
     Displays the search results page given the search terms
@@ -278,7 +278,7 @@ def metrics(searchTerms):
 
 
 # # A function to get search terms from the search bar on the results page
-@app.route('/results/<arg>', methods=['POST'])
+@app.route('/results=score-desc/<arg>', methods=['POST'])
 def postNewSearchTerms(arg):
     """
     ...
@@ -288,7 +288,7 @@ def postNewSearchTerms(arg):
     print("SEARCH TERMS ENTERED BY USER: " + searchTerms)
 
     # Send the user to the results page
-    return redirect("/results/" + searchTerms)
+    return redirect("/results=score-desc/" + searchTerms)
 
 # Route for About Us page
 @app.route('/about', methods=['GET', 'POST'])
