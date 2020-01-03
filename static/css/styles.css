@@ -193,6 +193,7 @@ textarea:focus, input:focus{
     margin-bottom: 6px;
     font-weight: bold;
     color: white;
+    width: 800px;
 }
 
 .navButton:hover {
@@ -379,6 +380,14 @@ a {
 	/* Alex's adjusted font size to make the text fit into the card */
 	/*	font-size: 3.0vw;*/
 	color: #cda20b;
+}
+
+.sideways {
+	writing-mode: vertical-rl;
+	text-orientation: mixed;
+	display: inline-block;
+	overflow: visible;
+	max-height: 100%;
 }
 
 .drink-of-the-day {
@@ -568,7 +577,7 @@ CSS for when the menu is actually open
 	#menu {
 		width: 10vw;
 		height: 100vh;
-		max-width: 65px;
+		max-width: 85px;
 		margin: -100px 0 0 -55px;
 		padding-top: 125px;
 	}

@@ -113,7 +113,7 @@
             {% if results|length == 1 %}
                 We found 1 drink that matched your search.
             {% else %}
-                We found {{ results|length }} drinks matching your search. I've set it so it only shows the first 8 for
+                We found {{ results|length }} drinks matching your search. I've set it so it only shows the first 16 for
                 testing.
             {% endif %}
         <div class="areaContainer">
@@ -126,8 +126,8 @@
                             <!-- If this item is a google ad item -->
                             {% if result|length == 1 %}
                                 <div class="item">
-                                    <a class="resultCard" href="https://youtube.com"
-                                       style="width: 300px; height:200px;">
+                                    <a class="resultCard ad" href="https://youtube.com"
+                                       style="/*width: 300px; */height:200px;">
 
                                     </a>
                                 </div>
@@ -137,21 +137,6 @@
                                 <!-- Develop so only loads more when scrolls down -->
                                 <div class="item">
                                     <a class="resultCard" href="{{ result[6] }}">
-                                        {% if result == results[0] %}
-                                            <div class="medal">
-                                                🥇
-                                            </div>
-                                        {% endif %}
-                                        {% if result == results[2] %}
-                                            <div class="medal">
-                                                🥈
-                                            </div>
-                                        {% endif %}
-                                        {% if result == results[3] %}
-                                            <div class="medal">
-                                                🥉
-                                            </div>
-                                        {% endif %}
                                         <div class="cardImage">
                                             <img src="/static/images/drinkimages/{{ result[-1] }}.webp.webp.png"
                                                  style="width:96px;height:120px;">
@@ -160,6 +145,21 @@
                                             <div class="brand">
                                                 {{ result[1] }}
                                             </div>
+	                                        {% if result == results[0] %}
+	                                            <div class="medal">
+	                                                🥇
+	                                            </div>
+	                                        {% endif %}
+	                                        {% if result == results[2] %}
+	                                            <div class="medal">
+	                                                🥈
+	                                            </div>
+	                                        {% endif %}
+	                                        {% if result == results[3] %}
+	                                            <div class="medal">
+	                                                🥉
+	                                            </div>
+	                                        {% endif %}
                                             <div>
                                                 <div class="name">
                                                     {{ result[2] }} {{ result[3] }}

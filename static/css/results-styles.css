@@ -229,6 +229,10 @@ textarea:focus, input:focus{
 	width: 100%;
 }
 
+.resultCard .ad {
+	width: 100%;
+}
+
 .resultCard {
 	position: relative;
 	display: flex;
@@ -263,6 +267,12 @@ textarea:focus, input:focus{
 	font-weight: bold;
 	font-size: 3vmax;
 	color: #cda20b;
+	float: left;
+}
+
+.medal {
+	float: right;
+	font-size: 24px;
 }
 
 .name {
@@ -402,6 +412,7 @@ textarea:focus, input:focus{
     margin-bottom: 6px;
     font-weight: bold;
     color: #ededed;
+    width: 800px;
 }
 
 .navButton:hover {
@@ -591,7 +602,7 @@ CSS for when the menu is actually open
 	#menu {
 		width: 10vw;
 		height: 100vh;
-		max-width: 65px;
+		max-width: 85px;
 		margin: -100px 0 0 -55px;
 		padding-top: 125px;
 	}
@@ -629,6 +640,9 @@ CSS for when the menu is actually open
 	#cardsArea {
 		column-count: 3;
 		/*grid-template-columns: 1fr 1fr 1fr;*/
+	}
+	.resultCard .ad {
+		width: 300px;
 	}
 	.name {
 		font-size: 2vmax;
@@ -683,6 +697,7 @@ CSS for when the menu is actually open
 		padding: 11px;
 		padding-left: 20px;
 		padding-right: 20px;
+		color: white;
 	}
 	#footer {
 		padding: 1%;
