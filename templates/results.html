@@ -112,8 +112,6 @@
 										{% endif %}
                                         <div class="cardImage">
                                             <!-- <img src="{{result[-1]}}" style="width:96px;height:120px;"> -->
-
-<<<<<<< HEAD
 									</div>
 									<div class="cardContent">
 										<div class="brand">
@@ -148,45 +146,6 @@
 						</div>
 					{% endif %}
 				</div>
-=======
-                                            <!-- For deployment -->
-                                            <img src="/static/images/drinkimages/{{result[12]}}.webp.png" alt={{result[2]}} {{result[3]}} style="max-width:100%;max-height:100%;">
-                                            <!-- For testing (uncomment this and comment above to see images when testing code -->
-                                            <!-- <img src="/static/images/drinkimages/{{result[12]}}.webp.webp.png" alt={{result[2]}} {{result[3]}} style="max-width:100%;max-height:100%;"> -->
-
-                                        </div>
-                                        <div class="cardContent">
-                                            <div class="brand">
-                                                {{result[1]}}
-                                            </div>
-                                            <div>
-                                                <div class="name">
-                                                    {{result[2]}} {{result[3]}}
-                                                </div>
-                                            </div>
-                                            <span class="searchLine"></span>
-                                            <div class="details" style="white-space: nowrap; display: inline-block;">
-                                                {{result[7]}}L - {{'%0.0f'| format(result[9])}} std. - {{result[8]}}%
-                                            </div>
-                                            <div>
-                                                <div class="scorePriceContainer">
-                                                    <div class="score responsive_head" style="white-space: nowrap; display: inline-block;">
-                                                        {{'%0.0f'| format(result[10] * 100)}}%
-                                                        <div class="price">
-                                                            ${{result[5]}}                                          
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </a>
-                                </div>
-                            {% endif %}
-                        {%endfor%}
-                        </div>
-                    {% endif %}
-                </div>
->>>>>>> da8f6ba02cdd1349c7b05d7210bdd3b6f2882150
 			</div>
 			
 			<div class="light">
