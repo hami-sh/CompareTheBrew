@@ -8,6 +8,7 @@ import re
 import json
 from urllib.request import urlopen
 import ipinfo
+import random
 
 # from scrape2 import search
 import scripts.databaseHandler as db
@@ -53,6 +54,19 @@ def displayResultPage(searchTerms):
     # Get results the new way - by querying the database
     conn = db.create_connection() # connect to the database
     tempResults = db.select_drink_by_smart_search(conn, searchTerms) # get drinks with type/brand/name matching any of the words in searchTerms
+    print("### OG LIST: " + str(tempResults) + " ###")
+    
+    num_ads = 0 # hom wnay ads are currently added to the list
+    next_ad_index = 1 # the index we will place the next ad item at
+    drinks_per_ad = 5 # hom many legitimate drinks cards (-1) we will have until we show the next drink card  i.e. 3 = 1 ad per 3 drinks
+    while next_ad_index < len(tempResults): # While we have not yet finished putting ads all through the list
+        tempResults.insert(next_ad_index, ['GOOGLE_AD']) # Add an advertisement item to the list
+        num_ads = num_ads + 1 # increment the number of ads we have added to the page
+        next_ad_index = (num_ads * drinks_per_ad)+ random.randint(1, drinks_per_ad) # calculate the position in which we will put the next drink card
+    print("### NEW LIST: ")
+    for result in tempResults:
+        print(result)
+    print("###")
 
     # # This is the working query of all drinks
     # # tempResults = db.select_all_drinks_by_efficiency(conn) # get all drinks where the value in column 'type' is 'searchTerms' sorted by efficiency
