@@ -87,6 +87,9 @@ def intellisearch(terms):
     term_map['light beer'] = ['beer', 'healthy']
     term_map['medium dry'] = ['wine']
 
+    # other slang terms
+    term_map['cask'] = ['goon', 'sack', 'piss']
+
     # print(term_map)
 
     # we now need to see if any terms are in the values of each key
