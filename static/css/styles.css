@@ -193,6 +193,7 @@ textarea:focus, input:focus{
     margin-bottom: 6px;
     font-weight: bold;
     color: white;
+    width: 800px;
 }
 
 .navButton:hover {
@@ -568,7 +569,7 @@ CSS for when the menu is actually open
 	#menu {
 		width: 10vw;
 		height: 100vh;
-		max-width: 65px;
+		max-width: 85px;
 		margin: -100px 0 0 -55px;
 		padding-top: 125px;
 	}
