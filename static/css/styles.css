@@ -382,6 +382,14 @@ a {
 	color: #cda20b;
 }
 
+.sideways {
+	writing-mode: vertical-rl;
+	text-orientation: mixed;
+	display: inline-block;
+	overflow: visible;
+	max-height: 100%;
+}
+
 .drink-of-the-day {
 	margin-top: 6vh;
 	width: 75%;

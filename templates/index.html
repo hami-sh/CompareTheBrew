@@ -104,8 +104,11 @@
 								</div>
 								<div>
 									<div class="scorePriceContainer">
-										<div class="score responsive_head">
-											{{'%0.0f'| format(result[10] * 100)}}
+										<div class="score responsive_head" style="white-space: nowrap; display: inline-block;">
+											&nbsp{{ '%0.0f'| format(result[10] * 100) }}
+                                            <div class="sideways">
+                                                 <img src="/static/images/scoreMaroon.svg" style="max-height:60%;position:absolute;top: 50%;-webkit-transform:translate(0, -50%);transform:translate(0, -50%);left:0;overflow:visible" alt="Score">
+                                        	</div>
 											<div class="price">
 												${{result[5]}}											
 											</div>

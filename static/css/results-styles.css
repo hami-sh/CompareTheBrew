@@ -229,6 +229,10 @@ textarea:focus, input:focus{
 	width: 100%;
 }
 
+.resultCard .ad {
+	width: 100%;
+}
+
 .resultCard {
 	position: relative;
 	display: flex;
@@ -636,6 +640,9 @@ CSS for when the menu is actually open
 	#cardsArea {
 		column-count: 3;
 		/*grid-template-columns: 1fr 1fr 1fr;*/
+	}
+	.resultCard .ad {
+		width: 300px;
 	}
 	.name {
 		font-size: 2vmax;
