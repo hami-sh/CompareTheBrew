@@ -80,7 +80,7 @@ def intellisearch(terms):
     term_map['non alcoholic'] = ['beer', 'healthy', 'low']
     term_map['wheat beer'] = ['beer']
     term_map['india pale ale'] = ['beer']
-    term_map['amber ale'] = ['beer', 'malt', 'crystal']
+    term_map['amber ale'] = ['beer', 'malt']
     term_map['dark ale'] = ['beer']
     term_map['xpa'] = ['beer', 'pale', 'ale', 'extra']
     term_map['ipa'] = ['beer', 'ale', 'india', 'pale']
