@@ -24,6 +24,13 @@
 
 }
 
+#logo img {
+	float: right;
+	margin-top: 50px;
+	margin-right: 50px;
+	max-height: 36px;
+}
+
 body {
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
