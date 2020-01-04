@@ -91,10 +91,15 @@ def intellisearch(terms):
     term_map['cask'] = ['goon', 'sack', 'piss']
     term_map['spirits'] = ['hard liquor']
 
-    # print(term_map)
+
+    dupOutput = list()
+
+    joined = ""
+    for term in terms:
+        joined += " " + term
+    dupOutput.append(joined)
 
     # we now need to see if any terms are in the values of each key
-    dupOutput = list()
     for term in terms:
         # print("<" + term + ">")
         for key in term_map.keys():
@@ -108,12 +113,6 @@ def intellisearch(terms):
 
     for term in terms:
         dupOutput.append(term)
-
-    joined = ""
-    for term in terms:
-        joined += " " + term
-
-    dupOutput.append(joined)
 
     cleanOutput = list(dict.fromkeys(dupOutput))
 
