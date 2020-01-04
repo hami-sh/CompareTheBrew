@@ -12,9 +12,9 @@ echo "${GREEN}PNG CONVERT${NC}"
 imagedir="/home/ubuntu/CompareTheBrewDev/static/images"
 cd $imagedir/uncompressed
 sudo mogrify -format png *.webp
-for file in $imagedir/uncompressed/*; do
+for file in $imagedir/uncompressed/*.png; do
         echo "$file"
-	mv "$file.png" "$imagedir/drinkimages/"
+	mv "$file" "$imagedir/drinkimages/"
 done
 
 ## delete extra images that have otherwise been compressed
