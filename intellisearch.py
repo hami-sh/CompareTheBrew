@@ -89,6 +89,7 @@ def intellisearch(terms):
 
     # other slang terms
     term_map['cask'] = ['goon', 'sack', 'piss']
+    term_map['spirits'] = ['hard liquor']
 
     # print(term_map)
 
@@ -107,6 +108,12 @@ def intellisearch(terms):
 
     for term in terms:
         dupOutput.append(term)
+
+    joined = ""
+    for term in terms:
+        joined += " " + term
+
+    dupOutput.append(joined)
 
     cleanOutput = list(dict.fromkeys(dupOutput))
 

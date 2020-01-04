@@ -58,7 +58,7 @@ def display_bestscore_ResultPage(searchTerms):
     # Get results the new way - by querying the database
     conn = db.create_connection() # connect to the database
     tempResults = db.select_drink_by_smart_search(conn, searchTerms, 'DESC_efficiency')
-    insert_ads_amongst_results(tempResults)
+    # insert_ads_amongst_results(tempResults)
 
     # gather metrics info
     metrics(searchTerms)
@@ -83,7 +83,7 @@ def display_worstscore_ResultPage(searchTerms):
     # Get results the new way - by querying the database
     conn = db.create_connection()  # connect to the database
     tempResults = db.select_drink_by_smart_search(conn, searchTerms, 'ASC_efficiency')
-    insert_ads_amongst_results(tempResults)
+    # insert_ads_amongst_results(tempResults)
 
     # gather metrics info
     metrics(searchTerms)
@@ -108,7 +108,7 @@ def display_bestprice_ResultPage(searchTerms):
     # Get results the new way - by querying the database
     conn = db.create_connection()  # connect to the database
     tempResults = db.select_drink_by_smart_search(conn, searchTerms, 'ASC_price')
-    insert_ads_amongst_results(tempResults)
+    # insert_ads_amongst_results(tempResults)
 
     # gather metrics info
     metrics(searchTerms)
@@ -133,7 +133,7 @@ def display_worstprice_ResultPage(searchTerms):
     # Get results the new way - by querying the database
     conn = db.create_connection()  # connect to the database
     tempResults = db.select_drink_by_smart_search(conn, searchTerms, 'DESC_price')
-    insert_ads_amongst_results(tempResults)
+    # insert_ads_amongst_results(tempResults)
 
     # gather metrics info
     metrics(searchTerms)
@@ -158,7 +158,7 @@ def display_largest_ResultPage(searchTerms):
     # Get results the new way - by querying the database
     conn = db.create_connection()  # connect to the database
     tempResults = db.select_drink_by_smart_search(conn, searchTerms, 'DESC_ml')
-    insert_ads_amongst_results(tempResults)
+    # insert_ads_amongst_results(tempResults)
 
     # gather metrics info
     metrics(searchTerms)
@@ -183,7 +183,7 @@ def display_smallest_ResultPage(searchTerms):
     # Get results the new way - by querying the database
     conn = db.create_connection()  # connect to the database
     tempResults = db.select_drink_by_smart_search(conn, searchTerms, 'ASC_ml')
-    insert_ads_amongst_results(tempResults)
+    # insert_ads_amongst_results(tempResults)
 
     # gather metrics info
     metrics(searchTerms)
@@ -208,7 +208,7 @@ def display_largepercent_ResultPage(searchTerms):
     # Get results the new way - by querying the database
     conn = db.create_connection()  # connect to the database
     tempResults = db.select_drink_by_smart_search(conn, searchTerms, 'DESC_percent')
-    insert_ads_amongst_results(tempResults)
+    # insert_ads_amongst_results(tempResults)
 
     # gather metrics info
     metrics(searchTerms)
