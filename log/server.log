@@ -24,3 +24,76 @@
 66.249.64.201 - - [04/Jan/2020 15:32:48] "GET / HTTP/1.1" 200 -
 66.249.64.201 - - [04/Jan/2020 15:32:53] "GET /static/images/logoname.svg HTTP/1.1" 200 -
 66.249.64.203 - - [04/Jan/2020 15:32:53] "GET /static/images/scoreMaroon.svg HTTP/1.1" 200 -
+ * Detected change in '/home/ubuntu/CompareTheBrewDev/intellisearch.py', reloading
+connected to database
+SEARCH TERMS ENTERED BY USER: vodka
+connected to database
+SEARCH TERMS: ['vodka']
+-------------------<OLD>-------------------
+['vodka']
+-------------------(NEW)-------------------
+['vodka', ' vodka']
+DESC_efficiency
+FOR vodka
+NUMBER OF ROWS FOUND: 65
+FOR  vodka
+NUMBER OF ROWS FOUND: 37
+NUMBER OF RESULTS FOUND: 65
+15:30:24 2020-01-04
+vodka
+220.239.3.4
+{'ip': '220.239.3.4', 'city': 'Seventeen Mile Rocks', 'region': 'Queensland', 'country': 'AU', 'loc': '-27.5507,152.9590', 'org': 'AS4804 Microplex PTY LTD', 'postal': '4073', 'timezone': 'Australia/Brisbane', 'country_name': 'Australia', 'latitude': '-27.5507', 'longitude': '152.9590'}
+
+
+
+Australia
+
+-27.5507
+152.9590
+connected to metrics
+1
+2
+3
+4
+ID: 139
+connected to database
+SEARCH TERMS ENTERED BY USER: hard liqour
+connected to database
+SEARCH TERMS: ['hard', 'liqour']
+-------------------<OLD>-------------------
+['hard', 'liqour']
+-------------------(NEW)-------------------
+['spirits', 'hard liquor', 'hard', 'liqour', ' hard liqour']
+DESC_efficiency
+FOR spirits
+NUMBER OF ROWS FOUND: 16
+FOR hard liquor
+NUMBER OF ROWS FOUND: 0
+FOR hard
+NUMBER OF ROWS FOUND: 167
+FOR liqour
+NUMBER OF ROWS FOUND: 0
+FOR  hard liqour
+NUMBER OF ROWS FOUND: 0
+NUMBER OF RESULTS FOUND: 53
+15:30:39 2020-01-04
+hard liqour
+220.239.3.4
+{'ip': '220.239.3.4', 'city': 'Seventeen Mile Rocks', 'region': 'Queensland', 'country': 'AU', 'loc': '-27.5507,152.9590', 'org': 'AS4804 Microplex PTY LTD', 'postal': '4073', 'timezone': 'Australia/Brisbane', 'country_name': 'Australia', 'latitude': '-27.5507', 'longitude': '152.9590'}
+
+
+
+Australia
+
+-27.5507
+152.9590
+connected to metrics
+1
+2
+3
+4
+ID: 140
+connected to database
+ * Restarting with stat
+ * Debugger is active!
+ * Debugger PIN: 301-300-657
