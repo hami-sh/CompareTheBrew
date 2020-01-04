@@ -70,5 +70,5 @@ for file in $imagedir/uncompressed/*; do
 done
 
 ## delete extra images that have otherwise been compressed
-rm -rf $imagedir/uncompressed/*
+#rm -rf $imagedir/uncompressed/*
 
