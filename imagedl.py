@@ -32,7 +32,7 @@ def main():
             url = url.replace(":", ",")
             url = url.split('~')[-1]
             uncompressed_path = "static/images/uncompressed/" + url + '.webp'
-            compressed_path = "static/images/drinkimages/" + url + '.webp.png'
+            compressed_path = "static/images/drinkimages/" + url + '.png'
             if os.path.exists(compressed_path):
                 print("exists<" + link[0] + ">")
             else:

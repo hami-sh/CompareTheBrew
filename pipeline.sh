@@ -14,7 +14,7 @@ do
    echo "start"
    log="$workdir/log/beer-$time.log"
    err="$workdir/log/beer-$time.err"
-   sudo python3 $workdir/scrape.py bws beer 0 && break
+   sudo python3 $workdir/scrape.py bws beer 0 False && break
    n=$[$n+1]
    sleep 5
 done
@@ -28,7 +28,7 @@ do
    time="$(date +"%d-%m-%Y")"
    log="$workdir/log/wine-$time.log"
    err="$workdir/log/wine-$time.err"
-   sudo python3 $workdir/scrape.py bws wine 0 && break
+   sudo python3 $workdir/scrape.py bws wine 0 False && break
    n=$[$n+1]
    sleep 5
 done
@@ -43,7 +43,7 @@ do
    time="$(date +"%Y-%m-%d")"
    log="$workdir/log/spirits-$time.log"
    err="$workdir/log/spirits-$time.err" 
-   sudo python3 $workdir/scrape.py bws spirits 0 && break
+   sudo python3 $workdir/scrape.py bws spirits 0 False && break
    n=$[$n+1]
    sleep 5
 done
@@ -55,20 +55,6 @@ done
 # ...
 
 # download images
-time="$(date +"%Y-%m-%d")"
-echo "${GREEN}IMAGES${NC}"
-sudo python3 imagedl.py #> "$workdir/log/image-$time.log"
+sudo $workdir/iscript.sh
 
-# convert to webp format
-echo "${GREEN}PNG CONVERT${NC}"
-imagedir="/home/ubuntu/CompareTheBrewDev/static/images"
-cd $imagedir/uncompressed
-sudo mogrify -format png *.webp
-for file in $imagedir/uncompressed/*; do
-        echo "$file"
-	mv "$file.png" "$imagedir/drinkimages/"
-done
-
-## delete extra images that have otherwise been compressed
-#rm -rf $imagedir/uncompressed/*
 

@@ -447,7 +447,7 @@ def fix_missing_beer_images(conn):
                                 conn.commit()
 
 
-def dbhandler(conn, list, mode):
+def dbhandler(conn, list, mode, populate):
     # populate or update mode
     if mode == "p":
         for drink in list:
@@ -464,11 +464,12 @@ def dbhandler(conn, list, mode):
                 update_drink(conn, drink, drink.price)
 
             else:
-                print('//create')
-                drink_task = (drink.store, drink.brand, drink.name, drink.type, float(drink.price), drink.link,
-                              float(drink.ml), float(drink.percent), float(drink.stdDrinks), float(drink.efficiency),
-                              drink.image)
-                create_entry(conn, drink_task)
+                if populate:
+                    print('//create')
+                    drink_task = (drink.store, drink.brand, drink.name, drink.type, float(drink.price), drink.link,
+                                float(drink.ml), float(drink.percent), float(drink.stdDrinks), float(drink.efficiency),
+                                drink.image)
+                    create_entry(conn, drink_task)
 
     conn.commit()
 
