@@ -14,7 +14,7 @@ do
    echo "start"
    log="$workdir/log/beer-$time.log"
    err="$workdir/log/beer-$time.err"
-   sudo python3 $workdir/scrape.py bws beer 0 False && break
+   sudo python3 $workdir/scrape.py bws beer 0 n && break
    n=$[$n+1]
    sleep 5
 done
@@ -28,7 +28,7 @@ do
    time="$(date +"%d-%m-%Y")"
    log="$workdir/log/wine-$time.log"
    err="$workdir/log/wine-$time.err"
-   sudo python3 $workdir/scrape.py bws wine 0 False && break
+   sudo python3 $workdir/scrape.py bws wine 0 n && break
    n=$[$n+1]
    sleep 5
 done
@@ -43,7 +43,7 @@ do
    time="$(date +"%Y-%m-%d")"
    log="$workdir/log/spirits-$time.log"
    err="$workdir/log/spirits-$time.err" 
-   sudo python3 $workdir/scrape.py bws spirits 0 False && break
+   sudo python3 $workdir/scrape.py bws spirits 0 n && break
    n=$[$n+1]
    sleep 5
 done
