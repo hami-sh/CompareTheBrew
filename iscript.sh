@@ -5,7 +5,7 @@ NC='\033[0m' # No Color
 
 #time="$(date +"%Y-%m-%d")"
 #echo "${GREEN}IMAGES${NC}"
-#sudo python3 imagedl.py #> "$workdir/log/image-$time.log"
+sudo python3 imagedl.py > "$workdir/log/image-$time.log"
 
 # convert to webp format
 echo "${GREEN}PNG CONVERT${NC}"

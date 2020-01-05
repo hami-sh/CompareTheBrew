@@ -21,6 +21,7 @@ store = None
 category = None
 pages = None
 beer = False
+populate = False
 
 """
 The urls we will need to scrape to populate our database:
@@ -264,27 +265,31 @@ def getDrinksData(itemsOnPage):
         # If there are drinkUrls, however, get the data from them
         threads = 0
         _lock = Lock()
+        global populate
         with threadingPool.ThreadPoolExecutor(max_workers=1) as executor:
             for drink in itemsOnPage:
                 if is_drink_in_table(conn, drink) == False:
-                    url = drink.link
-                    # Print out every time a new thread is initialised
-                    print("INITIALISING THREAD " + str(threads) + "." + " LINK: " + str(url))
+                    if populate == True:
+                        url = drink.link
+                        # Print out every time a new thread is initialised
+                        print("INITIALISING THREAD " + str(threads) + "." + " LINK: " + str(url))
 
-                    # Extract the drink data based on the site being scraped
-                    if site == "bws":
-                        # Retrieve drink data from bws format html
-                        executor.submit(getDrinksDataBws, drink, commonList, _lock)
-                    elif site == "liquorland":
-                        # TODO: Implement liquorland functionality
-                        print("Sorry, LiquorLand is not currently a supported site.")
-                        # Extract the drink data from liquorland format drink page html
-                        executor.submit(getDrinksDataLiquorland, url, commonList, _lock)
-                    # Update how many threads we have initialised
-                    threads += 1
+                        # Extract the drink data based on the site being scraped
+                        if site == "bws":
+                            # Retrieve drink data from bws format html
+                            executor.submit(getDrinksDataBws, drink, commonList, _lock)
+                        elif site == "liquorland":
+                            # TODO: Implement liquorland functionality
+                            print("Sorry, LiquorLand is not currently a supported site.")
+                            # Extract the drink data from liquorland format drink page html
+                            executor.submit(getDrinksDataLiquorland, url, commonList, _lock)
+                        # Update how many threads we have initialised
+                        threads += 1
 
-                    # if threads == 20:
-                    #     break
+                        # if threads == 20:
+                        #     break
+                    else:
+                        print("----population disabled---")
                 else:
                     print('THIS DRINK IS PRESENT IN THE DATABASE: update thread')
                     update_drink(conn, drink, drink.price)
@@ -948,6 +953,7 @@ def main():
     parser.add_argument('store', type=str, help='bws or NOT IMPLEMENTED YET')
     parser.add_argument('category', type=str, help='beer or wine or spirits or SEARCH TERM')
     parser.add_argument('pages', type=int, help='how many pages to parse [0 for all]')
+    parser.add_argument('populate', type=str, help='whether to run //create subroutine [y/n]')
     args = parser.parse_args()
 
     global store
@@ -956,10 +962,18 @@ def main():
     category = args.category
     global pages
     pages = args.pages
+    global populate
+    if args.populate == 'y':
+        populate = True
+    else:
+        populate = False
+
+    if populate == False:
+        print("WARN: NO POPULATION")
 
     data = search(category)  # scrape all the data for those search terms from bws
     conn = create_connection()
-    dbhandler(conn, data, 'u')  # append new drinks to the database.
+    dbhandler(conn, data, 'u', populate)  # append new drinks to the database.
 
 
 if __name__ == "__main__":
