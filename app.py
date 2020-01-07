@@ -276,9 +276,52 @@ def metrics(searchTerms):
     except Exception as e:
         print(e)
 
+# ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+#
+#            top50page
+#
+# ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+@app.route("/top50/beer")
+def display_top50_page():
+    # Get results the new way - by querying the database
+    conn = db.create_connection()  # connect to the database
+    tempResults = db.select_drink_by_smart_search(conn, "beer", 'DESC_efficiency')
+    # insert_ads_amongst_results(tempResults)
+
+    # gather metrics info
+    metrics(["beer"])
+    return render_template('top50.html', results=tempResults)
+
+@app.route("/top50/wine")
+def display_top50wine_page():
+    # Get results the new way - by querying the database
+    conn = db.create_connection()  # connect to the database
+    tempResults = db.select_drink_by_smart_search(conn, "wine", 'DESC_efficiency')
+    # insert_ads_amongst_results(tempResults)
+
+    # gather metrics info
+    metrics(["wine"])
+    return render_template('top50.html', results=tempResults)
+
+@app.route("/top50/spirits")
+def display_top50spirits_page():
+    # Get results the new way - by querying the database
+    conn = db.create_connection()  # connect to the database
+    tempResults = db.select_drink_by_smart_search(conn, "spirits", 'DESC_efficiency')
+    # insert_ads_amongst_results(tempResults)
+
+    # gather metrics info
+    metrics(["spirits"])
+    return render_template('top50.html', results=tempResults)
 
 # # A function to get search terms from the search bar on the results page
 @app.route('/results=score-desc/<arg>', methods=['POST'])
+@app.route('/results=score-asc/<arg>', methods=['POST'])
+@app.route('/results=price-desc/<arg>', methods=['POST'])
+@app.route('/results=size-desc/<arg>', methods=['POST'])
+@app.route("/top50/beer")
+@app.route("/top50/wine")
+@app.route("/top50/spirits")
 def postNewSearchTerms(arg):
     """
     ...
@@ -319,5 +362,5 @@ def get_my_ip():
 
 # Run the flask application (won't run when the site is being hosted on a server)
 if __name__ == '__main__':
-    app.run(host='0.0.0.0', port=80, debug=True)
-    # app.run(host='127.0.0.1', port=8000, debug=True)
+    # app.run(host='0.0.0.0', port=80, debug=True)
+    app.run(host='127.0.0.1', port=8000, debug=True)
