@@ -1,0 +1,245 @@
+<!doctype html>
+
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+
+    <title>Compare The Brew</title>
+    <meta name="description" content="Compare The Brew">
+    <meta name="author" content="The Boys">
+
+    <link rel="stylesheet" href="/static/css/results-styles.css">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <script type="text/javascript" src="http://latex.codecogs.com/latexit.js"></script>
+    <link rel="stylesheet" href="/static/css/light-modal.css">
+
+    <script data-ad-client="ca-pub-2690757346374030" async
+            src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+
+    <!-- Global site tag (gtag.js) - Google Analytics -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=UA-155323852-1"></script>
+    <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+
+    gtag('config', 'UA-155323852-1');
+    </script>
+
+</head>
+
+<body>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+<!-- TODO: POINT THIS SCRIPTS SRC TO THE PROPER LOCATION -->
+<script src="/static/js/top50.js"></script>
+<div id="cover"></div>
+<div id="header">
+    <nav role="navigation">
+        <div id="menuToggle">
+            <!--
+            Hidden checkbox
+            -->
+            <input id="slide" type="checkbox"/>
+
+            <!--
+            Some spans to act as a hamburger.
+            Don't remove this u monkey it looks dumb but it works
+            -->
+            <span></span>
+            <span></span>
+            <span></span>
+
+            <!--
+            Links
+            -->
+            <ul id="menu">
+                <a href="/">
+                    <li class="navButton">🏠Home</li>
+                </a>
+                <a href="/about">
+                    <li class="navButton">❓About</li>
+                </a>
+                <a href="https://www.redbubble.com/people/comparethebrew/shop">
+                    <li class="navButton">👕Merch</li>
+                </a>
+            </ul>
+        </div>
+    </nav>
+    <div>
+                <!--Modal Section-->
+                <div class="light-modal" id="unique-id" role="dialog" aria-labelledby="light-modal-label"
+                     aria-hidden="false">
+                    <div class="light-modal-content animated zoomInUp">
+                        <!-- light modal header -->
+                        <div class="light-modal-header">
+                            <h3 class="light-modal-heading">Confused? Worry not...</h3>
+                            <a href="#" class="light-modal-close-icon" aria-label="close">&times;</a>
+                        </div>
+                        <!-- light modal body -->
+                        <div class="light-modal-body">
+                            {#                        <p>Here we can see an example drink card...</p>#}
+                            <img src="/static/images/example.PNG" alt="">
+                            <p>Score is the main way CompareTheBrew organises its results...</p>
+                            <div lang="latex">
+                                score = \frac{std.\;drinks}{price}*100
+                            </div>
+                            <p>Remember, <b>a greater score indicates more standard drinks per dollar</b></p>
+                        </div>
+                        <!-- light modal footer -->
+                        {#                    <div class="light-modal-footer">#}
+                        {#                        <a href="#" class="light-modal-close-btn" aria-label="close">Close</a>#}
+                        {#                    </div>#}
+                    </div>
+                </div>
+             
+            </div>
+        </div>
+</div>
+
+<div id="content">
+    <div id="main" class="mainResults">
+        <div>
+            <form id="query" method="POST">
+                <i id="searchButton" class="material-icons"
+                   style="padding:1%;font-size:80px;color:#cda20b;right:0;position:absolute;margin-right:-1%;margin-top:1%;cursor:pointer;">search</i>
+                <input name="searchTerms" id="searchDrink" type="text" class="smallSearch" placeholder="Search...">
+                <span class="underline smallLine"></span>
+            </form>
+        </div>
+        <div>
+            <h1 id="BigHeader">
+                Top 50 :
+            </h1>
+        </div>
+        <div class="areaContainer">
+            <div id="resultsArea">
+                {% if results|length == 0 %}
+                    <h2>Sorry, we didn't find any results matching your search.</h2>
+                {% else %}
+                    <div id="cardsArea">
+                        {% for result in results[:50] %}
+                            <!-- If this item is a google ad item -->
+                            {% if result|length == 1 %}
+                                <div class="item">
+                                    <a class="resultCard ad" href="https://youtube.com"
+                                       style="/*width: 300px; */height:200px;">
+                                    </a>
+                                </div>
+                                <!-- If this item is a normal drink item -->
+                            {% else %}
+                                <!-- Testing phase, don't need to load every result atm. Just taking the first 8 -->
+                                <!-- Develop so only loads more when scrolls down -->
+                                <div class="item">
+                                    <a class="resultCard" href="{{ result[6] }}">
+                                        <div class="cardImage">
+                                            <img src="/static/images/drinkimages/{{ result[-1] }}.png"
+                                                 style="width:96px;height:120px;">
+                                        </div>
+                                        <div class="cardContent">
+                                            <div class="brand">
+                                                {{ result[1] }}
+                                            </div>
+	                                        {% if result == results[0] %}
+	                                            <div class="medal">
+	                                                🥇
+	                                            </div>
+	                                        {% endif %}
+	                                        {% if result == results[2] %}
+	                                            <div class="medal">
+	                                                🥈
+	                                            </div>
+	                                        {% endif %}
+	                                        {% if result == results[3] %}
+	                                            <div class="medal">
+	                                                🥉
+	                                            </div>
+	                                        {% endif %}
+                                            <div>
+                                                <div class="name">
+                                                    {{ result[2] }} {{ result[3] }}
+                                                </div>
+                                            </div>
+                                            <span class="searchLine"></span>
+                                            <div class="details" style="white-space: nowrap; display: inline-block;">
+                                                {{ result[7] }}L - {{ '%0.0f'| format(result[9]) }} std.
+                                                - {{ result[8] }}%
+                                            </div>
+                                            <div>
+                                                <div class="scorePriceContainer">
+                                                    <div class="score responsive_head"
+                                                         style="white-space: nowrap; display: inline-block;">
+                                                        &nbsp{{ '%0.0f'| format(result[10] * 100) }}
+                                                        <div class="sideways">
+                                                            <img src="/static/images/score.svg"
+                                                                 style="max-height:60%;position:absolute;top: 50%;-webkit-transform:translate(0, -50%);transform:translate(0, -50%);left:0;overflow:visible;"
+                                                                 alt="Score">
+                                                        </div>
+                                                        <div class="price">
+                                                            ${{ result[5] }}
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </a>
+                                </div>
+                            {% endif %}
+                        {% endfor %}
+                    </div>
+                {% endif %}
+            </div>
+        </div>
+
+        <div class="light">
+
+        </div>
+        <div id="mobileFooter">
+            <div id="footerLeft">
+                <b>©CompareTheBrew.com.au, 2019.
+            </div>
+            <div id="footerRight">
+                Drink responsibly.</b>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div id="footer">
+    <div id="footerLeft">
+        <b>©CompareTheBrew.com, 2019.
+    </div>
+    <div id="footerRight">
+        <form style="display:inline-block;position:absolute;margin-left:-15%"
+              action="https://www.paypal.com/cgi-bin/webscr" method="post" target="_top">
+            <input type="hidden" name="cmd" value="_donations"/>
+            <input type="hidden" name="business" value="LTES4FLSL72YL"/>
+            <input type="hidden" name="currency_code" value="AUD"/>
+            <input type="image" style="max-height: 25px" src="/static/images/donate.png" border="0" name="submit"
+                   title="PayPal - The safer, easier way to pay online!" alt="Donate with PayPal button"/>
+            <img alt="" border="0" src="https://www.paypal.com/en_AU/i/scr/pixel.gif" width="1" height="1"/>
+        </form>
+
+
+        Drink responsibly.</b>
+    </div>
+</div>
+<script src="/static/js/fitty.min.js"></script>
+<script>
+    fitty('.responsive_head', {
+        maxSize: 100,
+    });
+    // fitty('.scorePriceContainer');
+    fitty('.details', {
+        minSize: 12,
+    });
+    fitty('.name', {
+        minSize: 26,
+        multiLine: true,
+    });
+
+    // window.onresize = function onresize() {
+    // 	fitty.fitAll();
+    // }
+</script>
+</body>
+</html>

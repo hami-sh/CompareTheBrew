@@ -37,7 +37,7 @@ def intellisearch(terms):
     term_map['dry red'] = ['wine']
     term_map['Sweet White'] = ['wine']
     term_map['Medium Bodied Red'] = ['wine']
-    term_map['fortified'] = ['wine', 'spirit', 'brandy', 'mix']
+    term_map['fortified'] = ['wine', 'mix']
     term_map['dry white'] = ['wine']
     term_map['rosé'] = ['wine', 'rose', 'rosado', 'pink']
     term_map['sweet red'] = ['wine']
