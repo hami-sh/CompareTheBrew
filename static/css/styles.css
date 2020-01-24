@@ -29,6 +29,7 @@
 	margin-top: 50px;
 	margin-right: 50px;
 	max-height: 36px;
+    width: 200px;
 }
 
 body {
@@ -407,8 +408,15 @@ a {
 }
 
 .drink-of-the-day {
-    margin-top: 6vh;
+    margin-top: 0.2vh;
     width: 75%;
+}
+
+.award-title {
+    margin-top: 10vh;
+    font-weight: bold;
+    font-size: 3vh;
+    color: #cda20b;
 }
 
 /* ___END___ section for styles for the drink of the day card */
