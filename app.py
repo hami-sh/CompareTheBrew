@@ -2,6 +2,7 @@ from flask import Flask
 from flask import render_template
 from flask import request
 from flask import redirect
+from flask import current_app
 from flask import jsonify
 from datetime import datetime
 import re
@@ -356,10 +357,55 @@ def page_not_found404(e):
 def page_not_found500(e):
     return render_template('/500.html'), 500
 
-# Hamish Section
-@app.route("/get_my_ip", methods=["GET"])
-def get_my_ip():
-    return jsonify({'ip': request.remote_addr}), 200
+@app.route('/api', methods=['GET', 'POST'])
+def api_handler():
+    term = request.args.get('term')
+    order = request.args.get('order')
+    print(term)
+    print(order)
+
+    # Get results the new way - by querying the database
+    conn = db.create_connection()  # connect to the database
+    tempResults = []
+    # gather metrics info
+    metrics(term)
+
+    if order == "score_desc":
+        tempResults = db.select_drink_by_smart_search(conn, term, 'DESC_efficiency')
+    elif order == "score_asc":
+        tempResults = db.select_drink_by_smart_search(conn, term, 'ASC_efficiency')
+    elif order == "price_desc":
+        tempResults = db.select_drink_by_smart_search(conn, term, 'DESC_price')
+    elif order == "size_desc":
+        tempResults = db.select_drink_by_smart_search(conn, term, 'DESC_ml')
+
+    print(tempResults)
+
+    data = {}
+
+    # loop over tuples
+    i = 0
+    for result in tempResults:
+        drink = dict()
+        drink['id'] = result[0]
+        drink['store'] = result[1]
+        drink['brand'] = result[2]
+        drink['name'] = result[3]
+        drink['type'] = result[4]
+        drink['price'] = result[5]
+        drink['url'] = result[6]
+        drink['volume'] = result[7]
+        drink['percent'] = result[8]
+        drink['drinks'] = result[9]
+        drink['efficiency'] = result[10]
+        drink['imglink'] = result[11]
+        drink['img'] = result[12]
+        data[i] = drink
+        i = i + 1
+
+    # return json_data
+    return current_app.response_class(json.dumps(data), mimetype="application/json")
+    # return jsonify({'ip': request.remote_addr}), 200
 
 
 # Run the flask application (won't run when the site is being hosted on a server)
