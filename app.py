@@ -322,10 +322,12 @@ def display_top50spirits_page():
 @app.route("/top50/beer")
 @app.route("/top50/wine")
 @app.route("/top50/spirits")
+
 def postNewSearchTerms(arg):
     """
     ...
     """
+    print("LOG: INSIDE")
     # Get the search terms inputted by the user
     searchTerms = request.form['searchTerms']
     print("SEARCH TERMS ENTERED BY USER: " + searchTerms)
