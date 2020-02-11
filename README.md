@@ -1,5 +1,5 @@
-# CompareTheBrew.com.au
-🍺🍺 Get the cheapest drink possible, and make money doing so 🍺🍺
+# CompareTheBrew.me
+🍺🍺 Get the cheapest drink possible across all Aussie alcoholic vendors 🍺🍺
 
 ## Setup:
 ```bash
@@ -46,20 +46,11 @@ $ ./killserver.sh
 - ChromeWebDriver (headless)
 - flask
 - sqlite3
-___
-
-## TODO
-- [ ] finalise image displays [nearly done, files are present but waiting on mcost and alex]
-- [ ] beer parsing for bws. find an efficient approach? 
-
-- [ ] Setup hosting on aws
-  - [ ] Setup hosting on aws
-  - [ ] Scheduling time-staggered scraping of liquor sites (using Cron most likely)
-  - [ ] Buy a Domain and DNS
 
 ___
 ### Made Possible by:
 Hamish Bultitude
+
 Matt Costello
+
 Alex Nicholson
-Stekaz
