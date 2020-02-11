@@ -6,6 +6,10 @@
 $ bash setup.sh
 ```
 
+## API Queries:
+`http://comparethebrew.me/api?term=TERM&order=score_desc`
+
+
 ## Run:
 #### SCRAPING
 ###### locally
