@@ -73,6 +73,7 @@ def bws_handler(search_term: str) -> List:
                         std_drinks = i["Value"]
                         std_drinks = std_drinks.replace('Approx.', '')
                         std_drinks = std_drinks.replace('Approx', '')
+                        std_drinks = std_drinks.split(" ")[0]
                         std_drinks = float(std_drinks.strip())
                 elif i["Name"] == "bwsproducturl":
                     link = i["Value"]
