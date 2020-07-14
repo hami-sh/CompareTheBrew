@@ -1,0 +1,74 @@
+{
+  "beer": {
+    "BWS": "https://bws.com.au/beer/all-beer?pageNumber=1",
+    "LiquorLand": "https://www.liquorland.com.au/beer?show=350",
+    "DanMurphy": "https://www.danmurphys.com.au/beer/all?size=2000",
+    "FirstChoice": "https://www.firstchoiceliquor.com.au/Beer?show=500",
+    "VintageCellars": "https://www.vintagecellars.com.au/beer?show=350"
+  },
+  "wine": {
+    "BWS": "https://bws.com.au/wine/all-wine?pageNumber=1",
+    "LiqourLandRed": "https://www.liquorland.com.au/red-wine?show=700",
+    "LiqourLandWhite": "https://www.liquorland.com.au/white-wine?show=150",
+    "LiqourLandRose": "https://www.liquorland.com.au/rose?show=100",
+    "danmurphyred": "https://www.danmurphys.com.au/list/wine?filters=variety(red-wine)&size=500&sort=PriceAsc",
+    "danmurphywhite": "https://www.danmurphys.com.au/list/wine?filters=variety(white-wine)&size=500&sort=PriceAsc",
+    "danmurphyrose": "https://www.danmurphys.com.au/list/wine?filters=variety(rose)&size=500&sort=PriceAsc",
+    "firstchoice": "https://www.firstchoiceliquor.com.au/search?q=wine&show=2000",
+    "vintagecellars": "https://www.vintagecellars.com.au/search?q=wine&show=500&sort=price&page=1"
+  },
+  "champagne": {
+    "bws": "https://bws.com.au/wine/champagne-sparkling/champagne?pageNumber=1",
+    "liquorland": "https://www.liquorland.com.au/search?q=champagne&show=60",
+    "danmurphy": "https://www.danmurphys.com.au/champagne-sparkling/champagne?size=300",
+    "firstchoice": "https://www.firstchoiceliquor.com.au/search?q=champagne&show=90",
+    "vintagecellars": "https://www.vintagecellars.com.au/search?q=champagne&show=150"
+  },
+  "cider": {
+    "bws": "https://bws.com.au/beer/cider?pageNumber=1",
+    "liqourland": "https://www.liquorland.com.au/search?q=cider&show=100",
+    "danmurphy": "https://www.danmurphys.com.au/cider/all?browse=brand",
+    "firstchoice": "https://www.firstchoiceliquor.com.au/search?q=cider&show=100",
+    "vintagecellars": "https://www.vintagecellars.com.au/search?q=cider&show=100"
+  },
+  "gin": {
+    "bws": "https://bws.com.au/spirits/gin?pageNumber=1",
+    "liquorland": "https://www.liquorland.com.au/spirits/gin?show=90"
+  },
+  "whiskey": {},
+  "rum": {
+    "bws": "https://bws.com.au/spirits/rum",
+    "liquorland": "https://www.liquorland.com.au/spirits/rum?show=500",
+    "danmurphys": "https://www.danmurphys.com.au/spirits/rum?size=400",
+    "firstchoice": "https://www.firstchoiceliquor.com.au/spirits?fh_maxdisplaynrvalues_categories=-1&show=1000",
+    "vintagecellars": "https://www.vintagecellars.com.au/spirits?fh_maxdisplaynrvalues_categories=-1&show=1000"
+  },
+  "tequila": {
+    "bws": "https://bws.com.au/spirits/tequila?pageNumber=1",
+    "liquorland": "https://www.liquorland.com.au/spirits/tequila?show=500",
+    "danmurphys": "https://www.danmurphys.com.au/spirits/tequila?size=400",
+    "firstchoice": "https://www.firstchoiceliquor.com.au/spirits?fh_maxdisplaynrvalues_categories=-1&show=1000",
+    "vintagecellars": "https://www.vintagecellars.com.au/spirits?fh_maxdisplaynrvalues_categories=-1&show=1000"
+  },
+  "vodka": {
+    "bws": "https://bws.com.au/spirits/vodka?pageNumber=1",
+    "liquorland": "https://www.liquorland.com.au/spirits/vodka?show=500",
+    "danmurphys": "https://www.danmurphys.com.au/spirits/vodka?size=500",
+    "firstchoice": "https://www.firstchoiceliquor.com.au/spirits/vodka?show=500",
+    "vintagecellars": "https://www.vintagecellars.com.au/spirits/vodka?show=500"
+  },
+  "bourbon": {
+    "bws": "https://bws.com.au/spirits/bourbon?pageNumber=1",
+    "liquorland": "https://www.liquorland.com.au/spirits/bourbon?show=500",
+    "danmurphys": "https://www.danmurphys.com.au/spirits/bourbon?size=400",
+    "firstchoice": "https://www.firstchoiceliquor.com.au/spirits?fh_maxdisplaynrvalues_categories=-1&show=1000",
+    "vintagecellars": "https://www.vintagecellars.com.au/spirits?fh_maxdisplaynrvalues_categories=-1&show=1000"
+  },
+  "brandy": {
+    "bws": "https://bws.com.au/spirits/brandy?pageNumber=1",
+    "liquorland": "https://www.liquorland.com.au/spirits/brandy?show=500",
+    "danmurphys": "https://www.danmurphys.com.au/spirits/brandy?size=400",
+    "firstchoice": "https://www.firstchoiceliquor.com.au/spirits?fh_maxdisplaynrvalues_categories=-1&show=1000",
+    "vintagecellars": "https://www.vintagecellars.com.au/spirits?fh_maxdisplaynrvalues_categories=-1&show=1000"
+  }
+}

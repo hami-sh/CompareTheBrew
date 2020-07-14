@@ -1,2 +1,3 @@
 #!/bin/bash
-sudo nohup python3 app.py > /home/ubuntu/CompareTheBrewDev/log/server.log
+#touch ./log/server.log
+sudo python3 app.py #> ./log/server.log
