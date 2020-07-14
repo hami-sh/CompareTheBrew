@@ -1,0 +1,27 @@
+{
+    "bws": 
+    {
+        "beer": "https://api.bws.com.au/apis/ui/Browse?Location=%2Fbeer%2Fall-beer&banner=true&department=beer&pageNumber=1&pageSize=30&sortType=Browse_Relevance_LocalSales&subDepartment=all+beer",
+        "wine": "https://api.bws.com.au/apis/ui/Browse?Location=%2Fwine%2Fall-wine&banner=true&department=wine&pageNumber=1&pageSize=30&sortType=Browse_Relevance_LocalSales&subDepartment=all+wine",
+        "spirits": "https://api.bws.com.au/apis/ui/Browse?Location=%2Fspirits%2Fall-spirits&banner=true&department=spirits&pageNumber=1&pageSize=30&sortType=Browse_Relevance_LocalSales&subDepartment=all+spirits",
+        "general": ""
+    },
+    "ll":
+    {
+        "beer": "",
+        "wine": "",
+        "spirits": ""
+    },
+    "fc": 
+    {
+        "beer": "",
+        "wine": "",
+        "spirits": ""
+    },
+    "dm":
+    {
+        "beer": "",
+        "wine": "",
+        "spirits": ""
+    }
+}
