@@ -11,6 +11,7 @@ from time import sleep
 import argparse
 from typing import List
 import json
+import csv
 # Custom
 from scripts.databaseHandler import *
 
@@ -74,28 +75,36 @@ def bws_handler(search_term: str) -> List:
                         std_drinks = std_drinks.replace('Approx.', '')
                         std_drinks = std_drinks.replace('Approx', '')
                         std_drinks = std_drinks.split(" ")[0]
-                        std_drinks = float(std_drinks.strip())
+                        try:
+                            std_drinks = float(std_drinks.strip())
+                        except:
+                            std_drinks = -1
                 elif i["Name"] == "bwsproducturl":
                     link = i["Value"]
-                elif i["Name"] == "liquorstyle":
+                elif i["Name"] == "standardcategory":
                     style = i["Value"]
                 elif i["Name"] == "liquorsize":
                     size = i["Value"]
                     if "Pack" in size:
-                        size = size.split(" ")[2]
+                        try:
+                            size = size.split(" ")[2]
+                        except:
+                            size = "-2"
                     if "ml" in size:
                         size = size.split("ml")[0]
                     elif "mL" in size:
                         size = size.split("mL")[0]
                     elif "L" in size:
                         size = float(size.split("L")[0]) * 1000
-                    size = float(size)
+                    try:
+                        size = float(size)
+                    except:
+                        size = "-2"
                     
-            drink_link = f"bws.com.au/product/{parentcode}/{link}"
+            drink_link = f"https://bws.com.au/product/{parentcode}/{link}"
             image_link = f"https://edgmedia.bws.com.au/bws/media/products/{image_numb}"
             
             if std_drinks == -1:
-                # print("\t", "GONE", subdrink["BrandName"], subdrink["Name"])
                 # search through json to find proper std drinks
                 for partners in drink["Products"]:
                     for subsection in partners["AdditionalDetails"]:
@@ -104,14 +113,45 @@ def bws_handler(search_term: str) -> List:
                             print("\t FOUND", std_drinks)
                             std_drinks = std_drinks.replace('Approx.', '')
                             std_drinks = std_drinks.replace('Approx', '')
-                            std_drinks = float(std_drinks.strip())
+                            try:
+                                std_drinks = float(std_drinks.strip())
+                            except:
+                                std_drinks = -2
                             break
+                std_drinks = -2
+            
+            if percent_alcohol == "None":
+                for partners in drink["Products"]:
+                    for subsection in partners["AdditionalDetails"]:
+                        if subsection["Name"] == "alcohol%":
+                            percent_alcohol = subsection["Value"]
+                            
+            if size == "None":
+                for partners in drink["Products"]:
+                    for subsection in partners["AdditionalDetails"]:
+                        if subsection["Name"] == "liquorsize":
+                            size = subsection["Value"]
+                            if "Pack" in size:
+                                size = size.split(" ")[2]
+                            if "ml" in size:
+                                size = size.split("ml")[0]
+                            elif "mL" in size:
+                                size = size.split("mL")[0]
+                            elif "L" in size:
+                                size = str(float(size.split("L")[0]) * 1000)
+                                
+            if style == "None":
+                for partners in drink["Products"]:
+                    for subsection in partners["AdditionalDetails"]:
+                        if subsection["Name"] == "standardcategory":
+                            style = subsection["Value"]
+                
             
             try:
                 if std_drinks == -1:
                     raise Exception # break to failed
                 
-                if item_numb != 1:
+                if item_numb != 1 and std_drinks != -2 and std_drinks != -1:
                     std_drinks = item_numb * std_drinks # account for multiple items in a pack
                 
                 efficiency = std_drinks / float(subdrink["Price"])
@@ -120,7 +160,7 @@ def bws_handler(search_term: str) -> List:
         
 
             # store as class
-            item = Item(store="bws", brand=subdrink["BrandName"], name=subdrink["Name"], 
+            item = Item(store="bws", brand=subdrink["BrandName"], name=subdrink["Name"].strip(), 
                         type=style, price=subdrink["Price"], link=drink_link, ml=size, percent=percent_alcohol,
                         std_drinks=std_drinks, numb_items=item_numb, efficiency=efficiency, image=image_link,
                         promotion=subdrink['IsOnSpecial'], old_price=subdrink["WasPrice"])
@@ -152,8 +192,12 @@ def main():
 
     data = search(search_term=category, store=store)  # scrape all the data for those search terms from bws
     
-    for item in data:
-        print(item)
+    # save to csv
+    with open('output.csv', 'w', newline='') as file:
+        for item in data:
+            file.write(repr(item) + "\n")
+            
+            
     
     #todo save data to db.
 
