@@ -23,20 +23,20 @@ class Item:
 
     def __repr__(self):
         # Create a new string
-        reprString = "<Item>"
+        reprString = ""
         # Add the instance properties to the reprString
-        # reprString += self.store + ","
+        reprString += self.store + ","
         reprString += self.brand + ","
         reprString += self.name + ","
-        # reprString += str(self.price) + ","
-        # reprString += self.type + ","
-        # reprString += self.link + ","
-        # reprString += str(self.ml) + ","
-        # reprString += str(self.percent) + ","
+        reprString += self.type + ","
+        reprString += str(self.percent) + ","
+        reprString += str(self.ml) + ","
         reprString += str(self.numb_items) + ","
         reprString += str(self.stdDrinks) + ","
+        reprString += str(self.price) + ","
         reprString += str(self.efficiency) + ","
-        # reprString += self.image
+        reprString += self.link + ","
+        reprString += self.image
         return reprString
 
 class ItemCollection:
