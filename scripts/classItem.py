@@ -1,8 +1,12 @@
 import threading
 
+
 class Item:
     # todo expand for alcohol content
-    def __init__(self, store, brand, name, type, price, link, ml, percent, std_drinks, numb_items, efficiency, image, promotion, old_price):
+    def __init__(self, store: str, brand: str, name: str, type: str,
+                 price: float, link: str, ml: int, percent: str,
+                 std_drinks: int, numb_items: int, efficiency: float,
+                 image: str, promotion: bool, old_price: float):
         self.store = store
         self.brand = brand
         self.name = name
@@ -11,7 +15,7 @@ class Item:
         self.link = link
         self.ml = ml
         self.percent = percent
-        self.stdDrinks = std_drinks
+        self.std_drinks = std_drinks
         self.numb_items = numb_items
         self.efficiency = efficiency
         self.image = image
@@ -21,23 +25,15 @@ class Item:
     def __lt__(self, other):
         return self.efficiency < other.efficiency
 
-    def __repr__(self):
+    def __str__(self):
         # Create a new string
-        reprString = ""
-        # Add the instance properties to the reprString
-        reprString += self.store + ","
-        reprString += self.brand + ","
-        reprString += self.name + ","
-        reprString += self.type + ","
-        reprString += str(self.percent) + ","
-        reprString += str(self.ml) + ","
-        reprString += str(self.numb_items) + ","
-        reprString += str(self.stdDrinks) + ","
-        reprString += str(self.price) + ","
-        reprString += str(self.efficiency) + ","
-        reprString += self.link + ","
-        reprString += self.image
-        return reprString
+        repr_string = f"{self.store}, {self.brand}, {self.name}, " \
+            f"${self.price}," \
+            f"{self.type}, {self.link}, {self.ml}mL, {self.percent}, " \
+            f"{self.std_drinks}, {self.numb_items}, {self.efficiency}, " \
+            f"{self.image}, {self.promotion}, ${self.old_price}"
+        return repr_string
+
 
 class ItemCollection:
     def __init__(self):
