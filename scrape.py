@@ -3,7 +3,48 @@ import argparse
 from typing import List
 import json
 import csv
+import os
 from scripts.databaseHandler import *
+
+from sqlalchemy.ext.declarative import declarative_base
+from sqlalchemy import create_engine
+from sqlalchemy.orm import sessionmaker
+from sqlalchemy import (
+    Column, Integer, Float, String, Boolean
+)
+
+
+Base = declarative_base()
+
+
+class Item(Base):
+    __tablename__ = "items1"
+
+    store = Column(String)
+    brand = Column(String)
+    name = Column(String)
+    price = Column(String)
+    type = Column(String)
+    link = Column(String)
+    ml = Column(String)
+    percent = Column(String)
+    std_drinks = Column(String)
+    numb_items = Column(String)
+    efficiency = Column(String)
+    image = Column(String)
+    promotion = Column(Boolean)
+    old_price = Column(Float)
+    column_not_exist_in_db = Column(Integer, primary_key=True)
+
+    def __str__(self):
+        # Create a new string
+        repr_string = f"{self.store}, {self.brand}, {self.name}, " \
+            f"${self.price}," \
+            f"{self.type}, {self.link}, {self.ml}mL, {self.percent}, " \
+            f"{self.std_drinks}, {self.numb_items}, {self.efficiency}, " \
+            f"{self.image}, {self.promotion}, ${self.old_price}"
+        return repr_string
+
 
 # GLOBAL VARIABLES
 store = None
@@ -44,14 +85,14 @@ def bws_handler(search_term: str) -> List:
         for subdrink in thing:
             print(subdrink["Name"], subdrink["Price"])
             # compute from {additionaldetails} section
-            parentcode = "None"
-            item_numb = "None"
-            percent_alcohol = "None"
-            image_numb = "None"
+            parentcode = None
+            item_numb = None
+            percent_alcohol = None
+            image_numb = None
             std_drinks = -1
-            link = "None"
-            style = "None"
-            size = "None"
+            link = None
+            style = None
+            size = None
 
             for i in subdrink["AdditionalDetails"]:
                 if i["Name"] == "parentstockcode":
@@ -114,13 +155,13 @@ def bws_handler(search_term: str) -> List:
                             break
                 std_drinks = -2
 
-            if percent_alcohol == "None":
+            if percent_alcohol == None:
                 for partners in drink["Products"]:
                     for subsection in partners["AdditionalDetails"]:
                         if subsection["Name"] == "alcohol%":
                             percent_alcohol = subsection["Value"]
 
-            if size == "None":
+            if size == None:
                 for partners in drink["Products"]:
                     for subsection in partners["AdditionalDetails"]:
                         if subsection["Name"] == "liquorsize":
@@ -134,7 +175,7 @@ def bws_handler(search_term: str) -> List:
                             elif "L" in size:
                                 size = str(float(size.split("L")[0]) * 1000)
 
-            if style == "None":
+            if style == None:
                 for partners in drink["Products"]:
                     for subsection in partners["AdditionalDetails"]:
                         if subsection["Name"] == "standardcategory":
@@ -168,7 +209,6 @@ def bws_handler(search_term: str) -> List:
 
 
 def website_searcher(store: str, category: str) -> str:
-    url = ""
     with open("websites.json") as fp:
         websites = json.load(fp)
         url = websites[store][category]
@@ -183,21 +223,31 @@ def main():
     parser.add_argument('category', type=str,
                         help='beer or wine or spirits or SEARCH TERM')
     args = parser.parse_args()
-
     global store, category, populate
     store = args.store
     category = args.category
 
+    engine = create_engine(
+        os.getenv("DB_URL"), echo=True)
+
     data = search(search_term=category,
-                  store=store)  # scrape all the data for those search terms from bws
+                  store=store)  # scrape all the data for those
+    # search terms from bws
+    Base.metadata.create_all(engine)
+
+    Session = sessionmaker()
+    Session.configure(bind=engine, autoflush=False)
+    session = Session()
 
     # save to csv
     # with open('output.csv', 'w', newline='') as file:
-    for item in data:
-        # file.write(repr(item) + "\n")
-        print(str(item))
+    #     for item in data:
+    #         file.write(str(item) + "\n")
 
-    # todo save data to db.
+    # for item in data:
+    #     print(item)
+        # session.add(item)
+    # session.commit()
 
 
 if __name__ == "__main__":
