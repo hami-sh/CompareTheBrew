@@ -191,6 +191,8 @@ def ll_handler(search_term: str) -> List:
     for product in data["products"]:
         efficiency = None
         promotion = False
+        price = None
+        multiplier = None
         productid = (product["id"])
         category = (product["category"])
         productUrlComplete = f"https://www.liquorland.com.au/api/products/ll/qld/{category}/{productid}"
@@ -200,28 +202,38 @@ def ll_handler(search_term: str) -> List:
             product_data = json.loads(product.read().decode())
             print(product_data)
 
+        # price creation
+        price = product_data["price"]["current"]
+        oldprice = product_data["price"]["normal"]
+
+        # number of items
+        try:
+            multiplier = float(product_data["UnitOfMeasure"].split("PACK")[1])
+        except KeyError as e:
+            multiplier = 1
+
         # image link creation
         heroImage = product_data["image"]["heroImage"]
         imagelink = f"https://www.liquorland.com.au{heroImage}"
 
         # based efficiency calculator
         try:
-            efficiency = product_data["standardDrinks"] / float(product_data["price"])
+            efficiency = product_data["standardDrinks"] * multiplier  / float(product_data["price"])
         except:
             efficiency = None
 
         if (product_data["promotion"] != None):
             promotion = True
-            
+
         # store as class
         item = Item(store="ll", brand=product_data["brand"],
                     name=product_data["name"].strip(),
-                    type=product_data["category"], price=product_data["price"], link=productUrlComplete,
+                    type=product_data["category"], price=price, link=productUrlComplete,
                     ml=product_data["volumeMl"], percent=product["alcoholPercent"],
-                    std_drinks=product_data["standardDrinks"], numb_items=1,
+                    std_drinks=product_data["standardDrinks"], numb_items=multiplier,
                     efficiency=efficiency, image=imagelink,
                     promotion=promotion,
-                    old_price=None)
+                    old_price=oldprice)
 
     result.append(item)
 
