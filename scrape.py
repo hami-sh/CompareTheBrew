@@ -25,7 +25,8 @@ def search(search_term: str, store: str) -> List:
     
     if store == "bws":
         searched_data = bws_handler(search_term)
-    
+    if store == "ll":
+        searched_data = ll_handler(search_term)
 
     return searched_data
 
@@ -168,8 +169,65 @@ def bws_handler(search_term: str) -> List:
             result.append(item)
             
     return result        
-    
-        
+
+"""
+bws format
+bundles -> INTEGER (drink) -> Products -> INTEGER (subdrink) -> [[details required]]
+"""
+def ll_handler(search_term: str) -> List:
+    result = list()
+
+    # get website for search term
+    url = website_searcher("ll", search_term)
+
+    # download drinks data
+    data = None
+    with open("ll.json") as lljson:
+        data = json.load(lljson)
+
+
+    productList = []
+    # makes list of productUrls for appropriate alcohol
+    for product in data["products"]:
+        efficiency = None
+        promotion = False
+        productid = (product["id"])
+        category = (product["category"])
+        productUrlComplete = f"https://www.liquorland.com.au/api/products/ll/qld/{category}/{productid}"
+        productList.append(productUrlComplete)
+
+        with urlopen(productUrlComplete) as product:
+            product_data = json.loads(product.read().decode())
+            print(product_data)
+
+        # image link creation
+        heroImage = product_data["image"]["heroImage"]
+        imagelink = f"https://www.liquorland.com.au{heroImage}"
+
+        # based efficiency calculator
+        try:
+            efficiency = product_data["standardDrinks"] / float(product_data["price"])
+        except:
+            efficiency = None
+
+        if (product_data["promotion"] != None):
+            promotion = True
+            
+        # store as class
+        item = Item(store="ll", brand=product_data["brand"],
+                    name=product_data["name"].strip(),
+                    type=product_data["category"], price=product_data["price"], link=productUrlComplete,
+                    ml=product_data["volumeMl"], percent=product["alcoholPercent"],
+                    std_drinks=product_data["standardDrinks"], numb_items=1,
+                    efficiency=efficiency, image=imagelink,
+                    promotion=promotion,
+                    old_price=None)
+
+    result.append(item)
+
+    return result
+
+
 def website_searcher(store: str, category: str) -> str:
     url = ""
     with open("websites.json") as fp:

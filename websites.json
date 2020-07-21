@@ -9,7 +9,7 @@
     "ll":
     {
         "beer": "",
-        "wine": "",
+        "wine": "https://www.liquorland.com.au/api/search/ll/qld?q=wine&page=1&sort=&show=50",
         "spirits": ""
     },
     "fc": 
