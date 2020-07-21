@@ -23,5 +23,9 @@
         "beer": "",
         "wine": "",
         "spirits": ""
+    },
+    "vc":
+    {
+        "spirits": "https://www.vintagecellars.com.au/api/search/vc/qld?q=spirits&page=1&sort=&show=5"
     }
 }

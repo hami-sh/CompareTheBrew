@@ -25,9 +25,115 @@ def search(search_term: str, store: str) -> List:
     
     if store == "bws":
         searched_data = bws_handler(search_term)
+    elif store == "vc":
+        searched_data = vc_handler(search_term)
     
 
     return searched_data
+
+"""
+vc format
+
+"""
+
+def vc_handler(search_term: str):
+    result = list()
+    
+    # get website for search term
+    url = website_searcher("vc", search_term)
+    
+    # download drinks data
+    data = None
+    # with urlopen(url) as api_json:
+        # data = json.loads(api_json.read().decode())
+        # print(data)
+    with open ("vc.json") as vcjson:
+        data = json.load(vcjson)
+        urllist = []
+        result = []
+        for product in data["products"]:
+            productcat = (product["category"])
+            productid = (product["id"])
+            finalURL = f"https://www.vintagecellars.com.au/api/products/vc/qld/{productcat}/{productid}"
+            urllist.append(finalURL)
+
+        for drinkurl in urllist:    
+            with open ("subdrink.json") as drinkjson:
+                drink = json.load(drinkjson)
+                subdrink = drink["product"]
+                productcat = (subdrink["category"])
+                productid = (subdrink["id"])
+                price=subdrink["price"]["current"]
+                old_price = subdrink["price"]["normal"]
+                drink_link = f"https://www.vintagecellars.com.au/api/products/vc/qld/{productcat}/{productid}"
+                style = None
+                size = None
+                percent_alcohol = None
+                std_drinks = None
+                item_numb = None
+                efficiency = None
+                image_link = subdrink["image"]["heroImage"]
+                promotion = None
+                
+
+                # Style (type of drink)
+                for i in subdrink["productProperties"]:
+                    if i["key"] == "Style":
+                        style = i["value"]
+
+                # Standard Drinks
+                for i in subdrink["productProperties"]:
+                    if i["key"] == "Standard Drinks":
+                        std_drinks = i["value"]
+
+                # Size
+                if size == None:
+                    size = subdrink["volumeMl"]
+
+                # Alcohol Percentage
+                for i in subdrink["productProperties"]:
+                    if i["key"] == "Alcohol Content":
+                        temp_percent = i["value"]
+                        percent_alcohol = temp_percent.split("%")[0]
+
+                # Standard Drinks
+                for i in subdrink["productProperties"]:
+                    if i["key"] == "Standard Drinks":
+                        std_drinks = i["value"]
+
+                # Number of Items
+                item_numb = 1
+                if "CTN" in subdrink["unitOfMeasureLabel"]:
+                    item_numb = int(temp_size.split("CTN")[1])
+
+                # Efficiency (cartons first)
+                multiplier = 1
+                if "CTN" in subdrink["unitOfMeasureLabel"]:
+                    temp_size = subdrink["unitOfMeasureLabel"]
+                    multiplier = float(temp_size.split("CTN")[1])
+                efficiency = (float(std_drinks) * multiplier)/float(price)
+
+                # Promotion
+                promotion = True
+                if subdrink["promotion"] == None:
+                    promotion = False
+                
+                item = Item(store="vc", brand=subdrink["brand"], name=subdrink["name"].strip(), type=style, 
+                            price=price, link=drink_link, ml=size,
+                            percent=percent_alcohol, std_drinks=std_drinks, numb_items=item_numb, efficiency=efficiency,
+                            image=image_link, promotion=promotion, old_price=old_price)
+
+                print(item)
+
+                result.append(item)
+
+
+            # item = Item(store="bws", brand=subdrink["BrandName"], name=subdrink["Name"].strip(), 
+                        # type=style, price=subdrink["Price"], link=drink_link, ml=size, percent=percent_alcohol,
+                        # std_drinks=std_drinks, numb_items=item_numb, efficiency=efficiency, image=image_link,
+                        # promotion=subdrink['IsOnSpecial'], old_price=subdrink["WasPrice"])
+            
+
 
 
 """
